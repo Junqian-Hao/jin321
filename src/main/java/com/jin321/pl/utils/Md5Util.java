@@ -1,4 +1,7 @@
-package com.jin321.utils;
+package com.jin321.pl.utils;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,11 +16,14 @@ import java.util.Map;
  * @Description : 进行md5加密和接口加密算法
  */
 public class Md5Util {
+    private static final Log log = LogFactory.getLog(Md5Util.class);
+    private static final String YAN = "jin321";
 
     /**
      * 给指定字符串按照md5算法去加密
-     * @param psd	需要加密的密码	加盐处理
-     * @return		md5后的字符串
+     *
+     * @param psd 需要加密的密码	加盐处理
+     * @return md5后的字符串
      */
     public static String Md5Encoder(String psd) {
         try {
@@ -36,13 +42,13 @@ public class Md5Util {
                 //int类型的i需要转换成16机制字符
                 String hexString = Integer.toHexString(i);
 //				System.out.println(hexString);
-                if(hexString.length()<2){
-                    hexString = "0"+hexString;
+                if (hexString.length() < 2) {
+                    hexString = "0" + hexString;
                 }
                 stringBuffer.append(hexString);
             }
             //5,打印测试
-            System.out.println(stringBuffer.toString());
+            log.debug("md5加密结果："+stringBuffer.toString());
             return stringBuffer.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -59,13 +65,12 @@ public class Md5Util {
         Collections.sort(list);
         String string = "";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("key——值:"+list.get(i)+","+map.get(list.get(i)));
-            string +=list.get(i)+map.get(list.get(i));
+            System.out.println("key——值:" + list.get(i) + "," + map.get(list.get(i)));
+            string += list.get(i) + map.get(list.get(i));
         }
-//        String secret = string + Urls.FFA;
         String secret = string;
-        System.out.println("拼成的参数为："+secret);
-        String encoder = Md5Util.Md5Encoder(secret);
+        log.debug("字典升序加密拼成字符串："+secret+YAN);
+        String encoder = Md5Util.Md5Encoder(secret+YAN);
         return encoder;
     }
 }
