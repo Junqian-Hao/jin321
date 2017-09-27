@@ -13,7 +13,7 @@ import java.util.Map;
 public class Md5UtilTest {
     @Test
     public void md5Encoder() throws Exception {
-        String jin321 = Md5Util.Md5Encoder("jin321");
+        String jin321 = Md5Util.Md5Encoder("jin321et");
         System.out.println(jin321);
 
     }

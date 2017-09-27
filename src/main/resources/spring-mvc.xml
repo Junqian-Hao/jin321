@@ -40,4 +40,16 @@
         <!-- 内存中的最大值 -->
         <property name="maxInMemorySize" value="4096"/>
     </bean>
+
+    <!--拦截器配置-->
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash;签名拦截器&ndash;&gt;-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/wx/*"/>-->
+            <!--<bean class="com.jin321.pl.intercepts.SignatureIntercetp"/>-->
+        <!--</mvc:interceptor>-->
+
+    <!--</mvc:interceptors>-->
+    <!--全局异常处理-->
+    <bean class="com.jin321.pl.intercepts.AllExceptionResolver"/>
 </beans>

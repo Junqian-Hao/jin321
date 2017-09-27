@@ -26,7 +26,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:com/jin321/*/dao/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath:config/*/mapper/*Mapper.xml"/>
        <!--配置别名扫描-->
         <property name="typeAliasesPackage" value="com.jin321.wx.model,com.jin321.ms.model,com.jin321.pl.model"/>
     </bean>

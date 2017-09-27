@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class Md5Util {
     private static final Log log = LogFactory.getLog(Md5Util.class);
-    private static final String YAN = "jin321";
+    private static final String YAN = "jin321et";
 
     /**
      * 给指定字符串按照md5算法去加密
@@ -65,7 +65,7 @@ public class Md5Util {
         Collections.sort(list);
         String string = "";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("key——值:" + list.get(i) + "," + map.get(list.get(i)));
+            log.debug("key——值:" + list.get(i) + "," + map.get(list.get(i)));
             string += list.get(i) + map.get(list.get(i));
         }
         String secret = string;
@@ -73,4 +73,5 @@ public class Md5Util {
         String encoder = Md5Util.Md5Encoder(secret+YAN);
         return encoder;
     }
+
 }
