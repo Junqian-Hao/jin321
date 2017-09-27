@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,11 @@ public class SignatureIntercetp implements HandlerInterceptor {
         String sign = httpServletRequest.getParameter("sign");
         if (sign == null || "".equals(sign.trim())) {
             log.info(httpServletRequest.getRemoteAddr()+"未携带签名访问，签名拦截器拦截！！");
+            try {
+                httpServletResponse.getOutputStream().print("{\"code\":\"-1\",\"errormessage\":\"未携带签名\"}");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             return false;
         }
         Enumeration<String> parameterNames = httpServletRequest.getParameterNames();
@@ -42,6 +48,11 @@ public class SignatureIntercetp implements HandlerInterceptor {
         if (Md5Util.URLEncoder(map).equals(sign)) {
             log.info(httpServletRequest.getRemoteAddr()+"访问，签名正确，放行");
             return true;
+        }
+        try {
+            httpServletResponse.getOutputStream().print("{\"code\":\"-1\",\"errormessage\":\"签名错误\"}");
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
         log.info(httpServletRequest.getRemoteAddr()+"访问，签名错误，拦截！！");
         return false;

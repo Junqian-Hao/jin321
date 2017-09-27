@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -37,6 +38,10 @@ public class FirstPageController {
         return firstPageMessage;
     }
 
-    public Map<String, Object> login()
+    public Map<String, String> login() {
+        HashMap<String, String> map = new HashMap<String, String>();
+
+        return map;
+    }
 
 }
