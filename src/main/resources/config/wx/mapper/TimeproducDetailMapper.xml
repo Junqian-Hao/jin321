@@ -22,7 +22,7 @@
         </association>
     </resultMap>
 
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectNowAll" resultMap="BaseResultMap">
         SELECT
             timeproduct.*,
             productpics.`ppicurl`,

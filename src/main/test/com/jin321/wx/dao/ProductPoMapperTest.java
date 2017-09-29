@@ -23,7 +23,7 @@ public class ProductPoMapperTest {
     }
     @Test
     public void selectAllTogether() throws Exception {
-        List<ProductPo> productPos = productPoMapper.selectAllTogether();
+        List<ProductPo> productPos = productPoMapper.selectAllNowTogether();
         System.out.println(productPos);
 
     }

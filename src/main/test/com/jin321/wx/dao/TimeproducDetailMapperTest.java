@@ -25,7 +25,7 @@ public class TimeproducDetailMapperTest {
 
     @Test
     public void selectAll() throws Exception {
-        List<TimeproducDetail> timeproducDetails = timeproducDetailMapper.selectAll();
+        List<TimeproducDetail> timeproducDetails = timeproducDetailMapper.selectNowAll();
         System.out.println(timeproducDetails);
     }
 

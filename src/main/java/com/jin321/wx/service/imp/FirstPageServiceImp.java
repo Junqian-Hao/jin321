@@ -11,6 +11,9 @@ import com.jin321.pl.utils.StringUtil;
 import com.jin321.wx.dao.ProductPoMapper;
 import com.jin321.wx.dao.RollingpickDetailMapper;
 import com.jin321.wx.dao.TimeproducDetailMapper;
+import com.jin321.wx.model.ProductPo;
+import com.jin321.wx.model.RollingpickDetail;
+import com.jin321.wx.model.TimeproducDetail;
 import com.jin321.wx.service.FirstPageService;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -44,7 +47,7 @@ public class FirstPageServiceImp implements FirstPageService {
     @Autowired
     TimeproducDetailMapper timeproducDetailMapper;        //秒杀商品活动信息
     @Autowired
-    ProductPoMapper productDetailMapper;        //合伙人商品
+    ProductPoMapper productPoMapper;        //合伙人商品
 
     String appid = StringUtil.APPID;
 
@@ -53,6 +56,15 @@ public class FirstPageServiceImp implements FirstPageService {
 
     public Map<String, Object> getFirstPageMessage(String userId, String lUserId) throws Exception {
         Map<String, Object> map = new HashMap<String,Object>();
+        //轮播图
+        List<RollingpickDetail> rollingpickDetails = rollingpickDetailMapper.selectNow();
+        map.put("rollingpicks", rollingpickDetails);
+        //秒杀
+        List<TimeproducDetail> timeproducDetails = timeproducDetailMapper.selectNowAll();
+        map.put("timeproducs", timeproducDetails);
+        //合伙人商品
+        List<ProductPo> productPos = productPoMapper.selectAllNowTogether();
+        map.put("productPos", productPos);
         return map;
     }
 

@@ -12,6 +12,6 @@ import java.util.List;
  * @Description :
  */
 public interface ProductPoMapper {
-    List<ProductPo> selectAllTogether();
+    List<ProductPo> selectAllNowTogether();
 
 }

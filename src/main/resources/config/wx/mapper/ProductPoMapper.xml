@@ -15,7 +15,7 @@
         <result column="is_delete" property="isDelete" jdbcType="BIT"/>
         <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
     </resultMap>
-    <select id="selectAllTogether" resultMap="BaseResultMap">
+    <select id="selectAllNowTogether" resultMap="BaseResultMap">
         SELECT
             productpics.`ppicurl`,
             product.*,

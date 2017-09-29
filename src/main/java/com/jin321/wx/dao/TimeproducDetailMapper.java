@@ -14,5 +14,5 @@ public interface TimeproducDetailMapper {
      * 查询所有秒杀活动信息
      * @return
      */
-    List<TimeproducDetail> selectAll();
+    List<TimeproducDetail> selectNowAll();
 }
