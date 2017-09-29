@@ -11,6 +11,26 @@ import com.jin321.pl.model.Rollingpick;
 public class RollingpickDetail extends Rollingpick{
     Product products;
     String ppicurl;
+    //原价
+    private Long psoriprice;
+    //售价
+    private Long pssellprice;
+
+    public Long getPsoriprice() {
+        return psoriprice;
+    }
+
+    public void setPsoriprice(Long psoriprice) {
+        this.psoriprice = psoriprice;
+    }
+
+    public Long getPssellprice() {
+        return pssellprice;
+    }
+
+    public void setPssellprice(Long pssellprice) {
+        this.pssellprice = pssellprice;
+    }
 
     public Product getProducts() {
         return products;

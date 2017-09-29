@@ -8,7 +8,9 @@
         <result column="timeend" property="timeend" jdbcType="DATE"/>
         <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
         <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR" />
-        <collection property="products" ofType="product">
+        <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
+        <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
+        <association property="products" javaType="product">
             <result column="did" property="did" jdbcType="INTEGER"/>
             <result column="pname" property="pname" jdbcType="VARCHAR"/>
             <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
@@ -17,21 +19,25 @@
             <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
             <result column="is_together" property="isTogether" jdbcType="BIT"/>
             <result column="is_delete" property="isDelete" jdbcType="BIT"/>
-        </collection>
+        </association>
     </resultMap>
 
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT
             timeproduct.*,
             productpics.`ppicurl`,
-            product.*
+            product.*,
+            MIN(productsize.pssellprice) AS pssellprice,
+            productsize.`psoriprice`
         FROM timeproduct
             LEFT JOIN product ON timeproduct.`pid` = product.`pid`
             LEFT JOIN productpics ON timeproduct.`pid` = productpics.`pid`
+            LEFT JOIN productsize ON timeproduct.`pid` = productsize.`pid`
         WHERE timeproduct.`is_deleted` = 0
               AND productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
               AND timeproduct.`pid` = 1
+              AND productsize.`is_deleted` = 0
     </select>
 </mapper>

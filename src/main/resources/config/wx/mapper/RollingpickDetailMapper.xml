@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jin321.wx.dao.RollingpickDetailMapper" >
-    <resultMap id="BaseResultMap" type="rollingpickDetail" >
-        <id column="rpid" property="rpid" jdbcType="INTEGER" />
-        <result column="pid" property="pid" jdbcType="INTEGER" />
-        <result column="rpicurl" property="rpicurl" jdbcType="VARCHAR" />
-        <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
-        <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR" />
+<mapper namespace="com.jin321.wx.dao.RollingpickDetailMapper">
+    <resultMap id="BaseResultMap" type="rollingpickDetail">
+        <id column="rpid" property="rpid" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="rpicurl" property="rpicurl" jdbcType="VARCHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
+        <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
+        <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
+        <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
         <association property="products" javaType="product">
-            <result column="did" property="did" jdbcType="INTEGER" />
-            <result column="pname" property="pname" jdbcType="VARCHAR" />
-            <result column="psummary" property="psummary" jdbcType="VARCHAR" />
-            <result column="ptypea" property="ptypea" jdbcType="INTEGER" />
-            <result column="ptypeb" property="ptypeb" jdbcType="INTEGER" />
-            <result column="ptypec" property="ptypec" jdbcType="INTEGER" />
-            <result column="is_together" property="isTogether" jdbcType="BIT" />
-            <result column="is_delete" property="isDelete" jdbcType="BIT" />
+            <result column="did" property="did" jdbcType="INTEGER"/>
+            <result column="pname" property="pname" jdbcType="VARCHAR"/>
+            <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
+            <result column="ptypea" property="ptypea" jdbcType="INTEGER"/>
+            <result column="ptypeb" property="ptypeb" jdbcType="INTEGER"/>
+            <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
+            <result column="is_together" property="isTogether" jdbcType="BIT"/>
+            <result column="is_delete" property="isDelete" jdbcType="BIT"/>
         </association>
     </resultMap>
     <select id="selectNowByPid" resultMap="BaseResultMap" parameterType="int">
-        SELECT rollingpick.*,productpics.`ppicurl`,product.*
+        SELECT
+            rollingpick.*,
+            productpics.`ppicurl`,
+            product.*,
+            MIN(productsize.pssellprice) AS pssellprice,
+            productsize.`psoriprice`
         FROM rollingpick
-              LEFT JOIN product ON rollingpick.`pid`=product.`pid`
-              LEFT JOIN productpics ON rollingpick.`pid`=productpics.`pid`
-        WHERE rollingpick.`is_deleted`=0
-              AND productpics.`is_deleted`=0
-              AND productpics.`is_headpic`=1
-              AND product.`is_delete`=0
-              AND rollingpick.`pid`=#{pid}
+            LEFT JOIN product ON rollingpick.`pid` = product.`pid`
+            LEFT JOIN productpics ON rollingpick.`pid` = productpics.`pid`
+            LEFT JOIN productsize ON rollingpick.`pid` = productsize.`pid`
+        WHERE rollingpick.`is_deleted` = 0
+              AND productpics.`is_deleted` = 0
+              AND productpics.`is_headpic` = 1
+              AND product.`is_delete` = 0
+              AND productsize.`is_deleted` = 0
+              AND rollingpick.`pid` = #{pid}
     </select>
     <select id="selectNow" resultMap="BaseResultMap">
-        SELECT rollingpick.*,productpics.`ppicurl`,product.*
+        SELECT
+            rollingpick.*,
+            productpics.`ppicurl`,
+            product.*,
+            MIN(productsize.pssellprice) AS pssellprice,
+            productsize.`psoriprice`
         FROM rollingpick
-            LEFT JOIN product ON rollingpick.`pid`=product.`pid`
-            LEFT JOIN productpics ON rollingpick.`pid`=productpics.`pid`
-        WHERE rollingpick.`is_deleted`=0
-              AND productpics.`is_deleted`=0
-              AND productpics.`is_headpic`=1
-              AND product.`is_delete`=0
+            LEFT JOIN product ON rollingpick.`pid` = product.`pid`
+            LEFT JOIN productpics ON rollingpick.`pid` = productpics.`pid`
+            LEFT JOIN productsize ON rollingpick.`pid` = productsize.`pid`
+        WHERE rollingpick.`is_deleted` = 0
+              AND productpics.`is_deleted` = 0
+              AND productpics.`is_headpic` = 1
+              AND product.`is_delete` = 0
+              AND productsize.`is_deleted` = 0
     </select>
 
 

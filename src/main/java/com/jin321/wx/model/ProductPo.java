@@ -8,9 +8,11 @@ import com.jin321.pl.model.Product;
  * @Description :商品扩展类
  */
 public class ProductPo extends Product {
+    //商品缩略图
     private String ppicurl;
+    //原价
     private Long psoriprice;
-
+    //售价
     private Long pssellprice;
 
     public String getPpicurl() {

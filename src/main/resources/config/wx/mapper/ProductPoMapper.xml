@@ -8,8 +8,8 @@
         <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
         <result column="ptypea" property="ptypea" jdbcType="INTEGER"/>
         <result column="ptypeb" property="ptypeb" jdbcType="INTEGER"/>
-        <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL" />
-        <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL" />
+        <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
+        <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
         <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
         <result column="is_together" property="isTogether" jdbcType="BIT"/>
         <result column="is_delete" property="isDelete" jdbcType="BIT"/>
@@ -18,13 +18,17 @@
     <select id="selectAllTogether" resultMap="BaseResultMap">
         SELECT
             productpics.`ppicurl`,
-            product.*
+            product.*,
+            MIN(productsize.pssellprice) AS pssellprice,
+            productsize.`psoriprice`
         FROM product
             LEFT JOIN productpics ON product.`pid` = productpics.`pid`
+            LEFT JOIN productsize ON product.`pid` = productsize.`pid`
         WHERE productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
               AND product.`is_together` = 1
+              AND productsize.`is_deleted` = 0
     </select>
 
 </mapper>
