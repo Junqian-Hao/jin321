@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.wx.dao.ProductpicsDetailMapper">
+    <resultMap id="BaseResultMap" type="productpicsDetail" >
+        <id column="ppid" property="ppid" jdbcType="INTEGER" />
+        <result column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR" />
+        <result column="is_headpic" property="isHeadpic" jdbcType="BIT" />
+        <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ppid, pid, ppicurl, is_headpic, is_deleted
+    </sql>
+
+    <select id="selectNowHeadPicByPid" resultType="com.jin321.pl.model.Productpics">
+        select
+        <include refid="Base_Column_List" />
+        from productpics
+        where pid = #{pid} and is_deleted=0 and is_headpic=1
+    </select>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.wx.dao.ProductPoMapper">
+    <resultMap id="BaseResultMap" type="productPo">
+        <id column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="did" property="did" jdbcType="INTEGER"/>
+        <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
+        <result column="ptypea" property="ptypea" jdbcType="INTEGER"/>
+        <result column="ptypeb" property="ptypeb" jdbcType="INTEGER"/>
+        <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL" />
+        <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL" />
+        <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
+        <result column="is_together" property="isTogether" jdbcType="BIT"/>
+        <result column="is_delete" property="isDelete" jdbcType="BIT"/>
+        <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectAllTogether" resultMap="BaseResultMap">
+        SELECT
+            productpics.`ppicurl`,
+            product.*
+        FROM product
+            LEFT JOIN productpics ON product.`pid` = productpics.`pid`
+        WHERE productpics.`is_deleted` = 0
+              AND productpics.`is_headpic` = 1
+              AND product.`is_delete` = 0
+              AND product.`is_together` = 1
+    </select>
+
+</mapper>

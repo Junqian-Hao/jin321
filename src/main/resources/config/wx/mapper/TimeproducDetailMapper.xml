@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.TimeproducDetailMapper">
-    <resultMap id="BaseResultMap" type="timeproducDetail" >
-
-            <id column="pid" property="pid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <result column="did" property="did" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <result column="pname" property="pname" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <result column="psummary" property="psummary" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <result column="ptypea" property="ptypea" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <result column="ptypeb" property="ptypeb" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <result column="ptypec" property="ptypec" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <result column="is_together" property="isTogether" jdbcType="BIT" javaType="java.lang.Boolean" />
-            <result column="tpid" property="tpid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <result column="timestart" property="timestart" jdbcType="DATE" javaType="java.util.Date" />
-            <result column="timeend" property="timeend" jdbcType="DATE" javaType="java.util.Date" />
-            <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR" javaType="java.lang.String" />
+    <resultMap id="BaseResultMap" type="timeproducDetail">
+        <id column="tpid" property="tpid" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="timestart" property="timestart" jdbcType="DATE"/>
+        <result column="timeend" property="timeend" jdbcType="DATE"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
+        <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR" />
+        <collection property="products" ofType="product">
+            <result column="did" property="did" jdbcType="INTEGER"/>
+            <result column="pname" property="pname" jdbcType="VARCHAR"/>
+            <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
+            <result column="ptypea" property="ptypea" jdbcType="INTEGER"/>
+            <result column="ptypeb" property="ptypeb" jdbcType="INTEGER"/>
+            <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
+            <result column="is_together" property="isTogether" jdbcType="BIT"/>
+            <result column="is_delete" property="isDelete" jdbcType="BIT"/>
+        </collection>
     </resultMap>
+
     <select id="selectAll" resultMap="BaseResultMap">
-        SELECT *
-        FROM product, timeproduct ,productpics
-        WHERE product.pid = timeproduct.pid AND product.is_delete=0
-              AND timeproduct.is_deleted=0 AND productpics.is_deleted=0
-              AND productpics.pid=product.pid AND productpics.is_headpic=1;
+        SELECT
+            timeproduct.*,
+            productpics.`ppicurl`,
+            product.*
+        FROM timeproduct
+            LEFT JOIN product ON timeproduct.`pid` = product.`pid`
+            LEFT JOIN productpics ON timeproduct.`pid` = productpics.`pid`
+        WHERE timeproduct.`is_deleted` = 0
+              AND productpics.`is_deleted` = 0
+              AND productpics.`is_headpic` = 1
+              AND product.`is_delete` = 0
+              AND timeproduct.`pid` = 1
     </select>
 </mapper>

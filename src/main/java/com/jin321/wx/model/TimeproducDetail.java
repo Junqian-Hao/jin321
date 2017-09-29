@@ -1,50 +1,25 @@
 package com.jin321.wx.model;
 
 import com.jin321.pl.model.Product;
+import com.jin321.pl.model.Timeproduct;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * @Author hao
  * @Date 2017/9/26 17:34
- * @Description :
+ * @Description :秒杀商品扩展类
  */
-public class TimeproducDetail extends Product {
-//    秒杀活动信息
-    private Integer tpid;
+public class TimeproducDetail extends Timeproduct {
+    List<Product> products;
+    String ppicurl;
 
-    private Date timestart;
-
-    private Date timeend;
-
-//缩略图信息
-    private String ppicurl;
-
-
-
-    public Integer getTpid() {
-        return tpid;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setTpid(Integer tpid) {
-        this.tpid = tpid;
-    }
-
-
-    public Date getTimestart() {
-        return timestart;
-    }
-
-    public void setTimestart(Date timestart) {
-        this.timestart = timestart;
-    }
-
-    public Date getTimeend() {
-        return timeend;
-    }
-
-    public void setTimeend(Date timeend) {
-        this.timeend = timeend;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public String getPpicurl() {

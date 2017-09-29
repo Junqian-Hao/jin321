@@ -21,4 +21,12 @@ public interface FirstPageService {
     @Transactional(rollbackFor = Exception.class)
     Map<String, Object> getFirstPageMessage(String userId, String lUserId) throws Exception;
 
+    /**
+     * 微信登录
+     * @param js_code
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    Map<String, String> login(String js_code , String lUserid) throws Exception;
+
 }

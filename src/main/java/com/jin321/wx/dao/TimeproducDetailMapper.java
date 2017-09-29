@@ -10,5 +10,9 @@ import java.util.List;
  * @Description : 秒杀活动详细信息
  */
 public interface TimeproducDetailMapper {
+    /**
+     * 查询所有秒杀活动信息
+     * @return
+     */
     List<TimeproducDetail> selectAll();
 }

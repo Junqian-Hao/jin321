@@ -1,36 +1,23 @@
 package com.jin321.wx.model;
 
 import com.jin321.pl.model.Product;
+import com.jin321.pl.model.Rollingpick;
 
 /**
  * @Author hao
  * @Date 2017/9/26 17:19
  * @Description : 秒杀活动详细信息
  */
-public class RollingpickDetail extends Product{
+public class RollingpickDetail extends Rollingpick{
+    Product products;
+    String ppicurl;
 
-    private Integer rpid;
-
-    private String rpicurl;
-
-//    缩略图信息
-    private String ppicurl;
-
-    public Integer getRpid() {
-        return rpid;
+    public Product getProducts() {
+        return products;
     }
 
-    public void setRpid(Integer rpid) {
-        this.rpid = rpid;
-    }
-
-
-    public String getRpicurl() {
-        return rpicurl;
-    }
-
-    public void setRpicurl(String rpicurl) {
-        this.rpicurl = rpicurl;
+    public void setProducts(Product products) {
+        this.products = products;
     }
 
     public String getPpicurl() {

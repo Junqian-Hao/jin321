@@ -1,18 +1,21 @@
 package com.jin321.wx.service.imp;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.jin321.pl.dao.FirstrelateMapper;
 import com.jin321.pl.dao.UserMapper;
 import com.jin321.pl.model.Firstrelate;
-import com.jin321.pl.model.FirstrelateExample;
 import com.jin321.pl.model.User;
 import com.jin321.pl.model.UserExample;
 import com.jin321.pl.utils.StringUtil;
-import com.jin321.wx.dao.ProductDetailMapper;
+import com.jin321.wx.dao.ProductPoMapper;
 import com.jin321.wx.dao.RollingpickDetailMapper;
 import com.jin321.wx.dao.TimeproducDetailMapper;
-import com.jin321.wx.model.RollingpickDetail;
-import com.jin321.wx.model.TimeproducDetail;
 import com.jin321.wx.service.FirstPageService;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,70 +44,89 @@ public class FirstPageServiceImp implements FirstPageService {
     @Autowired
     TimeproducDetailMapper timeproducDetailMapper;        //秒杀商品活动信息
     @Autowired
-    ProductDetailMapper productDetailMapper;        //合伙人商品
+    ProductPoMapper productDetailMapper;        //合伙人商品
 
+    String appid = StringUtil.APPID;
+
+    String secret = StringUtil.SECRET;
 
 
     public Map<String, Object> getFirstPageMessage(String userId, String lUserId) throws Exception {
         Map<String, Object> map = new HashMap<String,Object>();
-//        判断用户是否是第一次进入商城
+        return map;
+    }
+
+    @Override
+    public Map<String, String> login(String js_code , String lUserid) throws Exception{
+        log.debug("appid->" + appid + "secert->" + secret);
+        HashMap<String, String> map = new HashMap<String, String>();
+        //请求微信服务器
+        String url = "https://api.weixin.qq.com/sns/jscode2session";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .header("appid", appid)
+                .header("secret", secret)
+                .header("js_code", js_code)
+                .header("grant_type", "authorization_code")
+                .build();
+        Call call = okHttpClient.newCall(request);
+        Response response = call.execute();
+        String string = response.body().string();
+        log.info("微信服务器返回："+string);
+        Map<String, String> params = JSONObject.parseObject(string, new TypeReference<Map<String, String>>(){});
+        String errcode = params.get("errcode");
+        if (!StringUtil.isNullString(errcode)) {
+            //微信服务器返回错误 {"errcode": 40029,"errmsg": "invalid code"}
+            map.put("code", "0");
+            map.put("errormessage", string);
+            return map;
+        }
+        //请求成功
+        String openid = params.get("openid");
+        String session_key = params.get("session_key");
+        String unionid = params.get("unionid");
+        map.put("openid", openid);
+        map.put("session_key", session_key);
+
+        //查询用户是否存在
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andUserwxidEqualTo(userId);
+        criteria.andUserwxidEqualTo(openid);
         List<User> users = userMapper.selectByExample(userExample);
         if (users == null || users.get(0) == null) {
-            map.put("code", 1);
-            log.debug(userId+"用户是新用户"+"推介者"+lUserId);
-//         用户是新用户
-//            记录进入用户表
+            //用户是新用户
+            log.info("新用户"+openid);
             User user = new User();
-            user.setUserwxid(userId);
+            user.setUid(StringUtil.makeUserid());
+            user.setUserwxid(openid);
             userMapper.insert(user);
 
-            if (StringUtil.isNullString(lUserId)) {
-//                用户拥有推荐者
-//                判断推介者合法性
-                UserExample userexample = new UserExample();
-                UserExample.Criteria criteria2 = userexample.createCriteria();
-                criteria2.andUserwxidEqualTo(userId);
-                List<User> lUsers = userMapper.selectByExample(userexample);
-                if (lUsers == null || lUsers.get(0) == null) {
-//                 推介者合法
-                    FirstrelateExample firstrelateExample = new FirstrelateExample();
-                    FirstrelateExample.Criteria criteria1 = firstrelateExample.createCriteria();
-                    criteria1.andR1u1idEqualTo(users.get(0).getUid());
-                    criteria1.andR1u2idEqualTo(lUsers.get(0).getUid());
-                    List<Firstrelate> firstrelates = firstrelateMapper.selectByExample(firstrelateExample);
-                    if (firstrelates != null && firstrelates.get(0) != null) {
-//                        推介记录不存在,记录
-                        log.info("推介记录不存在,记录");
-                        Firstrelate firstrelate = new Firstrelate();
-                        firstrelate.setR1u1id(users.get(0).getUid());
-                        firstrelate.setR1u2id(lUsers.get(0).getUid());
-                        firstrelateMapper.insert(firstrelate);
-                    } else {
-                        map.put("code", 0);
-                        map.put("errormessage", "推介用户非法，推介用户名："+lUserId);
-                        log.info("推介记录存在");
-                    }
-                } else {
-//                    推介用户名为非商城用户
-                    log.error("推介用户id为非法id");
-                }
+            //校验推荐用户合法性
+            User user1 = userMapper.selectByPrimaryKey(lUserid);
+            if (user1 == null) {
+                log.info("推介用户非法");
+                map.put("code", "0");
+                map.put("errormessage", "推介用户非法");
+                return map;
+            } else {
+                //推介用户合法
+                Firstrelate firstrelate = new Firstrelate();
+                firstrelate.setR1u1id(user.getUid());
+                firstrelate.setR1u2id(user1.getUid());
+                firstrelateMapper.insert(firstrelate);
+
+                map.put("code", "1");
+                map.put("message", "新用户");
+                map.put("userid", user.getUid());
             }
         } else {
-            map.put("code", 2);
-            log.info("老用户登录");
+            //用户是老用户
+            log.info("老用户");
+            map.put("code", "2");
+            map.put("message", "老用户");
+            map.put("userid", users.get(0).getUid());
         }
-//        查询轮播图商品
-        List<RollingpickDetail> rollingpickDetails = rollingpickDetailMapper.selectAll();
-        map.put("rollingpick", rollingpickDetails);
-//        查询秒杀活动商品
-        List<TimeproducDetail> timeproducDetails = timeproducDetailMapper.selectAll();
-        map.put("timeproduc", timeproducDetails);
-//        查询合伙人商品
-        Map<String, Object> map1 = productDetailMapper.selectSimpleTogether();
-        map.put("productTogether", map1);
         return map;
     }
 }
