@@ -32,12 +32,11 @@ public class FirstPageController {
 
     @RequestMapping("/firstRequest")
     @ResponseBody
-    public Map<String, Object> firstRequest(HttpServletRequest request, @RequestBody Map<String, String> map) throws Exception {
+    public Map<String, Object> firstRequest(HttpServletRequest request) throws Exception {
         log.info("相对路径：" + UrlUtil.getPath(request));
         log.info("完整路径：" + UrlUtil.getBasePath(request));
         log.info("物理路径：" + UrlUtil.getRealPath(request));
-        log.info("请求参数：userId->" + map.get("userId") + "lUserId->" + map.get("lUserId"));
-        Map<String, Object> firstPageMessage = firstPageService.getFirstPageMessage(map.get("userId"), map.get("lUserId"));
+        Map<String, Object> firstPageMessage = firstPageService.getFirstPageMessage();
         firstPageMessage.put("basePath", UrlUtil.getBasePath(request));
         return firstPageMessage;
     }

@@ -13,16 +13,15 @@ public interface FirstPageService {
 
     /**
      * 商城请求首页，获得商城首页信息
-     * @param userId 当前访问用户的id
-     * @param lUserId 当前用户的推介人
      * @return 商城首页信息
      * @throws Exception
      */
     @Transactional(rollbackFor = Exception.class)
-    Map<String, Object> getFirstPageMessage(String userId, String lUserId) throws Exception;
+    Map<String, Object> getFirstPageMessage() throws Exception;
 
     /**
      * 微信登录
+     * @param lUserid 当前用户的推介人
      * @param js_code
      * @return
      */

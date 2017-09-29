@@ -53,8 +53,8 @@ public class FirstPageServiceImp implements FirstPageService {
 
     String secret = StringUtil.SECRET;
 
-
-    public Map<String, Object> getFirstPageMessage(String userId, String lUserId) throws Exception {
+    @Override
+    public Map<String, Object> getFirstPageMessage() throws Exception {
         Map<String, Object> map = new HashMap<String,Object>();
         //轮播图
         List<RollingpickDetail> rollingpickDetails = rollingpickDetailMapper.selectNow();
