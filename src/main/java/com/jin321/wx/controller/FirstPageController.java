@@ -37,7 +37,7 @@ public class FirstPageController {
         log.info("完整路径：" + UrlUtil.getBasePath(request));
         log.info("物理路径：" + UrlUtil.getRealPath(request));
         Map<String, Object> firstPageMessage = firstPageService.getFirstPageMessage();
-        firstPageMessage.put("basePath", UrlUtil.getBasePath(request));
+        firstPageMessage.put("basePath", UrlUtil.getBasePathNoPort(request));
         return firstPageMessage;
     }
     @RequestMapping("/login")
