@@ -15,6 +15,7 @@ import com.jin321.wx.model.ProductPo;
 import com.jin321.wx.model.RollingpickDetail;
 import com.jin321.wx.model.TimeproducDetail;
 import com.jin321.wx.service.FirstPageService;
+import com.jin321.wx.utils.WXUtil;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -49,9 +50,9 @@ public class FirstPageServiceImp implements FirstPageService {
     @Autowired
     ProductPoMapper productPoMapper;        //合伙人商品
 
-    String appid = StringUtil.APPID;
+    String appid = WXUtil.APPID;
 
-    String secret = StringUtil.SECRET;
+    String secret = WXUtil.SECRET;
 
     @Override
     public Map<String, Object> getFirstPageMessage() throws Exception {

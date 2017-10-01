@@ -9,10 +9,7 @@ import java.util.UUID;
  * @Description : 字符串处理
  */
 public class StringUtil {
-    //appid
-    public static String APPID = "appid";
-    //secret
-    public static String SECRET = "secret";
+
 
     /**
      * 判断字符串是否为空
