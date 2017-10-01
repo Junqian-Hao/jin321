@@ -16,10 +16,7 @@ import com.jin321.wx.model.RollingpickDetail;
 import com.jin321.wx.model.TimeproducDetail;
 import com.jin321.wx.service.FirstPageService;
 import com.jin321.wx.utils.WXUtil;
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,12 +73,15 @@ public class FirstPageServiceImp implements FirstPageService {
         //请求微信服务器
         String url = "https://api.weixin.qq.com/sns/jscode2session";
         OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("appid", appid)
+                .add("secret", secret)
+                .add("js_code", js_code)
+                .add("grant_type", "authorization_code")
+                .build();
         Request request = new Request.Builder()
                 .url(url)
-                .header("appid", appid)
-                .header("secret", secret)
-                .header("js_code", js_code)
-                .header("grant_type", "authorization_code")
+                .post(body)
                 .build();
         Call call = okHttpClient.newCall(request);
         Response response = call.execute();

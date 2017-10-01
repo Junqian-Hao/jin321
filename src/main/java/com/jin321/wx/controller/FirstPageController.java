@@ -48,6 +48,7 @@ public class FirstPageController {
         String js_code = re.get("js_code");
         String lUserid = re.get("lUserid");
         String session = re.get("session");
+        log.info("请求的参数"+"js_code->"+js_code+"lUserid->"+lUserid+"session->"+session);
         if (StringUtil.isNullString(js_code)) {
             HashMap<String, String> map = new HashMap<String, String>();
             map.put("code", "0");
