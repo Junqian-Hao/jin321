@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository("DealerLoginMapper")
 public interface DealerLoginMapper{
     /**
-     * 登录MAP
+     * 登录MAP  TAT
      * @param Username
      * @return
      */
