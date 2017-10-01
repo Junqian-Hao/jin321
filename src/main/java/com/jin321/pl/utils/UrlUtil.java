@@ -25,6 +25,14 @@ public class UrlUtil {
     public static String getBasePath(HttpServletRequest request) {
         return request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+getPath(request)+"/";
     }
+    /**
+     * 返回当前项目的绝对路径
+     * @param request
+     * @return
+     */
+    public static String getBasePathNoPort(HttpServletRequest request) {
+        return request.getScheme()+"://"+request.getServerName()+getPath(request)+"/";
+    }
 
     /**
      * 返回当前项目的真实路径
