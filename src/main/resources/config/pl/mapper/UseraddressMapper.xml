@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.pl.dao.UseraddressMapper" >
+  <resultMap id="BaseResultMap" type="com.jin321.pl.model.Useraddress" >
+    <id column="uaid" property="uaid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="ucountry" property="ucountry" jdbcType="VARCHAR" />
+    <result column="uprovince" property="uprovince" jdbcType="VARCHAR" />
+    <result column="ucity" property="ucity" jdbcType="VARCHAR" />
+    <result column="uarea" property="uarea" jdbcType="VARCHAR" />
+    <result column="uaddress" property="uaddress" jdbcType="VARCHAR" />
+    <result column="ubname" property="ubname" jdbcType="VARCHAR" />
+    <result column="uphonenum" property="uphonenum" jdbcType="VARCHAR" />
+    <result column="umail" property="umail" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="DATE" />
+    <result column="adddefault" property="adddefault" jdbcType="BIT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uaid, uid, ucountry, uprovince, ucity, uarea, uaddress, ubname, uphonenum, umail, 
+    addtime, adddefault, is_deleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.UseraddressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from useraddress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from useraddress
+    where uaid = #{uaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from useraddress
+    where uaid = #{uaid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jin321.pl.model.UseraddressExample" >
+    delete from useraddress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jin321.pl.model.Useraddress" >
+    insert into useraddress (uaid, uid, ucountry, 
+      uprovince, ucity, uarea, 
+      uaddress, ubname, uphonenum, 
+      umail, addtime, adddefault, 
+      is_deleted)
+    values (#{uaid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{ucountry,jdbcType=VARCHAR}, 
+      #{uprovince,jdbcType=VARCHAR}, #{ucity,jdbcType=VARCHAR}, #{uarea,jdbcType=VARCHAR}, 
+      #{uaddress,jdbcType=VARCHAR}, #{ubname,jdbcType=VARCHAR}, #{uphonenum,jdbcType=VARCHAR}, 
+      #{umail,jdbcType=VARCHAR}, #{addtime,jdbcType=DATE}, #{adddefault,jdbcType=BIT}, 
+      #{isDeleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jin321.pl.model.Useraddress" >
+    insert into useraddress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uaid != null" >
+        uaid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="ucountry != null" >
+        ucountry,
+      </if>
+      <if test="uprovince != null" >
+        uprovince,
+      </if>
+      <if test="ucity != null" >
+        ucity,
+      </if>
+      <if test="uarea != null" >
+        uarea,
+      </if>
+      <if test="uaddress != null" >
+        uaddress,
+      </if>
+      <if test="ubname != null" >
+        ubname,
+      </if>
+      <if test="uphonenum != null" >
+        uphonenum,
+      </if>
+      <if test="umail != null" >
+        umail,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="adddefault != null" >
+        adddefault,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uaid != null" >
+        #{uaid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="ucountry != null" >
+        #{ucountry,jdbcType=VARCHAR},
+      </if>
+      <if test="uprovince != null" >
+        #{uprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="ucity != null" >
+        #{ucity,jdbcType=VARCHAR},
+      </if>
+      <if test="uarea != null" >
+        #{uarea,jdbcType=VARCHAR},
+      </if>
+      <if test="uaddress != null" >
+        #{uaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ubname != null" >
+        #{ubname,jdbcType=VARCHAR},
+      </if>
+      <if test="uphonenum != null" >
+        #{uphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="umail != null" >
+        #{umail,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=DATE},
+      </if>
+      <if test="adddefault != null" >
+        #{adddefault,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jin321.pl.model.UseraddressExample" resultType="java.lang.Integer" >
+    select count(*) from useraddress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update useraddress
+    <set >
+      <if test="record.uaid != null" >
+        uaid = #{record.uaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ucountry != null" >
+        ucountry = #{record.ucountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uprovince != null" >
+        uprovince = #{record.uprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ucity != null" >
+        ucity = #{record.ucity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uarea != null" >
+        uarea = #{record.uarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uaddress != null" >
+        uaddress = #{record.uaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ubname != null" >
+        ubname = #{record.ubname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uphonenum != null" >
+        uphonenum = #{record.uphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.umail != null" >
+        umail = #{record.umail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=DATE},
+      </if>
+      <if test="record.adddefault != null" >
+        adddefault = #{record.adddefault,jdbcType=BIT},
+      </if>
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update useraddress
+    set uaid = #{record.uaid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      ucountry = #{record.ucountry,jdbcType=VARCHAR},
+      uprovince = #{record.uprovince,jdbcType=VARCHAR},
+      ucity = #{record.ucity,jdbcType=VARCHAR},
+      uarea = #{record.uarea,jdbcType=VARCHAR},
+      uaddress = #{record.uaddress,jdbcType=VARCHAR},
+      ubname = #{record.ubname,jdbcType=VARCHAR},
+      uphonenum = #{record.uphonenum,jdbcType=VARCHAR},
+      umail = #{record.umail,jdbcType=VARCHAR},
+      addtime = #{record.addtime,jdbcType=DATE},
+      adddefault = #{record.adddefault,jdbcType=BIT},
+      is_deleted = #{record.isDeleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Useraddress" >
+    update useraddress
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="ucountry != null" >
+        ucountry = #{ucountry,jdbcType=VARCHAR},
+      </if>
+      <if test="uprovince != null" >
+        uprovince = #{uprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="ucity != null" >
+        ucity = #{ucity,jdbcType=VARCHAR},
+      </if>
+      <if test="uarea != null" >
+        uarea = #{uarea,jdbcType=VARCHAR},
+      </if>
+      <if test="uaddress != null" >
+        uaddress = #{uaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ubname != null" >
+        ubname = #{ubname,jdbcType=VARCHAR},
+      </if>
+      <if test="uphonenum != null" >
+        uphonenum = #{uphonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="umail != null" >
+        umail = #{umail,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=DATE},
+      </if>
+      <if test="adddefault != null" >
+        adddefault = #{adddefault,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where uaid = #{uaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Useraddress" >
+    update useraddress
+    set uid = #{uid,jdbcType=VARCHAR},
+      ucountry = #{ucountry,jdbcType=VARCHAR},
+      uprovince = #{uprovince,jdbcType=VARCHAR},
+      ucity = #{ucity,jdbcType=VARCHAR},
+      uarea = #{uarea,jdbcType=VARCHAR},
+      uaddress = #{uaddress,jdbcType=VARCHAR},
+      ubname = #{ubname,jdbcType=VARCHAR},
+      uphonenum = #{uphonenum,jdbcType=VARCHAR},
+      umail = #{umail,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=DATE},
+      adddefault = #{adddefault,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where uaid = #{uaid,jdbcType=INTEGER}
+  </update>
+</mapper>

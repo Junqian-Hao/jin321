@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.pl.dao.TimeproductMapper" >
+  <resultMap id="BaseResultMap" type="com.jin321.pl.model.Timeproduct" >
+    <id column="tpid" property="tpid" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="timestart" property="timestart" jdbcType="DATE" />
+    <result column="timeend" property="timeend" jdbcType="DATE" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tpid, pid, timestart, timeend, is_deleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.TimeproductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from timeproduct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from timeproduct
+    where tpid = #{tpid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from timeproduct
+    where tpid = #{tpid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jin321.pl.model.TimeproductExample" >
+    delete from timeproduct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jin321.pl.model.Timeproduct" >
+    insert into timeproduct (tpid, pid, timestart, 
+      timeend, is_deleted)
+    values (#{tpid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{timestart,jdbcType=DATE}, 
+      #{timeend,jdbcType=DATE}, #{isDeleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jin321.pl.model.Timeproduct" >
+    insert into timeproduct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tpid != null" >
+        tpid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="timestart != null" >
+        timestart,
+      </if>
+      <if test="timeend != null" >
+        timeend,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tpid != null" >
+        #{tpid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="timestart != null" >
+        #{timestart,jdbcType=DATE},
+      </if>
+      <if test="timeend != null" >
+        #{timeend,jdbcType=DATE},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jin321.pl.model.TimeproductExample" resultType="java.lang.Integer" >
+    select count(*) from timeproduct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update timeproduct
+    <set >
+      <if test="record.tpid != null" >
+        tpid = #{record.tpid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.timestart != null" >
+        timestart = #{record.timestart,jdbcType=DATE},
+      </if>
+      <if test="record.timeend != null" >
+        timeend = #{record.timeend,jdbcType=DATE},
+      </if>
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update timeproduct
+    set tpid = #{record.tpid,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=INTEGER},
+      timestart = #{record.timestart,jdbcType=DATE},
+      timeend = #{record.timeend,jdbcType=DATE},
+      is_deleted = #{record.isDeleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Timeproduct" >
+    update timeproduct
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="timestart != null" >
+        timestart = #{timestart,jdbcType=DATE},
+      </if>
+      <if test="timeend != null" >
+        timeend = #{timeend,jdbcType=DATE},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where tpid = #{tpid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Timeproduct" >
+    update timeproduct
+    set pid = #{pid,jdbcType=INTEGER},
+      timestart = #{timestart,jdbcType=DATE},
+      timeend = #{timeend,jdbcType=DATE},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where tpid = #{tpid,jdbcType=INTEGER}
+  </update>
+</mapper>

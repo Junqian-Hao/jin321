@@ -303,6 +303,66 @@ public class UserExample {
             addCriterion("ucommition not between", value1, value2, "ucommition");
             return (Criteria) this;
         }
+
+        public Criteria andIsTogetherIsNull() {
+            addCriterion("is_together is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherIsNotNull() {
+            addCriterion("is_together is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherEqualTo(Boolean value) {
+            addCriterion("is_together =", value, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherNotEqualTo(Boolean value) {
+            addCriterion("is_together <>", value, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherGreaterThan(Boolean value) {
+            addCriterion("is_together >", value, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_together >=", value, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherLessThan(Boolean value) {
+            addCriterion("is_together <", value, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_together <=", value, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherIn(List<Boolean> values) {
+            addCriterion("is_together in", values, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherNotIn(List<Boolean> values) {
+            addCriterion("is_together not in", values, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_together between", value1, value2, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsTogetherNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_together not between", value1, value2, "isTogether");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

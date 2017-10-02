@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.pl.dao.ProductsizeMapper" >
+  <resultMap id="BaseResultMap" type="com.jin321.pl.model.Productsize" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="pscost" property="pscost" jdbcType="DECIMAL" />
+    <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL" />
+    <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL" />
+    <result column="sizename" property="sizename" jdbcType="VARCHAR" />
+    <result column="snumber" property="snumber" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sid, pid, pscost, psoriprice, pssellprice, sizename, snumber, is_deleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.ProductsizeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from productsize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from productsize
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from productsize
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jin321.pl.model.ProductsizeExample" >
+    delete from productsize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jin321.pl.model.Productsize" >
+    insert into productsize (sid, pid, pscost, 
+      psoriprice, pssellprice, sizename, 
+      snumber, is_deleted)
+    values (#{sid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{pscost,jdbcType=DECIMAL}, 
+      #{psoriprice,jdbcType=DECIMAL}, #{pssellprice,jdbcType=DECIMAL}, #{sizename,jdbcType=VARCHAR}, 
+      #{snumber,jdbcType=INTEGER}, #{isDeleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jin321.pl.model.Productsize" >
+    insert into productsize
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="pscost != null" >
+        pscost,
+      </if>
+      <if test="psoriprice != null" >
+        psoriprice,
+      </if>
+      <if test="pssellprice != null" >
+        pssellprice,
+      </if>
+      <if test="sizename != null" >
+        sizename,
+      </if>
+      <if test="snumber != null" >
+        snumber,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pscost != null" >
+        #{pscost,jdbcType=DECIMAL},
+      </if>
+      <if test="psoriprice != null" >
+        #{psoriprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pssellprice != null" >
+        #{pssellprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sizename != null" >
+        #{sizename,jdbcType=VARCHAR},
+      </if>
+      <if test="snumber != null" >
+        #{snumber,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jin321.pl.model.ProductsizeExample" resultType="java.lang.Integer" >
+    select count(*) from productsize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update productsize
+    <set >
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pscost != null" >
+        pscost = #{record.pscost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.psoriprice != null" >
+        psoriprice = #{record.psoriprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pssellprice != null" >
+        pssellprice = #{record.pssellprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sizename != null" >
+        sizename = #{record.sizename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.snumber != null" >
+        snumber = #{record.snumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update productsize
+    set sid = #{record.sid,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=INTEGER},
+      pscost = #{record.pscost,jdbcType=DECIMAL},
+      psoriprice = #{record.psoriprice,jdbcType=DECIMAL},
+      pssellprice = #{record.pssellprice,jdbcType=DECIMAL},
+      sizename = #{record.sizename,jdbcType=VARCHAR},
+      snumber = #{record.snumber,jdbcType=INTEGER},
+      is_deleted = #{record.isDeleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Productsize" >
+    update productsize
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pscost != null" >
+        pscost = #{pscost,jdbcType=DECIMAL},
+      </if>
+      <if test="psoriprice != null" >
+        psoriprice = #{psoriprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pssellprice != null" >
+        pssellprice = #{pssellprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sizename != null" >
+        sizename = #{sizename,jdbcType=VARCHAR},
+      </if>
+      <if test="snumber != null" >
+        snumber = #{snumber,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Productsize" >
+    update productsize
+    set pid = #{pid,jdbcType=INTEGER},
+      pscost = #{pscost,jdbcType=DECIMAL},
+      psoriprice = #{psoriprice,jdbcType=DECIMAL},
+      pssellprice = #{pssellprice,jdbcType=DECIMAL},
+      sizename = #{sizename,jdbcType=VARCHAR},
+      snumber = #{snumber,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

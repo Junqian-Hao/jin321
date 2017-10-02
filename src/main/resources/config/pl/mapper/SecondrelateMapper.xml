@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.pl.dao.SecondrelateMapper" >
+  <resultMap id="BaseResultMap" type="com.jin321.pl.model.Secondrelate" >
+    <id column="r2id" property="r2id" jdbcType="INTEGER" />
+    <result column="r2u1id" property="r2u1id" jdbcType="VARCHAR" />
+    <result column="r2u2id" property="r2u2id" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    r2id, r2u1id, r2u2id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.SecondrelateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from secondrelate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from secondrelate
+    where r2id = #{r2id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from secondrelate
+    where r2id = #{r2id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jin321.pl.model.SecondrelateExample" >
+    delete from secondrelate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jin321.pl.model.Secondrelate" >
+    insert into secondrelate (r2id, r2u1id, r2u2id
+      )
+    values (#{r2id,jdbcType=INTEGER}, #{r2u1id,jdbcType=VARCHAR}, #{r2u2id,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jin321.pl.model.Secondrelate" >
+    insert into secondrelate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="r2id != null" >
+        r2id,
+      </if>
+      <if test="r2u1id != null" >
+        r2u1id,
+      </if>
+      <if test="r2u2id != null" >
+        r2u2id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="r2id != null" >
+        #{r2id,jdbcType=INTEGER},
+      </if>
+      <if test="r2u1id != null" >
+        #{r2u1id,jdbcType=VARCHAR},
+      </if>
+      <if test="r2u2id != null" >
+        #{r2u2id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jin321.pl.model.SecondrelateExample" resultType="java.lang.Integer" >
+    select count(*) from secondrelate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update secondrelate
+    <set >
+      <if test="record.r2id != null" >
+        r2id = #{record.r2id,jdbcType=INTEGER},
+      </if>
+      <if test="record.r2u1id != null" >
+        r2u1id = #{record.r2u1id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.r2u2id != null" >
+        r2u2id = #{record.r2u2id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update secondrelate
+    set r2id = #{record.r2id,jdbcType=INTEGER},
+      r2u1id = #{record.r2u1id,jdbcType=VARCHAR},
+      r2u2id = #{record.r2u2id,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Secondrelate" >
+    update secondrelate
+    <set >
+      <if test="r2u1id != null" >
+        r2u1id = #{r2u1id,jdbcType=VARCHAR},
+      </if>
+      <if test="r2u2id != null" >
+        r2u2id = #{r2u2id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where r2id = #{r2id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Secondrelate" >
+    update secondrelate
+    set r2u1id = #{r2u1id,jdbcType=VARCHAR},
+      r2u2id = #{r2u2id,jdbcType=VARCHAR}
+    where r2id = #{r2id,jdbcType=INTEGER}
+  </update>
+</mapper>

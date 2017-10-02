@@ -7,6 +7,8 @@ public class User {
 
     private Float ucommition;
 
+    private Boolean isTogether;
+
     public String getUid() {
         return uid;
     }
@@ -29,5 +31,13 @@ public class User {
 
     public void setUcommition(Float ucommition) {
         this.ucommition = ucommition;
+    }
+
+    public Boolean getIsTogether() {
+        return isTogether;
+    }
+
+    public void setIsTogether(Boolean isTogether) {
+        this.isTogether = isTogether;
     }
 }

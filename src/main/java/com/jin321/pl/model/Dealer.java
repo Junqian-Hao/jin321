@@ -13,6 +13,8 @@ public class Dealer {
 
     private Boolean isDeleted;
 
+    private String dname;
+
     public Integer getDid() {
         return did;
     }
@@ -59,5 +61,13 @@ public class Dealer {
 
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname == null ? null : dname.trim();
     }
 }

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.pl.dao.DistrictMapper" >
+  <resultMap id="BaseResultMap" type="com.jin321.pl.model.District" >
+    <id column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="c_pa_id" property="cPaId" jdbcType="INTEGER" />
+    <result column="c_level" property="cLevel" jdbcType="TINYINT" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_lon" property="cLon" jdbcType="DOUBLE" />
+    <result column="c_lat" property="cLat" jdbcType="DOUBLE" />
+    <result column="c_alias" property="cAlias" jdbcType="VARCHAR" />
+    <result column="c_spell" property="cSpell" jdbcType="VARCHAR" />
+    <result column="c_szm" property="cSzm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    c_id, c_pa_id, c_level, c_name, c_lon, c_lat, c_alias, c_spell, c_szm
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.DistrictExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from district
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from district
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jin321.pl.model.DistrictExample" >
+    delete from district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jin321.pl.model.District" >
+    insert into district (c_id, c_pa_id, c_level, 
+      c_name, c_lon, c_lat, c_alias, 
+      c_spell, c_szm)
+    values (#{cId,jdbcType=INTEGER}, #{cPaId,jdbcType=INTEGER}, #{cLevel,jdbcType=TINYINT}, 
+      #{cName,jdbcType=VARCHAR}, #{cLon,jdbcType=DOUBLE}, #{cLat,jdbcType=DOUBLE}, #{cAlias,jdbcType=VARCHAR}, 
+      #{cSpell,jdbcType=VARCHAR}, #{cSzm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jin321.pl.model.District" >
+    insert into district
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cPaId != null" >
+        c_pa_id,
+      </if>
+      <if test="cLevel != null" >
+        c_level,
+      </if>
+      <if test="cName != null" >
+        c_name,
+      </if>
+      <if test="cLon != null" >
+        c_lon,
+      </if>
+      <if test="cLat != null" >
+        c_lat,
+      </if>
+      <if test="cAlias != null" >
+        c_alias,
+      </if>
+      <if test="cSpell != null" >
+        c_spell,
+      </if>
+      <if test="cSzm != null" >
+        c_szm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cPaId != null" >
+        #{cPaId,jdbcType=INTEGER},
+      </if>
+      <if test="cLevel != null" >
+        #{cLevel,jdbcType=TINYINT},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cLon != null" >
+        #{cLon,jdbcType=DOUBLE},
+      </if>
+      <if test="cLat != null" >
+        #{cLat,jdbcType=DOUBLE},
+      </if>
+      <if test="cAlias != null" >
+        #{cAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="cSpell != null" >
+        #{cSpell,jdbcType=VARCHAR},
+      </if>
+      <if test="cSzm != null" >
+        #{cSzm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jin321.pl.model.DistrictExample" resultType="java.lang.Integer" >
+    select count(*) from district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update district
+    <set >
+      <if test="record.cId != null" >
+        c_id = #{record.cId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cPaId != null" >
+        c_pa_id = #{record.cPaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cLevel != null" >
+        c_level = #{record.cLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.cName != null" >
+        c_name = #{record.cName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLon != null" >
+        c_lon = #{record.cLon,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cLat != null" >
+        c_lat = #{record.cLat,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cAlias != null" >
+        c_alias = #{record.cAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cSpell != null" >
+        c_spell = #{record.cSpell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cSzm != null" >
+        c_szm = #{record.cSzm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update district
+    set c_id = #{record.cId,jdbcType=INTEGER},
+      c_pa_id = #{record.cPaId,jdbcType=INTEGER},
+      c_level = #{record.cLevel,jdbcType=TINYINT},
+      c_name = #{record.cName,jdbcType=VARCHAR},
+      c_lon = #{record.cLon,jdbcType=DOUBLE},
+      c_lat = #{record.cLat,jdbcType=DOUBLE},
+      c_alias = #{record.cAlias,jdbcType=VARCHAR},
+      c_spell = #{record.cSpell,jdbcType=VARCHAR},
+      c_szm = #{record.cSzm,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.District" >
+    update district
+    <set >
+      <if test="cPaId != null" >
+        c_pa_id = #{cPaId,jdbcType=INTEGER},
+      </if>
+      <if test="cLevel != null" >
+        c_level = #{cLevel,jdbcType=TINYINT},
+      </if>
+      <if test="cName != null" >
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cLon != null" >
+        c_lon = #{cLon,jdbcType=DOUBLE},
+      </if>
+      <if test="cLat != null" >
+        c_lat = #{cLat,jdbcType=DOUBLE},
+      </if>
+      <if test="cAlias != null" >
+        c_alias = #{cAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="cSpell != null" >
+        c_spell = #{cSpell,jdbcType=VARCHAR},
+      </if>
+      <if test="cSzm != null" >
+        c_szm = #{cSzm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.District" >
+    update district
+    set c_pa_id = #{cPaId,jdbcType=INTEGER},
+      c_level = #{cLevel,jdbcType=TINYINT},
+      c_name = #{cName,jdbcType=VARCHAR},
+      c_lon = #{cLon,jdbcType=DOUBLE},
+      c_lat = #{cLat,jdbcType=DOUBLE},
+      c_alias = #{cAlias,jdbcType=VARCHAR},
+      c_spell = #{cSpell,jdbcType=VARCHAR},
+      c_szm = #{cSzm,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>
