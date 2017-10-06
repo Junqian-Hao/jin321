@@ -1,15 +1,17 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
+
 public class Productsize {
     private Integer sid;
 
     private Integer pid;
 
-    private Long pscost;
+    private BigDecimal pscost;
 
-    private Long psoriprice;
+    private BigDecimal psoriprice;
 
-    private Long pssellprice;
+    private BigDecimal pssellprice;
 
     private String sizename;
 
@@ -33,27 +35,27 @@ public class Productsize {
         this.pid = pid;
     }
 
-    public Long getPscost() {
+    public BigDecimal getPscost() {
         return pscost;
     }
 
-    public void setPscost(Long pscost) {
+    public void setPscost(BigDecimal pscost) {
         this.pscost = pscost;
     }
 
-    public Long getPsoriprice() {
+    public BigDecimal getPsoriprice() {
         return psoriprice;
     }
 
-    public void setPsoriprice(Long psoriprice) {
+    public void setPsoriprice(BigDecimal psoriprice) {
         this.psoriprice = psoriprice;
     }
 
-    public Long getPssellprice() {
+    public BigDecimal getPssellprice() {
         return pssellprice;
     }
 
-    public void setPssellprice(Long pssellprice) {
+    public void setPssellprice(BigDecimal pssellprice) {
         this.pssellprice = pssellprice;
     }
 

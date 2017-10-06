@@ -2,9 +2,8 @@ package com.jin321.pl.dao;
 
 import com.jin321.pl.model.User;
 import com.jin321.pl.model.UserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int countByExample(UserExample example);

@@ -52,6 +52,7 @@ public class FirstPageServiceImp implements FirstPageService {
     String secret = WXUtil.SECRET;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Map<String, Object> getFirstPageMessage() throws Exception {
         Map<String, Object> map = new HashMap<String,Object>();
         //轮播图
@@ -67,8 +68,9 @@ public class FirstPageServiceImp implements FirstPageService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Map<String, String> login(String js_code , String lUserid) throws Exception{
-        log.debug("appid->" + appid + "secert->" + secret);
+        log.info("appid->" + appid + "secert->" + secret);
         HashMap<String, String> map = new HashMap<String, String>();
         //请求微信服务器
         String url = "https://api.weixin.qq.com/sns/jscode2session";
@@ -107,7 +109,7 @@ public class FirstPageServiceImp implements FirstPageService {
         UserExample.Criteria criteria = userExample.createCriteria();
         criteria.andUserwxidEqualTo(openid);
         List<User> users = userMapper.selectByExample(userExample);
-        if (users == null || users.get(0) == null) {
+        if (users == null || users.size() == 0) {
             //用户是新用户
             log.info("新用户"+openid);
             User user = new User();
@@ -115,22 +117,29 @@ public class FirstPageServiceImp implements FirstPageService {
             user.setUserwxid(openid);
             userMapper.insert(user);
 
-            //校验推荐用户合法性
-            User user1 = userMapper.selectByPrimaryKey(lUserid);
-            if (user1 == null) {
-                log.info("推介用户非法");
-                map.put("code", "0");
-                map.put("errormessage", "推介用户非法");
-                return map;
-            } else {
-                //推介用户合法
-                Firstrelate firstrelate = new Firstrelate();
-                firstrelate.setR1u1id(user.getUid());
-                firstrelate.setR1u2id(user1.getUid());
-                firstrelateMapper.insert(firstrelate);
+            if (!StringUtil.isNullString(lUserid)) {
+                //校验推荐用户合法性
+                User user1 = userMapper.selectByPrimaryKey(lUserid);
+                if (user1 == null) {
+                    log.info("推介用户非法");
+                    map.put("code", "0");
+                    map.put("errormessage", "推介用户非法");
+                    return map;
+                } else {
+                    //推介用户合法
+                    Firstrelate firstrelate = new Firstrelate();
+                    firstrelate.setR1u1id(user.getUid());
+                    firstrelate.setR1u2id(user1.getUid());
+                    firstrelateMapper.insert(firstrelate);
 
+                    map.put("code", "1");
+                    map.put("message", "新用户");
+                    map.put("userid", user.getUid());
+                }
+            } else {
+                //无推介用户
                 map.put("code", "1");
-                map.put("message", "新用户");
+                map.put("message", "新用户，无推介用户");
                 map.put("userid", user.getUid());
             }
         } else {

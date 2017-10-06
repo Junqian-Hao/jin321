@@ -48,7 +48,7 @@ public class Md5Util {
                 stringBuffer.append(hexString);
             }
             //5,打印测试
-            log.debug("md5加密结果："+stringBuffer.toString());
+            log.info("md5加密结果："+stringBuffer.toString());
             return stringBuffer.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -65,11 +65,11 @@ public class Md5Util {
         Collections.sort(list);
         String string = "";
         for (int i = 0; i < list.size(); i++) {
-            log.debug("key——值:" + list.get(i) + "," + map.get(list.get(i)));
+            log.info("key——值:" + list.get(i) + "," + map.get(list.get(i)));
             string += list.get(i) + map.get(list.get(i));
         }
         String secret = string;
-        log.debug("字典升序加密拼成字符串："+secret+YAN);
+        log.info("字典升序加密拼成字符串："+secret+YAN);
         String encoder = Md5Util.Md5Encoder(secret+YAN);
         return encoder;
     }

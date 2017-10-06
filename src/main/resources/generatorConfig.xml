@@ -29,7 +29,7 @@
 
         <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
         <javaTypeResolver>
-            <property name="forceBigDecimals" value="false"/>
+            <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
 
 
@@ -65,22 +65,22 @@
                              targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <!--<table tableName="billtable"/>-->
-        <!--<table tableName="chart"/>-->
+        <table tableName="billtable"/>
+        <table tableName="chart"/>
         <table tableName="dealer"/>
-        <!--<table tableName="district"/>-->
-        <!--<table tableName="firstrelate"/>-->
-        <!--<table tableName="orderform"/>-->
-        <!--<table tableName="product"/>-->
-        <!--<table tableName="productdetail"/>-->
-        <!--<table tableName="productpics"/>-->
-        <!--<table tableName="productsize"/>-->
-        <!--<table tableName="producttype"/>-->
-        <!--<table tableName="rollingpick"/>-->
-        <!--<table tableName="secondrelate"/>-->
-        <!--<table tableName="timeproduct"/>-->
+        <table tableName="district"/>
+        <table tableName="firstrelate"/>
+        <table tableName="orderform"/>
+        <table tableName="product"/>
+        <table tableName="productdetail"/>
+        <table tableName="productpics"/>
+        <table tableName="productsize"/>
+        <table tableName="producttype"/>
+        <table tableName="rollingpick"/>
+        <table tableName="secondrelate"/>
+        <table tableName="timeproduct"/>
         <table tableName="user"/>
-        <!--<table tableName="useraddress"/>-->
+        <table tableName="useraddress"/>
 
         <!--<table tableName="movies" domainObjectName="User"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->

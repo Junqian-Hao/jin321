@@ -7,7 +7,6 @@
     <result column="pid" property="pid" jdbcType="INTEGER" />
     <result column="pnumber" property="pnumber" jdbcType="INTEGER" />
     <result column="sid" property="sid" jdbcType="INTEGER" />
-    <result column="cpnum" property="cpnum" jdbcType="INTEGER" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cartid, uid, pid, pnumber, sid, cpnum, is_deleted
+    cartid, uid, pid, pnumber, sid, is_deleted
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.ChartExample" >
     select
@@ -103,11 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Chart" >
     insert into chart (cartid, uid, pid, 
-      pnumber, sid, cpnum, 
-      is_deleted)
+      pnumber, sid, is_deleted
+      )
     values (#{cartid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
-      #{pnumber,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{cpnum,jdbcType=INTEGER}, 
-      #{isDeleted,jdbcType=BIT})
+      #{pnumber,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{isDeleted,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Chart" >
     insert into chart
@@ -126,9 +125,6 @@
       </if>
       <if test="sid != null" >
         sid,
-      </if>
-      <if test="cpnum != null" >
-        cpnum,
       </if>
       <if test="isDeleted != null" >
         is_deleted,
@@ -149,9 +145,6 @@
       </if>
       <if test="sid != null" >
         #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="cpnum != null" >
-        #{cpnum,jdbcType=INTEGER},
       </if>
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=BIT},
@@ -182,9 +175,6 @@
       <if test="record.sid != null" >
         sid = #{record.sid,jdbcType=INTEGER},
       </if>
-      <if test="record.cpnum != null" >
-        cpnum = #{record.cpnum,jdbcType=INTEGER},
-      </if>
       <if test="record.isDeleted != null" >
         is_deleted = #{record.isDeleted,jdbcType=BIT},
       </if>
@@ -200,7 +190,6 @@
       pid = #{record.pid,jdbcType=INTEGER},
       pnumber = #{record.pnumber,jdbcType=INTEGER},
       sid = #{record.sid,jdbcType=INTEGER},
-      cpnum = #{record.cpnum,jdbcType=INTEGER},
       is_deleted = #{record.isDeleted,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -221,9 +210,6 @@
       <if test="sid != null" >
         sid = #{sid,jdbcType=INTEGER},
       </if>
-      <if test="cpnum != null" >
-        cpnum = #{cpnum,jdbcType=INTEGER},
-      </if>
       <if test="isDeleted != null" >
         is_deleted = #{isDeleted,jdbcType=BIT},
       </if>
@@ -236,7 +222,6 @@
       pid = #{pid,jdbcType=INTEGER},
       pnumber = #{pnumber,jdbcType=INTEGER},
       sid = #{sid,jdbcType=INTEGER},
-      cpnum = #{cpnum,jdbcType=INTEGER},
       is_deleted = #{isDeleted,jdbcType=BIT}
     where cartid = #{cartid,jdbcType=INTEGER}
   </update>

@@ -30,6 +30,12 @@ public class FirstPageController {
     FirstPageService firstPageService;
 
 
+    /**
+     * 首页信息
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/firstRequest")
     @ResponseBody
     public Map<String, Object> firstRequest(HttpServletRequest request) throws Exception {
@@ -40,6 +46,14 @@ public class FirstPageController {
         firstPageMessage.put("basePath", UrlUtil.getBasePathNoPort(request));
         return firstPageMessage;
     }
+
+    /**
+     * 登录
+     * @param request
+     * @param re
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/login")
     @ResponseBody
     public Map<String, String> login(HttpServletRequest request, @RequestBody Map<String, String> re) throws Exception {
@@ -49,12 +63,7 @@ public class FirstPageController {
         String lUserid = re.get("lUserid");
         String session = re.get("session");
         log.info("请求的参数"+"js_code->"+js_code+"lUserid->"+lUserid+"session->"+session);
-        if (StringUtil.isNullString(js_code)) {
-            HashMap<String, String> map = new HashMap<String, String>();
-            map.put("code", "0");
-            map.put("message", "需要js_code");
-            return map;
-        }
+
         if (!StringUtil.isNullString(session)) {
         //不是第一次登录是验证请求
             LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
@@ -62,20 +71,24 @@ public class FirstPageController {
 //               //session未过期
                 HashMap<String, String> map = new HashMap<String, String>();
                 String openid = loginEntity.getOpenid();
+                String userid = loginEntity.getUserid();
                 map.put("code", "0");
                 map.put("openid", openid);
+                map.put("userid", userid);
                 return map;
             }
         }
         Map<String, String> login = firstPageService.login(js_code, lUserid);
         String openid = login.get("openid");
         String session_key = login.get("session_key");
+        String userid = login.get("userid");
 
         if (!StringUtil.isNullString(openid)&&!StringUtil.isNullString(session_key)) {
             LoginEntity loginEntity = new LoginEntity();
             loginEntity.setTim(System.currentTimeMillis());
             loginEntity.setSessionKey(session_key);
             loginEntity.setOpenid(openid);
+            loginEntity.setUserid(userid);
 
             login.remove("session_key");
             String s = StringUtil.makeSession();

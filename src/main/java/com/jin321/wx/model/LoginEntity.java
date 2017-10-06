@@ -8,7 +8,16 @@ package com.jin321.wx.model;
 public class LoginEntity {
     String sessionKey;
     String openid;
+    String userid;
     long tim;
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
     public String getSessionKey() {
         return sessionKey;

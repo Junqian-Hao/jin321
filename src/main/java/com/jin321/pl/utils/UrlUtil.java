@@ -26,7 +26,7 @@ public class UrlUtil {
         return request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+getPath(request)+"/";
     }
     /**
-     * 返回当前项目的绝对路径
+     * 返回当前项目的绝对路径不带端口
      * @param request
      * @return
      */

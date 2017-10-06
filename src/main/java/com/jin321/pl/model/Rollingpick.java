@@ -25,14 +25,6 @@ public class Rollingpick {
         this.pid = pid;
     }
 
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
-
     public String getRpicurl() {
         return rpicurl;
     }

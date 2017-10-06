@@ -11,8 +11,6 @@ public class Chart {
 
     private Integer sid;
 
-    private Integer cpnum;
-
     private Boolean isDeleted;
 
     public Integer getCartid() {
@@ -53,14 +51,6 @@ public class Chart {
 
     public void setSid(Integer sid) {
         this.sid = sid;
-    }
-
-    public Integer getCpnum() {
-        return cpnum;
-    }
-
-    public void setCpnum(Integer cpnum) {
-        this.cpnum = cpnum;
     }
 
     public Boolean getIsDeleted() {

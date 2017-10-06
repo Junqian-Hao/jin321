@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.wx.dao.FullProductMapper">
+    <resultMap id="BaseResultMap" type="fullProduct">
+        <id column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="did" property="did" jdbcType="INTEGER"/>
+        <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
+        <result column="ptypea" property="ptypea" jdbcType="INTEGER"/>
+        <result column="ptypeb" property="ptypeb" jdbcType="INTEGER"/>
+        <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
+        <result column="is_together" property="isTogether" jdbcType="BIT"/>
+        <result column="is_delete" property="isDelete" jdbcType="BIT"/>
+        <collection property="productsizeList" ofType="productsize">
+            <id column="sid" property="sid" jdbcType="INTEGER"/>
+            <result column="pscost" property="pscost" jdbcType="DECIMAL"/>
+            <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
+            <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
+            <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
+            <result column="snumber" property="snumber" jdbcType="INTEGER"/>
+        </collection>
+        <collection property="productpicsList" ofType="productpics">
+            <id column="ppid" property="ppid" jdbcType="INTEGER"/>
+            <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
+            <result column="is_headpic" property="isHeadpic" jdbcType="BIT"/>
+        </collection>
+        <collection property="productdetailList" ofType="productdetail">
+            <id column="pdid" property="pdid" jdbcType="INTEGER"/>
+            <result column="picurl" property="picurl" jdbcType="VARCHAR"/>
+            <result column="porder" property="porder" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+    <select id="selectFullProductById" resultMap="BaseResultMap" parameterType="int">
+        SELECT
+            product.*,
+            productsize.*,
+            productpics.*,
+            productdetail.*
+        FROM product
+            LEFT JOIN productpics ON product.pid = productpics.pid
+            LEFT JOIN productsize ON product.pid = productsize.pid
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
+        WHERE product.is_delete = 0
+              AND productsize.is_deleted = 0
+              AND productpics.is_deleted = 0
+              AND productdetail.is_deleted = 0
+              
+    </select>
+</mapper>

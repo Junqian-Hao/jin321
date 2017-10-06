@@ -414,66 +414,6 @@ public class ChartExample {
             return (Criteria) this;
         }
 
-        public Criteria andCpnumIsNull() {
-            addCriterion("cpnum is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumIsNotNull() {
-            addCriterion("cpnum is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumEqualTo(Integer value) {
-            addCriterion("cpnum =", value, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumNotEqualTo(Integer value) {
-            addCriterion("cpnum <>", value, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumGreaterThan(Integer value) {
-            addCriterion("cpnum >", value, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("cpnum >=", value, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumLessThan(Integer value) {
-            addCriterion("cpnum <", value, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumLessThanOrEqualTo(Integer value) {
-            addCriterion("cpnum <=", value, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumIn(List<Integer> values) {
-            addCriterion("cpnum in", values, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumNotIn(List<Integer> values) {
-            addCriterion("cpnum not in", values, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumBetween(Integer value1, Integer value2) {
-            addCriterion("cpnum between", value1, value2, "cpnum");
-            return (Criteria) this;
-        }
-
-        public Criteria andCpnumNotBetween(Integer value1, Integer value2) {
-            addCriterion("cpnum not between", value1, value2, "cpnum");
-            return (Criteria) this;
-        }
-
         public Criteria andIsDeletedIsNull() {
             addCriterion("is_deleted is null");
             return (Criteria) this;

@@ -1,5 +1,6 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -234,52 +235,52 @@ public class ProductsizeExample {
             return (Criteria) this;
         }
 
-        public Criteria andPscostEqualTo(Long value) {
+        public Criteria andPscostEqualTo(BigDecimal value) {
             addCriterion("pscost =", value, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostNotEqualTo(Long value) {
+        public Criteria andPscostNotEqualTo(BigDecimal value) {
             addCriterion("pscost <>", value, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostGreaterThan(Long value) {
+        public Criteria andPscostGreaterThan(BigDecimal value) {
             addCriterion("pscost >", value, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostGreaterThanOrEqualTo(Long value) {
+        public Criteria andPscostGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("pscost >=", value, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostLessThan(Long value) {
+        public Criteria andPscostLessThan(BigDecimal value) {
             addCriterion("pscost <", value, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostLessThanOrEqualTo(Long value) {
+        public Criteria andPscostLessThanOrEqualTo(BigDecimal value) {
             addCriterion("pscost <=", value, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostIn(List<Long> values) {
+        public Criteria andPscostIn(List<BigDecimal> values) {
             addCriterion("pscost in", values, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostNotIn(List<Long> values) {
+        public Criteria andPscostNotIn(List<BigDecimal> values) {
             addCriterion("pscost not in", values, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostBetween(Long value1, Long value2) {
+        public Criteria andPscostBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("pscost between", value1, value2, "pscost");
             return (Criteria) this;
         }
 
-        public Criteria andPscostNotBetween(Long value1, Long value2) {
+        public Criteria andPscostNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("pscost not between", value1, value2, "pscost");
             return (Criteria) this;
         }
@@ -294,52 +295,52 @@ public class ProductsizeExample {
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceEqualTo(Long value) {
+        public Criteria andPsoripriceEqualTo(BigDecimal value) {
             addCriterion("psoriprice =", value, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceNotEqualTo(Long value) {
+        public Criteria andPsoripriceNotEqualTo(BigDecimal value) {
             addCriterion("psoriprice <>", value, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceGreaterThan(Long value) {
+        public Criteria andPsoripriceGreaterThan(BigDecimal value) {
             addCriterion("psoriprice >", value, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andPsoripriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("psoriprice >=", value, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceLessThan(Long value) {
+        public Criteria andPsoripriceLessThan(BigDecimal value) {
             addCriterion("psoriprice <", value, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceLessThanOrEqualTo(Long value) {
+        public Criteria andPsoripriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("psoriprice <=", value, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceIn(List<Long> values) {
+        public Criteria andPsoripriceIn(List<BigDecimal> values) {
             addCriterion("psoriprice in", values, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceNotIn(List<Long> values) {
+        public Criteria andPsoripriceNotIn(List<BigDecimal> values) {
             addCriterion("psoriprice not in", values, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceBetween(Long value1, Long value2) {
+        public Criteria andPsoripriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("psoriprice between", value1, value2, "psoriprice");
             return (Criteria) this;
         }
 
-        public Criteria andPsoripriceNotBetween(Long value1, Long value2) {
+        public Criteria andPsoripriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("psoriprice not between", value1, value2, "psoriprice");
             return (Criteria) this;
         }
@@ -354,52 +355,52 @@ public class ProductsizeExample {
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceEqualTo(Long value) {
+        public Criteria andPssellpriceEqualTo(BigDecimal value) {
             addCriterion("pssellprice =", value, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceNotEqualTo(Long value) {
+        public Criteria andPssellpriceNotEqualTo(BigDecimal value) {
             addCriterion("pssellprice <>", value, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceGreaterThan(Long value) {
+        public Criteria andPssellpriceGreaterThan(BigDecimal value) {
             addCriterion("pssellprice >", value, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andPssellpriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("pssellprice >=", value, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceLessThan(Long value) {
+        public Criteria andPssellpriceLessThan(BigDecimal value) {
             addCriterion("pssellprice <", value, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceLessThanOrEqualTo(Long value) {
+        public Criteria andPssellpriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("pssellprice <=", value, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceIn(List<Long> values) {
+        public Criteria andPssellpriceIn(List<BigDecimal> values) {
             addCriterion("pssellprice in", values, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceNotIn(List<Long> values) {
+        public Criteria andPssellpriceNotIn(List<BigDecimal> values) {
             addCriterion("pssellprice not in", values, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceBetween(Long value1, Long value2) {
+        public Criteria andPssellpriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("pssellprice between", value1, value2, "pssellprice");
             return (Criteria) this;
         }
 
-        public Criteria andPssellpriceNotBetween(Long value1, Long value2) {
+        public Criteria andPssellpriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("pssellprice not between", value1, value2, "pssellprice");
             return (Criteria) this;
         }
