@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.ms.dao.ProductInsertMapper">
+    <insert id="insertProduct">
+          INSERT into product
+            (did,pname,psummary,ptypea,ptypeb,ptypec,is_together)
+          VALUES
+            (#{0},#{1},#{2},#{3},#{4},#{5},#{6})
+    </insert>
+</mapper>

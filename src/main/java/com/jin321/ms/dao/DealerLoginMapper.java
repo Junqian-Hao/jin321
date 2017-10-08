@@ -1,5 +1,6 @@
 package com.jin321.ms.dao;
 
+
 import com.jin321.ms.model.DealerLogin;
 import org.springframework.stereotype.Repository;
 
@@ -14,8 +15,8 @@ import org.springframework.stereotype.Repository;
 public interface DealerLoginMapper{
     /**
      * 登录MAP  TAT
-     * @param Username
+     * @param dusername
      * @return
      */
-    DealerLogin Login(String Username);
+    DealerLogin dealerLogin(String dusername);
 }
