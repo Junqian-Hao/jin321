@@ -4,7 +4,9 @@ import com.jin321.pl.model.Secondrelate;
 import com.jin321.pl.model.SecondrelateExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SecondrelateMapper {
     int countByExample(SecondrelateExample example);
 

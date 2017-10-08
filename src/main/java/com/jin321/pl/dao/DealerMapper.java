@@ -4,7 +4,9 @@ import com.jin321.pl.model.Dealer;
 import com.jin321.pl.model.DealerExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DealerMapper {
     int countByExample(DealerExample example);
 

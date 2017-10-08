@@ -57,18 +57,22 @@ public class DealerLoginController{
         if (verifycodeget!=null&&verifycodeget==verifycode) {
             if(sign==2){
                 returnMap.put("code","2");
+                returnMap.put("msg","用户不存在");
                 return returnMap;
             }
             else if(sign==1){
                 returnMap.put("code","1");
+                returnMap.put("msg","登录成功");
                 return returnMap;
             }
             else{
                 returnMap.put("code","0");
+                returnMap.put("msg","密码错误");
                 return returnMap;
             }
         } else {
             returnMap.put("code","3");
+            returnMap.put("msg","验证码错误");
             return returnMap;
         }
 

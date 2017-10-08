@@ -4,7 +4,9 @@ import com.jin321.pl.model.Chart;
 import com.jin321.pl.model.ChartExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ChartMapper {
     int countByExample(ChartExample example);
 

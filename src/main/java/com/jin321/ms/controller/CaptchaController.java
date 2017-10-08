@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * Created by Tyranitarx on 2017/10/5.
  *
- * @Description :
+ * @Description : 获取验证码
  */
 @Controller
 @RequestMapping("/ms")

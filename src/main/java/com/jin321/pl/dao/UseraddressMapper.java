@@ -4,7 +4,9 @@ import com.jin321.pl.model.Useraddress;
 import com.jin321.pl.model.UseraddressExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UseraddressMapper {
     int countByExample(UseraddressExample example);
 

@@ -4,7 +4,9 @@ import com.jin321.pl.model.Orderform;
 import com.jin321.pl.model.OrderformExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderformMapper {
     int countByExample(OrderformExample example);
 

@@ -4,7 +4,9 @@ import com.jin321.pl.model.Product;
 import com.jin321.pl.model.ProductExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProductMapper {
     int countByExample(ProductExample example);
 

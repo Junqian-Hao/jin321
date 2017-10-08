@@ -1,12 +1,18 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.DealerLoginService;
-import com.jin321.ms.dao.DealerExistMapper;
-import com.jin321.ms.dao.DealerLoginMapper;
 
+
+
+import com.jin321.pl.dao.DealerMapper;
+
+import com.jin321.pl.model.Dealer;
+import com.jin321.pl.model.DealerExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by Tyranitarx on 2017/9/30.
@@ -16,10 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class DealerLoginServiceimp implements DealerLoginService {
     @Autowired
-    private DealerLoginMapper dealerLoginMapper;
-    @Autowired
-    private DealerExistMapper dealerExistMapper;
-
+    private DealerMapper dealerMapper;
+    private List<Dealer> dealers;
     /**
      *
      * @param dusername 经销商用户名
@@ -28,15 +32,18 @@ public class DealerLoginServiceimp implements DealerLoginService {
      */
     @Override
     public int Login(String dusername, String dpassword) {
-      if(dealerExistMapper.checkDealer(dusername)!=null){
-          if(dealerLoginMapper.dealerLogin(dusername).getDpassword().equals(dpassword)){
-              return 1;
-          }
-          else {
-              return 0;
-          }
-      }
-      else
-            return 2;
-      }
+        DealerExample dealerExample=new DealerExample();
+        DealerExample.Criteria criteria=dealerExample.createCriteria();
+        criteria.andDusernameEqualTo(dusername);
+        dealers=dealerMapper.selectByExample(dealerExample);
+        if(dealers!=null){
+                if (dealers.get(0).getDpassword()==dpassword)
+                    return 1;
+                else
+                    return 2;
+        }
+        else
+            return 0;
+
+    }
 }

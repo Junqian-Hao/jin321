@@ -3,9 +3,10 @@ package com.jin321.pl.dao;
 import com.jin321.pl.model.Billtable;
 import com.jin321.pl.model.BilltableExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface BilltableMapper {
     int countByExample(BilltableExample example);
 

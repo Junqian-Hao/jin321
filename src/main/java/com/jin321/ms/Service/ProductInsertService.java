@@ -1,5 +1,6 @@
 package com.jin321.ms.Service;
 
+import com.jin321.pl.model.Product;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -10,15 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ProductInsertService {
     /**
      *
-     * @param did 商品经销商ID
-     * @param pname 商品名称
-     * @param psummary 商品简介
-     * @param ptypea 商品类型a
-     * @param ptypeb 商品类型b
-     * @param ptypec 商品类型v
-     * @param is_together 是否合伙人商品
+     * @param product 插入product对象
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int insertProduct(int did,String pname,String psummary,int ptypea,int ptypeb,int ptypec,int is_together);
+    int insertProduct(Product product);
 }

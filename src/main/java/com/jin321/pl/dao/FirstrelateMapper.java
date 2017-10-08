@@ -4,7 +4,9 @@ import com.jin321.pl.model.Firstrelate;
 import com.jin321.pl.model.FirstrelateExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FirstrelateMapper {
     int countByExample(FirstrelateExample example);
 
