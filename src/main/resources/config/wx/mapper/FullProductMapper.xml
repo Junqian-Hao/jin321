@@ -44,6 +44,5 @@
               AND productsize.is_deleted = 0
               AND productpics.is_deleted = 0
               AND productdetail.is_deleted = 0
-              
     </select>
 </mapper>
