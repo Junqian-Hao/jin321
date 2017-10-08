@@ -12,6 +12,15 @@ import java.util.List;
  * @Description :
  */
 public interface ProductPoMapper {
+    /**
+     * 查询所有未标记为删除的合伙人商品
+     * @return
+     */
     List<ProductPo> selectAllNowTogether();
 
+    /**
+     *根据二级标签id查询未删除的商品
+     * @return
+     */
+    List<ProductPo> selectNowByPtypeb(int ptypeb);
 }

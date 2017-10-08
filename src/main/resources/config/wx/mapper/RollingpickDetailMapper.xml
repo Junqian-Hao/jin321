@@ -25,7 +25,7 @@
             rollingpick.*,
             productpics.`ppicurl`,
             product.*,
-            MIN(productsize.pssellprice) AS pssellprice,
+            productsize.pssellprice,
             productsize.`psoriprice`
         FROM rollingpick
             LEFT JOIN product ON rollingpick.`pid` = product.`pid`
@@ -36,6 +36,9 @@
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
               AND productsize.`is_deleted` = 0
+              AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
+                                             FROM productsize
+                                             WHERE rollingpick.`pid` = productsize.`pid`)
               AND rollingpick.`pid` = #{pid}
     </select>
     <select id="selectNow" resultMap="BaseResultMap">
@@ -43,7 +46,7 @@
             rollingpick.*,
             productpics.`ppicurl`,
             product.*,
-            MIN(productsize.pssellprice) AS pssellprice,
+            productsize.pssellprice,
             productsize.`psoriprice`
         FROM rollingpick
             LEFT JOIN product ON rollingpick.`pid` = product.`pid`
@@ -54,6 +57,9 @@
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
               AND productsize.`is_deleted` = 0
+              AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
+                                             FROM productsize
+                                             WHERE rollingpick.`pid` = productsize.`pid`)
     </select>
 
 

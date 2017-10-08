@@ -39,9 +39,7 @@ public class FirstPageController {
     @RequestMapping("/firstRequest")
     @ResponseBody
     public Map<String, Object> firstRequest(HttpServletRequest request) throws Exception {
-        log.info("相对路径：" + UrlUtil.getPath(request));
-        log.info("完整路径：" + UrlUtil.getBasePath(request));
-        log.info("物理路径：" + UrlUtil.getRealPath(request));
+        log.info("请求首页信息");
         Map<String, Object> firstPageMessage = firstPageService.getFirstPageMessage();
         firstPageMessage.put("basePath", UrlUtil.getBasePathNoPort(request));
         return firstPageMessage;
@@ -57,6 +55,7 @@ public class FirstPageController {
     @RequestMapping("/login")
     @ResponseBody
     public Map<String, String> login(HttpServletRequest request, @RequestBody Map<String, String> re) throws Exception {
+        log.info("进行登录操作");
         ServletContext servletContext = request.getServletContext();
 
         String js_code = re.get("js_code");
@@ -65,16 +64,27 @@ public class FirstPageController {
         log.info("请求的参数"+"js_code->"+js_code+"lUserid->"+lUserid+"session->"+session);
 
         if (!StringUtil.isNullString(session)) {
-        //不是第一次登录是验证请求
+            //不是第一次登录是验证请求
+            log.info("不是第一次登录是验证请求");
             LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
-            if ((loginEntity != null) && (loginEntity.getTim() > (System.currentTimeMillis() - (30 * 24 * 60 * 60 * 1000)))) {
-//               //session未过期
+            log.info("取出的loginEntity-》"+loginEntity);
+
+            if ((loginEntity != null)&&(loginEntity.getTim() > (System.currentTimeMillis() - 2592000000l))) {
+                log.info("session未过期");
+                //session未过期
                 HashMap<String, String> map = new HashMap<String, String>();
                 String openid = loginEntity.getOpenid();
                 String userid = loginEntity.getUserid();
-                map.put("code", "0");
+                map.put("code", "3");
                 map.put("openid", openid);
                 map.put("userid", userid);
+                return map;
+            } else {
+                //session过期
+                log.info("session过期");
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("code", "4");
+                map.put("message", "session过期");
                 return map;
             }
         }

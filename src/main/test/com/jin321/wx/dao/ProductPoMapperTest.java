@@ -25,7 +25,14 @@ public class ProductPoMapperTest {
     public void selectAllTogether() throws Exception {
         List<ProductPo> productPos = productPoMapper.selectAllNowTogether();
         System.out.println(productPos);
-
+//        long l = System.currentTimeMillis();
+//        System.out.println("第一次获得的毫秒值" + l);
+//        System.out.println("等待");
+//        long l2 = System.currentTimeMillis();
+//        System.out.println("第二次获得的毫秒值" + l2);
+//        long l3 = (System.currentTimeMillis()-2592000000l);
+//        System.out.println("回退一个月的毫秒值" + l3);
+//        System.out.println(l-l3);
     }
 
 }

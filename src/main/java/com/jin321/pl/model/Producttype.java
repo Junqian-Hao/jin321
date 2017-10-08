@@ -7,6 +7,8 @@ public class Producttype {
 
     private Integer typeclass;
 
+    private Integer highertid;
+
     private Boolean isDelete;
 
     public Integer getTid() {
@@ -31,6 +33,14 @@ public class Producttype {
 
     public void setTypeclass(Integer typeclass) {
         this.typeclass = typeclass;
+    }
+
+    public Integer getHighertid() {
+        return highertid;
+    }
+
+    public void setHighertid(Integer highertid) {
+        this.highertid = highertid;
     }
 
     public Boolean getIsDelete() {

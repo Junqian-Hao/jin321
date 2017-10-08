@@ -127,6 +127,7 @@ public class FirstPageServiceImp implements FirstPageService {
                     return map;
                 } else {
                     //推介用户合法
+                    log.info("推介用户合法");
                     Firstrelate firstrelate = new Firstrelate();
                     firstrelate.setR1u1id(user.getUid());
                     firstrelate.setR1u2id(user1.getUid());
@@ -138,6 +139,7 @@ public class FirstPageServiceImp implements FirstPageService {
                 }
             } else {
                 //无推介用户
+                log.info("无推介用户");
                 map.put("code", "1");
                 map.put("message", "新用户，无推介用户");
                 map.put("userid", user.getUid());

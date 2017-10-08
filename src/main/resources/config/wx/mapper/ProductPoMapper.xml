@@ -17,9 +17,9 @@
     </resultMap>
     <select id="selectAllNowTogether" resultMap="BaseResultMap">
         SELECT
-            productpics.`ppicurl`,
             product.*,
-            MIN(productsize.pssellprice) AS pssellprice,
+            productpics.`ppicurl`,
+            productsize.pssellprice,
             productsize.`psoriprice`
         FROM product
             LEFT JOIN productpics ON product.`pid` = productpics.`pid`
@@ -29,6 +29,27 @@
               AND product.`is_delete` = 0
               AND product.`is_together` = 1
               AND productsize.`is_deleted` = 0
+              AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
+                                             FROM productsize
+                                             WHERE product.`pid` = productsize.`pid`)
+    </select>
+    <select id="selectNowByPtypeb" resultMap="BaseResultMap" parameterType="int">
+        SELECT
+            product.*,
+            productpics.`ppicurl`,
+            productsize.pssellprice,
+            productsize.`psoriprice`
+        FROM product
+            LEFT JOIN productpics ON product.`pid` = productpics.`pid`
+            LEFT JOIN productsize ON product.`pid` = productsize.`pid`
+        WHERE productpics.`is_deleted` = 0
+              AND productpics.`is_headpic` = 1
+              AND product.`is_delete` = 0
+              AND product.ptypeb=#{ptypeb}
+              AND productsize.`is_deleted` = 0
+              AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
+                                             FROM productsize
+                                             WHERE product.`pid` = productsize.`pid`)
     </select>
 
 </mapper>
