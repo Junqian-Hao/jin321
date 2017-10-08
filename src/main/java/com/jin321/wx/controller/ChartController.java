@@ -52,6 +52,12 @@ public class ChartController {
         }
     }
 
+    /**
+     * 删除购物车
+     * @param re
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/deleteChart")
     @ResponseBody
     public Map<String, Object> deleteChart(@RequestBody Map<String, String> re) throws Exception {
@@ -69,6 +75,12 @@ public class ChartController {
         }
     }
 
+    /**
+     * 修改购物车商品数量
+     * @param re
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/updateChartPnumber")
     @ResponseBody
     public Map<String, Object> updateChartPnumber(@RequestBody Map<String, String> re) throws Exception {
@@ -86,6 +98,13 @@ public class ChartController {
         }
     }
 
+    /**
+     * 通过用户id查询用户购物车
+     * @param re
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/selectChartByUserId")
     @ResponseBody
     public Map<String, Object> selectChartByUserId(@RequestBody Map<String, String> re, HttpServletRequest request) throws Exception {

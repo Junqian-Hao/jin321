@@ -27,7 +27,7 @@
             timeproduct.*,
             productpics.`ppicurl`,
             product.*,
-            MIN(productsize.pssellprice) AS pssellprice,
+            productsize.pssellprice,
             productsize.`psoriprice`
         FROM timeproduct
             LEFT JOIN product ON timeproduct.`pid` = product.`pid`
@@ -37,7 +37,9 @@
               AND productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
-              AND timeproduct.`pid` = 1
               AND productsize.`is_deleted` = 0
+              AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
+                                             FROM productsize
+                                             WHERE timeproduct.`pid` = productsize.`pid`)
     </select>
 </mapper>

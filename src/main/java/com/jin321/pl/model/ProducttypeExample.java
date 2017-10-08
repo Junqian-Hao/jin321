@@ -294,6 +294,66 @@ public class ProducttypeExample {
             return (Criteria) this;
         }
 
+        public Criteria andHighertidIsNull() {
+            addCriterion("highertid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidIsNotNull() {
+            addCriterion("highertid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidEqualTo(Integer value) {
+            addCriterion("highertid =", value, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidNotEqualTo(Integer value) {
+            addCriterion("highertid <>", value, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidGreaterThan(Integer value) {
+            addCriterion("highertid >", value, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("highertid >=", value, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidLessThan(Integer value) {
+            addCriterion("highertid <", value, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidLessThanOrEqualTo(Integer value) {
+            addCriterion("highertid <=", value, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidIn(List<Integer> values) {
+            addCriterion("highertid in", values, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidNotIn(List<Integer> values) {
+            addCriterion("highertid not in", values, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidBetween(Integer value1, Integer value2) {
+            addCriterion("highertid between", value1, value2, "highertid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHighertidNotBetween(Integer value1, Integer value2) {
+            addCriterion("highertid not between", value1, value2, "highertid");
+            return (Criteria) this;
+        }
+
         public Criteria andIsDeleteIsNull() {
             addCriterion("is_delete is null");
             return (Criteria) this;
