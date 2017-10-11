@@ -8,6 +8,7 @@ import com.jin321.wx.model.ProductPo;
 import com.jin321.wx.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class TypeServiceImp  implements TypeService {
     @Autowired
     ProductPoMapper productPoMapper;
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<Producttype> selectAllFirstProducttype() throws Exception{
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
@@ -32,6 +34,7 @@ public class TypeServiceImp  implements TypeService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<Producttype> selectSecondProducttype(int tid) throws Exception {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
@@ -41,6 +44,7 @@ public class TypeServiceImp  implements TypeService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<ProductPo> selectProductByptypeb(int ptypeb) throws Exception {
         List<ProductPo> productPos = productPoMapper.selectNowByPtypeb(ptypeb);
         return productPos;

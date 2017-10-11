@@ -47,6 +47,7 @@
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
           <element id="library" level="project" name="Maven: com.squareup.okhttp3:okhttp:3.9.0" />
           <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.13.0" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.52" />
         </element>
       </element>
       <element id="directory" name="META-INF">

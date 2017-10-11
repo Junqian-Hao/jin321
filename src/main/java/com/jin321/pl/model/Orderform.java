@@ -3,7 +3,7 @@ package com.jin321.pl.model;
 import java.util.Date;
 
 public class Orderform {
-    private Integer oid;
+    private Long oid;
 
     private String uid;
 
@@ -23,11 +23,15 @@ public class Orderform {
 
     private String omessage;
 
-    public Integer getOid() {
+    private String osendmethod;
+
+    private String osendnumber;
+
+    public Long getOid() {
         return oid;
     }
 
-    public void setOid(Integer oid) {
+    public void setOid(Long oid) {
         this.oid = oid;
     }
 
@@ -101,5 +105,21 @@ public class Orderform {
 
     public void setOmessage(String omessage) {
         this.omessage = omessage == null ? null : omessage.trim();
+    }
+
+    public String getOsendmethod() {
+        return osendmethod;
+    }
+
+    public void setOsendmethod(String osendmethod) {
+        this.osendmethod = osendmethod == null ? null : osendmethod.trim();
+    }
+
+    public String getOsendnumber() {
+        return osendnumber;
+    }
+
+    public void setOsendnumber(String osendnumber) {
+        this.osendnumber = osendnumber == null ? null : osendnumber.trim();
     }
 }
