@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Tyranitarx on 2017/9/30.
  * @Description : 用户登录服务
  */
-@Service("dealerLoginService")
+@Service
 @Transactional(rollbackFor = Exception.class)
 public class DealerLoginServiceimp implements DealerLoginService {
     @Autowired

@@ -2,13 +2,16 @@ package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jin321.ms.Service.ProductInsertService;
+import com.jin321.ms.Service.ProductPicService;
+import com.jin321.ms.Service.ProductService;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.jin321.pl.model.Product;
+import com.jin321.pl.model.Productsize;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,41 +30,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ProductInsertController {
     private static final Log log = LogFactory.getLog(ProductInsertController.class);
     @Autowired
-    private ProductInsertService productInsertService;
+    private ProductService productService;
     private Map<String,String> returnMap;
     private Product product;
-    private int did;
-    private String pname;
-    private String psummary;
-    private int ptypea;
-    private int ptypeb;
-    private int ptypec;
-    private int is_together;
+    private List<Productsize> productsizes;
+
+    /**
+     *
+     * @param json 样例json：
+     * {
+        "product":{"did":"1","pname":"郝俊谦最牛逼","psummary":"郝俊谦牛逼","ptypea":"1","ptypeb":"1","is_together":"1","is_delete":"0"},
+        "productsizes":[{"pscost":"12.2","psoriprice":"12.2","pssellprice":"12.2","sizename":"郝俊谦牛逼","snumber":"123","is_delete":"0"}]
+     *｝
+     * @return
+     */
     @RequestMapping("/insertProduct")
     @ResponseBody
     public Map<String,String> insertProduct(@RequestBody String json){
-        product=new Product();
         returnMap=new HashMap<String, String>();
         JSONObject obj= JSON.parseObject(json);
-        did=obj.getInteger("did");
-        pname=obj.getString("pname");
-        psummary=obj.getString("psummary");
-        ptypea=obj.getInteger("ptypea");
-        ptypeb=obj.getInteger("ptypeb");
-        is_together=obj.getInteger("is_together");
-        product.setDid(did);
-        product.setPname(pname);
-        product.setPsummary(psummary);
-        product.setPtypea(ptypea);
-        product.setPtypeb(ptypeb);
-        product.setIsTogether((is_together==1)?true:false);
-        if(productInsertService.insertProduct(product)==1){
+        //product
+        product=JSON.parseObject(obj.get("product").toString(),Product.class);
+        //productsize
+        productsizes=JSON.parseArray(obj.get("productsizes").toString(),Productsize.class);
+        if (productService.insertProduct(product,productsizes)==1){
             returnMap.put("code","1");
-            return returnMap;
+            returnMap.put("msg","插入成功");
+            return  returnMap;
         }
         else {
             returnMap.put("code","0");
-            return returnMap;
+            returnMap.put("msg","插入失败");
+            return  returnMap;
         }
     }
 }
