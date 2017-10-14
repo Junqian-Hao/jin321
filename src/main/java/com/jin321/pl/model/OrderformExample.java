@@ -142,52 +142,52 @@ public class OrderformExample {
             return (Criteria) this;
         }
 
-        public Criteria andOidEqualTo(Integer value) {
+        public Criteria andOidEqualTo(Long value) {
             addCriterion("oid =", value, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidNotEqualTo(Integer value) {
+        public Criteria andOidNotEqualTo(Long value) {
             addCriterion("oid <>", value, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidGreaterThan(Integer value) {
+        public Criteria andOidGreaterThan(Long value) {
             addCriterion("oid >", value, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andOidGreaterThanOrEqualTo(Long value) {
             addCriterion("oid >=", value, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidLessThan(Integer value) {
+        public Criteria andOidLessThan(Long value) {
             addCriterion("oid <", value, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidLessThanOrEqualTo(Integer value) {
+        public Criteria andOidLessThanOrEqualTo(Long value) {
             addCriterion("oid <=", value, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidIn(List<Integer> values) {
+        public Criteria andOidIn(List<Long> values) {
             addCriterion("oid in", values, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidNotIn(List<Integer> values) {
+        public Criteria andOidNotIn(List<Long> values) {
             addCriterion("oid not in", values, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidBetween(Integer value1, Integer value2) {
+        public Criteria andOidBetween(Long value1, Long value2) {
             addCriterion("oid between", value1, value2, "oid");
             return (Criteria) this;
         }
 
-        public Criteria andOidNotBetween(Integer value1, Integer value2) {
+        public Criteria andOidNotBetween(Long value1, Long value2) {
             addCriterion("oid not between", value1, value2, "oid");
             return (Criteria) this;
         }
@@ -562,6 +562,66 @@ public class OrderformExample {
             return (Criteria) this;
         }
 
+        public Criteria andOrepaytimeIsNull() {
+            addCriterion("orepaytime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeIsNotNull() {
+            addCriterion("orepaytime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeEqualTo(Date value) {
+            addCriterionForJDBCDate("orepaytime =", value, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeNotEqualTo(Date value) {
+            addCriterionForJDBCDate("orepaytime <>", value, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeGreaterThan(Date value) {
+            addCriterionForJDBCDate("orepaytime >", value, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("orepaytime >=", value, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeLessThan(Date value) {
+            addCriterionForJDBCDate("orepaytime <", value, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("orepaytime <=", value, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeIn(List<Date> values) {
+            addCriterionForJDBCDate("orepaytime in", values, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeNotIn(List<Date> values) {
+            addCriterionForJDBCDate("orepaytime not in", values, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("orepaytime between", value1, value2, "orepaytime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrepaytimeNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("orepaytime not between", value1, value2, "orepaytime");
+            return (Criteria) this;
+        }
+
         public Criteria andOpayedIsNull() {
             addCriterion("opayed is null");
             return (Criteria) this;
@@ -679,6 +739,216 @@ public class OrderformExample {
 
         public Criteria andOstateNotBetween(Integer value1, Integer value2) {
             addCriterion("ostate not between", value1, value2, "ostate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageIsNull() {
+            addCriterion("omessage is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageIsNotNull() {
+            addCriterion("omessage is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageEqualTo(String value) {
+            addCriterion("omessage =", value, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageNotEqualTo(String value) {
+            addCriterion("omessage <>", value, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageGreaterThan(String value) {
+            addCriterion("omessage >", value, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageGreaterThanOrEqualTo(String value) {
+            addCriterion("omessage >=", value, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageLessThan(String value) {
+            addCriterion("omessage <", value, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageLessThanOrEqualTo(String value) {
+            addCriterion("omessage <=", value, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageLike(String value) {
+            addCriterion("omessage like", value, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageNotLike(String value) {
+            addCriterion("omessage not like", value, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageIn(List<String> values) {
+            addCriterion("omessage in", values, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageNotIn(List<String> values) {
+            addCriterion("omessage not in", values, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageBetween(String value1, String value2) {
+            addCriterion("omessage between", value1, value2, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOmessageNotBetween(String value1, String value2) {
+            addCriterion("omessage not between", value1, value2, "omessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodIsNull() {
+            addCriterion("osendmethod is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodIsNotNull() {
+            addCriterion("osendmethod is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodEqualTo(String value) {
+            addCriterion("osendmethod =", value, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodNotEqualTo(String value) {
+            addCriterion("osendmethod <>", value, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodGreaterThan(String value) {
+            addCriterion("osendmethod >", value, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodGreaterThanOrEqualTo(String value) {
+            addCriterion("osendmethod >=", value, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodLessThan(String value) {
+            addCriterion("osendmethod <", value, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodLessThanOrEqualTo(String value) {
+            addCriterion("osendmethod <=", value, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodLike(String value) {
+            addCriterion("osendmethod like", value, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodNotLike(String value) {
+            addCriterion("osendmethod not like", value, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodIn(List<String> values) {
+            addCriterion("osendmethod in", values, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodNotIn(List<String> values) {
+            addCriterion("osendmethod not in", values, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodBetween(String value1, String value2) {
+            addCriterion("osendmethod between", value1, value2, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendmethodNotBetween(String value1, String value2) {
+            addCriterion("osendmethod not between", value1, value2, "osendmethod");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberIsNull() {
+            addCriterion("osendnumber is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberIsNotNull() {
+            addCriterion("osendnumber is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberEqualTo(String value) {
+            addCriterion("osendnumber =", value, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberNotEqualTo(String value) {
+            addCriterion("osendnumber <>", value, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberGreaterThan(String value) {
+            addCriterion("osendnumber >", value, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberGreaterThanOrEqualTo(String value) {
+            addCriterion("osendnumber >=", value, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberLessThan(String value) {
+            addCriterion("osendnumber <", value, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberLessThanOrEqualTo(String value) {
+            addCriterion("osendnumber <=", value, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberLike(String value) {
+            addCriterion("osendnumber like", value, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberNotLike(String value) {
+            addCriterion("osendnumber not like", value, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberIn(List<String> values) {
+            addCriterion("osendnumber in", values, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberNotIn(List<String> values) {
+            addCriterion("osendnumber not in", values, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberBetween(String value1, String value2) {
+            addCriterion("osendnumber between", value1, value2, "osendnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andOsendnumberNotBetween(String value1, String value2) {
+            addCriterion("osendnumber not between", value1, value2, "osendnumber");
             return (Criteria) this;
         }
     }

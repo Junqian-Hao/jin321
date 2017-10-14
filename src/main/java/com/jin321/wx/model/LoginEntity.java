@@ -42,4 +42,14 @@ public class LoginEntity {
     public void setTim(long tim) {
         this.tim = tim;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.LoginEntity{" +
+                "sessionKey='" + sessionKey + '\'' +
+                ", openid='" + openid + '\'' +
+                ", userid='" + userid + '\'' +
+                ", tim=" + tim +
+                '}';
+    }
 }

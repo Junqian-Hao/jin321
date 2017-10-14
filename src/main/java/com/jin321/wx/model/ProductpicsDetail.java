@@ -8,4 +8,8 @@ import com.jin321.pl.model.Productpics;
  * @Description :货物相关图片
  */
 public class ProductpicsDetail extends Productpics {
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.ProductpicsDetail{} " + super.toString();
+    }
 }

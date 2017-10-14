@@ -48,4 +48,14 @@ public class ChartDetail extends Chart {
     public void setSizename(String sizename) {
         this.sizename = sizename;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.ChartDetail{" +
+                "ppicurl='" + ppicurl + '\'' +
+                ", psoriprice=" + psoriprice +
+                ", pssellprice=" + pssellprice +
+                ", sizename='" + sizename + '\'' +
+                "} " + super.toString();
+    }
 }

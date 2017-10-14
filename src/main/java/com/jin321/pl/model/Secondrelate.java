@@ -30,4 +30,13 @@ public class Secondrelate {
     public void setR2u2id(String r2u2id) {
         this.r2u2id = r2u2id == null ? null : r2u2id.trim();
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Secondrelate{" +
+                "r2id=" + r2id +
+                ", r2u1id='" + r2u1id + '\'' +
+                ", r2u2id='" + r2u2id + '\'' +
+                '}';
+    }
 }

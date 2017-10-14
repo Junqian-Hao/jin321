@@ -70,4 +70,17 @@ public class Dealer {
     public void setDname(String dname) {
         this.dname = dname == null ? null : dname.trim();
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Dealer{" +
+                "did=" + did +
+                ", daddress='" + daddress + '\'' +
+                ", dphonenum='" + dphonenum + '\'' +
+                ", dusername='" + dusername + '\'' +
+                ", dpassword='" + dpassword + '\'' +
+                ", isDeleted=" + isDeleted +
+                ", dname='" + dname + '\'' +
+                '}';
+    }
 }

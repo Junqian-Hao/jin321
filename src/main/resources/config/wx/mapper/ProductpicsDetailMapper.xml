@@ -15,7 +15,7 @@
 
     <select id="selectNowHeadPicByPid" resultType="com.jin321.pl.model.Productpics">
         select
-        <include refid="Base_Column_List" />
+            ppid, pid, ppicurl, is_headpic, is_deleted
         from productpics
         where pid = #{pid} and is_deleted=0 and is_headpic=1
     </select>

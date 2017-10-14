@@ -50,4 +50,15 @@ public class Productpics {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Productpics{" +
+                "ppid=" + ppid +
+                ", pid=" + pid +
+                ", ppicurl='" + ppicurl + '\'' +
+                ", isHeadpic=" + isHeadpic +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

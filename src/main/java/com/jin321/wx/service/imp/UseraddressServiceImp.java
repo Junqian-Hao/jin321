@@ -4,6 +4,8 @@ import com.jin321.pl.dao.UseraddressMapper;
 import com.jin321.pl.model.Useraddress;
 import com.jin321.pl.model.UseraddressExample;
 import com.jin321.wx.service.UseraddressService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 @Service("useraddressService")
 public class UseraddressServiceImp implements UseraddressService {
+    private static final Log log = LogFactory.getLog(UseraddressServiceImp.class);
     @Autowired
     UseraddressMapper useraddressMapper;
 

@@ -4,6 +4,8 @@ import com.jin321.pl.dao.DistrictMapper;
 import com.jin321.pl.model.District;
 import com.jin321.pl.model.DistrictExample;
 import com.jin321.wx.service.DistrictService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import java.util.List;
 @Service("districtService")
 @Transactional(rollbackFor = Exception.class)
 public class DistrictServiceImp implements DistrictService {
+    private static final Log log = LogFactory.getLog(DistrictServiceImp.class);
     @Autowired
     DistrictMapper districtMapper;
 

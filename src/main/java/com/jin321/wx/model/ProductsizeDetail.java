@@ -8,4 +8,8 @@ import com.jin321.pl.model.Productsize;
  * @Description :商品规格
  */
 public class ProductsizeDetail extends Productsize {
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.ProductsizeDetail{} " + super.toString();
+    }
 }

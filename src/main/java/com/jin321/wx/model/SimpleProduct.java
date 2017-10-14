@@ -34,4 +34,12 @@ public class SimpleProduct extends Product {
         this.rollingpick = rollingpick;
     }
 
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.SimpleProduct{" +
+                "productpics=" + productpics +
+                ", rollingpick=" + rollingpick +
+                ", productsize=" + productsize +
+                "} " + super.toString();
+    }
 }

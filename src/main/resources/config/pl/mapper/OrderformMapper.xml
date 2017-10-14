@@ -2,18 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.pl.dao.OrderformMapper" >
   <resultMap id="BaseResultMap" type="com.jin321.pl.model.Orderform" >
-    <id column="oid" property="oid" jdbcType="INTEGER" />
+    <id column="oid" property="oid" jdbcType="BIGINT" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="uaid" property="uaid" jdbcType="INTEGER" />
     <result column="odate" property="odate" jdbcType="DATE" />
     <result column="opaydate" property="opaydate" jdbcType="DATE" />
     <result column="osenddate" property="osenddate" jdbcType="DATE" />
     <result column="oconfirmdate" property="oconfirmdate" jdbcType="DATE" />
+    <result column="orepaytime" property="orepaytime" jdbcType="DATE" />
     <result column="opayed" property="opayed" jdbcType="INTEGER" />
     <result column="ostate" property="ostate" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.jin321.pl.model.Orderform" extends="BaseResultMap" >
-    <result column="omessage" property="omessage" jdbcType="LONGVARCHAR" />
+    <result column="omessage" property="omessage" jdbcType="VARCHAR" />
+    <result column="osendmethod" property="osendmethod" jdbcType="VARCHAR" />
+    <result column="osendnumber" property="osendnumber" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,27 +75,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    oid, uid, uaid, odate, opaydate, osenddate, oconfirmdate, opayed, ostate
+    oid, uid, uaid, odate, opaydate, osenddate, oconfirmdate, orepaytime, opayed, ostate, 
+    omessage, osendmethod, osendnumber
   </sql>
-  <sql id="Blob_Column_List" >
-    omessage
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jin321.pl.model.OrderformExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from orderform
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.OrderformExample" >
     select
     <if test="distinct" >
@@ -109,17 +92,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from orderform
-    where oid = #{oid,jdbcType=INTEGER}
+    where oid = #{oid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from orderform
-    where oid = #{oid,jdbcType=INTEGER}
+    where oid = #{oid,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.jin321.pl.model.OrderformExample" >
     delete from orderform
@@ -130,12 +111,14 @@
   <insert id="insert" parameterType="com.jin321.pl.model.Orderform" >
     insert into orderform (oid, uid, uaid, 
       odate, opaydate, osenddate, 
-      oconfirmdate, opayed, ostate, 
-      omessage)
-    values (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER}, 
+      oconfirmdate, orepaytime, opayed, 
+      ostate, omessage, osendmethod, 
+      osendnumber)
+    values (#{oid,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER}, 
       #{odate,jdbcType=DATE}, #{opaydate,jdbcType=DATE}, #{osenddate,jdbcType=DATE}, 
-      #{oconfirmdate,jdbcType=DATE}, #{opayed,jdbcType=INTEGER}, #{ostate,jdbcType=INTEGER}, 
-      #{omessage,jdbcType=LONGVARCHAR})
+      #{oconfirmdate,jdbcType=DATE}, #{orepaytime,jdbcType=DATE}, #{opayed,jdbcType=INTEGER}, 
+      #{ostate,jdbcType=INTEGER}, #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR}, 
+      #{osendnumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Orderform" >
     insert into orderform
@@ -161,6 +144,9 @@
       <if test="oconfirmdate != null" >
         oconfirmdate,
       </if>
+      <if test="orepaytime != null" >
+        orepaytime,
+      </if>
       <if test="opayed != null" >
         opayed,
       </if>
@@ -170,10 +156,16 @@
       <if test="omessage != null" >
         omessage,
       </if>
+      <if test="osendmethod != null" >
+        osendmethod,
+      </if>
+      <if test="osendnumber != null" >
+        osendnumber,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="oid != null" >
-        #{oid,jdbcType=INTEGER},
+        #{oid,jdbcType=BIGINT},
       </if>
       <if test="uid != null" >
         #{uid,jdbcType=VARCHAR},
@@ -193,6 +185,9 @@
       <if test="oconfirmdate != null" >
         #{oconfirmdate,jdbcType=DATE},
       </if>
+      <if test="orepaytime != null" >
+        #{orepaytime,jdbcType=DATE},
+      </if>
       <if test="opayed != null" >
         #{opayed,jdbcType=INTEGER},
       </if>
@@ -200,7 +195,13 @@
         #{ostate,jdbcType=INTEGER},
       </if>
       <if test="omessage != null" >
-        #{omessage,jdbcType=LONGVARCHAR},
+        #{omessage,jdbcType=VARCHAR},
+      </if>
+      <if test="osendmethod != null" >
+        #{osendmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="osendnumber != null" >
+        #{osendnumber,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -214,7 +215,7 @@
     update orderform
     <set >
       <if test="record.oid != null" >
-        oid = #{record.oid,jdbcType=INTEGER},
+        oid = #{record.oid,jdbcType=BIGINT},
       </if>
       <if test="record.uid != null" >
         uid = #{record.uid,jdbcType=VARCHAR},
@@ -234,6 +235,9 @@
       <if test="record.oconfirmdate != null" >
         oconfirmdate = #{record.oconfirmdate,jdbcType=DATE},
       </if>
+      <if test="record.orepaytime != null" >
+        orepaytime = #{record.orepaytime,jdbcType=DATE},
+      </if>
       <if test="record.opayed != null" >
         opayed = #{record.opayed,jdbcType=INTEGER},
       </if>
@@ -241,40 +245,34 @@
         ostate = #{record.ostate,jdbcType=INTEGER},
       </if>
       <if test="record.omessage != null" >
-        omessage = #{record.omessage,jdbcType=LONGVARCHAR},
+        omessage = #{record.omessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osendmethod != null" >
+        osendmethod = #{record.osendmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osendnumber != null" >
+        osendnumber = #{record.osendnumber,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update orderform
-    set oid = #{record.oid,jdbcType=INTEGER},
-      uid = #{record.uid,jdbcType=VARCHAR},
-      uaid = #{record.uaid,jdbcType=INTEGER},
-      odate = #{record.odate,jdbcType=DATE},
-      opaydate = #{record.opaydate,jdbcType=DATE},
-      osenddate = #{record.osenddate,jdbcType=DATE},
-      oconfirmdate = #{record.oconfirmdate,jdbcType=DATE},
-      opayed = #{record.opayed,jdbcType=INTEGER},
-      ostate = #{record.ostate,jdbcType=INTEGER},
-      omessage = #{record.omessage,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map" >
     update orderform
-    set oid = #{record.oid,jdbcType=INTEGER},
+    set oid = #{record.oid,jdbcType=BIGINT},
       uid = #{record.uid,jdbcType=VARCHAR},
       uaid = #{record.uaid,jdbcType=INTEGER},
       odate = #{record.odate,jdbcType=DATE},
       opaydate = #{record.opaydate,jdbcType=DATE},
       osenddate = #{record.osenddate,jdbcType=DATE},
       oconfirmdate = #{record.oconfirmdate,jdbcType=DATE},
+      orepaytime = #{record.orepaytime,jdbcType=DATE},
       opayed = #{record.opayed,jdbcType=INTEGER},
-      ostate = #{record.ostate,jdbcType=INTEGER}
+      ostate = #{record.ostate,jdbcType=INTEGER},
+      omessage = #{record.omessage,jdbcType=VARCHAR},
+      osendmethod = #{record.osendmethod,jdbcType=VARCHAR},
+      osendnumber = #{record.osendnumber,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -300,6 +298,9 @@
       <if test="oconfirmdate != null" >
         oconfirmdate = #{oconfirmdate,jdbcType=DATE},
       </if>
+      <if test="orepaytime != null" >
+        orepaytime = #{orepaytime,jdbcType=DATE},
+      </if>
       <if test="opayed != null" >
         opayed = #{opayed,jdbcType=INTEGER},
       </if>
@@ -307,23 +308,16 @@
         ostate = #{ostate,jdbcType=INTEGER},
       </if>
       <if test="omessage != null" >
-        omessage = #{omessage,jdbcType=LONGVARCHAR},
+        omessage = #{omessage,jdbcType=VARCHAR},
+      </if>
+      <if test="osendmethod != null" >
+        osendmethod = #{osendmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="osendnumber != null" >
+        osendnumber = #{osendnumber,jdbcType=VARCHAR},
       </if>
     </set>
-    where oid = #{oid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jin321.pl.model.Orderform" >
-    update orderform
-    set uid = #{uid,jdbcType=VARCHAR},
-      uaid = #{uaid,jdbcType=INTEGER},
-      odate = #{odate,jdbcType=DATE},
-      opaydate = #{opaydate,jdbcType=DATE},
-      osenddate = #{osenddate,jdbcType=DATE},
-      oconfirmdate = #{oconfirmdate,jdbcType=DATE},
-      opayed = #{opayed,jdbcType=INTEGER},
-      ostate = #{ostate,jdbcType=INTEGER},
-      omessage = #{omessage,jdbcType=LONGVARCHAR}
-    where oid = #{oid,jdbcType=INTEGER}
+    where oid = #{oid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Orderform" >
     update orderform
@@ -333,8 +327,12 @@
       opaydate = #{opaydate,jdbcType=DATE},
       osenddate = #{osenddate,jdbcType=DATE},
       oconfirmdate = #{oconfirmdate,jdbcType=DATE},
+      orepaytime = #{orepaytime,jdbcType=DATE},
       opayed = #{opayed,jdbcType=INTEGER},
-      ostate = #{ostate,jdbcType=INTEGER}
-    where oid = #{oid,jdbcType=INTEGER}
+      ostate = #{ostate,jdbcType=INTEGER},
+      omessage = #{omessage,jdbcType=VARCHAR},
+      osendmethod = #{osendmethod,jdbcType=VARCHAR},
+      osendnumber = #{osendnumber,jdbcType=VARCHAR}
+    where oid = #{oid,jdbcType=BIGINT}
   </update>
 </mapper>

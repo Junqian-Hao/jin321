@@ -50,4 +50,15 @@ public class Producttype {
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Producttype{" +
+                "tid=" + tid +
+                ", typename='" + typename + '\'' +
+                ", typeclass=" + typeclass +
+                ", highertid=" + highertid +
+                ", isDelete=" + isDelete +
+                '}';
+    }
 }
