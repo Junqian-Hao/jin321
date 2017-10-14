@@ -1,9 +1,6 @@
 package com.jin321.wx.model;
 
 import com.jin321.pl.model.Orderform;
-import com.jin321.pl.model.Orderformproduct;
-
-import java.util.List;
 
 /**
  * @Author hao
@@ -11,14 +8,4 @@ import java.util.List;
  * @Description :订单表
  */
 public class OrderformDetail extends Orderform {
-    //订单商品信息
-    List<Orderformproduct> orderformproducts;
-
-    public List<Orderformproduct> getOrderformproducts() {
-        return orderformproducts;
-    }
-
-    public void setOrderformproducts(List<Orderformproduct> orderformproducts) {
-        this.orderformproducts = orderformproducts;
-    }
 }

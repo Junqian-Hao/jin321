@@ -4,8 +4,6 @@ import com.jin321.pl.utils.StringUtil;
 import com.jin321.pl.utils.UrlUtil;
 import com.jin321.wx.model.LoginEntity;
 import com.jin321.wx.service.FirstPageService;
-import com.jin321.wx.utils.AES;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +69,7 @@ public class FirstPageController {
             LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
             log.info("取出的loginEntity-》"+loginEntity);
 
-            if ((loginEntity != null)&&(loginEntity.getTim() > (System.currentTimeMillis() - 240000))) {
+            if ((loginEntity != null)&&(loginEntity.getTim() > (System.currentTimeMillis() - 2592000000l))) {
                 log.info("session未过期");
                 //session未过期
                 HashMap<String, String> map = new HashMap<String, String>();
@@ -110,53 +108,6 @@ public class FirstPageController {
             servletContext.setAttribute(s, loginEntity);
         }
         return login;
-    }
-
-    /**
-     * 解密用户数据
-     * @param request
-     * @param re
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/getUserMessage")
-    @ResponseBody
-    public Map<String, Object> getUserMessage(HttpServletRequest request, @RequestBody Map<String, String> re) throws Exception {
-        ServletContext servletContext = request.getServletContext();
-        log.info("解码用户信息请求");
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        String session = re.get("session");
-        String encryptedData = re.get("encryptedData");
-        String iv = re.get("iv");
-        log.info("请求的session-》"+session);
-        log.info("encryptedData数据-》"+encryptedData);
-        log.info("iv-》" + iv);
-        //获取session信息
-        LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
-        log.info("取出的loginEntity-》"+loginEntity);
-        if ((loginEntity != null) && (loginEntity.getTim() > (System.currentTimeMillis() - 2592000000l))) {
-            log.info("session存在且未过期");
-            String sessionKey = loginEntity.getSessionKey();
-            log.info("sessionKey-》"+sessionKey);
-            AES aes = new AES();
-            byte[] resultByte = aes.decrypt(Base64.decodeBase64(encryptedData), Base64.decodeBase64(sessionKey), Base64.decodeBase64(iv));
-            if (null != resultByte && resultByte.length > 0) {
-                String userInfo = new String(resultByte, "UTF-8");
-                log.info("解密后的数据-》"+userInfo);
-                map.put("code", 1);
-                    map.put("userinfo", userInfo);
-                return map;
-            } else {
-                log.info("解密失败");
-                map.put("code", 0);
-                map.put("message", "解密失败");
-            }
-            return map;
-        } else {
-            map.put("cade", 0);
-            map.put("message", "session不存在或者已过期");
-        }
-        return map;
     }
 
 }

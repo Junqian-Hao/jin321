@@ -26,7 +26,6 @@
         <slf4j.version>1.7.18</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
-
     </properties>
 
     <dependencies>
@@ -204,12 +203,6 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>3.9.0</version>
-        </dependency>
-        <!--RSA算法加密支持-->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.52</version>
         </dependency>
     </dependencies>
     <build>
