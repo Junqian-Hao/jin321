@@ -91,11 +91,18 @@ public class ProductServiceimp implements ProductService {
      * @param product 更新后的商品数据
      * @return 1成功 0失败 2商品不存在
      */
+
+    private Product productold;
     @Override
-    public int updateProduct(Product product) {
-        product=productMapper.selectByPrimaryKey(product.getPid());
-        if(product!=null){
-            return updateProduct(product);
+    public int updateProduct(Product product,List<Productsize> productsizes) {
+        productold=productMapper.selectByPrimaryKey(product.getPid());
+        Iterator<Productsize> iterator=productsizes.iterator();
+        if(productold!=null){
+            signa=productMapper.updateByPrimaryKey(product);
+            while (iterator.hasNext()){
+                signb=productsizeMapper.updateByPrimaryKey(iterator.next());
+            }
+            return signa&signb;
         }
         else
             return 2;

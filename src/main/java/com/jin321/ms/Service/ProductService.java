@@ -25,5 +25,5 @@ public interface ProductService {
     @Transactional(rollbackFor = Exception.class)
     int deleteProduct(int pid);
     @Transactional(rollbackFor = Exception.class)
-    int updateProduct(Product product);
+    int updateProduct(Product product,List<Productsize> productsizes);
 }

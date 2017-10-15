@@ -24,6 +24,11 @@ import java.util.UUID;
  * Created by Tyranitarx on 2017/10/9.
  *
  * @Description : 商品相关图片上传
+ * 样例JSON
+ * {
+    "product":{"did":"1","pname":"郝俊谦最牛逼","psummary":"郝俊谦牛逼","ptypea":"1","ptypeb":"1","is_together":"1","is_delete":"0"},
+    " productsizes":[{"pscost":"12.2","psoriprice":"12.2","pssellprice":"12.2","sizename":"郝俊谦牛逼","snumber":"123","is_delete":"0"}]
+ *｝
  */
 @Controller
 @RequestMapping("/ms")
