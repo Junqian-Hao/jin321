@@ -90,4 +90,19 @@ public class Product {
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Product{" +
+                "pid=" + pid +
+                ", did=" + did +
+                ", pname='" + pname + '\'' +
+                ", psummary='" + psummary + '\'' +
+                ", ptypea=" + ptypea +
+                ", ptypeb=" + ptypeb +
+                ", ptypec=" + ptypec +
+                ", isTogether=" + isTogether +
+                ", isDelete=" + isDelete +
+                '}';
+    }
 }

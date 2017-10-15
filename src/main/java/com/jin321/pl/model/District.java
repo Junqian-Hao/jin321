@@ -90,4 +90,19 @@ public class District {
     public void setcSzm(String cSzm) {
         this.cSzm = cSzm == null ? null : cSzm.trim();
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.District{" +
+                "cId=" + cId +
+                ", cPaId=" + cPaId +
+                ", cLevel=" + cLevel +
+                ", cName='" + cName + '\'' +
+                ", cLon=" + cLon +
+                ", cLat=" + cLat +
+                ", cAlias='" + cAlias + '\'' +
+                ", cSpell='" + cSpell + '\'' +
+                ", cSzm='" + cSzm + '\'' +
+                '}';
+    }
 }

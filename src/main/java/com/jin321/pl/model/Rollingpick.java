@@ -40,4 +40,14 @@ public class Rollingpick {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Rollingpick{" +
+                "rpid=" + rpid +
+                ", pid=" + pid +
+                ", rpicurl='" + rpicurl + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

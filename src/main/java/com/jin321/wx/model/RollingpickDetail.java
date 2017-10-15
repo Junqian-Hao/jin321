@@ -47,4 +47,14 @@ public class RollingpickDetail extends Rollingpick{
     public void setPpicurl(String ppicurl) {
         this.ppicurl = ppicurl;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.RollingpickDetail{" +
+                "products=" + products +
+                ", ppicurl='" + ppicurl + '\'' +
+                ", psoriprice=" + psoriprice +
+                ", pssellprice=" + pssellprice +
+                "} " + super.toString();
+    }
 }

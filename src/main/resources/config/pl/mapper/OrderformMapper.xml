@@ -5,10 +5,11 @@
     <id column="oid" property="oid" jdbcType="BIGINT" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="uaid" property="uaid" jdbcType="INTEGER" />
-    <result column="odate" property="odate" jdbcType="DATE" />
-    <result column="opaydate" property="opaydate" jdbcType="DATE" />
-    <result column="osenddate" property="osenddate" jdbcType="DATE" />
-    <result column="oconfirmdate" property="oconfirmdate" jdbcType="DATE" />
+    <result column="odate" property="odate" jdbcType="TIMESTAMP" />
+    <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP" />
+    <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP" />
+    <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP" />
+    <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP" />
     <result column="opayed" property="opayed" jdbcType="INTEGER" />
     <result column="ostate" property="ostate" jdbcType="INTEGER" />
     <result column="omessage" property="omessage" jdbcType="VARCHAR" />
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    oid, uid, uaid, odate, opaydate, osenddate, oconfirmdate, opayed, ostate, omessage, 
-    osendmethod, osendnumber
+    oid, uid, uaid, odate, opaydate, osenddate, oconfirmdate, orepaytime, opayed, ostate, 
+    omessage, osendmethod, osendnumber
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.OrderformExample" >
     select
@@ -110,14 +111,14 @@
   <insert id="insert" parameterType="com.jin321.pl.model.Orderform" >
     insert into orderform (oid, uid, uaid, 
       odate, opaydate, osenddate, 
-      oconfirmdate, opayed, ostate, 
-      omessage, osendmethod, osendnumber
-      )
+      oconfirmdate, orepaytime, opayed, 
+      ostate, omessage, osendmethod, 
+      osendnumber)
     values (#{oid,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER}, 
-      #{odate,jdbcType=DATE}, #{opaydate,jdbcType=DATE}, #{osenddate,jdbcType=DATE}, 
-      #{oconfirmdate,jdbcType=DATE}, #{opayed,jdbcType=INTEGER}, #{ostate,jdbcType=INTEGER}, 
-      #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR}, #{osendnumber,jdbcType=VARCHAR}
-      )
+      #{odate,jdbcType=TIMESTAMP}, #{opaydate,jdbcType=TIMESTAMP}, #{osenddate,jdbcType=TIMESTAMP}, 
+      #{oconfirmdate,jdbcType=TIMESTAMP}, #{orepaytime,jdbcType=TIMESTAMP}, #{opayed,jdbcType=INTEGER}, 
+      #{ostate,jdbcType=INTEGER}, #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR}, 
+      #{osendnumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Orderform" >
     insert into orderform
@@ -142,6 +143,9 @@
       </if>
       <if test="oconfirmdate != null" >
         oconfirmdate,
+      </if>
+      <if test="orepaytime != null" >
+        orepaytime,
       </if>
       <if test="opayed != null" >
         opayed,
@@ -170,16 +174,19 @@
         #{uaid,jdbcType=INTEGER},
       </if>
       <if test="odate != null" >
-        #{odate,jdbcType=DATE},
+        #{odate,jdbcType=TIMESTAMP},
       </if>
       <if test="opaydate != null" >
-        #{opaydate,jdbcType=DATE},
+        #{opaydate,jdbcType=TIMESTAMP},
       </if>
       <if test="osenddate != null" >
-        #{osenddate,jdbcType=DATE},
+        #{osenddate,jdbcType=TIMESTAMP},
       </if>
       <if test="oconfirmdate != null" >
-        #{oconfirmdate,jdbcType=DATE},
+        #{oconfirmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orepaytime != null" >
+        #{orepaytime,jdbcType=TIMESTAMP},
       </if>
       <if test="opayed != null" >
         #{opayed,jdbcType=INTEGER},
@@ -217,16 +224,19 @@
         uaid = #{record.uaid,jdbcType=INTEGER},
       </if>
       <if test="record.odate != null" >
-        odate = #{record.odate,jdbcType=DATE},
+        odate = #{record.odate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.opaydate != null" >
-        opaydate = #{record.opaydate,jdbcType=DATE},
+        opaydate = #{record.opaydate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.osenddate != null" >
-        osenddate = #{record.osenddate,jdbcType=DATE},
+        osenddate = #{record.osenddate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.oconfirmdate != null" >
-        oconfirmdate = #{record.oconfirmdate,jdbcType=DATE},
+        oconfirmdate = #{record.oconfirmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orepaytime != null" >
+        orepaytime = #{record.orepaytime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.opayed != null" >
         opayed = #{record.opayed,jdbcType=INTEGER},
@@ -253,10 +263,11 @@
     set oid = #{record.oid,jdbcType=BIGINT},
       uid = #{record.uid,jdbcType=VARCHAR},
       uaid = #{record.uaid,jdbcType=INTEGER},
-      odate = #{record.odate,jdbcType=DATE},
-      opaydate = #{record.opaydate,jdbcType=DATE},
-      osenddate = #{record.osenddate,jdbcType=DATE},
-      oconfirmdate = #{record.oconfirmdate,jdbcType=DATE},
+      odate = #{record.odate,jdbcType=TIMESTAMP},
+      opaydate = #{record.opaydate,jdbcType=TIMESTAMP},
+      osenddate = #{record.osenddate,jdbcType=TIMESTAMP},
+      oconfirmdate = #{record.oconfirmdate,jdbcType=TIMESTAMP},
+      orepaytime = #{record.orepaytime,jdbcType=TIMESTAMP},
       opayed = #{record.opayed,jdbcType=INTEGER},
       ostate = #{record.ostate,jdbcType=INTEGER},
       omessage = #{record.omessage,jdbcType=VARCHAR},
@@ -276,16 +287,19 @@
         uaid = #{uaid,jdbcType=INTEGER},
       </if>
       <if test="odate != null" >
-        odate = #{odate,jdbcType=DATE},
+        odate = #{odate,jdbcType=TIMESTAMP},
       </if>
       <if test="opaydate != null" >
-        opaydate = #{opaydate,jdbcType=DATE},
+        opaydate = #{opaydate,jdbcType=TIMESTAMP},
       </if>
       <if test="osenddate != null" >
-        osenddate = #{osenddate,jdbcType=DATE},
+        osenddate = #{osenddate,jdbcType=TIMESTAMP},
       </if>
       <if test="oconfirmdate != null" >
-        oconfirmdate = #{oconfirmdate,jdbcType=DATE},
+        oconfirmdate = #{oconfirmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orepaytime != null" >
+        orepaytime = #{orepaytime,jdbcType=TIMESTAMP},
       </if>
       <if test="opayed != null" >
         opayed = #{opayed,jdbcType=INTEGER},
@@ -309,10 +323,11 @@
     update orderform
     set uid = #{uid,jdbcType=VARCHAR},
       uaid = #{uaid,jdbcType=INTEGER},
-      odate = #{odate,jdbcType=DATE},
-      opaydate = #{opaydate,jdbcType=DATE},
-      osenddate = #{osenddate,jdbcType=DATE},
-      oconfirmdate = #{oconfirmdate,jdbcType=DATE},
+      odate = #{odate,jdbcType=TIMESTAMP},
+      opaydate = #{opaydate,jdbcType=TIMESTAMP},
+      osenddate = #{osenddate,jdbcType=TIMESTAMP},
+      oconfirmdate = #{oconfirmdate,jdbcType=TIMESTAMP},
+      orepaytime = #{orepaytime,jdbcType=TIMESTAMP},
       opayed = #{opayed,jdbcType=INTEGER},
       ostate = #{ostate,jdbcType=INTEGER},
       omessage = #{omessage,jdbcType=VARCHAR},

@@ -40,4 +40,14 @@ public class User {
     public void setIsTogether(Boolean isTogether) {
         this.isTogether = isTogether;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.User{" +
+                "uid='" + uid + '\'' +
+                ", userwxid='" + userwxid + '\'' +
+                ", ucommition=" + ucommition +
+                ", isTogether=" + isTogether +
+                '}';
+    }
 }

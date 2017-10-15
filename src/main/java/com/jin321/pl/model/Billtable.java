@@ -53,4 +53,15 @@ public class Billtable {
     public void setBtimestamp(Date btimestamp) {
         this.btimestamp = btimestamp;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Billtable{" +
+                "btid=" + btid +
+                ", uid='" + uid + '\'' +
+                ", btpayorback=" + btpayorback +
+                ", btmoney=" + btmoney +
+                ", btimestamp=" + btimestamp +
+                '}';
+    }
 }

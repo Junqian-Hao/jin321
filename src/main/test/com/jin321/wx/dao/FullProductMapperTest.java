@@ -1,9 +1,11 @@
 package com.jin321.wx.dao;
 
-import com.jin321.wx.model.FullProduct;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @Author hao
@@ -21,8 +23,14 @@ public class FullProductMapperTest {
     }
     @Test
     public void selectFullProductById() throws Exception {
-        FullProduct fullProduct = fullProductMapper.selectFullProductById(1);
-        System.out.println(fullProduct);
+//        FullProduct fullProduct = fullProductMapper.selectFullProductById(1);
+//        System.out.println(fullProduct);
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lt = new Long("1507954860000");
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        System.out.println(res);
     }
 
 }

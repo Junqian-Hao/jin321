@@ -17,6 +17,8 @@ public class Orderform {
 
     private Date oconfirmdate;
 
+    private Date orepaytime;
+
     private Integer opayed;
 
     private Integer ostate;
@@ -81,6 +83,14 @@ public class Orderform {
 
     public void setOconfirmdate(Date oconfirmdate) {
         this.oconfirmdate = oconfirmdate;
+    }
+
+    public Date getOrepaytime() {
+        return orepaytime;
+    }
+
+    public void setOrepaytime(Date orepaytime) {
+        this.orepaytime = orepaytime;
     }
 
     public Integer getOpayed() {

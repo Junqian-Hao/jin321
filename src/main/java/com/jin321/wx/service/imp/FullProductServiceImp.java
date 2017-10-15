@@ -3,6 +3,8 @@ package com.jin321.wx.service.imp;
 import com.jin321.wx.dao.FullProductMapper;
 import com.jin321.wx.model.FullProduct;
 import com.jin321.wx.service.FullProductService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("fullProductService")
 public class FullProductServiceImp implements FullProductService{
+    private static final Log log = LogFactory.getLog(FullProductServiceImp.class);
     @Autowired
     FullProductMapper fullProductMapper;
     @Override

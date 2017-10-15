@@ -7,6 +7,8 @@ public class Producttype {
 
     private Integer typeclass;
 
+    private String picurl;
+
     private Integer highertid;
 
     private Boolean isDelete;
@@ -33,6 +35,14 @@ public class Producttype {
 
     public void setTypeclass(Integer typeclass) {
         this.typeclass = typeclass;
+    }
+
+    public String getPicurl() {
+        return picurl;
+    }
+
+    public void setPicurl(String picurl) {
+        this.picurl = picurl == null ? null : picurl.trim();
     }
 
     public Integer getHighertid() {

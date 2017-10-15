@@ -7,6 +7,8 @@ import com.jin321.pl.model.Productsize;
 import com.jin321.wx.dao.ChartDetailMapper;
 import com.jin321.wx.model.ChartDetail;
 import com.jin321.wx.service.ChartService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import java.util.List;
 @Service("chartService")
 @Transactional(rollbackFor = Exception.class)
 public class ChartServiceImp implements ChartService{
+    private static final Log log = LogFactory.getLog(ChartServiceImp.class);
     @Autowired
     ChartMapper chartMapper;
     @Autowired
@@ -33,6 +36,7 @@ public class ChartServiceImp implements ChartService{
     public boolean insertChart(Chart chart) throws Exception {
         Productsize productsize = productsizeMapper.selectByPrimaryKey(chart.getSid());
         if (productsize.getSnumber() < chart.getPnumber()) {
+            log.info("加入购物车商品数量超标");
             return false;
         }
         int i = chartMapper.insertSelective(chart);

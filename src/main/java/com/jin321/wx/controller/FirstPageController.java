@@ -1,5 +1,7 @@
 package com.jin321.wx.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.jin321.pl.utils.StringUtil;
 import com.jin321.pl.utils.UrlUtil;
 import com.jin321.wx.model.LoginEntity;
@@ -34,6 +36,7 @@ public class FirstPageController {
 
     /**
      * 首页信息
+     *
      * @param request
      * @return
      * @throws Exception
@@ -49,6 +52,7 @@ public class FirstPageController {
 
     /**
      * 登录
+     *
      * @param request
      * @param re
      * @return
@@ -63,15 +67,15 @@ public class FirstPageController {
         String js_code = re.get("js_code");
         String lUserid = re.get("lUserid");
         String session = re.get("session");
-        log.info("请求的参数"+"js_code->"+js_code+"lUserid->"+lUserid+"session->"+session);
+        log.info("请求的参数" + "js_code->" + js_code + "lUserid->" + lUserid + "session->" + session);
 
         if (!StringUtil.isNullString(session)) {
             //不是第一次登录是验证请求
             log.info("不是第一次登录是验证请求");
             LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
-            log.info("取出的loginEntity-》"+loginEntity);
+            log.info("取出的loginEntity-》" + loginEntity);
 
-            if ((loginEntity != null)&&(loginEntity.getTim() > (System.currentTimeMillis() - 240000))) {
+            if ((loginEntity != null) && (loginEntity.getTim() > (System.currentTimeMillis() - 240000))) {
                 log.info("session未过期");
                 //session未过期
                 HashMap<String, String> map = new HashMap<String, String>();
@@ -95,7 +99,7 @@ public class FirstPageController {
         String session_key = login.get("session_key");
         String userid = login.get("userid");
 
-        if (!StringUtil.isNullString(openid)&&!StringUtil.isNullString(session_key)) {
+        if (!StringUtil.isNullString(openid) && !StringUtil.isNullString(session_key)) {
             LoginEntity loginEntity = new LoginEntity();
             loginEntity.setTim(System.currentTimeMillis());
             loginEntity.setSessionKey(session_key);
@@ -114,6 +118,7 @@ public class FirstPageController {
 
     /**
      * 解密用户数据
+     *
      * @param request
      * @param re
      * @return
@@ -128,24 +133,26 @@ public class FirstPageController {
         String session = re.get("session");
         String encryptedData = re.get("encryptedData");
         String iv = re.get("iv");
-        log.info("请求的session-》"+session);
-        log.info("encryptedData数据-》"+encryptedData);
+        log.info("请求的session-》" + session);
+        log.info("encryptedData数据-》" + encryptedData);
         log.info("iv-》" + iv);
         //获取session信息
         LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
-        log.info("取出的loginEntity-》"+loginEntity);
+        log.info("取出的loginEntity-》" + loginEntity);
         if ((loginEntity != null) && (loginEntity.getTim() > (System.currentTimeMillis() - 2592000000l))) {
             log.info("session存在且未过期");
             String sessionKey = loginEntity.getSessionKey();
-            log.info("sessionKey-》"+sessionKey);
+            log.info("sessionKey-》" + sessionKey);
             AES aes = new AES();
             byte[] resultByte = aes.decrypt(Base64.decodeBase64(encryptedData), Base64.decodeBase64(sessionKey), Base64.decodeBase64(iv));
             if (null != resultByte && resultByte.length > 0) {
                 String userInfo = new String(resultByte, "UTF-8");
-                log.info("解密后的数据-》"+userInfo);
+                log.info("解密后的数据-》" + userInfo);
                 map.put("code", 1);
-                    map.put("userinfo", userInfo);
-                return map;
+                map.put("userinfo", userInfo);
+                map.clear();
+                Map<String, Object> map1 = JSONObject.parseObject(userInfo, new TypeReference<Map<String, Object>>() {});
+                return map1;
             } else {
                 log.info("解密失败");
                 map.put("code", 0);

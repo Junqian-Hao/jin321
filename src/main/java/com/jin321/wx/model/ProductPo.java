@@ -38,4 +38,13 @@ public class ProductPo extends Product {
     public void setPssellprice(Long pssellprice) {
         this.pssellprice = pssellprice;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.ProductPo{" +
+                "ppicurl='" + ppicurl + '\'' +
+                ", psoriprice=" + psoriprice +
+                ", pssellprice=" + pssellprice +
+                "} " + super.toString();
+    }
 }

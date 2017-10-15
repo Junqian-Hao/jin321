@@ -60,4 +60,16 @@ public class Chart {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Chart{" +
+                "cartid=" + cartid +
+                ", uid='" + uid + '\'' +
+                ", pid=" + pid +
+                ", pnumber=" + pnumber +
+                ", sid=" + sid +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

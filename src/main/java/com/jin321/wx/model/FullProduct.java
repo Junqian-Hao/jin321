@@ -53,4 +53,14 @@ public class FullProduct extends Product {
     public void setProductdetailList(List<Productdetail> productdetailList) {
         this.productdetailList = productdetailList;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.FullProduct{" +
+                "productsizeList=" + productsizeList +
+                ", productpicsList=" + productpicsList +
+                ", productdetailList=" + productdetailList +
+                ", basePathNoPort='" + basePathNoPort + '\'' +
+                "} " + super.toString();
+    }
 }

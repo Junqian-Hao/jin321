@@ -30,4 +30,13 @@ public class Firstrelate {
     public void setR1u2id(String r1u2id) {
         this.r1u2id = r1u2id == null ? null : r1u2id.trim();
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Firstrelate{" +
+                "r1id=" + r1id +
+                ", r1u1id='" + r1u1id + '\'' +
+                ", r1u2id='" + r1u2id + '\'' +
+                '}';
+    }
 }

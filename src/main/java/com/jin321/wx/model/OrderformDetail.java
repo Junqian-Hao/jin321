@@ -21,4 +21,11 @@ public class OrderformDetail extends Orderform {
     public void setOrderformproducts(List<Orderformproduct> orderformproducts) {
         this.orderformproducts = orderformproducts;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.OrderformDetail{" +
+                "orderformproducts=" + orderformproducts +
+                "} " + super.toString();
+    }
 }

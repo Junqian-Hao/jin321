@@ -5,6 +5,7 @@
     <id column="tid" property="tid" jdbcType="INTEGER" />
     <result column="typename" property="typename" jdbcType="VARCHAR" />
     <result column="typeclass" property="typeclass" jdbcType="INTEGER" />
+    <result column="picurl" property="picurl" jdbcType="VARCHAR" />
     <result column="highertid" property="highertid" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="BIT" />
   </resultMap>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    tid, typename, typeclass, highertid, is_delete
+    tid, typename, typeclass, picurl, highertid, is_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.ProducttypeExample" >
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Producttype" >
     insert into producttype (tid, typename, typeclass, 
-      highertid, is_delete)
+      picurl, highertid, is_delete
+      )
     values (#{tid,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{typeclass,jdbcType=INTEGER}, 
-      #{highertid,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT})
+      #{picurl,jdbcType=VARCHAR}, #{highertid,jdbcType=INTEGER}, #{isDelete,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Producttype" >
     insert into producttype
@@ -116,6 +119,9 @@
       </if>
       <if test="typeclass != null" >
         typeclass,
+      </if>
+      <if test="picurl != null" >
+        picurl,
       </if>
       <if test="highertid != null" >
         highertid,
@@ -133,6 +139,9 @@
       </if>
       <if test="typeclass != null" >
         #{typeclass,jdbcType=INTEGER},
+      </if>
+      <if test="picurl != null" >
+        #{picurl,jdbcType=VARCHAR},
       </if>
       <if test="highertid != null" >
         #{highertid,jdbcType=INTEGER},
@@ -160,6 +169,9 @@
       <if test="record.typeclass != null" >
         typeclass = #{record.typeclass,jdbcType=INTEGER},
       </if>
+      <if test="record.picurl != null" >
+        picurl = #{record.picurl,jdbcType=VARCHAR},
+      </if>
       <if test="record.highertid != null" >
         highertid = #{record.highertid,jdbcType=INTEGER},
       </if>
@@ -176,6 +188,7 @@
     set tid = #{record.tid,jdbcType=INTEGER},
       typename = #{record.typename,jdbcType=VARCHAR},
       typeclass = #{record.typeclass,jdbcType=INTEGER},
+      picurl = #{record.picurl,jdbcType=VARCHAR},
       highertid = #{record.highertid,jdbcType=INTEGER},
       is_delete = #{record.isDelete,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -191,6 +204,9 @@
       <if test="typeclass != null" >
         typeclass = #{typeclass,jdbcType=INTEGER},
       </if>
+      <if test="picurl != null" >
+        picurl = #{picurl,jdbcType=VARCHAR},
+      </if>
       <if test="highertid != null" >
         highertid = #{highertid,jdbcType=INTEGER},
       </if>
@@ -204,6 +220,7 @@
     update producttype
     set typename = #{typename,jdbcType=VARCHAR},
       typeclass = #{typeclass,jdbcType=INTEGER},
+      picurl = #{picurl,jdbcType=VARCHAR},
       highertid = #{highertid,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=BIT}
     where tid = #{tid,jdbcType=INTEGER}

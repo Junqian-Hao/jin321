@@ -132,4 +132,23 @@ public class Useraddress {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    @Override
+    public String toString() {
+        return "com.jin321.pl.model.Useraddress{" +
+                "uaid=" + uaid +
+                ", uid='" + uid + '\'' +
+                ", ucountry='" + ucountry + '\'' +
+                ", uprovince='" + uprovince + '\'' +
+                ", ucity='" + ucity + '\'' +
+                ", uarea='" + uarea + '\'' +
+                ", uaddress='" + uaddress + '\'' +
+                ", ubname='" + ubname + '\'' +
+                ", uphonenum='" + uphonenum + '\'' +
+                ", umail='" + umail + '\'' +
+                ", addtime=" + addtime +
+                ", adddefault=" + adddefault +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

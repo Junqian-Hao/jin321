@@ -6,6 +6,8 @@ import com.jin321.pl.model.ProducttypeExample;
 import com.jin321.wx.dao.ProductPoMapper;
 import com.jin321.wx.model.ProductPo;
 import com.jin321.wx.service.TypeService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ import java.util.List;
  */
 @Service("typeService")
 public class TypeServiceImp  implements TypeService {
+    private static final Log log = LogFactory.getLog(TypeServiceImp.class);
     @Autowired
     ProducttypeMapper producttypeMapper;
     @Autowired
