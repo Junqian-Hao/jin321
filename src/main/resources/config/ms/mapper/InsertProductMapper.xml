@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.ms.dao.InsertProductMapper">
+<insert id="insertProduct" parameterType="com.jin321.pl.model.Product" useGeneratedKeys="true" keyProperty="pid">
+   INSERT INTO product
+    (did,pname,psummary,ptypea,ptypeb,is_together)
+    VALUES
+    (#{did},#{pname},#{psummary},#{ptypea},#{ptypeb},#{isTogether})
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="pid">
+        SELECT  LAST_INSERT_ID()
+    </selectKey>
+</insert>
+</mapper>
