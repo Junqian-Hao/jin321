@@ -7,6 +7,8 @@ public class Producttype {
 
     private Integer typeclass;
 
+    private String picurl;
+
     private Integer highertid;
 
     private Boolean isDelete;
@@ -35,6 +37,14 @@ public class Producttype {
         this.typeclass = typeclass;
     }
 
+    public String getPicurl() {
+        return picurl;
+    }
+
+    public void setPicurl(String picurl) {
+        this.picurl = picurl == null ? null : picurl.trim();
+    }
+
     public Integer getHighertid() {
         return highertid;
     }
@@ -49,16 +59,5 @@ public class Producttype {
 
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
-    }
-
-    @Override
-    public String toString() {
-        return "com.jin321.pl.model.Producttype{" +
-                "tid=" + tid +
-                ", typename='" + typename + '\'' +
-                ", typeclass=" + typeclass +
-                ", highertid=" + highertid +
-                ", isDelete=" + isDelete +
-                '}';
     }
 }

@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.TimeproducDetailMapper">
     <resultMap id="BaseResultMap" type="timeproducDetail">
-        <id column="tpid" property="tpid" jdbcType="INTEGER"/>
-        <result column="pid" property="pid" jdbcType="INTEGER"/>
-        <result column="timestart" property="timestart" jdbcType="DATE"/>
-        <result column="timeend" property="timeend" jdbcType="DATE"/>
-        <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
+        <id column="tpid" property="tpid" jdbcType="INTEGER" />
+        <result column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="timestart" property="timestart" jdbcType="TIMESTAMP" />
+        <result column="timeend" property="timeend" jdbcType="TIMESTAMP" />
+        <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
         <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR" />
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>

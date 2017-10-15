@@ -1,6 +1,7 @@
 package com.jin321.wx.dao;
 
 import com.jin321.wx.model.ProductPo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,4 +24,11 @@ public interface ProductPoMapper {
      * @return
      */
     List<ProductPo> selectNowByPtypeb(int ptypeb);
+
+    /**
+     * 通过关键字模糊搜索商品
+     * @param key
+     * @return
+     */
+    List<ProductPo> selectNowBykey(@Param("key")String key);
 }

@@ -132,23 +132,4 @@ public class Orderform {
     public void setOsendnumber(String osendnumber) {
         this.osendnumber = osendnumber == null ? null : osendnumber.trim();
     }
-
-    @Override
-    public String toString() {
-        return "com.jin321.pl.model.Orderform{" +
-                "oid=" + oid +
-                ", uid='" + uid + '\'' +
-                ", uaid=" + uaid +
-                ", odate=" + odate +
-                ", opaydate=" + opaydate +
-                ", osenddate=" + osenddate +
-                ", oconfirmdate=" + oconfirmdate +
-                ", orepaytime=" + orepaytime +
-                ", opayed=" + opayed +
-                ", ostate=" + ostate +
-                ", omessage='" + omessage + '\'' +
-                ", osendmethod='" + osendmethod + '\'' +
-                ", osendnumber='" + osendnumber + '\'' +
-                '}';
-    }
 }

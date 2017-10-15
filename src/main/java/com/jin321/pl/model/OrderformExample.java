@@ -2,7 +2,6 @@ package com.jin321.pl.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class OrderformExample {
@@ -104,32 +103,6 @@ public class OrderformExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andOidIsNull() {
@@ -333,52 +306,52 @@ public class OrderformExample {
         }
 
         public Criteria andOdateEqualTo(Date value) {
-            addCriterionForJDBCDate("odate =", value, "odate");
+            addCriterion("odate =", value, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("odate <>", value, "odate");
+            addCriterion("odate <>", value, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateGreaterThan(Date value) {
-            addCriterionForJDBCDate("odate >", value, "odate");
+            addCriterion("odate >", value, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("odate >=", value, "odate");
+            addCriterion("odate >=", value, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateLessThan(Date value) {
-            addCriterionForJDBCDate("odate <", value, "odate");
+            addCriterion("odate <", value, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("odate <=", value, "odate");
+            addCriterion("odate <=", value, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateIn(List<Date> values) {
-            addCriterionForJDBCDate("odate in", values, "odate");
+            addCriterion("odate in", values, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("odate not in", values, "odate");
+            addCriterion("odate not in", values, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("odate between", value1, value2, "odate");
+            addCriterion("odate between", value1, value2, "odate");
             return (Criteria) this;
         }
 
         public Criteria andOdateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("odate not between", value1, value2, "odate");
+            addCriterion("odate not between", value1, value2, "odate");
             return (Criteria) this;
         }
 
@@ -393,52 +366,52 @@ public class OrderformExample {
         }
 
         public Criteria andOpaydateEqualTo(Date value) {
-            addCriterionForJDBCDate("opaydate =", value, "opaydate");
+            addCriterion("opaydate =", value, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("opaydate <>", value, "opaydate");
+            addCriterion("opaydate <>", value, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateGreaterThan(Date value) {
-            addCriterionForJDBCDate("opaydate >", value, "opaydate");
+            addCriterion("opaydate >", value, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("opaydate >=", value, "opaydate");
+            addCriterion("opaydate >=", value, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateLessThan(Date value) {
-            addCriterionForJDBCDate("opaydate <", value, "opaydate");
+            addCriterion("opaydate <", value, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("opaydate <=", value, "opaydate");
+            addCriterion("opaydate <=", value, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateIn(List<Date> values) {
-            addCriterionForJDBCDate("opaydate in", values, "opaydate");
+            addCriterion("opaydate in", values, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("opaydate not in", values, "opaydate");
+            addCriterion("opaydate not in", values, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("opaydate between", value1, value2, "opaydate");
+            addCriterion("opaydate between", value1, value2, "opaydate");
             return (Criteria) this;
         }
 
         public Criteria andOpaydateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("opaydate not between", value1, value2, "opaydate");
+            addCriterion("opaydate not between", value1, value2, "opaydate");
             return (Criteria) this;
         }
 
@@ -453,52 +426,52 @@ public class OrderformExample {
         }
 
         public Criteria andOsenddateEqualTo(Date value) {
-            addCriterionForJDBCDate("osenddate =", value, "osenddate");
+            addCriterion("osenddate =", value, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("osenddate <>", value, "osenddate");
+            addCriterion("osenddate <>", value, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateGreaterThan(Date value) {
-            addCriterionForJDBCDate("osenddate >", value, "osenddate");
+            addCriterion("osenddate >", value, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("osenddate >=", value, "osenddate");
+            addCriterion("osenddate >=", value, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateLessThan(Date value) {
-            addCriterionForJDBCDate("osenddate <", value, "osenddate");
+            addCriterion("osenddate <", value, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("osenddate <=", value, "osenddate");
+            addCriterion("osenddate <=", value, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateIn(List<Date> values) {
-            addCriterionForJDBCDate("osenddate in", values, "osenddate");
+            addCriterion("osenddate in", values, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("osenddate not in", values, "osenddate");
+            addCriterion("osenddate not in", values, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("osenddate between", value1, value2, "osenddate");
+            addCriterion("osenddate between", value1, value2, "osenddate");
             return (Criteria) this;
         }
 
         public Criteria andOsenddateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("osenddate not between", value1, value2, "osenddate");
+            addCriterion("osenddate not between", value1, value2, "osenddate");
             return (Criteria) this;
         }
 
@@ -513,52 +486,52 @@ public class OrderformExample {
         }
 
         public Criteria andOconfirmdateEqualTo(Date value) {
-            addCriterionForJDBCDate("oconfirmdate =", value, "oconfirmdate");
+            addCriterion("oconfirmdate =", value, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("oconfirmdate <>", value, "oconfirmdate");
+            addCriterion("oconfirmdate <>", value, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateGreaterThan(Date value) {
-            addCriterionForJDBCDate("oconfirmdate >", value, "oconfirmdate");
+            addCriterion("oconfirmdate >", value, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("oconfirmdate >=", value, "oconfirmdate");
+            addCriterion("oconfirmdate >=", value, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateLessThan(Date value) {
-            addCriterionForJDBCDate("oconfirmdate <", value, "oconfirmdate");
+            addCriterion("oconfirmdate <", value, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("oconfirmdate <=", value, "oconfirmdate");
+            addCriterion("oconfirmdate <=", value, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateIn(List<Date> values) {
-            addCriterionForJDBCDate("oconfirmdate in", values, "oconfirmdate");
+            addCriterion("oconfirmdate in", values, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("oconfirmdate not in", values, "oconfirmdate");
+            addCriterion("oconfirmdate not in", values, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("oconfirmdate between", value1, value2, "oconfirmdate");
+            addCriterion("oconfirmdate between", value1, value2, "oconfirmdate");
             return (Criteria) this;
         }
 
         public Criteria andOconfirmdateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("oconfirmdate not between", value1, value2, "oconfirmdate");
+            addCriterion("oconfirmdate not between", value1, value2, "oconfirmdate");
             return (Criteria) this;
         }
 
@@ -573,52 +546,52 @@ public class OrderformExample {
         }
 
         public Criteria andOrepaytimeEqualTo(Date value) {
-            addCriterionForJDBCDate("orepaytime =", value, "orepaytime");
+            addCriterion("orepaytime =", value, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("orepaytime <>", value, "orepaytime");
+            addCriterion("orepaytime <>", value, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("orepaytime >", value, "orepaytime");
+            addCriterion("orepaytime >", value, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("orepaytime >=", value, "orepaytime");
+            addCriterion("orepaytime >=", value, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeLessThan(Date value) {
-            addCriterionForJDBCDate("orepaytime <", value, "orepaytime");
+            addCriterion("orepaytime <", value, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("orepaytime <=", value, "orepaytime");
+            addCriterion("orepaytime <=", value, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeIn(List<Date> values) {
-            addCriterionForJDBCDate("orepaytime in", values, "orepaytime");
+            addCriterion("orepaytime in", values, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("orepaytime not in", values, "orepaytime");
+            addCriterion("orepaytime not in", values, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("orepaytime between", value1, value2, "orepaytime");
+            addCriterion("orepaytime between", value1, value2, "orepaytime");
             return (Criteria) this;
         }
 
         public Criteria andOrepaytimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("orepaytime not between", value1, value2, "orepaytime");
+            addCriterion("orepaytime not between", value1, value2, "orepaytime");
             return (Criteria) this;
         }
 

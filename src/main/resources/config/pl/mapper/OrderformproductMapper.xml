@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jin321.pl.dao.TimeproductMapper" >
-  <resultMap id="BaseResultMap" type="com.jin321.pl.model.Timeproduct" >
-    <id column="tpid" property="tpid" jdbcType="INTEGER" />
+<mapper namespace="com.jin321.pl.dao.OrderformproductMapper" >
+  <resultMap id="BaseResultMap" type="com.jin321.pl.model.Orderformproduct" >
+    <id column="ofpid" property="ofpid" jdbcType="INTEGER" />
+    <result column="oid" property="oid" jdbcType="BIGINT" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
-    <result column="timestart" property="timestart" jdbcType="TIMESTAMP" />
-    <result column="timeend" property="timeend" jdbcType="TIMESTAMP" />
-    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="pamount" property="pamount" jdbcType="INTEGER" />
+    <result column="pbuyprice" property="pbuyprice" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    tpid, pid, timestart, timeend, is_deleted
+    ofpid, oid, pid, sid, pamount, pbuyprice
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.TimeproductExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.OrderformproductExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from timeproduct
+    from orderformproduct
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,85 +87,96 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from timeproduct
-    where tpid = #{tpid,jdbcType=INTEGER}
+    from orderformproduct
+    where ofpid = #{ofpid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from timeproduct
-    where tpid = #{tpid,jdbcType=INTEGER}
+    delete from orderformproduct
+    where ofpid = #{ofpid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jin321.pl.model.TimeproductExample" >
-    delete from timeproduct
+  <delete id="deleteByExample" parameterType="com.jin321.pl.model.OrderformproductExample" >
+    delete from orderformproduct
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jin321.pl.model.Timeproduct" >
-    insert into timeproduct (tpid, pid, timestart, 
-      timeend, is_deleted)
-    values (#{tpid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{timestart,jdbcType=TIMESTAMP}, 
-      #{timeend,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
+  <insert id="insert" parameterType="com.jin321.pl.model.Orderformproduct" >
+    insert into orderformproduct (ofpid, oid, pid, 
+      sid, pamount, pbuyprice
+      )
+    values (#{ofpid,jdbcType=INTEGER}, #{oid,jdbcType=BIGINT}, #{pid,jdbcType=INTEGER}, 
+      #{sid,jdbcType=INTEGER}, #{pamount,jdbcType=INTEGER}, #{pbuyprice,jdbcType=DECIMAL}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.jin321.pl.model.Timeproduct" >
-    insert into timeproduct
+  <insert id="insertSelective" parameterType="com.jin321.pl.model.Orderformproduct" >
+    insert into orderformproduct
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="tpid != null" >
-        tpid,
+      <if test="ofpid != null" >
+        ofpid,
+      </if>
+      <if test="oid != null" >
+        oid,
       </if>
       <if test="pid != null" >
         pid,
       </if>
-      <if test="timestart != null" >
-        timestart,
+      <if test="sid != null" >
+        sid,
       </if>
-      <if test="timeend != null" >
-        timeend,
+      <if test="pamount != null" >
+        pamount,
       </if>
-      <if test="isDeleted != null" >
-        is_deleted,
+      <if test="pbuyprice != null" >
+        pbuyprice,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="tpid != null" >
-        #{tpid,jdbcType=INTEGER},
+      <if test="ofpid != null" >
+        #{ofpid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=BIGINT},
       </if>
       <if test="pid != null" >
         #{pid,jdbcType=INTEGER},
       </if>
-      <if test="timestart != null" >
-        #{timestart,jdbcType=TIMESTAMP},
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
       </if>
-      <if test="timeend != null" >
-        #{timeend,jdbcType=TIMESTAMP},
+      <if test="pamount != null" >
+        #{pamount,jdbcType=INTEGER},
       </if>
-      <if test="isDeleted != null" >
-        #{isDeleted,jdbcType=BIT},
+      <if test="pbuyprice != null" >
+        #{pbuyprice,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jin321.pl.model.TimeproductExample" resultType="java.lang.Integer" >
-    select count(*) from timeproduct
+  <select id="countByExample" parameterType="com.jin321.pl.model.OrderformproductExample" resultType="java.lang.Integer" >
+    select count(*) from orderformproduct
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update timeproduct
+    update orderformproduct
     <set >
-      <if test="record.tpid != null" >
-        tpid = #{record.tpid,jdbcType=INTEGER},
+      <if test="record.ofpid != null" >
+        ofpid = #{record.ofpid,jdbcType=INTEGER},
+      </if>
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=BIGINT},
       </if>
       <if test="record.pid != null" >
         pid = #{record.pid,jdbcType=INTEGER},
       </if>
-      <if test="record.timestart != null" >
-        timestart = #{record.timestart,jdbcType=TIMESTAMP},
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
       </if>
-      <if test="record.timeend != null" >
-        timeend = #{record.timeend,jdbcType=TIMESTAMP},
+      <if test="record.pamount != null" >
+        pamount = #{record.pamount,jdbcType=INTEGER},
       </if>
-      <if test="record.isDeleted != null" >
-        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      <if test="record.pbuyprice != null" >
+        pbuyprice = #{record.pbuyprice,jdbcType=DECIMAL},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -172,40 +184,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update timeproduct
-    set tpid = #{record.tpid,jdbcType=INTEGER},
+    update orderformproduct
+    set ofpid = #{record.ofpid,jdbcType=INTEGER},
+      oid = #{record.oid,jdbcType=BIGINT},
       pid = #{record.pid,jdbcType=INTEGER},
-      timestart = #{record.timestart,jdbcType=TIMESTAMP},
-      timeend = #{record.timeend,jdbcType=TIMESTAMP},
-      is_deleted = #{record.isDeleted,jdbcType=BIT}
+      sid = #{record.sid,jdbcType=INTEGER},
+      pamount = #{record.pamount,jdbcType=INTEGER},
+      pbuyprice = #{record.pbuyprice,jdbcType=DECIMAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Timeproduct" >
-    update timeproduct
+  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Orderformproduct" >
+    update orderformproduct
     <set >
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=BIGINT},
+      </if>
       <if test="pid != null" >
         pid = #{pid,jdbcType=INTEGER},
       </if>
-      <if test="timestart != null" >
-        timestart = #{timestart,jdbcType=TIMESTAMP},
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
       </if>
-      <if test="timeend != null" >
-        timeend = #{timeend,jdbcType=TIMESTAMP},
+      <if test="pamount != null" >
+        pamount = #{pamount,jdbcType=INTEGER},
       </if>
-      <if test="isDeleted != null" >
-        is_deleted = #{isDeleted,jdbcType=BIT},
+      <if test="pbuyprice != null" >
+        pbuyprice = #{pbuyprice,jdbcType=DECIMAL},
       </if>
     </set>
-    where tpid = #{tpid,jdbcType=INTEGER}
+    where ofpid = #{ofpid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Timeproduct" >
-    update timeproduct
-    set pid = #{pid,jdbcType=INTEGER},
-      timestart = #{timestart,jdbcType=TIMESTAMP},
-      timeend = #{timeend,jdbcType=TIMESTAMP},
-      is_deleted = #{isDeleted,jdbcType=BIT}
-    where tpid = #{tpid,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Orderformproduct" >
+    update orderformproduct
+    set oid = #{oid,jdbcType=BIGINT},
+      pid = #{pid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      pamount = #{pamount,jdbcType=INTEGER},
+      pbuyprice = #{pbuyprice,jdbcType=DECIMAL}
+    where ofpid = #{ofpid,jdbcType=INTEGER}
   </update>
 </mapper>

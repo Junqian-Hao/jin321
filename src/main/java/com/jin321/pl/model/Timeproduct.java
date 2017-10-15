@@ -52,15 +52,4 @@ public class Timeproduct {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-
-    @Override
-    public String toString() {
-        return "com.jin321.pl.model.Timeproduct{" +
-                "tpid=" + tpid +
-                ", pid=" + pid +
-                ", timestart=" + timestart +
-                ", timeend=" + timeend +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

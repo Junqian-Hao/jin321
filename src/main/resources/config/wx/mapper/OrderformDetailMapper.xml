@@ -5,11 +5,11 @@
         <id column="oid" property="oid" jdbcType="BIGINT" />
         <result column="uid" property="uid" jdbcType="VARCHAR" />
         <result column="uaid" property="uaid" jdbcType="INTEGER" />
-        <result column="odate" property="odate" jdbcType="DATE" />
-        <result column="opaydate" property="opaydate" jdbcType="DATE" />
-        <result column="osenddate" property="osenddate" jdbcType="DATE" />
-        <result column="oconfirmdate" property="oconfirmdate" jdbcType="DATE" />
-        <result column="orepaytime" property="orepaytime" jdbcType="DATE" />
+        <result column="odate" property="odate" jdbcType="TIMESTAMP" />
+        <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP" />
+        <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP" />
+        <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP" />
+        <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP" />
         <result column="opayed" property="opayed" jdbcType="INTEGER" />
         <result column="ostate" property="ostate" jdbcType="INTEGER" />
         <result column="omessage" property="omessage" jdbcType="VARCHAR" />

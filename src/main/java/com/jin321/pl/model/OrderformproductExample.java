@@ -1,17 +1,17 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class TimeproductExample {
+public class OrderformproductExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TimeproductExample() {
+    public OrderformproductExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,63 +105,123 @@ public class TimeproductExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andTpidIsNull() {
-            addCriterion("tpid is null");
+        public Criteria andOfpidIsNull() {
+            addCriterion("ofpid is null");
             return (Criteria) this;
         }
 
-        public Criteria andTpidIsNotNull() {
-            addCriterion("tpid is not null");
+        public Criteria andOfpidIsNotNull() {
+            addCriterion("ofpid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTpidEqualTo(Integer value) {
-            addCriterion("tpid =", value, "tpid");
+        public Criteria andOfpidEqualTo(Integer value) {
+            addCriterion("ofpid =", value, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidNotEqualTo(Integer value) {
-            addCriterion("tpid <>", value, "tpid");
+        public Criteria andOfpidNotEqualTo(Integer value) {
+            addCriterion("ofpid <>", value, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidGreaterThan(Integer value) {
-            addCriterion("tpid >", value, "tpid");
+        public Criteria andOfpidGreaterThan(Integer value) {
+            addCriterion("ofpid >", value, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("tpid >=", value, "tpid");
+        public Criteria andOfpidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ofpid >=", value, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidLessThan(Integer value) {
-            addCriterion("tpid <", value, "tpid");
+        public Criteria andOfpidLessThan(Integer value) {
+            addCriterion("ofpid <", value, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidLessThanOrEqualTo(Integer value) {
-            addCriterion("tpid <=", value, "tpid");
+        public Criteria andOfpidLessThanOrEqualTo(Integer value) {
+            addCriterion("ofpid <=", value, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidIn(List<Integer> values) {
-            addCriterion("tpid in", values, "tpid");
+        public Criteria andOfpidIn(List<Integer> values) {
+            addCriterion("ofpid in", values, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidNotIn(List<Integer> values) {
-            addCriterion("tpid not in", values, "tpid");
+        public Criteria andOfpidNotIn(List<Integer> values) {
+            addCriterion("ofpid not in", values, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidBetween(Integer value1, Integer value2) {
-            addCriterion("tpid between", value1, value2, "tpid");
+        public Criteria andOfpidBetween(Integer value1, Integer value2) {
+            addCriterion("ofpid between", value1, value2, "ofpid");
             return (Criteria) this;
         }
 
-        public Criteria andTpidNotBetween(Integer value1, Integer value2) {
-            addCriterion("tpid not between", value1, value2, "tpid");
+        public Criteria andOfpidNotBetween(Integer value1, Integer value2) {
+            addCriterion("ofpid not between", value1, value2, "ofpid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidIsNull() {
+            addCriterion("oid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidIsNotNull() {
+            addCriterion("oid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidEqualTo(Long value) {
+            addCriterion("oid =", value, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidNotEqualTo(Long value) {
+            addCriterion("oid <>", value, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidGreaterThan(Long value) {
+            addCriterion("oid >", value, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidGreaterThanOrEqualTo(Long value) {
+            addCriterion("oid >=", value, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidLessThan(Long value) {
+            addCriterion("oid <", value, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidLessThanOrEqualTo(Long value) {
+            addCriterion("oid <=", value, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidIn(List<Long> values) {
+            addCriterion("oid in", values, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidNotIn(List<Long> values) {
+            addCriterion("oid not in", values, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidBetween(Long value1, Long value2) {
+            addCriterion("oid between", value1, value2, "oid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOidNotBetween(Long value1, Long value2) {
+            addCriterion("oid not between", value1, value2, "oid");
             return (Criteria) this;
         }
 
@@ -225,183 +285,183 @@ public class TimeproductExample {
             return (Criteria) this;
         }
 
-        public Criteria andTimestartIsNull() {
-            addCriterion("timestart is null");
+        public Criteria andSidIsNull() {
+            addCriterion("sid is null");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartIsNotNull() {
-            addCriterion("timestart is not null");
+        public Criteria andSidIsNotNull() {
+            addCriterion("sid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartEqualTo(Date value) {
-            addCriterion("timestart =", value, "timestart");
+        public Criteria andSidEqualTo(Integer value) {
+            addCriterion("sid =", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartNotEqualTo(Date value) {
-            addCriterion("timestart <>", value, "timestart");
+        public Criteria andSidNotEqualTo(Integer value) {
+            addCriterion("sid <>", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartGreaterThan(Date value) {
-            addCriterion("timestart >", value, "timestart");
+        public Criteria andSidGreaterThan(Integer value) {
+            addCriterion("sid >", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartGreaterThanOrEqualTo(Date value) {
-            addCriterion("timestart >=", value, "timestart");
+        public Criteria andSidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sid >=", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartLessThan(Date value) {
-            addCriterion("timestart <", value, "timestart");
+        public Criteria andSidLessThan(Integer value) {
+            addCriterion("sid <", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartLessThanOrEqualTo(Date value) {
-            addCriterion("timestart <=", value, "timestart");
+        public Criteria andSidLessThanOrEqualTo(Integer value) {
+            addCriterion("sid <=", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartIn(List<Date> values) {
-            addCriterion("timestart in", values, "timestart");
+        public Criteria andSidIn(List<Integer> values) {
+            addCriterion("sid in", values, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartNotIn(List<Date> values) {
-            addCriterion("timestart not in", values, "timestart");
+        public Criteria andSidNotIn(List<Integer> values) {
+            addCriterion("sid not in", values, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartBetween(Date value1, Date value2) {
-            addCriterion("timestart between", value1, value2, "timestart");
+        public Criteria andSidBetween(Integer value1, Integer value2) {
+            addCriterion("sid between", value1, value2, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimestartNotBetween(Date value1, Date value2) {
-            addCriterion("timestart not between", value1, value2, "timestart");
+        public Criteria andSidNotBetween(Integer value1, Integer value2) {
+            addCriterion("sid not between", value1, value2, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendIsNull() {
-            addCriterion("timeend is null");
+        public Criteria andPamountIsNull() {
+            addCriterion("pamount is null");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendIsNotNull() {
-            addCriterion("timeend is not null");
+        public Criteria andPamountIsNotNull() {
+            addCriterion("pamount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendEqualTo(Date value) {
-            addCriterion("timeend =", value, "timeend");
+        public Criteria andPamountEqualTo(Integer value) {
+            addCriterion("pamount =", value, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendNotEqualTo(Date value) {
-            addCriterion("timeend <>", value, "timeend");
+        public Criteria andPamountNotEqualTo(Integer value) {
+            addCriterion("pamount <>", value, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendGreaterThan(Date value) {
-            addCriterion("timeend >", value, "timeend");
+        public Criteria andPamountGreaterThan(Integer value) {
+            addCriterion("pamount >", value, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendGreaterThanOrEqualTo(Date value) {
-            addCriterion("timeend >=", value, "timeend");
+        public Criteria andPamountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pamount >=", value, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendLessThan(Date value) {
-            addCriterion("timeend <", value, "timeend");
+        public Criteria andPamountLessThan(Integer value) {
+            addCriterion("pamount <", value, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendLessThanOrEqualTo(Date value) {
-            addCriterion("timeend <=", value, "timeend");
+        public Criteria andPamountLessThanOrEqualTo(Integer value) {
+            addCriterion("pamount <=", value, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendIn(List<Date> values) {
-            addCriterion("timeend in", values, "timeend");
+        public Criteria andPamountIn(List<Integer> values) {
+            addCriterion("pamount in", values, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendNotIn(List<Date> values) {
-            addCriterion("timeend not in", values, "timeend");
+        public Criteria andPamountNotIn(List<Integer> values) {
+            addCriterion("pamount not in", values, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendBetween(Date value1, Date value2) {
-            addCriterion("timeend between", value1, value2, "timeend");
+        public Criteria andPamountBetween(Integer value1, Integer value2) {
+            addCriterion("pamount between", value1, value2, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andTimeendNotBetween(Date value1, Date value2) {
-            addCriterion("timeend not between", value1, value2, "timeend");
+        public Criteria andPamountNotBetween(Integer value1, Integer value2) {
+            addCriterion("pamount not between", value1, value2, "pamount");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedIsNull() {
-            addCriterion("is_deleted is null");
+        public Criteria andPbuypriceIsNull() {
+            addCriterion("pbuyprice is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedIsNotNull() {
-            addCriterion("is_deleted is not null");
+        public Criteria andPbuypriceIsNotNull() {
+            addCriterion("pbuyprice is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedEqualTo(Boolean value) {
-            addCriterion("is_deleted =", value, "isDeleted");
+        public Criteria andPbuypriceEqualTo(BigDecimal value) {
+            addCriterion("pbuyprice =", value, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedNotEqualTo(Boolean value) {
-            addCriterion("is_deleted <>", value, "isDeleted");
+        public Criteria andPbuypriceNotEqualTo(BigDecimal value) {
+            addCriterion("pbuyprice <>", value, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedGreaterThan(Boolean value) {
-            addCriterion("is_deleted >", value, "isDeleted");
+        public Criteria andPbuypriceGreaterThan(BigDecimal value) {
+            addCriterion("pbuyprice >", value, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("is_deleted >=", value, "isDeleted");
+        public Criteria andPbuypriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("pbuyprice >=", value, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedLessThan(Boolean value) {
-            addCriterion("is_deleted <", value, "isDeleted");
+        public Criteria andPbuypriceLessThan(BigDecimal value) {
+            addCriterion("pbuyprice <", value, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedLessThanOrEqualTo(Boolean value) {
-            addCriterion("is_deleted <=", value, "isDeleted");
+        public Criteria andPbuypriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("pbuyprice <=", value, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedIn(List<Boolean> values) {
-            addCriterion("is_deleted in", values, "isDeleted");
+        public Criteria andPbuypriceIn(List<BigDecimal> values) {
+            addCriterion("pbuyprice in", values, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedNotIn(List<Boolean> values) {
-            addCriterion("is_deleted not in", values, "isDeleted");
+        public Criteria andPbuypriceNotIn(List<BigDecimal> values) {
+            addCriterion("pbuyprice not in", values, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_deleted between", value1, value2, "isDeleted");
+        public Criteria andPbuypriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("pbuyprice between", value1, value2, "pbuyprice");
             return (Criteria) this;
         }
 
-        public Criteria andIsDeletedNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_deleted not between", value1, value2, "isDeleted");
+        public Criteria andPbuypriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("pbuyprice not between", value1, value2, "pbuyprice");
             return (Criteria) this;
         }
     }
