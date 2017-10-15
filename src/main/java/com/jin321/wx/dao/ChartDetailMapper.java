@@ -10,5 +10,6 @@ import java.util.List;
  * @Description :购物车扩展类
  */
 public interface ChartDetailMapper {
+
     List<ChartDetail> selectChaetDetailByUid(String uid);
 }
