@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/ms")
-public class SelectProductController {
+public class SelectProductIdController {
     private Integer pid;
     private Map<String,String> returnMap;
     @RequestMapping("/selectProduct")
