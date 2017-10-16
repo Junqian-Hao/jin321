@@ -34,6 +34,7 @@ public class DealerLoginController{
     private String verifycode;
     private String verifycodeget;
     private int sign;
+    private int did;
     private Map<String,String> returnMap;
 
     /**
@@ -61,6 +62,8 @@ public class DealerLoginController{
                 return returnMap;
             }
             else if(sign==1){
+                did=dealerLoginService.getDealerId(dusername);
+                request.getSession().setAttribute("did",did);
                 returnMap.put("code","1");
                 returnMap.put("msg","登录成功");
                 return returnMap;

@@ -33,8 +33,8 @@ public class ProductDetailServiceimp implements ProductDetailService {
             productdetailMapper.updateByPrimaryKey(productdetailold);
             productdetail.setPorder(0);
         }else {
-            productdetail.setPorder(productdetailList.size());
+            productdetail.setPorder(productdetailList.size()+1);
         }
-        return productdetailMapper.updateByPrimaryKey(productdetail);
+        return productdetailMapper.insert(productdetail);
     }
 }

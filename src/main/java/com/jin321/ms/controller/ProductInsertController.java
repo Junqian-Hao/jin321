@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Tyranitarx on 2017/10/5.
  *
@@ -39,18 +41,19 @@ public class ProductInsertController {
      *
      * @param json 样例json：
      * {
-        "product":{"did":"1","pname":"郝俊谦最牛逼","psummary":"郝俊谦牛逼","ptypea":"1","ptypeb":"1","is_together":"1","is_delete":"0"},
+        "product":{"pname":"郝俊谦最牛逼","psummary":"郝俊谦牛逼","ptypea":"1","ptypeb":"1","is_together":"1","is_delete":"0"},
         "productsizes":[{"pscost":"12.2","psoriprice":"12.2","pssellprice":"12.2","sizename":"郝俊谦牛逼","snumber":"123","is_delete":"0"}]
      *｝
      * @return
      */
     @RequestMapping("/insertProduct")
     @ResponseBody
-    public Map<String,String> insertProduct(@RequestBody String json){
+    public Map<String,String> insertProduct(@RequestBody String json, HttpServletRequest request){
         returnMap=new HashMap<String, String>();
         JSONObject obj= JSON.parseObject(json);
         //product
         product=JSON.parseObject(obj.get("product").toString(),Product.class);
+        product.setDid((Integer) request.getSession().getAttribute("did"));
         //productsize
         productsizes=JSON.parseArray(obj.get("productsizes").toString(),Productsize.class);
         if (productService.insertProduct(product,productsizes)==1){

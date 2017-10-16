@@ -28,7 +28,7 @@ public class CaptchaController {
         response.setContentType("image/jpeg");
         verifyCode=CaptchaUtil.generateVerifyCode(4);
         request.getSession().setAttribute("verifycode",verifyCode);
-        log.debug("验证码为："+verifyCode);
+        log.info("验证码为："+verifyCode);
         int w=75,h=34;
         try {
             CaptchaUtil.outputImage(w,h,response.getOutputStream(),verifyCode);

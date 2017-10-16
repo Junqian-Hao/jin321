@@ -82,7 +82,7 @@
         <!--<table tableName="timeproduct"/>-->
         <!--<table tableName="user"/>-->
         <!--<table tableName="useraddress"/>-->
-
+        <table tableName="paybackevent"/>
         <!--<table tableName="movies" domainObjectName="User"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->

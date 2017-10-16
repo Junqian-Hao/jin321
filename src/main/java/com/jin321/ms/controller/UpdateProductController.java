@@ -29,8 +29,6 @@ public class UpdateProductController {
     private static final Log log = LogFactory.getLog(UpdateProductController.class);
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductsizeMapper productsizeMapper;
     private Map<String,String> returnMap;
     private Product product;
     private List<Productsize> productsize;

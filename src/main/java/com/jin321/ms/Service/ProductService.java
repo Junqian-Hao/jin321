@@ -23,7 +23,7 @@ public interface ProductService {
     @Transactional(rollbackFor = Exception.class)
     int insertProduct(Product product, List<Productsize> productsizes);
     @Transactional(rollbackFor = Exception.class)
-    int deleteProduct(int pid);
+    int deleteProduct(List<Integer> pids);
     @Transactional(rollbackFor = Exception.class)
     int updateProduct(Product product,List<Productsize> productsizes);
 }

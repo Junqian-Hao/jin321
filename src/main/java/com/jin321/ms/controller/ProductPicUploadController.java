@@ -2,6 +2,7 @@ package com.jin321.ms.controller;
 
 import com.jin321.ms.Service.ProductPicService;
 import com.jin321.pl.model.Productpics;
+import com.jin321.pl.utils.UrlUtil;
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,7 +43,7 @@ public class ProductPicUploadController {
     private UUID uuid;
     private String uuids;
     @ResponseBody
-    @RequestMapping(value = "/productpicupload",method = RequestMethod.POST)
+    @RequestMapping(value = "/productPicUpload",method = RequestMethod.POST)
     public Map<String, String> productPicUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file){
         uuid=UUID.randomUUID();
         uuids=uuid.toString();
@@ -54,10 +55,10 @@ public class ProductPicUploadController {
             for (int i=0;i<file.length;i++) {
                 if (!file[i].isEmpty()) {
                     //使用StreamsAPI方式拷贝文件
-                    Streams.copy(file[i].getInputStream(), new FileOutputStream("E:\\程序\\jin321\\target\\jin321\\productpics\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productpics=new Productpics();
                     productpics.setPid(pid);
-                    productpics.setPpicurl("\\productpics\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    productpics.setPpicurl("/productpics/"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productpics.setIsDeleted(false);
                     productPicService.productPicUpdate(productpics);
                 }

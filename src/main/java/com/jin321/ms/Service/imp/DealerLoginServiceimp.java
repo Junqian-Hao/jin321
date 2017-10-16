@@ -46,4 +46,21 @@ public class DealerLoginServiceimp implements DealerLoginService {
             return 0;
 
     }
+
+    /**
+     *
+     * @param dusername
+     * @return 非 -1 则返回成功
+     */
+    @Override
+    public int getDealerId(String dusername) {
+        DealerExample dealerExample=new DealerExample();
+        DealerExample.Criteria criteria=dealerExample.createCriteria();
+        criteria.andDusernameEqualTo(dusername);
+        dealers=dealerMapper.selectByExample(dealerExample);
+        if(dealers.get(0)!=null&&dealers!=null)
+            return dealers.get(0).getDid();
+        else
+            return -1;
+    }
 }
