@@ -76,13 +76,13 @@
         <!--<table tableName="productdetail"/>-->
         <!--<table tableName="productpics"/>-->
         <!--<table tableName="productsize"/>-->
-        <table tableName="producttype"/>
+        <!--<table tableName="producttype"/>-->
         <!--<table tableName="rollingpick"/>-->
         <!--<table tableName="secondrelate"/>-->
         <!--<table tableName="timeproduct"/>-->
         <!--<table tableName="user"/>-->
         <!--<table tableName="useraddress"/>-->
-
+        <table tableName="paybackevent"/>
         <!--<table tableName="movies" domainObjectName="User"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->

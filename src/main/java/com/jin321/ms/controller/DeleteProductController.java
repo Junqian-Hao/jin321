@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /**
  * Created by Tyranitarx on 2017/10/11.
  *
  * @Description : 标记删除接口
- * 样例请求json:    {
- *                      "pid":"1"
- *                  }
+ * 样例请求json: [
+ *     "123","3435",······
+ * ]
  */
 @Controller
 @RequestMapping("/ms")
 public class DeleteProductController {
     @Autowired
     private ProductService productService;
-    private int pid;
+    private List<Integer> pids;
     private Map<String,String> returnMap;
     @RequestMapping("/deleteproduct")
     @ResponseBody
     public Map<String,String> deleteProduct(@RequestBody String json){
         returnMap=new HashMap<String, String>();
-        JSONObject obj= JSON.parseObject(json);
-        pid=obj.getInteger("pid");
-        if(productService.deleteProduct(pid)==1){
+        pids=JSON.parseArray(json,Integer.class);
+        if(productService.deleteProduct(pids)==1){
              returnMap.put("code","1");
              returnMap.put("msg","删除成功");
              return returnMap;

@@ -2,6 +2,7 @@ package com.jin321.ms.controller;
 
 import com.jin321.ms.Service.ProductDetailService;
 import com.jin321.pl.model.Productdetail;
+import com.jin321.pl.utils.UrlUtil;
 import org.apache.commons.fileupload.util.Streams;
 
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import sun.net.util.URLUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
@@ -39,7 +41,7 @@ public class ProductDetailUploadController{
     private Productdetail productdetail;
     private Integer pid;
     @ResponseBody
-    @RequestMapping(value = "/productdetailupload",method = RequestMethod.POST)
+    @RequestMapping(value = "/productDetailUpload",method = RequestMethod.POST)
     public Map<String, String> productDetailUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file){
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
@@ -51,10 +53,11 @@ public class ProductDetailUploadController{
                     uuids=uuid.toString();
                     uuids=uuids.replaceAll("-","");
                     //使用StreamsAPI方式拷贝文件
-                    Streams.copy(file[i].getInputStream(), new FileOutputStream("E:\\程序\\jin321\\target\\jin321\\productdetail\\" +uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productdetail\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productdetail=new Productdetail();
-                    productdetail.setPid(pid);
-                    productdetail.setPicurl("\\productdetail\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    productdetail.setPid(1);
+                    productdetail.setPicurl("/productdetail/"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    log.info(UrlUtil.getRealPath(request)+"productdetail\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productdetail.setIsDeleted(false);
                     productDetailService.productDetailUpdate(productdetail);
                 }

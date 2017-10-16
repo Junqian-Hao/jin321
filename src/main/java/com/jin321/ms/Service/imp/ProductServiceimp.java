@@ -72,18 +72,25 @@ public class ProductServiceimp implements ProductService {
 
     /**
      *
-     * @param pid 要标记删除的商品ID号
+     * @param pids 要标记删除的商品ID号
      * @return 1成功 0失败 2商品不存在
      */
     @Override
-    public int deleteProduct(int pid) {
-        product=productMapper.selectByPrimaryKey(pid);
-        if(product!=null){
-            product.setIsDelete(true);
-            return productMapper.updateByPrimaryKey(product);
+    public int deleteProduct(List<Integer> pids) {
+        int pid;
+        Iterator<Integer> iterator=pids.iterator();
+        while (iterator.hasNext()){
+            pid=iterator.next();
+            product=productMapper.selectByPrimaryKey(pid);
+            if(product!=null){
+                product.setIsDelete(true);
+                productMapper.updateByPrimaryKey(product);
+            }
+            else{
+                return 0;
+            }
         }
-        else
-            return 2;
+        return 1;
     }
 
     /**
