@@ -3,7 +3,6 @@ package com.jin321.wx.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.jin321.pl.utils.StringUtil;
-import com.jin321.pl.utils.UrlUtil;
 import com.jin321.wx.model.LoginEntity;
 import com.jin321.wx.service.FirstPageService;
 import com.jin321.wx.utils.AES;
@@ -46,7 +45,7 @@ public class FirstPageController {
     public Map<String, Object> firstRequest(HttpServletRequest request) throws Exception {
         log.info("请求首页信息");
         Map<String, Object> firstPageMessage = firstPageService.getFirstPageMessage();
-        firstPageMessage.put("basePath", UrlUtil.getBasePathNoPort(request));
+        firstPageMessage.put("basePath", "https://www.haojunqian.cn/jin321/");
         return firstPageMessage;
     }
 

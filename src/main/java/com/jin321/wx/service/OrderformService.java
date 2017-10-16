@@ -1,6 +1,9 @@
 package com.jin321.wx.service;
 
 import com.jin321.wx.model.OrderformDetail;
+import com.jin321.wx.model.OrderformProductDetail;
+
+import java.util.List;
 
 /**
  * @Author hao
@@ -21,5 +24,14 @@ public interface OrderformService {
      * @return
      * @throws Exception
      */
-    boolean chargebackOrder(long oid) throws Exception;
+    boolean chargebackOrder(long oid,String message) throws Exception;
+
+
+    /**
+     * 通过uid查询订单
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    List<OrderformProductDetail> selectOrderByuid(String uid) throws Exception;
 }

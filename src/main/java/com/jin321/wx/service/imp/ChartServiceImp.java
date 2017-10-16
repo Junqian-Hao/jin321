@@ -43,16 +43,18 @@ public class ChartServiceImp implements ChartService{
         if (i > 0) {
             return true;
         }
+        log.warn("购物车插入错误"+chart);
         return false;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteChart(int chartid) throws Exception {
-        int i = chartMapper.deleteByPrimaryKey(chartid);
+    public boolean deleteChart(int cartid) throws Exception {
+        int i = chartMapper.deleteByPrimaryKey(cartid);
         if (i > 0) {
             return true;
         }
+        log.warn("购物车删除错误，chartid-》"+cartid);
         return false;
     }
 
@@ -61,10 +63,12 @@ public class ChartServiceImp implements ChartService{
     public boolean updateChartPnumber(int chart, int pnumber) throws Exception {
         Chart chart1 = chartMapper.selectByPrimaryKey(chart);
         if (chart1 == null) {
+            log.info("更新购物车，购物车记录不存在，chartid-》"+chart);
             return false;
         }
         Productsize productsize = productsizeMapper.selectByPrimaryKey(chart1.getSid());
         if (productsize.getSnumber() < pnumber) {
+            log.info("更新购物车,数量超标");
             return false;
         }
         chart1.setPnumber(pnumber);
@@ -72,6 +76,7 @@ public class ChartServiceImp implements ChartService{
         if (i > 0) {
             return true;
         }
+        log.warn("更新购物车，插入数据库失败");
         return false;
     }
 

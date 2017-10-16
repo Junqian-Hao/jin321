@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.FullProductMapper">
     <resultMap id="BaseResultMap" type="fullProduct">
-        <id column="pid" property="pid" jdbcType="INTEGER"/>
-        <result column="did" property="did" jdbcType="INTEGER"/>
-        <result column="pname" property="pname" jdbcType="VARCHAR"/>
-        <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
-        <result column="ptypea" property="ptypea" jdbcType="INTEGER"/>
-        <result column="ptypeb" property="ptypeb" jdbcType="INTEGER"/>
-        <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
-        <result column="is_together" property="isTogether" jdbcType="BIT"/>
-        <result column="is_delete" property="isDelete" jdbcType="BIT"/>
+        <id column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="did" property="did" jdbcType="INTEGER" />
+        <result column="pname" property="pname" jdbcType="VARCHAR" />
+        <result column="psummary" property="psummary" jdbcType="VARCHAR" />
+        <result column="psellnum" property="psellnum" jdbcType="INTEGER" />
+        <result column="ptypea" property="ptypea" jdbcType="INTEGER" />
+        <result column="ptypeb" property="ptypeb" jdbcType="INTEGER" />
+        <result column="ptypec" property="ptypec" jdbcType="INTEGER" />
+        <result column="is_together" property="isTogether" jdbcType="BIT" />
+        <result column="is_delete" property="isDelete" jdbcType="BIT" />
         <collection property="productsizeList" ofType="productsize">
             <id column="sid" property="sid" jdbcType="INTEGER"/>
             <result column="pscost" property="pscost" jdbcType="DECIMAL"/>
@@ -44,5 +45,7 @@
               AND productsize.is_deleted = 0
               AND productpics.is_deleted = 0
               AND productdetail.is_deleted = 0
+              AND product.pid = #{pid}
+        ORDER BY productsize.pssellprice,productdetail.porder
     </select>
 </mapper>

@@ -6,6 +6,7 @@
     <result column="did" property="did" jdbcType="INTEGER" />
     <result column="pname" property="pname" jdbcType="VARCHAR" />
     <result column="psummary" property="psummary" jdbcType="VARCHAR" />
+    <result column="psellnum" property="psellnum" jdbcType="INTEGER" />
     <result column="ptypea" property="ptypea" jdbcType="INTEGER" />
     <result column="ptypeb" property="ptypeb" jdbcType="INTEGER" />
     <result column="ptypec" property="ptypec" jdbcType="INTEGER" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    pid, did, pname, psummary, ptypea, ptypeb, ptypec, is_together, is_delete
+    pid, did, pname, psummary, psellnum, ptypea, ptypeb, ptypec, is_together, is_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.ProductExample" >
     select
@@ -105,13 +106,13 @@
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Product" >
     insert into product (pid, did, pname, 
-      psummary, ptypea, ptypeb, 
-      ptypec, is_together, is_delete
-      )
+      psummary, psellnum, ptypea, 
+      ptypeb, ptypec, is_together, 
+      is_delete)
     values (#{pid,jdbcType=INTEGER}, #{did,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, 
-      #{psummary,jdbcType=VARCHAR}, #{ptypea,jdbcType=INTEGER}, #{ptypeb,jdbcType=INTEGER}, 
-      #{ptypec,jdbcType=INTEGER}, #{isTogether,jdbcType=BIT}, #{isDelete,jdbcType=BIT}
-      )
+      #{psummary,jdbcType=VARCHAR}, #{psellnum,jdbcType=INTEGER}, #{ptypea,jdbcType=INTEGER}, 
+      #{ptypeb,jdbcType=INTEGER}, #{ptypec,jdbcType=INTEGER}, #{isTogether,jdbcType=BIT}, 
+      #{isDelete,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Product" >
     insert into product
@@ -127,6 +128,9 @@
       </if>
       <if test="psummary != null" >
         psummary,
+      </if>
+      <if test="psellnum != null" >
+        psellnum,
       </if>
       <if test="ptypea != null" >
         ptypea,
@@ -156,6 +160,9 @@
       </if>
       <if test="psummary != null" >
         #{psummary,jdbcType=VARCHAR},
+      </if>
+      <if test="psellnum != null" >
+        #{psellnum,jdbcType=INTEGER},
       </if>
       <if test="ptypea != null" >
         #{ptypea,jdbcType=INTEGER},
@@ -195,6 +202,9 @@
       <if test="record.psummary != null" >
         psummary = #{record.psummary,jdbcType=VARCHAR},
       </if>
+      <if test="record.psellnum != null" >
+        psellnum = #{record.psellnum,jdbcType=INTEGER},
+      </if>
       <if test="record.ptypea != null" >
         ptypea = #{record.ptypea,jdbcType=INTEGER},
       </if>
@@ -221,6 +231,7 @@
       did = #{record.did,jdbcType=INTEGER},
       pname = #{record.pname,jdbcType=VARCHAR},
       psummary = #{record.psummary,jdbcType=VARCHAR},
+      psellnum = #{record.psellnum,jdbcType=INTEGER},
       ptypea = #{record.ptypea,jdbcType=INTEGER},
       ptypeb = #{record.ptypeb,jdbcType=INTEGER},
       ptypec = #{record.ptypec,jdbcType=INTEGER},
@@ -241,6 +252,9 @@
       </if>
       <if test="psummary != null" >
         psummary = #{psummary,jdbcType=VARCHAR},
+      </if>
+      <if test="psellnum != null" >
+        psellnum = #{psellnum,jdbcType=INTEGER},
       </if>
       <if test="ptypea != null" >
         ptypea = #{ptypea,jdbcType=INTEGER},
@@ -265,6 +279,7 @@
     set did = #{did,jdbcType=INTEGER},
       pname = #{pname,jdbcType=VARCHAR},
       psummary = #{psummary,jdbcType=VARCHAR},
+      psellnum = #{psellnum,jdbcType=INTEGER},
       ptypea = #{ptypea,jdbcType=INTEGER},
       ptypeb = #{ptypeb,jdbcType=INTEGER},
       ptypec = #{ptypec,jdbcType=INTEGER},

@@ -1,9 +1,11 @@
 package com.jin321.wx.dao;
 
-import com.jin321.pl.model.Orderform;
+import com.jin321.wx.model.OrderformProductDetail;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 /**
  * @Author hao
@@ -20,12 +22,9 @@ public class OrderformDetailMapperTest {
         orderformDetailMapper = (OrderformDetailMapper) classPathXmlApplicationContext.getBean("orderformDetailMapper");
     }
     @Test
-    public void insert() throws Exception {
-        Orderform orderform = new Orderform();
-        orderform.setOmessage("klalalla");
-        int insert = orderformDetailMapper.insert(orderform);
-        System.out.println(insert);
-        System.out.println(orderform.getOid());
+    public void selectOrderformByuid() throws Exception {
+        List<OrderformProductDetail> orderformProductDetails = orderformDetailMapper.selectOrderformByuid(1 + "");
+        System.out.println(orderformProductDetails);
     }
 
 }

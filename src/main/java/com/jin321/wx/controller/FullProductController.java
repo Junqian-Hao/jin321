@@ -1,6 +1,5 @@
 package com.jin321.wx.controller;
 
-import com.jin321.pl.utils.UrlUtil;
 import com.jin321.wx.model.FullProduct;
 import com.jin321.wx.service.FullProductService;
 import org.apache.commons.logging.Log;
@@ -38,7 +37,7 @@ public class FullProductController {
         String pid = re.get("pid");
         log.info("通过id查询商品信息，商品id"+pid);
         FullProduct fullProduct = fullProductService.selectFullProductById(Integer.parseInt(pid));
-        fullProduct.setBasePathNoPort(UrlUtil.getBasePathNoPort(request));
+        fullProduct.setBasePathNoPort("https://www.haojunqian.cn/jin321/");
         return fullProduct;
     }
 }

@@ -1,39 +1,112 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.OrderformDetailMapper">
-    <resultMap id="BaseResultMap" type="orderformDetail" >
-        <id column="oid" property="oid" jdbcType="BIGINT" />
-        <result column="uid" property="uid" jdbcType="VARCHAR" />
-        <result column="uaid" property="uaid" jdbcType="INTEGER" />
-        <result column="odate" property="odate" jdbcType="TIMESTAMP" />
-        <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP" />
-        <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP" />
-        <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP" />
-        <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP" />
-        <result column="opayed" property="opayed" jdbcType="INTEGER" />
-        <result column="ostate" property="ostate" jdbcType="INTEGER" />
-        <result column="omessage" property="omessage" jdbcType="VARCHAR" />
-        <result column="osendmethod" property="osendmethod" jdbcType="VARCHAR" />
-        <result column="osendnumber" property="osendnumber" jdbcType="VARCHAR" />
+    <resultMap id="BaseResultMap" type="orderformDetail">
+        <id column="oid" property="oid" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="uaid" property="uaid" jdbcType="INTEGER"/>
+        <result column="odate" property="odate" jdbcType="TIMESTAMP"/>
+        <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP"/>
+        <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP"/>
+        <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP"/>
+        <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP"/>
+        <result column="opayed" property="opayed" jdbcType="INTEGER"/>
+        <result column="ostate" property="ostate" jdbcType="INTEGER"/>
+        <result column="omessage" property="omessage" jdbcType="VARCHAR"/>
+        <result column="osendmethod" property="osendmethod" jdbcType="VARCHAR"/>
+        <result column="osendnumber" property="osendnumber" jdbcType="VARCHAR"/>
         <collection property="orderformproducts" ofType="orderformproduct">
-            <id column="ofpid" property="ofpid" jdbcType="INTEGER" />
-            <result column="pid" property="pid" jdbcType="INTEGER" />
-            <result column="sid" property="sid" jdbcType="INTEGER" />
-            <result column="pamount" property="pamount" jdbcType="INTEGER" />
-            <result column="pbuyprice" property="pbuyprice" jdbcType="DECIMAL" />
+            <id column="ofpid" property="ofpid" jdbcType="INTEGER"/>
+            <result column="oid" property="oid" jdbcType="BIGINT"/>
+            <result column="pid" property="pid" jdbcType="INTEGER"/>
+            <result column="sid" property="sid" jdbcType="INTEGER"/>
+            <result column="pamount" property="pamount" jdbcType="INTEGER"/>
+            <result column="pbuyprice" property="pbuyprice" jdbcType="DECIMAL"/>
+        </collection>
+    </resultMap>
+    <resultMap id="OrderformProductDetailMap" type="orderformProductDetail">
+        <id column="oid" property="oid" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="uaid" property="uaid" jdbcType="INTEGER"/>
+        <result column="odate" property="odate" jdbcType="TIMESTAMP"/>
+        <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP"/>
+        <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP"/>
+        <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP"/>
+        <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP"/>
+        <result column="opayed" property="opayed" jdbcType="INTEGER"/>
+        <result column="ostate" property="ostate" jdbcType="INTEGER"/>
+        <result column="omessage" property="omessage" jdbcType="VARCHAR"/>
+        <result column="osendmethod" property="osendmethod" jdbcType="VARCHAR"/>
+        <result column="osendnumber" property="osendnumber" jdbcType="VARCHAR"/>
+        <association property="useraddress" javaType="useraddress">
+            <id column="uaid" property="uaid" jdbcType="INTEGER"/>
+            <result column="uid" property="uid" jdbcType="VARCHAR"/>
+            <result column="ucountry" property="ucountry" jdbcType="VARCHAR"/>
+            <result column="uprovince" property="uprovince" jdbcType="VARCHAR"/>
+            <result column="ucity" property="ucity" jdbcType="VARCHAR"/>
+            <result column="uarea" property="uarea" jdbcType="VARCHAR"/>
+            <result column="uaddress" property="uaddress" jdbcType="VARCHAR"/>
+            <result column="ubname" property="ubname" jdbcType="VARCHAR"/>
+            <result column="uphonenum" property="uphonenum" jdbcType="VARCHAR"/>
+            <result column="umail" property="umail" jdbcType="VARCHAR"/>
+            <result column="addtime" property="addtime" jdbcType="DATE"/>
+            <result column="adddefault" property="adddefault" jdbcType="BIT"/>
+            <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
+        </association>
+        <collection property="orderformProductPos" ofType="com.jin321.wx.model.OrderformProductPo">
+            <id column="ofpid" property="ofpid" jdbcType="INTEGER"/>
+            <result column="oid" property="oid" jdbcType="BIGINT"/>
+            <result column="pid" property="pid" jdbcType="INTEGER"/>
+            <result column="sid" property="sid" jdbcType="INTEGER"/>
+            <result column="pamount" property="pamount" jdbcType="INTEGER"/>
+            <result column="pbuyprice" property="pbuyprice" jdbcType="DECIMAL"/>
+            <result column="psellnum" property="psellnum" jdbcType="INTEGER"/>
+            <result column="did" property="did" jdbcType="INTEGER"/>
+            <result column="pname" property="pname" jdbcType="VARCHAR"/>
+            <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
+            <result column="ptypea" property="ptypea" jdbcType="INTEGER"/>
+            <result column="ptypeb" property="ptypeb" jdbcType="INTEGER"/>
+            <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
+            <result column="is_together" property="isTogether" jdbcType="BIT"/>
+            <result column="is_delete" property="isDelete" jdbcType="BIT"/>
+            <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
     <insert id="insert" parameterType="orderformDetail">
-        insert into orderform (oid, uid, uaid,
-        odate, opaydate, osenddate,
-        oconfirmdate, opayed, ostate,
-        omessage, osendmethod, osendnumber
+        INSERT INTO orderform (oid, uid, uaid,
+                               odate, opaydate, osenddate,
+                               oconfirmdate, opayed, ostate,
+                               omessage, osendmethod, osendnumber
         )
-        values (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER},
-        #{odate,jdbcType=DATE}, #{opaydate,jdbcType=DATE}, #{osenddate,jdbcType=DATE},
-        #{oconfirmdate,jdbcType=DATE}, #{opayed,jdbcType=INTEGER}, #{ostate,jdbcType=INTEGER},
-        #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR}, #{osendnumber,jdbcType=VARCHAR}
+        VALUES (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER},
+                                         #{odate,jdbcType=DATE}, #{opaydate,jdbcType=DATE}, #{osenddate,jdbcType=DATE},
+                                         #{oconfirmdate,jdbcType=DATE}, #{opayed,jdbcType=INTEGER},
+                                         #{ostate,jdbcType=INTEGER},
+                                         #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR},
+                #{osendnumber,jdbcType=VARCHAR}
         )
     </insert>
+    <select id="selectOrderformByuid" resultMap="OrderformProductDetailMap" parameterType="string">
+        SELECT
+            orderform.*,
+            orderformproduct.*,
+            useraddress.*,
+            product.*,
+            productsize.*,
+            productpics.*
+        FROM orderform
+            LEFT JOIN orderformproduct ON orderform.oid = orderformproduct.oid
+            LEFT JOIN useraddress ON orderform.uaid = useraddress.uaid
+            LEFT JOIN product ON orderformproduct.pid = product.pid
+            LEFT JOIN productsize ON orderformproduct.sid = productsize.sid
+            LEFT JOIN productpics ON orderformproduct.pid = productpics.pid
+        WHERE orderform.uid = #{uid}
+              AND productpics.`is_deleted` = 0
+              AND productpics.`is_headpic` = 1
+              AND product.`is_delete` = 0
+              AND product.`is_together` = 1
+              AND productsize.`is_deleted` = 0
+
+    </select>
 </mapper>

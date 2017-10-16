@@ -364,6 +364,66 @@ public class ProductExample {
             return (Criteria) this;
         }
 
+        public Criteria andPsellnumIsNull() {
+            addCriterion("psellnum is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumIsNotNull() {
+            addCriterion("psellnum is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumEqualTo(Integer value) {
+            addCriterion("psellnum =", value, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumNotEqualTo(Integer value) {
+            addCriterion("psellnum <>", value, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumGreaterThan(Integer value) {
+            addCriterion("psellnum >", value, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("psellnum >=", value, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumLessThan(Integer value) {
+            addCriterion("psellnum <", value, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumLessThanOrEqualTo(Integer value) {
+            addCriterion("psellnum <=", value, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumIn(List<Integer> values) {
+            addCriterion("psellnum in", values, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumNotIn(List<Integer> values) {
+            addCriterion("psellnum not in", values, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumBetween(Integer value1, Integer value2) {
+            addCriterion("psellnum between", value1, value2, "psellnum");
+            return (Criteria) this;
+        }
+
+        public Criteria andPsellnumNotBetween(Integer value1, Integer value2) {
+            addCriterion("psellnum not between", value1, value2, "psellnum");
+            return (Criteria) this;
+        }
+
         public Criteria andPtypeaIsNull() {
             addCriterion("ptypea is null");
             return (Criteria) this;

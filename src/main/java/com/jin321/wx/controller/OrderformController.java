@@ -1,6 +1,7 @@
 package com.jin321.wx.controller;
 
 import com.jin321.wx.model.OrderformDetail;
+import com.jin321.wx.model.OrderformProductDetail;
 import com.jin321.wx.service.OrderformService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +41,14 @@ public class OrderformController {
             map.put("message", "下单失败");
         }
         return map;
+    }
+
+    @RequestMapping("/selectOrderformByuid")
+    @ResponseBody
+    public List<OrderformProductDetail> selectOrderformByuid(@RequestBody OrderformDetail orderformDetail) throws Exception {
+        log.info("查询订单");
+        List<OrderformProductDetail> orderformProductDetails = orderformService.selectOrderByuid(orderformDetail.getUid());
+        return orderformProductDetails;
     }
 
 }
