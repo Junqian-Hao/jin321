@@ -1,6 +1,10 @@
 package com.jin321.wx.dao;
 
 import com.jin321.pl.model.Orderform;
+import com.jin321.wx.model.OrderformProductDetail;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Author hao
@@ -15,5 +19,7 @@ public interface OrderformDetailMapper {
      * @return
      */
     int insert(Orderform record);
+
+    List<OrderformProductDetail> selectOrderformByuid(@Param("uid")String uid);
 
 }

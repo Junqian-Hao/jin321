@@ -3,6 +3,7 @@
 <mapper namespace="com.jin321.wx.dao.ProductPoMapper">
     <resultMap id="BaseResultMap" type="productPo">
         <id column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="psellnum" property="psellnum" jdbcType="INTEGER" />
         <result column="did" property="did" jdbcType="INTEGER"/>
         <result column="pname" property="pname" jdbcType="VARCHAR"/>
         <result column="psummary" property="psummary" jdbcType="VARCHAR"/>

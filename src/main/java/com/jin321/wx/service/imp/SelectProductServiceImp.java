@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @Author hao
  * @Date 2017/10/14 16:23
- * @Description :
+ * @Description :关键字搜索商品
  */
 @Service("selectProductService")
 public class SelectProductServiceImp implements SelectProductService {

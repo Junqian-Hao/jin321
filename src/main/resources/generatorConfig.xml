@@ -72,11 +72,11 @@
         <!--<table tableName="firstrelate"/>-->
         <!--<table tableName="orderform"/>-->
         <!--<table tableName="orderformproduct"/>-->
-        <!--<table tableName="product"/>-->
+        <table tableName="product"/>
         <!--<table tableName="productdetail"/>-->
         <!--<table tableName="productpics"/>-->
         <!--<table tableName="productsize"/>-->
-        <table tableName="producttype"/>
+        <!--<table tableName="producttype"/>-->
         <!--<table tableName="rollingpick"/>-->
         <!--<table tableName="secondrelate"/>-->
         <!--<table tableName="timeproduct"/>-->

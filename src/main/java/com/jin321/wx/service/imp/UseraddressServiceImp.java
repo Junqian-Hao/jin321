@@ -29,7 +29,11 @@ public class UseraddressServiceImp implements UseraddressService {
     public boolean insertUseraddress(Useraddress useraddress) throws Exception {
         useraddress.setAddtime(new Date());
         int insert = useraddressMapper.insert(useraddress);
-        return insert>0;
+        if (insert > 0) {
+            return true;
+        }
+        log.warn("添加收货地址，数据库插入错误"+useraddress);
+        return false;
     }
 
     @Override
@@ -38,7 +42,11 @@ public class UseraddressServiceImp implements UseraddressService {
         Useraddress useraddress = useraddressMapper.selectByPrimaryKey(uaid);
         useraddress.setIsDeleted(true);
         int i = useraddressMapper.updateByPrimaryKeySelective(useraddress);
-        return i>0;
+        if (i > 0) {
+            return true;
+        }
+        log.warn("删除收货地址，数据库错误"+uaid);
+        return false;
     }
 
     @Override
@@ -46,7 +54,11 @@ public class UseraddressServiceImp implements UseraddressService {
     public boolean updateUseraddressByid(Useraddress useraddress) throws Exception {
         useraddress.setAddtime(new Date());
         int i = useraddressMapper.updateByPrimaryKeySelective(useraddress);
-        return i>0;
+        if (i > 0) {
+            return true;
+        }
+        log.warn("修改收货地址，数据库错误"+useraddress);
+        return false;
     }
 
     @Override

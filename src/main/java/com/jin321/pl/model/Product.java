@@ -9,6 +9,8 @@ public class Product {
 
     private String psummary;
 
+    private Integer psellnum;
+
     private Integer ptypea;
 
     private Integer ptypeb;
@@ -51,6 +53,14 @@ public class Product {
         this.psummary = psummary == null ? null : psummary.trim();
     }
 
+    public Integer getPsellnum() {
+        return psellnum;
+    }
+
+    public void setPsellnum(Integer psellnum) {
+        this.psellnum = psellnum;
+    }
+
     public Integer getPtypea() {
         return ptypea;
     }
@@ -89,20 +99,5 @@ public class Product {
 
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
-    }
-
-    @Override
-    public String toString() {
-        return "com.jin321.pl.model.Product{" +
-                "pid=" + pid +
-                ", did=" + did +
-                ", pname='" + pname + '\'' +
-                ", psummary='" + psummary + '\'' +
-                ", ptypea=" + ptypea +
-                ", ptypeb=" + ptypeb +
-                ", ptypec=" + ptypec +
-                ", isTogether=" + isTogether +
-                ", isDelete=" + isDelete +
-                '}';
     }
 }

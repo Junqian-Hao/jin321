@@ -1,6 +1,6 @@
 package com.jin321.wx.utils;
 
-import java.util.Random;
+import java.util.UUID;
 
 /**
  * @Author hao
@@ -12,6 +12,12 @@ public class OidUtil {
      * @return 获得新的订单编号
      */
     public static long newOid() {
-        return Long.parseLong(System.currentTimeMillis() + "" + new Random().nextInt(9) + "" + new Random().nextInt(9) +""+ new Random().nextInt(9));
+        int i = 1;
+        int hashCodeV = UUID.randomUUID().toString().hashCode();
+        if (hashCodeV < 0) {
+            hashCodeV = -hashCodeV;
+        }
+        String format = String.format(i+"%011d", hashCodeV);
+        return Long.parseLong(format);
     }
 }
