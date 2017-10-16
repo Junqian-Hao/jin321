@@ -43,9 +43,9 @@ public class DealerLoginController{
      * @param request
      * @return 1登录成功 2用户不存在 0登录失败 3验证码错误
      */
-    @RequestMapping("/dealerlogin")
+    @RequestMapping("/dealerLogin")
     @ResponseBody
-    public Map<String,String> dealerlogin(@RequestBody String json, HttpServletRequest request){
+    public Map<String,String> dealerLogin(@RequestBody String json, HttpServletRequest request){
         returnMap=new HashMap<String, String>();
         JSONObject obj= JSON.parseObject(json);
         dusername=obj.getString("dusername");

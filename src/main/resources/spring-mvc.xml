@@ -48,8 +48,14 @@
             <!--<mvc:mapping path="/wx/*"/>-->
             <!--<bean class="com.jin321.pl.intercepts.SignatureIntercetp"/>-->
         <!--</mvc:interceptor>-->
-
     <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/ms/*"/>
+            <bean class="com.jin321.ms.Interceptor.DealerLoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--全局异常处理-->
     <bean class="com.jin321.pl.intercepts.AllExceptionResolver"/>
 </beans>
