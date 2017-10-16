@@ -95,17 +95,16 @@
             product.*,
             productsize.*,
             productpics.*
-        FROM orderform
-            LEFT JOIN orderformproduct ON orderform.oid = orderformproduct.oid
+        FROM (orderform, orderformproduct)
             LEFT JOIN useraddress ON orderform.uaid = useraddress.uaid
             LEFT JOIN product ON orderformproduct.pid = product.pid
             LEFT JOIN productsize ON orderformproduct.sid = productsize.sid
             LEFT JOIN productpics ON orderformproduct.pid = productpics.pid
-        WHERE orderform.uid = #{uid}
+        WHERE orderform.uid = 1
+              AND orderform.oid = orderformproduct.oid
               AND productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
-              AND product.`is_together` = 1
               AND productsize.`is_deleted` = 0
 
     </select>
