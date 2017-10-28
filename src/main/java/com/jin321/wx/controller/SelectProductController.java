@@ -30,8 +30,9 @@ public class SelectProductController {
     public List<ProductPo> selectProductBykey(@RequestBody Map<String,String> rq) throws Exception {
         log.info("搜索商品");
         String key = rq.get("key");
+        String code = rq.get("code");
         log.info("key->"+key);
-        List<ProductPo> productPos = selectProductService.selectProductBykey(key);
+        List<ProductPo> productPos = selectProductService.selectProductBykey(key,code);
         return productPos;
     }
 

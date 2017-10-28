@@ -9,7 +9,6 @@ public class LoginEntity {
     String sessionKey;
     String openid;
     String userid;
-    long tim;
 
     public String getUserid() {
         return userid;
@@ -35,13 +34,6 @@ public class LoginEntity {
         this.openid = openid;
     }
 
-    public long getTim() {
-        return tim;
-    }
-
-    public void setTim(long tim) {
-        this.tim = tim;
-    }
 
     @Override
     public String toString() {
@@ -49,7 +41,6 @@ public class LoginEntity {
                 "sessionKey='" + sessionKey + '\'' +
                 ", openid='" + openid + '\'' +
                 ", userid='" + userid + '\'' +
-                ", tim=" + tim +
                 '}';
     }
 }

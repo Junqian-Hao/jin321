@@ -52,7 +52,7 @@
                                              FROM productsize
                                              WHERE product.`pid` = productsize.`pid`)
     </select>
-    <select id="selectNowBykey" resultMap="BaseResultMap" parameterType="string">
+    <select id="selectNowBykeyOrderByPrice" resultMap="BaseResultMap" parameterType="string">
         SELECT DISTINCT
             product.*,
             productpics.`ppicurl`,
@@ -71,6 +71,26 @@
                                              FROM productsize
                                              WHERE product.`pid` = productsize.`pid`)
         ORDER BY productsize.`pssellprice`
+    </select>
+    <select id="selectNowBykeyOrderByPsellnum" resultMap="BaseResultMap" parameterType="string">
+        SELECT DISTINCT
+        product.*,
+        productpics.`ppicurl`,
+        productsize.pssellprice,
+        productsize.`psoriprice`
+        FROM product
+        LEFT JOIN productpics ON product.`pid` = productpics.`pid`
+        LEFT JOIN productsize ON product.`pid` = productsize.`pid`
+        LEFT JOIN producttype ON product.`ptypea`=producttype.`tid` OR product.`ptypeb`=producttype.`tid`
+        WHERE productpics.`is_deleted` = 0
+        AND productpics.`is_headpic` = 1
+        AND product.`is_delete` = 0
+        AND productsize.`is_deleted` = 0
+        AND (product.`pname` LIKE '%${key}%' OR product.`psummary` LIKE '%${key}%' OR producttype.`typename` LIKE '%${key}%')
+        AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
+        FROM productsize
+        WHERE product.`pid` = productsize.`pid`)
+        ORDER BY product.`psellnum` desc
     </select>
 
 </mapper>

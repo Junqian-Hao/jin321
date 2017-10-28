@@ -2,6 +2,7 @@ package com.jin321.wx.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.jin321.pl.utils.JWTUtil;
 import com.jin321.pl.utils.StringUtil;
 import com.jin321.wx.model.LoginEntity;
 import com.jin321.wx.service.FirstPageService;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +61,7 @@ public class FirstPageController {
     @ResponseBody
     public Map<String, String> login(HttpServletRequest request, @RequestBody Map<String, String> re) throws Exception {
         log.info("进行登录操作");
-        ServletContext servletContext = request.getServletContext();
+//        ServletContext servletContext = request.getServletContext();
 
         String js_code = re.get("js_code");
         String lUserid = re.get("lUserid");
@@ -71,15 +71,19 @@ public class FirstPageController {
         if (!StringUtil.isNullString(session)) {
             //不是第一次登录是验证请求
             log.info("不是第一次登录是验证请求");
-            LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
-            log.info("取出的loginEntity-》" + loginEntity);
+            Map<String, Object> jwt = JWTUtil.parseJWTToMap(session);
+//            LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
+            log.info("取出的loginEntity-》" + jwt);
 
-            if ((loginEntity != null) && (loginEntity.getTim() > (System.currentTimeMillis() - 240000))) {
+//            if ((loginEntity != null) && (loginEntity.getTim() > (System.currentTimeMillis() - 240000))) {
+            if (jwt != null){
                 log.info("session未过期");
                 //session未过期
                 HashMap<String, String> map = new HashMap<String, String>();
-                String openid = loginEntity.getOpenid();
-                String userid = loginEntity.getUserid();
+                String openid = (String) jwt.get("openid");
+                String userid = (String) jwt.get("userid");
+//                String openid = loginEntity.getOpenid();
+//                String userid = loginEntity.getUserid();
                 map.put("code", "3");
                 map.put("openid", openid);
                 map.put("userid", userid);
@@ -100,17 +104,17 @@ public class FirstPageController {
 
         if (!StringUtil.isNullString(openid) && !StringUtil.isNullString(session_key)) {
             LoginEntity loginEntity = new LoginEntity();
-            loginEntity.setTim(System.currentTimeMillis());
             loginEntity.setSessionKey(session_key);
             loginEntity.setOpenid(openid);
             loginEntity.setUserid(userid);
 
             login.remove("session_key");
-            String s = StringUtil.makeSession();
-            login.put("session", s);
+//            String s = StringUtil.makeSession();
+            String jwTfromBean = JWTUtil.createJWTfromBean(loginEntity);
+            login.put("session", jwTfromBean);
 
             //存入session
-            servletContext.setAttribute(s, loginEntity);
+//            servletContext.setAttribute(s, loginEntity);
         }
         return login;
     }
@@ -126,7 +130,7 @@ public class FirstPageController {
     @RequestMapping("/getUserMessage")
     @ResponseBody
     public Map<String, Object> getUserMessage(HttpServletRequest request, @RequestBody Map<String, String> re) throws Exception {
-        ServletContext servletContext = request.getServletContext();
+//        ServletContext servletContext = request.getServletContext();
         log.info("解码用户信息请求");
         HashMap<String, Object> map = new HashMap<String, Object>();
         String session = re.get("session");
@@ -136,9 +140,10 @@ public class FirstPageController {
         log.info("encryptedData数据-》" + encryptedData);
         log.info("iv-》" + iv);
         //获取session信息
-        LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
+//        LoginEntity loginEntity = (LoginEntity) servletContext.getAttribute(session);
+        LoginEntity loginEntity = JWTUtil.parseJWTToBean(session, new LoginEntity());
         log.info("取出的loginEntity-》" + loginEntity);
-        if ((loginEntity != null) && (loginEntity.getTim() > (System.currentTimeMillis() - 2592000000l))) {
+        if (loginEntity != null) {
             log.info("session存在且未过期");
             String sessionKey = loginEntity.getSessionKey();
             log.info("sessionKey-》" + sessionKey);

@@ -26,9 +26,16 @@ public interface ProductPoMapper {
     List<ProductPo> selectNowByPtypeb(int ptypeb);
 
     /**
-     * 通过关键字模糊搜索商品
+     * 通过关键字模糊搜索商品,价格升序排列
      * @param key
      * @return
      */
-    List<ProductPo> selectNowBykey(@Param("key")String key);
+    List<ProductPo> selectNowBykeyOrderByPrice(@Param("key")String key);
+
+    /**
+     * 通过关键字模糊搜索商品,销量降序排列
+     * @param key
+     * @return
+     */
+    List<ProductPo> selectNowBykeyOrderByPsellnum(@Param("key")String key);
 }

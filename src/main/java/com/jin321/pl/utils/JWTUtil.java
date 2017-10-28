@@ -48,6 +48,9 @@ public class JWTUtil {
     public static Map<String, Object> parseJWTToMap(String jsonWebToken) {
         Claims claims = parseJWT(jsonWebToken);
         Map<String, Object> map = new HashMap<String, Object>();
+        if (claims == null) {
+            return null;
+        }
         Set<String> strings = claims.keySet();
         for (String key : strings) {
             Object s = claims.get(key);
@@ -65,6 +68,9 @@ public class JWTUtil {
      */
     public static <T> T parseJWTToBean(String jsonWebToken,T bean) {
         Map<String, Object> map = parseJWTToMap(jsonWebToken);
+        if (map == null) {
+            return null;
+        }
         T t = BeanMapUtil.mapToBean(map, bean);
         return t;
     }

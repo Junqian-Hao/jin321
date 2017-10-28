@@ -32,7 +32,6 @@ public class JWTUtilTest {
         loginEntity.setUserid("sladasdasdsad");
         loginEntity.setOpenid("jsadfkdjfkl");
         loginEntity.setSessionKey("jfklsajkl");
-        loginEntity.setTim(1232345);
         String jwt = JWTUtil.createJWTfromBean(loginEntity);
         System.out.println(jwt);
         Map<String, Object> map = JWTUtil.parseJWTToMap(jwt);
@@ -71,7 +70,6 @@ public class JWTUtilTest {
         loginEntity.setUserid("sladasdasdsad");
         loginEntity.setOpenid("jsadfkdjfkl");
         loginEntity.setSessionKey("jfklsajkl");
-        loginEntity.setTim(1232345);
         String jwt = JWTUtil.createJWTfromBean(loginEntity);
         System.out.println(jwt);
     }
@@ -82,7 +80,6 @@ public class JWTUtilTest {
         loginEntity.setUserid("sladasdasdsad");
         loginEntity.setOpenid("jsadfkdjfkl");
         loginEntity.setSessionKey("jfklsajkl");
-        loginEntity.setTim(1232345);
         String jwt = JWTUtil.createJWTfromBean(loginEntity);
         System.out.println(jwt);
         LoginEntity loginEntity1 = JWTUtil.parseJWTToBean(jwt, loginEntity);

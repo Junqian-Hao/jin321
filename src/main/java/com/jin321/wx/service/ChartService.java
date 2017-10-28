@@ -1,7 +1,7 @@
 package com.jin321.wx.service;
 
 import com.jin321.pl.model.Chart;
-import com.jin321.wx.model.ChartDetail;
+import com.jin321.wx.model.DealerDetail;
 
 import java.util.List;
 
@@ -41,5 +41,5 @@ public interface ChartService {
      * @return
      * @throws Exception
      */
-    List<ChartDetail> selectChartByUserId(String uid) throws Exception;
+    List<DealerDetail> selectChartByUserId(String uid) throws Exception;
 }

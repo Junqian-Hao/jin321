@@ -3,9 +3,10 @@ package com.jin321.wx.service.imp;
 import com.jin321.pl.dao.ChartMapper;
 import com.jin321.pl.dao.ProductsizeMapper;
 import com.jin321.pl.model.Chart;
+import com.jin321.pl.model.ChartExample;
 import com.jin321.pl.model.Productsize;
 import com.jin321.wx.dao.ChartDetailMapper;
-import com.jin321.wx.model.ChartDetail;
+import com.jin321.wx.model.DealerDetail;
 import com.jin321.wx.service.ChartService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,6 +35,21 @@ public class ChartServiceImp implements ChartService{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean insertChart(Chart chart) throws Exception {
+        ChartExample chartExample = new ChartExample();
+        ChartExample.Criteria criteria = chartExample.createCriteria();
+        criteria.andUidEqualTo(chart.getUid());
+        criteria.andSidEqualTo(chart.getSid());
+        criteria.andSidEqualTo(chart.getSid());
+        List<Chart> charts = chartMapper.selectByExample(chartExample);
+        if (charts.size() > 0) {
+            //购物车存在要添加的商品
+            Chart chart1 = charts.get(0);
+            Integer pnumber = chart1.getPnumber();
+            chart1.setPnumber(pnumber+1);
+            chartMapper.updateByPrimaryKeySelective(chart1);
+            return true;
+        }
+
         Productsize productsize = productsizeMapper.selectByPrimaryKey(chart.getSid());
         if (productsize.getSnumber() < chart.getPnumber()) {
             log.info("加入购物车商品数量超标");
@@ -82,8 +98,8 @@ public class ChartServiceImp implements ChartService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<ChartDetail> selectChartByUserId(String uid) throws Exception {
-        List<ChartDetail> chartDetails = chartDetailMapper.selectChaetDetailByUid(uid);
+    public List<DealerDetail> selectChartByUserId(String uid) throws Exception {
+        List<DealerDetail> chartDetails = chartDetailMapper.selectChaetDetailByUid(uid);
         if (chartDetails.size() > 0) {
             return chartDetails;
         }
