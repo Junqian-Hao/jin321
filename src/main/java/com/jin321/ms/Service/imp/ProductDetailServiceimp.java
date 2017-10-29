@@ -7,6 +7,7 @@ import com.jin321.pl.model.ProductdetailExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,5 +37,19 @@ public class ProductDetailServiceimp implements ProductDetailService {
             productdetail.setPorder(productdetailList.size()+1);
         }
         return productdetailMapper.insert(productdetail);
+    }
+    private Productdetail productdetail;
+    private int pdid;
+    @Override
+    public int productDetailDelete(List<Integer> productdetailList) {
+        Iterator<Integer> iterator=productdetailList.iterator();
+        while(iterator.hasNext()){
+            pdid=iterator.next();
+            productdetail=productdetailMapper.selectByPrimaryKey(pdid);
+            productdetail.setIsDeleted(true);
+            if ( productdetailMapper.updateByPrimaryKey(productdetail)==0)
+                return 0;
+        }
+        return 1;
     }
 }

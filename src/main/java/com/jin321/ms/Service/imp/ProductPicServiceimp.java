@@ -9,6 +9,9 @@ import com.jin321.pl.model.ProductpicsExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * Created by Tyranitarx on 2017/10/9.
  *
@@ -34,5 +37,17 @@ public class ProductPicServiceimp implements ProductPicService {
             productpics.setIsHeadpic(false);
         return productpicsMapper.insert(productpics);
     }
-
+    private Productpics productpics;
+    @Override
+    public int productPicDelete(List<Integer> productPicsList) {
+        Iterator<Integer> iterator=productPicsList.iterator();
+        while (iterator.hasNext()){
+            int ppid =iterator.next();
+            productpics=productpicsMapper.selectByPrimaryKey(ppid);
+            productpics.setIsDeleted(true);
+            if(productpicsMapper.updateByPrimaryKey(productpics)==0)
+                return 0;
+        }
+            return 1;
+    }
 }

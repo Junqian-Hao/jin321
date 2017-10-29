@@ -3,6 +3,8 @@ package com.jin321.ms.Service;
 import com.jin321.pl.model.Productdetail;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Tyranitarx on 2017/10/9.
  *
@@ -11,5 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ProductDetailService {
     @Transactional(rollbackFor = Exception.class)
     int productDetailUpdate(Productdetail productdetail);
+    @Transactional(rollbackFor = Exception.class)
+    int productDetailDelete(List<Integer> productdetailList);
+
 
 }

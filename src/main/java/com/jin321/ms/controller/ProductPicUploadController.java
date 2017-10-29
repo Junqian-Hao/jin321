@@ -45,15 +45,15 @@ public class ProductPicUploadController {
     @ResponseBody
     @RequestMapping(value = "/productPicUpload",method = RequestMethod.POST)
     public Map<String, String> productPicUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file){
-        uuid=UUID.randomUUID();
-        uuids=uuid.toString();
-        uuids=uuids.replaceAll("-","");
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
         pid=(Integer) request.getSession().getAttribute("pid");
         try {
             for (int i=0;i<file.length;i++) {
                 if (!file[i].isEmpty()) {
+                    uuid=UUID.randomUUID();
+                    uuids=uuid.toString();
+                    uuids=uuids.replaceAll("-","");
                     //使用StreamsAPI方式拷贝文件
                     Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productpics=new Productpics();
