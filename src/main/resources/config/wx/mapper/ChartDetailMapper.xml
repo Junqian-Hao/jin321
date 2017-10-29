@@ -13,16 +13,38 @@
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
         <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
     </resultMap>
-    <select id="selectChaetDetailByUid" resultMap="BaseResultMap" parameterType="string">
+    <resultMap id="DealerDetailMap" type="com.jin321.wx.model.DealerDetail">
+        <id column="did" property="did" jdbcType="INTEGER" />
+        <result column="dname" property="dname" jdbcType="VARCHAR" />
+        <collection property="chartDetails" ofType="com.jin321.wx.model.ChartDetail">
+            <id column="cartid" property="cartid" jdbcType="INTEGER"/>
+            <result column="uid" property="uid" jdbcType="VARCHAR"/>
+            <result column="pid" property="pid" jdbcType="INTEGER"/>
+            <result column="pnumber" property="pnumber" jdbcType="INTEGER"/>
+            <result column="sid" property="sid" jdbcType="INTEGER"/>
+            <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
+            <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
+            <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
+            <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
+            <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
+            <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <select id="selectChaetDetailByUid" resultMap="DealerDetailMap" parameterType="string">
         SELECT
             chart.*,
             productsize.psoriprice,
             productsize.pssellprice,
             productsize.sizename,
-            productpics.ppicurl
+            productpics.ppicurl,
+            product.pname,
+            dealer.did,
+            dealer.dname
         FROM chart
             LEFT JOIN productsize ON chart.sid = productsize.sid
             LEFT JOIN productpics ON chart.pid = productpics.pid
+            LEFT JOIN product ON chart.pid = product.pid
+            LEFT JOIN dealer ON product.did = dealer.did
         WHERE chart.is_deleted=0
         AND productsize.is_deleted=0
         AND productpics.is_deleted=0

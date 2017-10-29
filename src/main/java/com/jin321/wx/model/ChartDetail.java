@@ -16,6 +16,16 @@ public class ChartDetail extends Chart {
     private Long pssellprice;
     //规格名称
     private String sizename;
+    //商品名字
+    private String pname;
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
 
     public String getPpicurl() {
         return ppicurl;

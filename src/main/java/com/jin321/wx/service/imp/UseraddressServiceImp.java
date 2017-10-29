@@ -67,6 +67,8 @@ public class UseraddressServiceImp implements UseraddressService {
         UseraddressExample useraddressExample = new UseraddressExample();
         UseraddressExample.Criteria criteria = useraddressExample.createCriteria();
         criteria.andUidEqualTo(uid);
+        criteria.andIsDeletedEqualTo(false);
+        useraddressExample.setOrderByClause("adddefault desc");
         List<Useraddress> useraddresses = useraddressMapper.selectByExample(useraddressExample);
         return useraddresses;
     }

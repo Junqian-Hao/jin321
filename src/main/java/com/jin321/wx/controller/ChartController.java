@@ -2,7 +2,7 @@ package com.jin321.wx.controller;
 
 import com.jin321.pl.model.Chart;
 import com.jin321.pl.utils.UrlUtil;
-import com.jin321.wx.model.ChartDetail;
+import com.jin321.wx.model.DealerDetail;
 import com.jin321.wx.service.ChartService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -110,7 +110,7 @@ public class ChartController {
     public Map<String, Object> selectChartByUserId(@RequestBody Map<String, String> re, HttpServletRequest request) throws Exception {
         HashMap<String, Object> map = new HashMap<String, Object>();
         log.info("查询购物车信息购物车");
-        List<ChartDetail> uid = chartService.selectChartByUserId(re.get("uid"));
+        List<DealerDetail> uid = chartService.selectChartByUserId(re.get("uid"));
         map.put("baseUrl", UrlUtil.getBasePathNoPort(request));
         map.put("chartDetail", uid);
         return map;

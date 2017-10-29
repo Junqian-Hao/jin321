@@ -23,7 +23,7 @@ public class ProductPoMapperTest {
     }
     @Test
     public void selectAllTogether() throws Exception {
-        List<ProductPo> productPos = productPoMapper.selectNowBykey("张鑫");
+        List<ProductPo> productPos = productPoMapper.selectNowBykeyOrderByPrice("张鑫");
         System.out.println(productPos);
 //        long l = System.currentTimeMillis();
 //        System.out.println("第一次获得的毫秒值" + l);

@@ -1,6 +1,6 @@
 package com.jin321.wx.dao;
 
-import com.jin321.wx.model.ChartDetail;
+import com.jin321.wx.model.DealerDetail;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface ChartDetailMapper {
 
-    List<ChartDetail> selectChaetDetailByUid(String uid);
+    List<DealerDetail> selectChaetDetailByUid(String uid);
 }
