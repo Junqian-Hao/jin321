@@ -46,16 +46,16 @@ public class DealerLoginController{
     @RequestMapping("/dealerLogin")
     @ResponseBody
     public Map<String,String> dealerLogin(@RequestBody String json, HttpServletRequest request){
+        log.debug("传来的json为："+json);
         returnMap=new HashMap<String, String>();
         JSONObject obj= JSON.parseObject(json);
         dusername=obj.getString("dusername");
-        dpassword=obj.getString("dusername");
+        dpassword=obj.getString("dpassowrd");
         verifycodeget=obj.getString("verifycode");
-        log.debug("获取json参数"+json);
         verifycode=(String)request.getSession().getAttribute("verifycode");
         log.debug("获取到的验证码为："+verifycode);
         sign=dealerLoginService.Login(dusername,dpassword);
-        if (verifycodeget!=null&&verifycodeget==verifycode) {
+        if (verifycodeget!=null&&verifycode!=null&&verifycodeget==verifycode.toUpperCase()) {
             if(sign==2){
                 returnMap.put("code","2");
                 returnMap.put("msg","用户不存在");

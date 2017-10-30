@@ -43,6 +43,11 @@ public class ProductServiceimp implements ProductService {
      */
     @Override
     public int insertProduct(Product product,List<Productsize> productsizes) {
+        ProductExample productExample=new ProductExample();
+        ProductExample.Criteria criteria=productExample.createCriteria();
+        criteria.andPnameEqualTo(product.getPname());
+        if(productMapper.selectByExample(productExample).size()>0)
+                return -1;
         signa=productMapper.insert(product);
         Iterator<Productsize> psit=productsizes.iterator();
         while(psit.hasNext()){
@@ -113,5 +118,24 @@ public class ProductServiceimp implements ProductService {
         }
         else
             return 2;
+    }
+
+    /**
+     * 增加合伙商品
+     * @param pids
+     * @return 0无此商品 2更新失败 1设置成功
+     */
+    @Override
+    public int setTogetherProduct(List<Integer> pids) {
+        Iterator<Integer> iterator=pids.iterator();
+        while (iterator.hasNext()){
+            product=productMapper.selectByPrimaryKey(iterator.next());
+            if (product==null)
+                return 0;
+            product.setIsTogether(true);
+            if(productMapper.updateByPrimaryKey(product)!=1)
+                return 2;
+        }
+        return 1;
     }
 }

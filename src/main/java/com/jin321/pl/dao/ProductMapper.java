@@ -2,10 +2,14 @@ package com.jin321.pl.dao;
 
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.ProductExample;
+import groovy.transform.AutoClone;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.xml.ws.soap.Addressing;
 import java.util.List;
-
+@Repository
 public interface ProductMapper {
     int countByExample(ProductExample example);
 

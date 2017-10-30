@@ -26,4 +26,6 @@ public interface ProductService {
     int deleteProduct(List<Integer> pids);
     @Transactional(rollbackFor = Exception.class)
     int updateProduct(Product product,List<Productsize> productsizes);
+    @Transactional(rollbackFor = Exception.class)
+    int setTogetherProduct(List<Integer> pids);
 }

@@ -56,7 +56,7 @@
         </mvc:interceptor>
         <!--跨域请求拦截器-->
         <mvc:interceptor>
-            <mvc:mapping path="/wx/*"/>
+            <mvc:mapping path="/ms/*"/>
             <bean class="com.jin321.pl.intercepts.KuaYuIntercept"/>
         </mvc:interceptor>
     </mvc:interceptors>
