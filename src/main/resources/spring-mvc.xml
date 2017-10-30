@@ -49,23 +49,11 @@
             <!--<bean class="com.jin321.pl.intercepts.SignatureIntercetp"/>-->
         <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
-   <mvc:interceptors>
-       <!--登录验证拦截器-->
-       <!-- <mvc:interceptor>
-            <mvc:mapping path="/ms/productDetailUpload.do"/>
-            <mvc:mapping path="/ms/productPicUpload.do"/>
-            <bean class="com.jin321.ms.Interceptor.DealerLoginKVInterceptor"/>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/ms/*"/>
+            <bean class="com.jin321.ms.Interceptor.DealerLoginInterceptor"/>
         </mvc:interceptor>
-       <mvc:interceptor>
-           <mvc:mapping path="/ms/createTimeproduct.do"/>
-           <mvc:mapping path="/ms/deleteProduct.do"/>
-           <mvc:mapping path="/ms/productDetailDelete.do"/>
-           <mvc:mapping path="/ms/productInsert.do"/>
-           <mvc:mapping path="/ms/productPicDelete.do"/>
-           <mvc:mapping path="/ms/setTogether.do"/>
-           <mvc:mapping path="/ms/updateProduct.do"/>
-           <bean class="com.jin321.ms.Interceptor.DealerLoginJsonInterceptor"/>
-       </mvc:interceptor>-->
         <!--跨域请求拦截器-->
         <mvc:interceptor>
             <mvc:mapping path="/ms/*"/>

@@ -37,7 +37,7 @@ public class DealerLoginServiceimp implements DealerLoginService {
         criteria.andDusernameEqualTo(dusername);
         dealers=dealerMapper.selectByExample(dealerExample);
         if(dealers.size()>0){
-                if (dealers.get(0).getDpassword()==dpassword)
+                if (dealers.get(0).getDpassword().equals(dpassword))
                     return 1;
                 else
                     return 2;
