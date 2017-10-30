@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Tyranitarx on 2017/10/14.
  *
- * @Description :
+ * @Description :添加秒杀活动
  */
 @Service
 public class TimeProductServiceimp implements TimeProductService {
@@ -25,8 +25,8 @@ public class TimeProductServiceimp implements TimeProductService {
         TimeproductExample.Criteria criteria=timeproductExample.createCriteria();
         criteria.andPidEqualTo(timeproduct.getPid());
         timeproducts=timeproductMapper.selectByExample(timeproductExample);
-        if(timeproducts!=null||timeproducts.get(0)!=null)
-                return 2;
+        if(timeproducts.size()>0)
+                return -1;
         else{
             return timeproductMapper.insert(timeproduct);
         }

@@ -47,7 +47,8 @@ public class ProductPicUploadController {
     public Map<String, String> productPicUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file){
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
-        pid=(Integer) request.getSession().getAttribute("pid");
+        pid=Integer.parseInt(request.getParameter("pid"));
+        //pid=(Integer) request.getSession().getAttribute("pid");
         try {
             for (int i=0;i<file.length;i++) {
                 if (!file[i].isEmpty()) {
@@ -55,10 +56,11 @@ public class ProductPicUploadController {
                     uuids=uuid.toString();
                     uuids=uuids.replaceAll("-","");
                     //使用StreamsAPI方式拷贝文件
-                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    log.debug("储存地址为："+UrlUtil.getRealPath(request)+"productpics\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productpics=new Productpics();
                     productpics.setPid(pid);
-                    productpics.setPpicurl("/productpics/"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    productpics.setPpicurl("productpics/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productpics.setIsDeleted(false);
                     productPicService.productPicUpdate(productpics);
                 }

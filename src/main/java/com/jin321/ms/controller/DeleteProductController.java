@@ -27,7 +27,7 @@ public class DeleteProductController {
     private ProductService productService;
     private List<Integer> pids;
     private Map<String,String> returnMap;
-    @RequestMapping("/deleteproduct")
+    @RequestMapping("/deleteProduct")
     @ResponseBody
     public Map<String,String> deleteProduct(@RequestBody String json){
         returnMap=new HashMap<String, String>();

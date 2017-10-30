@@ -36,6 +36,7 @@ public class ProductInsertController {
     private Map<String,String> returnMap;
     private Product product;
     private List<Productsize> productsizes;
+    private int sign;
 
     /**
      *
@@ -56,9 +57,15 @@ public class ProductInsertController {
         product.setDid((Integer) request.getSession().getAttribute("did"));
         //productsize
         productsizes=JSON.parseArray(obj.get("productsizes").toString(),Productsize.class);
-        if (productService.insertProduct(product,productsizes)==1){
+        sign=productService.insertProduct(product,productsizes);
+        if (sign==1){
             returnMap.put("code","1");
             returnMap.put("msg","插入成功");
+            return  returnMap;
+        }
+        else if(sign==-1){
+            returnMap.put("code","-1");
+            returnMap.put("msg","商品已存在");
             return  returnMap;
         }
         else {
