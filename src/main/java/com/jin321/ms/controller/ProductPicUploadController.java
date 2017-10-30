@@ -55,10 +55,10 @@ public class ProductPicUploadController {
                     uuids=uuid.toString();
                     uuids=uuids.replaceAll("-","");
                     //使用StreamsAPI方式拷贝文件
-                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics\\"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productpics=new Productpics();
                     productpics.setPid(pid);
-                    productpics.setPpicurl("/productpics/"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    productpics.setPpicurl("productpics/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productpics.setIsDeleted(false);
                     productPicService.productPicUpdate(productpics);
                 }
