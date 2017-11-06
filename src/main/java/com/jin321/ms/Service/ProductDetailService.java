@@ -11,8 +11,19 @@ import java.util.List;
  * @Description :添加商品详细信息图片
  */
 public interface ProductDetailService {
+    /**
+     * 添加图片
+     * @param productdetail
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     int productDetailUpdate(Productdetail productdetail);
+
+    /**
+     * 删除图片
+     * @param productdetailList
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     int productDetailDelete(List<Integer> productdetailList);
 

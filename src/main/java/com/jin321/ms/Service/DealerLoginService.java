@@ -1,6 +1,5 @@
 package com.jin321.ms.Service;
 
-import com.jin321.pl.model.Dealer;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -16,6 +15,12 @@ public interface DealerLoginService {
      */
     @Transactional(rollbackFor = Exception.class)
     int Login(String dusername,String dpassword);
+
+    /**
+     * 获取经销商id
+     * @param dusername
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     int getDealerId(String dusername);
 }

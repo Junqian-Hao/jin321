@@ -3,12 +3,13 @@
 <mapper namespace="com.jin321.pl.dao.DealerMapper" >
   <resultMap id="BaseResultMap" type="com.jin321.pl.model.Dealer" >
     <id column="did" property="did" jdbcType="INTEGER" />
+    <result column="dname" property="dname" jdbcType="VARCHAR" />
     <result column="daddress" property="daddress" jdbcType="VARCHAR" />
     <result column="dphonenum" property="dphonenum" jdbcType="VARCHAR" />
     <result column="dusername" property="dusername" jdbcType="VARCHAR" />
     <result column="dpassword" property="dpassword" jdbcType="VARCHAR" />
+    <result column="dpower" property="dpower" jdbcType="VARCHAR" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
-    <result column="dname" property="dname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    did, daddress, dphonenum, dusername, dpassword, is_deleted, dname
+    did, dname, daddress, dphonenum, dusername, dpassword, dpower, is_deleted
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.DealerExample" >
     select
@@ -102,18 +103,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Dealer" >
-    insert into dealer (did, daddress, dphonenum, 
-      dusername, dpassword, is_deleted, 
-      dname)
-    values (#{did,jdbcType=INTEGER}, #{daddress,jdbcType=VARCHAR}, #{dphonenum,jdbcType=VARCHAR}, 
-      #{dusername,jdbcType=VARCHAR}, #{dpassword,jdbcType=VARCHAR}, #{isDeleted,jdbcType=BIT}, 
-      #{dname,jdbcType=VARCHAR})
+    insert into dealer (did, dname, daddress, 
+      dphonenum, dusername, dpassword, 
+      dpower, is_deleted)
+    values (#{did,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{daddress,jdbcType=VARCHAR}, 
+      #{dphonenum,jdbcType=VARCHAR}, #{dusername,jdbcType=VARCHAR}, #{dpassword,jdbcType=VARCHAR}, 
+      #{dpower,jdbcType=VARCHAR}, #{isDeleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Dealer" >
     insert into dealer
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="did != null" >
         did,
+      </if>
+      <if test="dname != null" >
+        dname,
       </if>
       <if test="daddress != null" >
         daddress,
@@ -127,16 +131,19 @@
       <if test="dpassword != null" >
         dpassword,
       </if>
+      <if test="dpower != null" >
+        dpower,
+      </if>
       <if test="isDeleted != null" >
         is_deleted,
-      </if>
-      <if test="dname != null" >
-        dname,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="did != null" >
         #{did,jdbcType=INTEGER},
+      </if>
+      <if test="dname != null" >
+        #{dname,jdbcType=VARCHAR},
       </if>
       <if test="daddress != null" >
         #{daddress,jdbcType=VARCHAR},
@@ -150,11 +157,11 @@
       <if test="dpassword != null" >
         #{dpassword,jdbcType=VARCHAR},
       </if>
+      <if test="dpower != null" >
+        #{dpower,jdbcType=VARCHAR},
+      </if>
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=BIT},
-      </if>
-      <if test="dname != null" >
-        #{dname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -170,6 +177,9 @@
       <if test="record.did != null" >
         did = #{record.did,jdbcType=INTEGER},
       </if>
+      <if test="record.dname != null" >
+        dname = #{record.dname,jdbcType=VARCHAR},
+      </if>
       <if test="record.daddress != null" >
         daddress = #{record.daddress,jdbcType=VARCHAR},
       </if>
@@ -182,11 +192,11 @@
       <if test="record.dpassword != null" >
         dpassword = #{record.dpassword,jdbcType=VARCHAR},
       </if>
+      <if test="record.dpower != null" >
+        dpower = #{record.dpower,jdbcType=VARCHAR},
+      </if>
       <if test="record.isDeleted != null" >
         is_deleted = #{record.isDeleted,jdbcType=BIT},
-      </if>
-      <if test="record.dname != null" >
-        dname = #{record.dname,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -196,12 +206,13 @@
   <update id="updateByExample" parameterType="map" >
     update dealer
     set did = #{record.did,jdbcType=INTEGER},
+      dname = #{record.dname,jdbcType=VARCHAR},
       daddress = #{record.daddress,jdbcType=VARCHAR},
       dphonenum = #{record.dphonenum,jdbcType=VARCHAR},
       dusername = #{record.dusername,jdbcType=VARCHAR},
       dpassword = #{record.dpassword,jdbcType=VARCHAR},
-      is_deleted = #{record.isDeleted,jdbcType=BIT},
-      dname = #{record.dname,jdbcType=VARCHAR}
+      dpower = #{record.dpower,jdbcType=VARCHAR},
+      is_deleted = #{record.isDeleted,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,6 +220,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Dealer" >
     update dealer
     <set >
+      <if test="dname != null" >
+        dname = #{dname,jdbcType=VARCHAR},
+      </if>
       <if test="daddress != null" >
         daddress = #{daddress,jdbcType=VARCHAR},
       </if>
@@ -221,23 +235,24 @@
       <if test="dpassword != null" >
         dpassword = #{dpassword,jdbcType=VARCHAR},
       </if>
+      <if test="dpower != null" >
+        dpower = #{dpower,jdbcType=VARCHAR},
+      </if>
       <if test="isDeleted != null" >
         is_deleted = #{isDeleted,jdbcType=BIT},
-      </if>
-      <if test="dname != null" >
-        dname = #{dname,jdbcType=VARCHAR},
       </if>
     </set>
     where did = #{did,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Dealer" >
     update dealer
-    set daddress = #{daddress,jdbcType=VARCHAR},
+    set dname = #{dname,jdbcType=VARCHAR},
+      daddress = #{daddress,jdbcType=VARCHAR},
       dphonenum = #{dphonenum,jdbcType=VARCHAR},
       dusername = #{dusername,jdbcType=VARCHAR},
       dpassword = #{dpassword,jdbcType=VARCHAR},
-      is_deleted = #{isDeleted,jdbcType=BIT},
-      dname = #{dname,jdbcType=VARCHAR}
+      dpower = #{dpower,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=BIT}
     where did = #{did,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -11,8 +11,19 @@ import java.util.List;
  * @Description :相关图片上传接口
  */
 public interface ProductPicService {
+    /**
+     * 添加图片
+     * @param productpics
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     int productPicUpdate(Productpics productpics);
+
+    /**
+     * 删除图片
+     * @param productPicsList
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     int productPicDelete(List<Integer> productPicsList);
 }

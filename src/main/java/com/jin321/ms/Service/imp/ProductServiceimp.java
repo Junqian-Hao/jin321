@@ -1,15 +1,14 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductService;
-import com.jin321.pl.dao.ProductMapper;
-import com.jin321.pl.dao.ProductdetailMapper;
-import com.jin321.pl.dao.ProductpicsMapper;
-import com.jin321.pl.dao.ProductsizeMapper;
+import com.jin321.ms.model.TrueProduct;
+import com.jin321.pl.dao.*;
 import com.jin321.pl.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -138,4 +137,67 @@ public class ProductServiceimp implements ProductService {
         }
         return 1;
     }
+
+    @Autowired
+    private ProducttypeMapper producttypeMapper;
+    private TrueProduct trueProduct;
+    private List<Product> productList;
+    private List<TrueProduct> trueProductList;
+    private String ptypea;
+    private String ptypeb;
+
+    /**
+     *
+     * @param did 查询的商家编号
+     * @return 真·商品
+     */
+    @Override
+    public List<TrueProduct> selectProductByDealer(int did) {
+        trueProductList=new ArrayList<TrueProduct>();
+        ProductExample example=new ProductExample();
+        ProductExample.Criteria criteria=example.createCriteria();
+        criteria.andDidEqualTo(did);
+        productList=productMapper.selectByExample(example);
+        Iterator<Product> it=productList.iterator();
+
+        while (it.hasNext()) {
+            product=it.next();
+            if (product!=null) {
+                trueProduct = new TrueProduct();
+                trueProduct.setDelete(product.getIsDelete());
+                trueProduct.setDid(product.getDid());
+                trueProduct.setPid(product.getPid());
+                trueProduct.setPname(product.getPname());
+                trueProduct.setPsellnum(product.getPsellnum());
+                trueProduct.setPsummary(product.getPsummary());
+                trueProduct.setTogether(product.getIsTogether());
+                ptypea = producttypeMapper.selectByPrimaryKey(product.getPtypea()).getTypename();
+                ptypeb = producttypeMapper.selectByPrimaryKey(product.getPtypeb()).getTypename();
+                trueProduct.setPtypea(ptypea);
+                trueProduct.setPtypeb(ptypeb);
+                trueProductList.add(trueProduct);
+            }
+        }
+        return trueProductList;
+    }
+
+    /**
+     *
+     * @param ptypea 第一分类
+     * @param ptypeb 第二分类
+     * @return 1 成功 0失败 -1 无此分类
+     */
+    @Override
+    public int updateProductType(int pid,int ptypea, int ptypeb) {
+        product=productMapper.selectByPrimaryKey(pid);
+        product.setPtypea(ptypea);
+        product.setPtypeb(ptypeb);
+        if(producttypeMapper.selectByPrimaryKey(ptypea)!=null&&
+                producttypeMapper.selectByPrimaryKey(ptypeb)!=null){
+            return productMapper.updateByPrimaryKey(product);
+        }
+        return -1;
+    }
 }
+
+

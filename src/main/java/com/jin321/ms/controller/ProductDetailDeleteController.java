@@ -23,7 +23,7 @@ public class ProductDetailDeleteController {
     private List<Integer> productDetailList;
     private Map<String,String> returnMap;
     private int sign;
-    @RequestMapping("/productDetailDelete")
+    @RequestMapping("/deleteProductDetails")
     @ResponseBody
     public Map<String,String> productDetailDelete(@RequestBody String json){
         productDetailList= JSON.parseArray(json,Integer.class);

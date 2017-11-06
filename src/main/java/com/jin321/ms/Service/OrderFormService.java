@@ -3,17 +3,17 @@ package com.jin321.ms.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by Tyranitarx on 2017/10/15.
+ * Created by Tyranitarx on 2017/11/6.
  *
  * @Description :
  */
-
-public interface OrderFormProductService {
+public interface OrderFormService {
     /**
-     * 获取订单ID
+     * 修改订单状态
+     * @param ostate
      * @param oid
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public int getOrderDid(Long oid);
+    public int changeOrderFormStatue(int ostate,Long oid);
 }

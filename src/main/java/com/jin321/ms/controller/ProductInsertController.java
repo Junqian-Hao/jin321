@@ -57,6 +57,7 @@ public class ProductInsertController {
         product.setDid((Integer) request.getSession().getAttribute("did"));
         //productsize
         productsizes=JSON.parseArray(obj.get("productsizes").toString(),Productsize.class);
+        product.setIsDelete(false);
         sign=productService.insertProduct(product,productsizes);
         if (sign==1){
             returnMap.put("code","1");

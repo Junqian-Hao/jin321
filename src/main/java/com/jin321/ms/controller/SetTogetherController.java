@@ -16,6 +16,8 @@ import java.util.Map;
  * Created by Tyranitarx on 2017/10/30.
  *
  * @Description : 设置合伙商品控制器
+ *
+ * 请求样例json:["11","22","333"]
  */
 @Controller
 @RequestMapping("/ms")

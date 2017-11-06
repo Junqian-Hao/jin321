@@ -164,6 +164,76 @@ public class DealerExample {
             return (Criteria) this;
         }
 
+        public Criteria andDnameIsNull() {
+            addCriterion("dname is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameIsNotNull() {
+            addCriterion("dname is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameEqualTo(String value) {
+            addCriterion("dname =", value, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameNotEqualTo(String value) {
+            addCriterion("dname <>", value, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameGreaterThan(String value) {
+            addCriterion("dname >", value, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameGreaterThanOrEqualTo(String value) {
+            addCriterion("dname >=", value, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameLessThan(String value) {
+            addCriterion("dname <", value, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameLessThanOrEqualTo(String value) {
+            addCriterion("dname <=", value, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameLike(String value) {
+            addCriterion("dname like", value, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameNotLike(String value) {
+            addCriterion("dname not like", value, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameIn(List<String> values) {
+            addCriterion("dname in", values, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameNotIn(List<String> values) {
+            addCriterion("dname not in", values, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameBetween(String value1, String value2) {
+            addCriterion("dname between", value1, value2, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDnameNotBetween(String value1, String value2) {
+            addCriterion("dname not between", value1, value2, "dname");
+            return (Criteria) this;
+        }
+
         public Criteria andDaddressIsNull() {
             addCriterion("daddress is null");
             return (Criteria) this;
@@ -444,6 +514,76 @@ public class DealerExample {
             return (Criteria) this;
         }
 
+        public Criteria andDpowerIsNull() {
+            addCriterion("dpower is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerIsNotNull() {
+            addCriterion("dpower is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerEqualTo(String value) {
+            addCriterion("dpower =", value, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerNotEqualTo(String value) {
+            addCriterion("dpower <>", value, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerGreaterThan(String value) {
+            addCriterion("dpower >", value, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerGreaterThanOrEqualTo(String value) {
+            addCriterion("dpower >=", value, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerLessThan(String value) {
+            addCriterion("dpower <", value, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerLessThanOrEqualTo(String value) {
+            addCriterion("dpower <=", value, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerLike(String value) {
+            addCriterion("dpower like", value, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerNotLike(String value) {
+            addCriterion("dpower not like", value, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerIn(List<String> values) {
+            addCriterion("dpower in", values, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerNotIn(List<String> values) {
+            addCriterion("dpower not in", values, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerBetween(String value1, String value2) {
+            addCriterion("dpower between", value1, value2, "dpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andDpowerNotBetween(String value1, String value2) {
+            addCriterion("dpower not between", value1, value2, "dpower");
+            return (Criteria) this;
+        }
+
         public Criteria andIsDeletedIsNull() {
             addCriterion("is_deleted is null");
             return (Criteria) this;
@@ -501,76 +641,6 @@ public class DealerExample {
 
         public Criteria andIsDeletedNotBetween(Boolean value1, Boolean value2) {
             addCriterion("is_deleted not between", value1, value2, "isDeleted");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameIsNull() {
-            addCriterion("dname is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameIsNotNull() {
-            addCriterion("dname is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameEqualTo(String value) {
-            addCriterion("dname =", value, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameNotEqualTo(String value) {
-            addCriterion("dname <>", value, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameGreaterThan(String value) {
-            addCriterion("dname >", value, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameGreaterThanOrEqualTo(String value) {
-            addCriterion("dname >=", value, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameLessThan(String value) {
-            addCriterion("dname <", value, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameLessThanOrEqualTo(String value) {
-            addCriterion("dname <=", value, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameLike(String value) {
-            addCriterion("dname like", value, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameNotLike(String value) {
-            addCriterion("dname not like", value, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameIn(List<String> values) {
-            addCriterion("dname in", values, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameNotIn(List<String> values) {
-            addCriterion("dname not in", values, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameBetween(String value1, String value2) {
-            addCriterion("dname between", value1, value2, "dname");
-            return (Criteria) this;
-        }
-
-        public Criteria andDnameNotBetween(String value1, String value2) {
-            addCriterion("dname not between", value1, value2, "dname");
             return (Criteria) this;
         }
     }

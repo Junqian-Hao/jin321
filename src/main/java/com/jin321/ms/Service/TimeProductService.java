@@ -8,5 +8,10 @@ import com.jin321.pl.model.Timeproduct;
  * @Description :秒杀商品相关
  */
 public interface TimeProductService {
+    /**
+     * 添加秒杀活动
+     * @param timeproduct
+     * @return
+     */
     int createTimeProduct(Timeproduct timeproduct);
 }

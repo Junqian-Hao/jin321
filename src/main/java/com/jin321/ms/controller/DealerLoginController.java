@@ -50,27 +50,42 @@ public class DealerLoginController{
         returnMap=new HashMap<String, String>();
         JSONObject obj= JSON.parseObject(json);
         dusername=obj.getString("dusername");
-        dpassword=obj.getString("dpassowrd");
+        dpassword=obj.getString("dpassword");
         verifycodeget=obj.getString("verifycode");
         verifycode=(String)request.getSession().getAttribute("verifycode");
         log.debug("获取到的验证码为："+verifycode);
+        log.debug("获取到的密码为:"+dpassword);
         sign=dealerLoginService.Login(dusername,dpassword);
         if (verifycodeget!=null&&verifycode!=null&&verifycodeget.toUpperCase().equals(verifycode.toUpperCase())) {
             if(sign==2){
                 returnMap.put("code","2");
-                returnMap.put("msg","用户不存在");
+                returnMap.put("msg","密码错误");
                 return returnMap;
             }
-            else if(sign==1){
+            else if(sign==4){
                 did=dealerLoginService.getDealerId(dusername);
                 request.getSession().setAttribute("did",did);
-                returnMap.put("code","1");
-                returnMap.put("msg","登录成功");
+                returnMap.put("code","4");
+                returnMap.put("msg","商户登录成功");
+                return returnMap;
+            }
+            else if(sign==5){
+                did=dealerLoginService.getDealerId(dusername);
+                request.getSession().setAttribute("did",did);
+                returnMap.put("code","5");
+                returnMap.put("msg","审核员登录成功");
+                return returnMap;
+            }
+            else if(sign==6){
+                did=dealerLoginService.getDealerId(dusername);
+                request.getSession().setAttribute("did",did);
+                returnMap.put("code","6");
+                returnMap.put("msg","管理员登录成功");
                 return returnMap;
             }
             else{
                 returnMap.put("code","0");
-                returnMap.put("msg","密码错误");
+                returnMap.put("msg","用户不存在");
                 return returnMap;
             }
         } else {
@@ -78,6 +93,5 @@ public class DealerLoginController{
             returnMap.put("msg","验证码错误");
             return returnMap;
         }
-
     }
 }

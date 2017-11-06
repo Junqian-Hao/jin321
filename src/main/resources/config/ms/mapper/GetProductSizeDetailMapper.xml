@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.ms.dao.GetProductSizeDetailMapper">
+    <resultMap id="BaseResultMap" type="UpdateProductSizeDetail">
+        <id column="sid" property="sid" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
+        <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
+        <result column="snumber" property="snumber" jdbcType="INTEGER"/>
+        <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
+        <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
+    </resultMap>
+    <select id="getProductSizeDetail" resultMap="BaseResultMap">
+        SELECT productsize.sid,
+              productsize.pid,
+              product.pname,
+              product.psummary,
+              productsize.sizename,
+              productsize.snumber,
+              productsize.psoriprice,
+              productsize.pssellprice
+              FROM
+              productsize
+              LEFT JOIN product ON productsize.pid=product.pid
+              WHERE
+                product.is_delete=0
+                AND productsize.is_deleted=0
+                AND product.did=#{did}
+    </select>
+</mapper>

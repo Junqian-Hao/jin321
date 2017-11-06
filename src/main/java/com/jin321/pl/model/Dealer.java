@@ -3,6 +3,8 @@ package com.jin321.pl.model;
 public class Dealer {
     private Integer did;
 
+    private String dname;
+
     private String daddress;
 
     private String dphonenum;
@@ -11,9 +13,9 @@ public class Dealer {
 
     private String dpassword;
 
-    private Boolean isDeleted;
+    private String dpower;
 
-    private String dname;
+    private Boolean isDeleted;
 
     public Integer getDid() {
         return did;
@@ -21,6 +23,14 @@ public class Dealer {
 
     public void setDid(Integer did) {
         this.did = did;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname == null ? null : dname.trim();
     }
 
     public String getDaddress() {
@@ -55,32 +65,19 @@ public class Dealer {
         this.dpassword = dpassword == null ? null : dpassword.trim();
     }
 
+    public String getDpower() {
+        return dpower;
+    }
+
+    public void setDpower(String dpower) {
+        this.dpower = dpower == null ? null : dpower.trim();
+    }
+
     public Boolean getIsDeleted() {
         return isDeleted;
     }
 
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
-    }
-
-    public String getDname() {
-        return dname;
-    }
-
-    public void setDname(String dname) {
-        this.dname = dname == null ? null : dname.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "com.jin321.pl.model.Dealer{" +
-                "did=" + did +
-                ", daddress='" + daddress + '\'' +
-                ", dphonenum='" + dphonenum + '\'' +
-                ", dusername='" + dusername + '\'' +
-                ", dpassword='" + dpassword + '\'' +
-                ", isDeleted=" + isDeleted +
-                ", dname='" + dname + '\'' +
-                '}';
     }
 }

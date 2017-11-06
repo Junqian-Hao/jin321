@@ -49,17 +49,17 @@
             <!--<bean class="com.jin321.pl.intercepts.SignatureIntercetp"/>-->
         <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
-    <mvc:interceptors>
+    <!--<mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/ms/*"/>
             <bean class="com.jin321.ms.Interceptor.DealerLoginInterceptor"/>
         </mvc:interceptor>
-        <!--跨域请求拦截器-->
-        <mvc:interceptor>
+        &lt;!&ndash;跨域请求拦截器&ndash;&gt;
+        &lt;!&ndash;<mvc:interceptor>
             <mvc:mapping path="/ms/*"/>
             <bean class="com.jin321.pl.intercepts.KuaYuIntercept"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+        </mvc:interceptor>&ndash;&gt;
+    </mvc:interceptors>-->
 
     <!--全局异常处理-->
     <bean class="com.jin321.pl.intercepts.AllExceptionResolver"/>

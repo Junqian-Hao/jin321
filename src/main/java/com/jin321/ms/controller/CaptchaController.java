@@ -29,7 +29,7 @@ public class CaptchaController {
         verifyCode=CaptchaUtil.generateVerifyCode(4);
         request.getSession().setAttribute("verifycode",verifyCode);
         log.info("验证码为："+request.getSession().getAttribute("verifycode"));
-        int w=75,h=34;
+        int w=75,h=26;
         try {
             CaptchaUtil.outputImage(w,h,response.getOutputStream(),verifyCode);
         } catch (IOException e) {

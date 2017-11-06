@@ -2,6 +2,7 @@ package com.jin321.wx.dao;
 
 import com.jin321.wx.model.ProductPo;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @Date 2017/9/26 22:18
  * @Description :
  */
+@Repository
 public interface ProductPoMapper {
     /**
      * 查询所有未标记为删除的合伙人商品

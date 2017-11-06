@@ -3,6 +3,8 @@ package com.jin321.ms.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.ProductService;
+import com.jin321.ms.Service.ProductSizeDetailService;
+import com.jin321.ms.model.UpdateProductSizeDetail;
 import com.jin321.pl.dao.ProductsizeMapper;
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Productsize;
@@ -28,36 +30,26 @@ import java.util.List;
 public class UpdateProductController {
     private static final Log log = LogFactory.getLog(UpdateProductController.class);
     @Autowired
-    private ProductService productService;
-    private Map<String,String> returnMap;
-    private Product product;
-    private List<Productsize> productsize;
+    private ProductSizeDetailService productSizeDetailService;
+    private UpdateProductSizeDetail updateProductSizeDetail;
     private int sign;
+    private Map<String,String> returnMap;
     @RequestMapping("/updateproduct")
     @ResponseBody
-    public Map<String,String> updateProduct(@RequestBody String json){
+    public Map<String,String> updateProduct(@RequestBody String json) {
         returnMap=new HashMap<String, String>();
-        JSONObject obj=JSON.parseObject(json);
-        //product
-        product=JSON.parseObject(obj.get("product").toString(),Product.class);
-        //productsize
-        productsize=JSON.parseArray(obj.get("productsize").toString(),Productsize.class);
-        log.info("获取到的product"+json+"+"+product);
-        sign=productService.updateProduct(product,productsize);
-        if(sign==1){
+        updateProductSizeDetail=JSON.parseObject(json,UpdateProductSizeDetail.class);
+        sign=productSizeDetailService.updateDetail(updateProductSizeDetail);
+        if(sign==0){
+            returnMap.put("code","0");
+            returnMap.put("msg","更新失败");
+            return returnMap;
+        }
+        else {
             returnMap.put("code","1");
             returnMap.put("msg","更新成功");
             return returnMap;
         }
-        else if(sign==0){
-            returnMap.put("code","1");
-            returnMap.put("msg","更新失败");
-            return returnMap;
-        }
-        else{
-            returnMap.put("code","2");
-            returnMap.put("msg","商品不存在");
-            return returnMap;
-        }
     }
+
 }
