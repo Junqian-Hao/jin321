@@ -3,6 +3,8 @@ package com.jin321.ms.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.ProductSizeDetailService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +17,12 @@ import java.util.Map;
 /**
  * Created by Tyranitarx on 2017/11/6.
  *
- * @Description :
+ * @Description :样例json{"sid":"xxx"}
  */
 @Controller
 @RequestMapping("/ms")
 public class DeleteProductSizeDetailController {
+    private static final Log log = LogFactory.getLog(DeleteProductSizeDetailController.class);
     @Autowired
     private ProductSizeDetailService productSizeDetailService;
     private Map<String,String> returnMap;
@@ -28,6 +31,7 @@ public class DeleteProductSizeDetailController {
     @ResponseBody
     @RequestMapping("/deleteProductSize")
     public Map<String,String> deleteProductSize(@RequestBody String json){
+        log.debug("传来的json为："+json);
         returnMap=new HashMap<String, String>();
         JSONObject object= JSON.parseObject(json);
         sid=object.getInteger("sid");

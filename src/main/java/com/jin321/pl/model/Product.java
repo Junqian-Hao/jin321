@@ -19,7 +19,7 @@ public class Product {
 
     private Boolean isTogether;
 
-    private Boolean isDelete;
+    private Integer isDelete;
 
     public Integer getPid() {
         return pid;
@@ -93,11 +93,11 @@ public class Product {
         this.isTogether = isTogether;
     }
 
-    public Boolean getIsDelete() {
+    public Integer getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(Boolean isDelete) {
+    public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
     }
 }

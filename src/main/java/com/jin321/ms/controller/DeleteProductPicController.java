@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/ms")
-public class ProductPicDeleteController {
+public class DeleteProductPicController {
     @Autowired
     private ProductPicService productPicService;
     private List<Integer> piclist;

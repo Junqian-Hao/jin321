@@ -15,11 +15,14 @@ import java.util.Map;
 /**
  * Created by Tyranitarx on 2017/11/6.
  *
- * @Description : 修改商品分类
+ * @Description : 修改商品分类接口
+ * {
+ *
+ * }
  */
 @Controller
 @RequestMapping("/ms")
-public class UpdateProductOwnType {
+public class UpdateProductOwnTypeController {
     @Autowired
     private ProductService productService;
     private int pid;

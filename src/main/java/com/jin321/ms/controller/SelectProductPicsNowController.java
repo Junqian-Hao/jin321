@@ -2,8 +2,8 @@ package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jin321.ms.Service.ProductService;
-import com.jin321.ms.model.TrueProduct;
+import com.jin321.ms.Service.ProductPicService;
+import com.jin321.pl.model.Productpics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,24 +13,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+
 /**
- * Created by Tyranitarx on 2017/11/6.
+ * Created by Tyranitarx on 2017/11/9.
  *
- * @Description : 根据session中登录存放的did获取商家所上架的商品
+ * @Description :
  */
 @Controller
 @RequestMapping("/ms")
-public class SelectProuctByDidController {
+public class SelectProductPicsNowController {
     @Autowired
-    private ProductService productService;
-    private int did;
-    private List<TrueProduct> trueProductList;
+    private ProductPicService productPicService;
+    private List<Productpics> productpicsList;
+    private int pid;
     @ResponseBody
-    @RequestMapping("/selectProdutByDid")
-    public List<TrueProduct> selectProductByDid(@RequestBody String json){
+    @RequestMapping("/selectPics")
+    public List<Productpics> selectPics(@RequestBody String json, HttpServletRequest request){
         JSONObject object= JSON.parseObject(json);
-        did=object.getInteger("did");
-        trueProductList=productService.selectProductByDealer(did);
-        return trueProductList;
+        pid=(Integer)object.get("pid");
+        productpicsList=productPicService.selectProductPicNow(pid);
+        return productpicsList;
     }
 }

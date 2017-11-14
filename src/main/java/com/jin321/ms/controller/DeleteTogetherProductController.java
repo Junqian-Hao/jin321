@@ -10,36 +10,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 /**
- * Created by Tyranitarx on 2017/10/11.
+ * Created by Tyranitarx on 2017/11/12.
  *
- * @Description : 标记删除接口
- * 样例请求json: [
- *     "123","3435",······
- * ]
+ * @Description :
  */
 @Controller
 @RequestMapping("/ms")
-public class DeleteProductController {
+public class DeleteTogetherProductController {
     @Autowired
     private ProductService productService;
-    private List<Integer> pids;
     private Map<String,String> returnMap;
-    @RequestMapping("/deleteProduct")
+    private int pid;
+    private int sign;
     @ResponseBody
-    public Map<String,String> deleteProduct(@RequestBody String json){
+    @RequestMapping("/deleteTogeter")
+    public Map<String, String> deleteTogeter(@RequestBody String json){
         returnMap=new HashMap<String, String>();
-        pids=JSON.parseArray(json,Integer.class);
-        if(productService.deleteProduct(pids)==1){
-             returnMap.put("code","1");
-             returnMap.put("msg","删除成功");
-             return returnMap;
+        JSONObject object= JSON.parseObject(json);
+        pid=object.getInteger("pid");
+        sign=productService.deleteTogetherProduct(pid);
+        if(sign==-1){
+            returnMap.put("code","-1");
+            returnMap.put("mgs","商品不存在");
+            return returnMap;
+        }
+        else if(sign==0){
+            returnMap.put("code","0");
+            returnMap.put("mgs","取消失败");
+            return returnMap;
         }
         else {
-            returnMap.put("code","0");
-            returnMap.put("msg","删除失败");
+            returnMap.put("code","1");
+            returnMap.put("mgs","取消成功");
             return returnMap;
         }
     }

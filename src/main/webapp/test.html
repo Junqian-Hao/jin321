@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery/jquery.min.js"></script>
+    <title>Title</title>
+    <script>
+        $(function(){
+            $("#btn").on("click", function () {
+                var value = $("#fil").val();
+                var fd = new FormData();
+                for(var i=0;i<$("#fil").val().length;i++){
+                    var reader = new FileReader();
+                    reader.readAsDataURL(value[i]);
+                    fd.append(i,value[i]);
+                }
+                console.log(fd);
+            });
+            $("#fil").on("change", function () {
+                var fd = new FormData();
+                for(var i=0;i<this.files.length;i++){
+                    var reader = new FileReader();
+                    reader.readAsDataURL(this.files[i]);
+                    fd.append(i,this.files[i]);
+                }
+                console.log(fd);
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="fil" type="file">
+    <button id="btn">按钮</button>
+</body>
+</html>

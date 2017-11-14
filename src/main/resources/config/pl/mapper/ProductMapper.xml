@@ -11,7 +11,7 @@
     <result column="ptypeb" property="ptypeb" jdbcType="INTEGER" />
     <result column="ptypec" property="ptypec" jdbcType="INTEGER" />
     <result column="is_together" property="isTogether" jdbcType="BIT" />
-    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -112,7 +112,7 @@
     values (#{pid,jdbcType=INTEGER}, #{did,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, 
       #{psummary,jdbcType=VARCHAR}, #{psellnum,jdbcType=INTEGER}, #{ptypea,jdbcType=INTEGER}, 
       #{ptypeb,jdbcType=INTEGER}, #{ptypec,jdbcType=INTEGER}, #{isTogether,jdbcType=BIT}, 
-      #{isDelete,jdbcType=BIT})
+      #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Product" >
     insert into product
@@ -177,7 +177,7 @@
         #{isTogether,jdbcType=BIT},
       </if>
       <if test="isDelete != null" >
-        #{isDelete,jdbcType=BIT},
+        #{isDelete,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -218,7 +218,7 @@
         is_together = #{record.isTogether,jdbcType=BIT},
       </if>
       <if test="record.isDelete != null" >
-        is_delete = #{record.isDelete,jdbcType=BIT},
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -236,7 +236,7 @@
       ptypeb = #{record.ptypeb,jdbcType=INTEGER},
       ptypec = #{record.ptypec,jdbcType=INTEGER},
       is_together = #{record.isTogether,jdbcType=BIT},
-      is_delete = #{record.isDelete,jdbcType=BIT}
+      is_delete = #{record.isDelete,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -269,7 +269,7 @@
         is_together = #{isTogether,jdbcType=BIT},
       </if>
       <if test="isDelete != null" >
-        is_delete = #{isDelete,jdbcType=BIT},
+        is_delete = #{isDelete,jdbcType=INTEGER},
       </if>
     </set>
     where pid = #{pid,jdbcType=INTEGER}
@@ -284,7 +284,7 @@
       ptypeb = #{ptypeb,jdbcType=INTEGER},
       ptypec = #{ptypec,jdbcType=INTEGER},
       is_together = #{isTogether,jdbcType=BIT},
-      is_delete = #{isDelete,jdbcType=BIT}
+      is_delete = #{isDelete,jdbcType=INTEGER}
     where pid = #{pid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="style/admin.css">
+    <script src="jquery/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div class="heart">
+        <!-- 头部 -->
+        <div class="header">
+            <ul>
+                <li id="s-manage">商品管理</li>
+            </ul>
+        </div>
+        <!-- 左侧栏 -->
+        <div class="left">
+            <div class="left-s item">
+                <ul>
+                    <li id="watch-s">查看商品</li>
+                    <li id="add-s">添加商品</li>
+                    <li id="delete-s">删除商品</li>
+                    <li id="upload-s">上传图片</li>
+                    <li id="upload-detail">上传商品介绍图片</li>
+                    <li id="change-type">更改商品分类</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="content">
+            <!-- 查看商品 -->
+            <div class="watch-s-content item">
+                <table id="s-info-table">
+                    <tr>
+                        <td>选择</td>
+                        <td>id</td>
+                        <td>名称</td>
+                        <td>介绍</td>
+                        <td>规格</td>
+                        <td>分类</td>
+                        <td>品牌</td>
+                        <td>原价</td>
+                        <td>售价</td>
+                        <td>剩余数量</td>
+                    </tr>
+                </table>
+                <button id="info-s-btn">修改商品信息</button>
+            </div>
+
+            <!-- 添加商品 -->
+            <div class="add-s-content item">
+                商品分类
+                <select id="subType">
+
+                </select>
+                商品品牌
+                <select id="supType">
+
+                </select>
+                <div>
+                    <label>商品名称</label>
+                    <input id="s-name" type="text">
+                </div>
+                <div>
+                    <label>商品描述</label>
+                    <input id="s-say" type="text">
+                </div>
+                <div id="size">
+                    <div class="size">
+                        <label>商品规格</label>
+                        <input class="s-size" type="text"><label>商品进价</label>
+                        <input type="number" class="s-jin"><label>商品原价</label>
+                        <input class="s-oprice" type="number"><label>商品售价</label>
+                        <input class="s-nprice" type="number"><label>商品数量</label>
+                        <input class="s-number" type="number">
+                        <button id="add-size">+</button>
+                    </div>
+                </div>
+                <div>
+                    <button id="add-s-btn">添加</button>
+                </div>
+            </div>
+
+            <!-- 删除商品 -->
+            <div class="delete-s-content item">
+                <label>请输入商品id</label>
+                <input id="delete-s-id" type="number">
+                <button id="delete-s-btn">删除</button>
+            </div>
+
+            <!-- 上传商品图片 -->
+            <div class="upload-s-content item">
+                <label>请选择图片：</label>
+                <input type="file" id="file-input" multiple/><br>
+                <label>请输入需要上传图片的商品id号</label>
+                <input type="number" id="file-s-id" placeholder="id可以在'查看商品'中找到">
+                <button id="file-btn">上传</button>
+            </div>
+            <!-- 上传商品详情图片 -->
+            <div class="upload-s-detail-img item">
+                <label>请选择图片：</label>
+                <input type="file" id="file-detail-input" multiple/><br>
+                <label>请输入需要上传图片的商品id号</label>
+                <input type="number" id="file-s-detail--id" placeholder="id可以在'查看商品'中找到">
+                <button id="file-detail-btn">上传</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import sun.net.util.URLUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
@@ -26,28 +27,27 @@ import java.util.UUID;
  *
  * @Description : 商品相关图片上传
  * 样例JSON
- * {
-    "product":{"did":"1","pname":"郝俊谦最牛逼","psummary":"郝俊谦牛逼","ptypea":"1","ptypeb":"1","is_together":"1","is_delete":"0"},
-    " productsizes":[{"pscost":"12.2","psoriprice":"12.2","pssellprice":"12.2","sizename":"郝俊谦牛逼","snumber":"123","is_delete":"0"}]
- *｝
+ *
  */
 @Controller
 @RequestMapping("/ms")
-public class ProductPicUploadController {
-    private static final Log log = LogFactory.getLog(ProductPicUploadController.class);
+public class UploadProductPicController {
+    private static final Log log = LogFactory.getLog(UploadProductPicController.class);
     @Autowired
     private ProductPicService productPicService;
     private Map<String,String> returnmap;
-    private Integer pid;
     private Productpics productpics;
     private UUID uuid;
     private String uuids;
     @ResponseBody
     @RequestMapping(value = "/productPicUpload",method = RequestMethod.POST)
-    public Map<String, String> productPicUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file){
+    public Map<String, String> productPicUpload(HttpServletRequest request,
+                                                @RequestParam("file") CommonsMultipartFile[] file
+                                                ,@RequestParam("header")int header,
+                                                @RequestParam("pid")int pid){
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
-        pid=(Integer) request.getSession().getAttribute("pid");
+        productPicService.productNoHeadPicDelete(pid,UrlUtil.getRealPath(request));
         try {
             for (int i=0;i<file.length;i++) {
                 if (!file[i].isEmpty()) {
@@ -60,7 +60,11 @@ public class ProductPicUploadController {
                     productpics.setPid(pid);
                     productpics.setPpicurl("productpics/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productpics.setIsDeleted(false);
-                    productPicService.productPicUpdate(productpics);
+                    if(header==0)
+                        productPicService.productPicUpdate(productpics);
+                    else
+                        productPicService.productHeadPicService(productpics);
+
                 }
             }
         } catch (IOException e) {

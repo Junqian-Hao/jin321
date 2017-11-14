@@ -1,5 +1,6 @@
 package com.jin321.ms.dao;
 
+import com.jin321.ms.model.TrueProduct;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

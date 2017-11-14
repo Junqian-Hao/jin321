@@ -1,5 +1,7 @@
 package com.jin321.ms.model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 /**
  * Created by Tyranitarx on 2017/11/6.
  *
@@ -22,7 +24,7 @@ public class TrueProduct {
 
     private Boolean isTogether;
 
-    private Boolean isDelete;
+    private Integer isDelete;
 
     public Integer getPid() {
         return pid;
@@ -88,11 +90,11 @@ public class TrueProduct {
         isTogether = together;
     }
 
-    public Boolean getDelete() {
+    public Integer getDelete() {
         return isDelete;
     }
 
-    public void setDelete(Boolean delete) {
+    public void setDelete(Integer delete) {
         isDelete = delete;
     }
 }

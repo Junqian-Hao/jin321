@@ -1,9 +1,11 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductDetailService;
+import com.jin321.pl.dao.ProductMapper;
 import com.jin321.pl.dao.ProductdetailMapper;
 import com.jin321.pl.model.Productdetail;
 import com.jin321.pl.model.ProductdetailExample;
+import com.jin321.wx.model.ProductsizeDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,27 +31,21 @@ public class ProductDetailServiceimp implements ProductDetailService {
         criteria.andIsDeletedEqualTo(false);
         productdetailList=productdetailMapper.selectByExample(productdetailExample);
         productdetailold=productdetailList.get(0);
-        if(productdetailold.getPicurl().contains("default")){
-            productdetailold.setIsDeleted(true);
-            productdetailMapper.updateByPrimaryKey(productdetailold);
-            productdetail.setPorder(0);
-        }else {
-            productdetail.setPorder(productdetailList.size()+1);
-        }
+        productdetail.setPorder(productdetailList.size()+1);
         return productdetailMapper.insert(productdetail);
     }
-    private Productdetail productdetail;
-    private int pdid;
+    private List<Productdetail> productdetailsold;
+
     @Override
-    public int productDetailDelete(List<Integer> productdetailList) {
-        Iterator<Integer> iterator=productdetailList.iterator();
+    public void productDetailDelete(int pid) {
+        ProductdetailExample example=new ProductdetailExample();
+        ProductdetailExample.Criteria criteria=example.createCriteria();
+        criteria.andPidEqualTo(pid);
+        productdetailsold=productdetailMapper.selectByExample(example);
+        Iterator<Productdetail> iterator=productdetailsold.iterator();
         while(iterator.hasNext()){
-            pdid=iterator.next();
-            productdetail=productdetailMapper.selectByPrimaryKey(pdid);
-            productdetail.setIsDeleted(true);
-            if ( productdetailMapper.updateByPrimaryKey(productdetail)==0)
-                return 0;
+            productdetailold=iterator.next();
+            productdetailMapper.deleteByPrimaryKey(productdetailold.getPdid());
         }
-        return 1;
     }
 }

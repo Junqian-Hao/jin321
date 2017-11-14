@@ -2,7 +2,6 @@ package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jin321.ms.Service.ProductPicService;
 import com.jin321.ms.Service.ProductService;
 
 
@@ -29,8 +28,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/ms")
-public class ProductInsertController {
-    private static final Log log = LogFactory.getLog(ProductInsertController.class);
+public class InsertProductController {
+    private static final Log log = LogFactory.getLog(InsertProductController.class);
     @Autowired
     private ProductService productService;
     private Map<String,String> returnMap;
@@ -57,7 +56,6 @@ public class ProductInsertController {
         product.setDid((Integer) request.getSession().getAttribute("did"));
         //productsize
         productsizes=JSON.parseArray(obj.get("productsizes").toString(),Productsize.class);
-        product.setIsDelete(false);
         sign=productService.insertProduct(product,productsizes);
         if (sign==1){
             returnMap.put("code","1");

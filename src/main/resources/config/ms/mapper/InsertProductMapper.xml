@@ -3,9 +3,9 @@
 <mapper namespace="com.jin321.ms.dao.InsertProductMapper">
 <insert id="insertProduct" parameterType="com.jin321.pl.model.Product" useGeneratedKeys="true" keyProperty="pid">
    INSERT INTO product
-    (did,pname,psummary,ptypea,ptypeb,is_together)
+    (did,pname,psummary,ptypea,ptypeb,is_together,is_delete)
     VALUES
-    (#{did},#{pname},#{psummary},#{ptypea},#{ptypeb},#{isTogether})
+    (#{did},#{pname},#{psummary},#{ptypea},#{ptypeb},#{isTogether},#{isDelete})
     <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="pid">
         SELECT  LAST_INSERT_ID()
     </selectKey>

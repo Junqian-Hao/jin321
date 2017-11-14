@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import sun.net.util.URLUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
@@ -31,21 +30,21 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/ms")
-public class ProductDetailUploadController{
-    private static final Log log = LogFactory.getLog(ProductDetailUploadController.class);
+public class UploadProductDetailController {
+    private static final Log log = LogFactory.getLog(UploadProductDetailController.class);
     @Autowired
     private ProductDetailService productDetailService;
     private UUID uuid;
     private String uuids;
     private Map<String,String> returnmap;
     private Productdetail productdetail;
-    private Integer pid;
     @ResponseBody
     @RequestMapping(value = "/productDetailUpload",method = RequestMethod.POST)
-    public Map<String, String> productDetailUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file){
+    public Map<String, String> productDetailUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file,
+                                                   @RequestParam("pid")int pid){
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
-        pid=(Integer) request.getSession().getAttribute("pid");
+        productDetailService.productDetailDelete(pid);
         try {
             for (int i=0;i<file.length;i++) {
                 if (!file[i].isEmpty()) {

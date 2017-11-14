@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="style/Super.css">
+    <script src="jquery/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div class="heart">
+        <!-- 头部 -->
+        <div class="header">
+            <ul>
+                <li id="type-manage">分类管理</li>
+                <li id="parents-manage">商品管理</li>
+                <li id="merchant-manage">商家管理</li>
+                <li id="lun-manage">轮播图管理</li>
+            </ul>
+        </div>
+        <!-- 左侧栏 -->
+        <div class="left">
+            <div class="type-manage item">
+                <ul>
+                    <li id="watch-type">查看分类</li>
+                    <li id="add-type">添加分类</li>
+                    <li id="add-brands">添加品牌</li>
+                    <li id="delete-type">删除分类</li>
+                    <li id="delete-brands">删除品牌</li>
+                </ul>
+            </div>
+            <div class="parents-manage item">
+                <ul>
+                    <li id="watch-common">查看普通商品</li>
+                    <li id="delete-common">删除普通商品</li>
+                    <li id="watch-parents">查看合伙人商品</li>
+                    <li id="add-parents">添加合伙人商品</li>
+                </ul>
+            </div>
+            <div class="merchant-mange item">
+                <ul>
+                    <li id="watch-merchant">查看商家</li>
+                    <li id="add-merchant">添加商家</li>
+                    <li id="delete-merchant">删除商家</li>
+                </ul>
+            </div>
+            <div class="lun-img item">
+                <ul>
+                    <li id="lun-li">轮播图管理</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 内容 -->
+        <div class="content">
+            <!-- 查看分类 -->
+            <div class="watch-type item">
+                <select id="first-type">
+                    <option>书</option>
+                    <option>书</option>
+                </select>
+                <select id="second-type">
+                    <option>书</option>
+                    <option>书</option>
+                </select>
+            </div>
+            <!-- 添加分类 -->
+            <div class="add-type item">
+                <label>请输入分类名称</label>
+                <input type="text" id="type-value">
+                <button id="add-type-btn">添加</button>
+            </div>
+            <!-- 添加品牌 -->
+            <div class="add-brands item">
+                <select id="first-type2">
+
+                </select>
+                <label>请输入要添加的品牌</label>
+                <input type="text" id="brands">
+                <label>请选择品牌的图片</label>
+                <input type="file" id="img-file">
+                <button id="sub-brands">提交</button>
+            </div>
+            <!-- 删除分类 -->
+            <div class="delete-type item">
+                <label>请输入删除的分类</label>
+                <input type="text" id="delete-input">
+                <button id="delete-type-btn">确定</button>
+            </div>
+            <!-- 删除品牌 -->
+            <div class="delete-brands item">
+                <label>请输入删除的品牌</label>
+                <input type="text" id="delete-b">
+                <button id="delete-b-btn">确定</button>
+            </div>
+            <!-- 查看普通商品（未完成）-->
+            <div class="watch-common-s item">
+                <select id="common-s-select">
+
+                </select>
+            </div>
+            <!-- 删除普通商品 -->
+            <div class="delete-common-s item">
+                <label>请输入商品id</label>
+                <input type="text" id="delete-common-text">
+                <button id="delete-common-btn">删除</button>
+            </div>
+            <!-- 查看合伙人商品 -->
+            <div class="watch-content item">
+                <table id="parents-table">
+                    <tr>
+                        <td>id</td>
+                        <td>合伙人商品名称</td>
+                        <td>商品原价</td>
+                        <td>商品售价</td>
+                    </tr>
+                </table>
+            </div>
+            <!-- 添加合伙人商品 -->
+            <div class="add-parents-content item">
+                <label>请输入需要添加的商品id号</label>
+                <input type="text" placeholder="id号可在查看普通商品中找到" id="add-parents-text">
+                <button id="add-parents-btn">添加</button>
+            </div>
+            <!-- 查看商家 -->
+            <div class="watch-merchant item">
+                <table id="watch-merchant-table">
+                    <tr>
+                        <td>商家id</td>
+                        <td>商家名称</td>
+                        <td>商家账号</td>
+                        <td>商家密码</td>
+                        <td>商家电话</td>
+                        <td>商家地址</td>
+                    </tr>
+                </table>
+            </div>
+            <!-- 添加商家 -->
+            <div class="add-merchant item">
+                <label>请输入商家名称</label>
+                <input type="text" id="merchant-name"><br>
+                <label>请输入商家账号</label>
+                <input type="text" id="merchant-username"><br>
+                <label>请输入商家密码</label>
+                <input type="text" id="merchant-pwd"><br>
+                <label>请输入商家电话</label>
+                <input type="text" id="merchant-phonenumber"><br>
+                <label>请输入商家地址</label>
+                <input type="text" id="merchant-address"><br>
+                <button id="add-merchant-btn">添加</button>
+            </div>
+            <!-- 轮播图管理 -->
+            <div class="lun-content item">
+                <label>请选择轮播图</label>
+                <input type="file" id="lun-input" multiple>
+                <div class="pid-content">
+
+                </div>
+                <button id="lun-btn">提交</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/Super.js"></script>
+</body>
+</html>

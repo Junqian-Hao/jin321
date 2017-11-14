@@ -21,11 +21,11 @@ public interface ProductDetailService {
 
     /**
      * 删除图片
-     * @param productdetailList
+     * @param pid
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int productDetailDelete(List<Integer> productdetailList);
+    void productDetailDelete(int pid);
 
 
 }

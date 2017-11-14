@@ -1,0 +1,51 @@
+ul li{
+    cursor: pointer;
+}
+
+.heart{
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.header{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.left{
+    width: 10%;
+    float: left;
+}
+
+.left li{
+    margin: 10px 0;
+}
+
+.content{
+    width: 90%;
+    float: right;
+    margin-top: 10px;
+}
+
+.size input{
+    width: 100px;
+}
+
+.size .s-size{
+    width: 157px;
+}
+
+.item{
+    display: none;
+}
+
+table{
+    border-collapse: collapse;
+    border: none;
+    width: 800px;
+}
+
+td{
+    border: 1px solid #000;
+    text-align: center;
+}

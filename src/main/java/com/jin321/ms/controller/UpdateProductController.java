@@ -1,13 +1,8 @@
 package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.jin321.ms.Service.ProductService;
 import com.jin321.ms.Service.ProductSizeDetailService;
 import com.jin321.ms.model.UpdateProductSizeDetail;
-import com.jin321.pl.dao.ProductsizeMapper;
-import com.jin321.pl.model.Product;
-import com.jin321.pl.model.Productsize;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +13,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 /**
  * Created by Tyranitarx on 2017/10/13.
  *
- * @Description :
+ * @Description :样例json
+ * {
+ * "sid":"",
+ * "pid":"",
+ * "pname":"",
+ * "psummary":"",
+ * "psoriprice":"",
+ * "pssellprice":"",
+ * "sizename":"",
+ * "snumber":""}
  */
 @Controller
 @RequestMapping("/ms")
@@ -34,7 +37,7 @@ public class UpdateProductController {
     private UpdateProductSizeDetail updateProductSizeDetail;
     private int sign;
     private Map<String,String> returnMap;
-    @RequestMapping("/updateproduct")
+    @RequestMapping("/updateProduct")
     @ResponseBody
     public Map<String,String> updateProduct(@RequestBody String json) {
         returnMap=new HashMap<String, String>();

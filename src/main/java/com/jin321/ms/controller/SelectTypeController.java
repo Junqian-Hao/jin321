@@ -21,8 +21,8 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/ms")
-public class GetTypeController {
-    private static final Log log = LogFactory.getLog(GetTypeController.class);
+public class SelectTypeController {
+    private static final Log log = LogFactory.getLog(SelectTypeController.class);
     @Autowired
     TypeService typeService;
 

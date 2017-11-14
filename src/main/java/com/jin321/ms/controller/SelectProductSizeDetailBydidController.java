@@ -19,14 +19,13 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/ms")
-public class SelectProductSizeDetailBydid {
+public class SelectProductSizeDetailBydidController {
     @Autowired
     private ProductSizeDetailService productSizeDetailService;
     private List<UpdateProductSizeDetail> productSizeDetailList;
     private int did;
-
     @ResponseBody
-    @RequestMapping({"/getDetail1ByDid"})
+    @RequestMapping("/getDetail1ByDid")
     public List<UpdateProductSizeDetail> getPrductSizeDetail(HttpServletRequest request) {
         did = (Integer) request.getSession().getAttribute("did");
         productSizeDetailList = productSizeDetailService.getDetailBydid(did);

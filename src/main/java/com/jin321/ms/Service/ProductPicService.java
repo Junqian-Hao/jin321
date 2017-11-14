@@ -1,5 +1,6 @@
 package com.jin321.ms.Service;
 
+import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Productpics;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +21,31 @@ public interface ProductPicService {
     int productPicUpdate(Productpics productpics);
 
     /**
-     * 删除图片
-     * @param productPicsList
+     * 添加头图
+     * @param productpics
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int productPicDelete(List<Integer> productPicsList);
+    int productHeadPicService(Productpics productpics);
+
+    /**
+     * 删除图片缩略图
+     * @param
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    void productNoHeadPicDelete(int pid,String Realpath);
+
+    /**
+     * 删除图片
+     * @param productpicsList
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    int productPicDelete(List<Integer> productpicsList);
+    /**
+     * 查看当前缩略图
+     */
+    @Transactional(rollbackFor = Exception.class)
+    List<Productpics> selectProductPicNow(int pid);
 }

@@ -1,16 +1,17 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductService;
+import com.jin321.ms.dao.InsertProductMapper;
 import com.jin321.ms.model.TrueProduct;
 import com.jin321.pl.dao.*;
 import com.jin321.pl.model.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Tyranitarx on 2017/10/5.
@@ -20,6 +21,7 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class ProductServiceimp implements ProductService {
+    private static final Log log = LogFactory.getLog(ProductServiceimp.class);
     private int signa;
     private int signb;
     private int signc;
@@ -30,6 +32,8 @@ public class ProductServiceimp implements ProductService {
     private ProductsizeMapper productsizeMapper;
     @Autowired
     private ProductpicsMapper productpicsMapper;
+    @Autowired
+    private InsertProductMapper insertProductMapper;
     @Autowired
     private ProductdetailMapper productdetailMapper;
     private Productsize productsize;
@@ -47,11 +51,15 @@ public class ProductServiceimp implements ProductService {
         criteria.andPnameEqualTo(product.getPname());
         if(productMapper.selectByExample(productExample).size()>0)
                 return -1;
-        signa=productMapper.insert(product);
+        product.setIsTogether(false);
+        product.setIsDelete(2);
+        log.debug("商品状态："+product.getIsDelete());
+        signa=insertProductMapper.insertProduct(product);
         Iterator<Productsize> psit=productsizes.iterator();
         while(psit.hasNext()){
             productsize=psit.next();
             productsize.setPid(product.getPid());
+            productsize.setIsDeleted(false);
             signb=productsizeMapper.insert(productsize);
             if(signb==0)
                 break;
@@ -60,15 +68,15 @@ public class ProductServiceimp implements ProductService {
         productpics=new Productpics();
         productpics.setPid(product.getPid());
         productpics.setIsHeadpic(true);
-        productpics.setPpicurl("\\productpics\\default.jpg");
+        productpics.setPpicurl("productpics/default.jpg");
         productpics.setIsDeleted(false);
         signc=productpicsMapper.insert(productpics);
         //设置默认详情
         productdetail=new Productdetail();
         productdetail.setIsDeleted(false);
-        productdetail.setPorder(0);
+        productdetail.setPorder(1);
         productdetail.setPid(product.getPid());
-        productdetail.setPicurl("\\productdetail\\default.jpg");
+        productdetail.setPicurl("productdetail/default.jpg");
         signd=productdetailMapper.insert(productdetail);
         return signa&signb&signc&signd;
     }
@@ -87,7 +95,7 @@ public class ProductServiceimp implements ProductService {
             pid=iterator.next();
             product=productMapper.selectByPrimaryKey(pid);
             if(product!=null){
-                product.setIsDelete(true);
+                product.setIsDelete(1);
                 productMapper.updateByPrimaryKey(product);
             }
             else{
@@ -136,6 +144,18 @@ public class ProductServiceimp implements ProductService {
                 return 2;
         }
         return 1;
+    }
+
+    @Override
+    public int deleteTogetherProduct(int pid) {
+        product=productMapper.selectByPrimaryKey(pid);
+        if(product!=null)
+            return -1;
+        else {
+            product.setIsTogether(false);
+            return productMapper.updateByPrimaryKey(product);
+        }
+
     }
 
     @Autowired
@@ -197,6 +217,34 @@ public class ProductServiceimp implements ProductService {
             return productMapper.updateByPrimaryKey(product);
         }
         return -1;
+    }
+    @Override
+    public List<Product> getReadyProduct() {
+        ProductExample example=new ProductExample();
+        ProductExample.Criteria criteria=example.createCriteria();
+        criteria.andIsDeleteEqualTo(2);
+        productList=productMapper.selectByExample(example);
+        return productList;
+    }
+
+    /**
+     *
+     * @param pid
+     * @param check
+     * @return 0为拒绝 1为通过
+     */
+
+    @Override
+    public int checkoutProduct(int pid, int check) {
+        product=productMapper.selectByPrimaryKey(pid);
+        if(product!=null){
+            if(check==0)
+                product.setIsDelete(3);
+            else
+                product.setIsDelete(0);
+            signa=productMapper.updateByPrimaryKey(product);
+        }
+            return signa;
     }
 }
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="style/base.css">
+    <script src="jquery/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div class="login-box">
+        <div>
+            <label>用户名:</label>
+            <input id="username"  type="text" placeholder="请输入用户名"/>
+        </div>
+        <div>
+            <label>密&nbsp;&nbsp;&nbsp;码:</label>
+            <input class="pwd" id="pwd" type="password" placeholder="请输入密码"/>
+        </div>
+        <div>
+            <label>验证码:</label>
+            <input class="verification" id="verification" placeholder="请输入验证码" type="text" />
+            <img id="verificationÏmg" src="/ms/getCaptcha.do"/>
+        </div>
+        <div class="login-btn">
+            <button id="login-btn">登录</button>
+        </div>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>
