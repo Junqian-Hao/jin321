@@ -31,7 +31,7 @@ public class DeleteProducTypeController {
     public Map<String,String> deleteFirstProductTyep(@RequestBody String json){
         returnMap=new HashMap<String, String>();
         JSONObject object=JSON.parseObject(json);
-        tid=Integer.parseInt((String)object.get("tid"));
+        tid=object.getInteger("tid");
         sign=productTypeService.deleteFirstType(tid);
         if(sign==-1){
             returnMap.put("code","-1");
@@ -54,7 +54,7 @@ public class DeleteProducTypeController {
     public Map<String,String> deleteSecondProdcutType(@RequestBody String json){
         returnMap=new HashMap<String, String>();
         JSONObject object= JSON.parseObject(json);
-        tid=Integer.parseInt((String)object.get("tid"));
+        tid=object.getInteger("tid");
         sign=productTypeService.deleteSecondType(tid);
         if(sign==-1){
             returnMap.put("code","-1");

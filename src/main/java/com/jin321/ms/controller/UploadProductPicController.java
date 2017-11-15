@@ -43,11 +43,13 @@ public class UploadProductPicController {
     @RequestMapping(value = "/productPicUpload",method = RequestMethod.POST)
     public Map<String, String> productPicUpload(HttpServletRequest request,
                                                 @RequestParam("file") CommonsMultipartFile[] file
-                                                ,@RequestParam("header")int header,
-                                                @RequestParam("pid")int pid){
+                                                ,@RequestParam("header")String header,
+                                                @RequestParam("pid")String pid){
+        log.debug("header输出:"+header);
+        log.debug("pid输出"+pid);
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
-        productPicService.productNoHeadPicDelete(pid,UrlUtil.getRealPath(request));
+        productPicService.productNoHeadPicDelete(Integer.parseInt(pid),UrlUtil.getRealPath(request));
         try {
             for (int i=0;i<file.length;i++) {
                 if (!file[i].isEmpty()) {
@@ -57,10 +59,10 @@ public class UploadProductPicController {
                     //使用StreamsAPI方式拷贝文件
                     Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productpics=new Productpics();
-                    productpics.setPid(pid);
+                    productpics.setPid(Integer.parseInt(pid));
                     productpics.setPpicurl("productpics/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productpics.setIsDeleted(false);
-                    if(header==0)
+                    if(Integer.parseInt(header)==0)
                         productPicService.productPicUpdate(productpics);
                     else
                         productPicService.productHeadPicService(productpics);

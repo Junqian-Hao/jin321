@@ -44,11 +44,11 @@ public interface ProductService {
 
     /**
      * 添加合伙人商品
-     * @param pids 批量添加
+     * @param pid 我就加一个
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int setTogetherProduct(List<Integer> pids);
+    int setTogetherProduct(int pid);
 
     /**
      * 删除合伙人商品

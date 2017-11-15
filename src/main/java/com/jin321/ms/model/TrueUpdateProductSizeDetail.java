@@ -2,12 +2,7 @@ package com.jin321.ms.model;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Tyranitarx on 2017/11/6.
- *
- * @Description :查询商品size详细接口
- */
-public class UpdateProductSizeDetail {
+public class TrueUpdateProductSizeDetail {
     private int sid;
 
     private int pid;
@@ -20,9 +15,9 @@ public class UpdateProductSizeDetail {
 
     private BigDecimal pssellprice;
 
-    private int ptypea;
+    private String ptypea;
 
-    private int ptypeb;
+    private String ptypeb;
 
     private String sizename;
 
@@ -93,19 +88,19 @@ public class UpdateProductSizeDetail {
         this.psummary = psummary;
     }
 
-    public int getPtypea() {
+    public String getPtypea() {
         return ptypea;
     }
 
-    public void setPtypea(int ptypea) {
+    public void setPtypea(String ptypea) {
         this.ptypea = ptypea;
     }
 
-    public int getPtypeb() {
+    public String getPtypeb() {
         return ptypeb;
     }
 
-    public void setPtypeb(int ptypeb) {
+    public void setPtypeb(String ptypeb) {
         this.ptypeb = ptypeb;
     }
 }

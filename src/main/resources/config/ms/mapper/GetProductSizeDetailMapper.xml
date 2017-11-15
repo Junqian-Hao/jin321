@@ -8,6 +8,8 @@
         <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
         <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
         <result column="snumber" property="snumber" jdbcType="INTEGER"/>
+        <result column="ptypea" property="ptypea" javaType="INTEGER"/>
+        <result column="ptypeb" property="ptypeb" javaType="INTEGER"/>
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
     </resultMap>
@@ -18,6 +20,8 @@
               product.psummary,
               productsize.sizename,
               productsize.snumber,
+              product.ptypea,
+              product.ptypeb,
               productsize.psoriprice,
               productsize.pssellprice
               FROM

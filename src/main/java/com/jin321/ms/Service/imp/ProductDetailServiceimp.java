@@ -36,6 +36,10 @@ public class ProductDetailServiceimp implements ProductDetailService {
     }
     private List<Productdetail> productdetailsold;
 
+    /**
+     * 删除详情图片
+     * @param pid
+     */
     @Override
     public void productDetailDelete(int pid) {
         ProductdetailExample example=new ProductdetailExample();
@@ -45,7 +49,8 @@ public class ProductDetailServiceimp implements ProductDetailService {
         Iterator<Productdetail> iterator=productdetailsold.iterator();
         while(iterator.hasNext()){
             productdetailold=iterator.next();
-            productdetailMapper.deleteByPrimaryKey(productdetailold.getPdid());
+            productdetailold.setIsDeleted(true);
+            productdetailMapper.updateByPrimaryKey(productdetailold);
         }
     }
 }

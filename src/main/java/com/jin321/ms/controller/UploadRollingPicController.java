@@ -29,46 +29,45 @@ public class UploadRollingPicController {
     @Autowired
     private RollingPicService rollingPicService;
     private Rollingpick rollingpick;
-    private Map<String,String> returnMap;
+    private Map<String, String> returnMap;
     private int sign;
     private UUID uuid;
     private String uuids;
+
     @ResponseBody
     @RequestMapping("/insertRollingPic")
-    public Map<String,String> insertRollingPic(@RequestParam("file")CommonsMultipartFile file,
-                                               @RequestParam("pid") int pid[],
-                                               HttpServletRequest request){
-        returnMap=new HashMap<String, String>();
+    public Map<String, String> insertRollingPic(@RequestParam("file") CommonsMultipartFile[] file,
+                                                @RequestParam("pid") int pid[],
+                                                HttpServletRequest request){
+
+        returnMap = new HashMap<String, String>();
         rollingPicService.deleteAllRollingPic();
-        int i=0;
         try {
-            if (!file.isEmpty()) {
-                uuid = UUID.randomUUID();
-                uuids = uuid.toString();
-                uuids = uuids.replaceAll("-", "");
-                //使用StreamsAPI方式拷贝文件
-                Streams.copy(file.getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request) + "rollingpick/" + uuids + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."))), true);
-                //log.info(UrlUtil.getRealPath(request)+"productdetail\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
-                rollingpick=new Rollingpick();
-                rollingpick.setIsDeleted(false);
-                rollingpick.setPid(pid[0]);
-                i++;
-                rollingpick.setRpicurl("rollingpick/" + uuids + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf(".")));
-                sign=rollingPicService.insertRollingPic(rollingpick);
-            }
-        } catch (IOException e) {
+            for (int i = 0; i < file.length; i++) {
+                    uuid = UUID.randomUUID();
+                    uuids = uuid.toString();
+                    uuids = uuids.replaceAll("-", "");
+                    //使用StreamsAPI方式拷贝文件
+                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request) + "rollingpick/" + uuids + file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    //log.info(UrlUtil.getRealPath(request)+"productdetail\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    rollingpick = new Rollingpick();
+                    rollingpick.setIsDeleted(false);
+                    rollingpick.setPid(pid[i]);
+                    rollingpick.setRpicurl("rollingpick/" + uuids + file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    sign = rollingPicService.insertRollingPic(rollingpick);
+                }
+        } catch (Exception e) {
             //log.info("详情图片上传失败");
             e.printStackTrace();
             returnMap.put("code", "0");
             returnMap.put("msg", "轮播图上传失败");
             return returnMap;
         }
-        if(sign==0){
+        if (sign == 0) {
             returnMap.put("code", "0");
             returnMap.put("msg", "轮播图上传失败");
             return returnMap;
-        }
-        else {
+        } else {
             returnMap.put("code", "1");
             returnMap.put("msg", "轮播图上传成功");
             return returnMap;

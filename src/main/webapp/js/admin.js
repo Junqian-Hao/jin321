@@ -30,7 +30,6 @@ $(function(){
             type:"post",
             contentType:"application/json",
             success: function (res) {
-                console.log(res);
                 for(var i = 0;i<res.length;i++){
                     //pId
                     pId[i] = res[i].pid;
@@ -129,6 +128,25 @@ $(function(){
                     const option = $("<option></option>").text(type1);
                     $("#subType").append(option);
                 }
+                var value = res[0].typename;
+                var data = {
+                    tid:Subtype[value]
+                };
+                $.ajax({
+                    url:"/ms/selectSecondProducttype.do",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:JSON.stringify(data),
+                    success: function (res) {
+                        $("#change-typeb option").remove();
+                        for(var i = 0;i<res.length;i++){
+                            const type1 = res[i].typename;
+                            Supertype[type1] = res[i].tid;
+                            const option = $("<option></option>").text(type1);
+                            $("#change-typeb").append(option);
+                        }
+                    }
+                })
             }
         });
 
@@ -255,6 +273,7 @@ $(function(){
         $(".upload-s-content").css("display","block");
 
         $("#file-input").on("change", function () {
+            fd = new FormData();
             for(var i=0;i<this.files.length;i++){
                 var reader = new FileReader();
                 reader.readAsDataURL(this.files[i]);
@@ -263,7 +282,7 @@ $(function(){
         });
 
         $("#file-btn").on("click", function () {
-            fd.append("pid",$("#file-input").val());
+            fd.append("pid",$("#file-s-id").val());
             fd.append("header",0);
             $.ajax({
                 url:"/ms/productPicUpload.do",
@@ -311,6 +330,105 @@ $(function(){
                     }
                 }
             })
+        });
+
+    });
+
+    //改变商品分类
+    $("#change-type").on("click",function () {
+        $(".item").css("display","none");
+        $(".left-s").css("display","block");
+        $(".change-type-content").css("display","block");
+
+        $.ajax({
+            url:"/ms/getDetail1ByDid.do",
+            type:"post",
+            contentType:"application/json",
+            success:function (res) {
+                for(var i = 0;i<res.length;i++){
+                    var name = res[i].pname;
+                    pId[name] = res[i].pid;
+                    var option = $("<option></option>").html(name);
+                    $("#change-type-id").append(option);
+                }
+            }
+        })
+        $.ajax({
+            url:"/ms/selectAllFirstProducttype.do",
+            type:"post",
+            contentType:"application/json",
+            success:function(res){
+                $("#change-typea option").remove();
+                for(var i = 0;i<res.length;i++){
+                    const type1 = res[i].typename;
+                    Subtype[type1] = res[i].tid;
+                    const option = $("<option></option>").text(type1);
+                    $("#change-typea").append(option);
+                }var value = res[0].typename;
+                var data = {
+                    tid:Subtype[value]
+                };
+                $.ajax({
+                    url:"/ms/selectSecondProducttype.do",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:JSON.stringify(data),
+                    success: function (res) {
+                        $("#change-typeb option").remove();
+                        for(var i = 0;i<res.length;i++){
+                            const type1 = res[i].typename;
+                            Supertype[type1] = res[i].tid;
+                            const option = $("<option></option>").text(type1);
+                            $("#change-typeb").append(option);
+                        }
+                    }
+                })
+
+
+            }
+        });
+
+        //一级分类改变时获取二级分类内容
+        $("#change-typea").on("change", function () {
+            var value = $("#change-typea").val();
+            var data = {
+                tid:Subtype[value]
+            };
+            $.ajax({
+                url:"/ms/selectSecondProducttype.do",
+                type:"POST",
+                contentType:"application/json",
+                data:JSON.stringify(data),
+                success: function (res) {
+                    $("#change-typeb option").remove();
+                    for(var i = 0;i<res.length;i++){
+                        const type1 = res[i].typename;
+                        Supertype[type1] = res[i].tid;
+                        const option = $("<option></option>").text(type1);
+                        $("#change-typeb").append(option);
+                    }
+                }
+            })
+        });
+        $("#change-type-btn").on("click",function () {
+            var value = $("#change-type-id").val();
+            var pid = pId[value];
+            var json = {
+                pid:pid,
+                ptypea:Subtype[$("#change-typea").val()],
+                ptypeb:Supertype[$("#change-typeb").val()]
+            }
+            $.ajax({
+                url:"/ms/updateProductOwnType.do",
+                type:"post",
+                contentType:"application/json",
+                data:JSON.stringify(json),
+                success:function (res) {
+                    if(res.code == 1){
+                        alert("修改成功");
+                    }
+                }
+            });
         });
 
     });

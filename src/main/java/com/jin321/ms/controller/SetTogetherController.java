@@ -1,6 +1,7 @@
 package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,15 +25,16 @@ import java.util.Map;
 public class SetTogetherController {
     @Autowired
     private ProductService productService;
-    private List<Integer> pids;
+    private int pid;
     private Map<String,String> returnMap;
     private int sign;
     @RequestMapping("/setTogether")
     @ResponseBody
     public Map<String,String> setTogether(@RequestBody String json){
         returnMap=new HashMap<String, String>();
-        pids= JSON.parseArray(json,Integer.class);
-        sign=productService.setTogetherProduct(pids);
+        JSONObject object=JSON.parseObject(json);
+        pid= (Integer)object.getInteger("pid");
+        sign=productService.setTogetherProduct(pid);
         if(sign==1){
             returnMap.put("code","1");
             returnMap.put("msg","设置成功");

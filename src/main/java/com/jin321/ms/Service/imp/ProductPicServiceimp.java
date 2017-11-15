@@ -58,9 +58,8 @@ public class ProductPicServiceimp implements ProductPicService {
         Iterator<Productpics> iterator = productpicsold.iterator();
         while (iterator.hasNext()) {
             productpics = iterator.next();
-            productpicsMapper.deleteByPrimaryKey(productpics.getPpid());
-            File file = new File(RealPath + productpics.getPpicurl().replace('/','\\'));
-            file.delete();
+            productpics.setIsDeleted(true);
+            productpicsMapper.updateByPrimaryKey(productpics);
         }
     }
 

@@ -37,7 +37,8 @@ public class RollingPicServiceimp implements RollingPicService {
         Iterator<Rollingpick> iterator=rollingpickList.iterator();
         while(iterator.hasNext()){
             rollingpick= iterator.next();
-            sign=rollingpickMapper.deleteByPrimaryKey(rollingpick.getRpid());
+            rollingpick.setIsDeleted(true);
+            sign=rollingpickMapper.updateByPrimaryKey(rollingpick);
             if(sign==0)
                 return 0;
         }

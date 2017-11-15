@@ -33,6 +33,7 @@ public class DealerServiceimp implements DealerService {
         DealerExample example=new DealerExample();
         DealerExample.Criteria criteria=example.createCriteria();
         criteria.andDnameEqualTo(dealer.getDname());
+        dealer.setIsDeleted(false);
         oldDealer=dealerMapper.selectByExample(example);
         if (oldDealer.size()>0)
             return -1;

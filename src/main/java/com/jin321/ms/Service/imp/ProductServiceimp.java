@@ -129,21 +129,19 @@ public class ProductServiceimp implements ProductService {
 
     /**
      * 增加合伙商品
-     * @param pids
+     * @param pid
      * @return 0无此商品 2更新失败 1设置成功
      */
     @Override
-    public int setTogetherProduct(List<Integer> pids) {
-        Iterator<Integer> iterator=pids.iterator();
-        while (iterator.hasNext()){
-            product=productMapper.selectByPrimaryKey(iterator.next());
+    public int setTogetherProduct(int pid) {
+        product=productMapper.selectByPrimaryKey(pid);
             if (product==null)
                 return 0;
             product.setIsTogether(true);
             if(productMapper.updateByPrimaryKey(product)!=1)
                 return 2;
-        }
-        return 1;
+            else
+                return 1;
     }
 
     @Override

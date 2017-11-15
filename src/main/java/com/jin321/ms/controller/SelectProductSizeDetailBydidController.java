@@ -2,7 +2,8 @@ package com.jin321.ms.controller;
 
 import com.jin321.ms.Service.ProductSizeDetailService;
 
-import com.jin321.ms.model.UpdateProductSizeDetail;
+import com.jin321.ms.model.TrueUpdateProductSizeDetail;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,13 +23,13 @@ import java.util.List;
 public class SelectProductSizeDetailBydidController {
     @Autowired
     private ProductSizeDetailService productSizeDetailService;
-    private List<UpdateProductSizeDetail> productSizeDetailList;
+    private List<TrueUpdateProductSizeDetail> trueUpdateProductSizeDetails;
     private int did;
     @ResponseBody
     @RequestMapping("/getDetail1ByDid")
-    public List<UpdateProductSizeDetail> getPrductSizeDetail(HttpServletRequest request) {
+    public List<TrueUpdateProductSizeDetail> getPrductSizeDetail(HttpServletRequest request) {
         did = (Integer) request.getSession().getAttribute("did");
-        productSizeDetailList = productSizeDetailService.getDetailBydid(did);
-        return productSizeDetailList;
+        trueUpdateProductSizeDetails = productSizeDetailService.getDetailBydid(did);
+        return trueUpdateProductSizeDetails;
     }
 }

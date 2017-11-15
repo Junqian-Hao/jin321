@@ -41,8 +41,8 @@ public class InsertSecondProductTypeController {
     @RequestMapping("/insertSecondProductType")
     public Map<String,String> insertFirstProductType(
             @RequestParam("file")CommonsMultipartFile file,
-            @RequestParam("typename")String typename,
-            @RequestParam("highertid")int highertid,
+            @RequestParam("typename") String typename,
+            @RequestParam("highertid")String highertid,
             HttpServletRequest request) {
         returnMap=new HashMap<String, String>();
         producttype=new Producttype();
@@ -54,10 +54,8 @@ public class InsertSecondProductTypeController {
                 //使用StreamsAPI方式拷贝文件
                 Streams.copy(file.getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request) + "productsecondtype\\" + uuids + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."))), true);
                 //log.info(UrlUtil.getRealPath(request)+"productdetail\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
-                producttype.setTypeclass(2);
-                producttype.setIsDelete(false);
                 producttype.setTypename(typename);
-                producttype.setTid(highertid);
+                producttype.setTid(Integer.parseInt(highertid));
                 producttype.setPicurl(UrlUtil.getRealPath(request) + "productsecondtype\\" + uuids + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf(".")));
                 sign=productTypeService.insertSecondType(producttype);
             }
