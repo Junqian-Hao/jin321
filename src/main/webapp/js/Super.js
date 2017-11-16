@@ -20,7 +20,7 @@ $(function(){
         $(".watch-type").css("display","block");
         //获取一级分类
         $.ajax({
-            url:"/ms/selectAllFirstProducttype.do",
+            url:"/jin321/ms/selectAllFirstProducttype.do",
             type:"post",
             contentType:"application/json",
             success: function (res) {
@@ -35,7 +35,7 @@ $(function(){
                 }
                 //获取对应的二级分类
                 $.ajax({
-                    url:"/ms/selectSecondProducttype.do",
+                    url:"/jin321/ms/selectSecondProducttype.do",
                     type:"post",
                     contentType:"application/json",
                     data: JSON.stringify(json),
@@ -59,7 +59,7 @@ $(function(){
                 tid:typeId[value]
             }
             $.ajax({
-                url:"/ms/selectSecondProducttype.do",
+                url:"/jin321/ms/selectSecondProducttype.do",
                 type:"post",
                 contentType:"application/json",
                 data: JSON.stringify(json),
@@ -87,7 +87,7 @@ $(function(){
                 typename:$("#type-value").val()
             }
             $.ajax({
-                url:"/ms/ insertFirstProductType.do",
+                url:"/jin321/ms/insertFirstProductType.do",
                 type:"post",
                 contentType:"application/json",
                 data:JSON.stringify(json),
@@ -108,7 +108,7 @@ $(function(){
 
         //获取一级分类列表
         $.ajax({
-            url:"/ms/selectAllFirstProducttype.do",
+            url:"/jin321/ms/selectAllFirstProducttype.do",
             type:"post",
             contentType:"application/json",
             success:function(res){
@@ -122,24 +122,26 @@ $(function(){
         });
 
         $("#img-file").on("change", function () {
+            fd = new FormData();
             for(var i=0;i<this.files.length;i++){
                 var reader = new FileReader();
                 reader.readAsDataURL(this.files[i]);
-                fd.append(i,this.files[i]);
+                fd.append("file",this.files[i]);
             }
         });
 
         $("#sub-brands").on("click", function () {
             var value = $("#first-type2").val();
-            var json  ={
-                file:fd,
-                typename:$("#brands").val(),
-                highertid:typeId[value]
-            }
+            fd.append("typename",$("#brands").val());
+            fd.append("highertid",typeId[value]);
+            console.log(fd);
             $.ajax({
-                url:"/ms/ insertFirstProductType.do",
+                url:"/jin321/ms/insertSecondProductType.do",
                 type:"post",
-                data:json,
+                contentType: false,
+                data:fd,
+                processData: false,
+                cache: false,
                 success: function (res) {
                     if(res.code == 1){
                         alert("添加成功");
@@ -161,7 +163,7 @@ $(function(){
                 tid:typeId[value]
             }
             $.ajax({
-                url:"/ms/ deleteFirstProductType.do",
+                url:"/jin321/ms/deleteFirstProductType.do",
                 type:"post",
                 data:JSON.stringify(json),
                 success: function (res) {
@@ -185,7 +187,7 @@ $(function(){
                 tid:typeId2[value]
             }
             $.ajax({
-                url:"/ms/ deleteSecondProductType.do",
+                url:"/jin321/ms/deleteSecondProductType.do",
                 type:"post",
                 data:JSON.stringify(json),
                 success: function (res) {
@@ -206,7 +208,7 @@ $(function(){
 
         //获取商家名
         $.ajax({
-            url:"/ms/ selectAllDealer.do",
+            url:"/jin321/ms/selectAllDealer.do",
             type:"post",
             success: function (res) {
                 for(var i = 0;i<res.length;i++){
@@ -229,7 +231,7 @@ $(function(){
                 sid:$("#delete-common-btn").val()
             }
             $.ajax({
-                url:"/ms/deleteProductSize.do",
+                url:"/jin321/ms/deleteProductSize.do",
                 type:"post",
                 data:JSON.stringify(json),
                 success: function (res) {
@@ -254,7 +256,7 @@ $(function(){
         $("#parents-table").remove();
 
         $.ajax({
-            url:"/ms/firstRequest.do",
+            url:"/jin321/ms/firstRequest.do",
             type:"post",
             success: function (res) {
                 var data = res.products;
@@ -285,7 +287,7 @@ $(function(){
             var arr = [];
             arr[0] = $("#add-parents-text").val();
             $.ajax({
-                url:"/ms/ setTogether.do",
+                url:"/jin321/ms/setTogether.do",
                 type:"post",
                 data:arr,
                 success: function (res) {
@@ -312,7 +314,7 @@ $(function(){
 
         //获取商家信息
         $.ajax({
-            url:"/ms/selectAllDealer.do",
+            url:"/jin321/ms/selectAllDealer.do",
             type:"post",
             success: function (res) {
                 for(var i = 0;i<res.length;i++){
@@ -352,7 +354,7 @@ $(function(){
                 dpower:"dealer"
             }
             $.ajax({
-                url:"/ ms/insertDealer.do",
+                url:"/jin321/ms/insertDealer.do",
                 type:"post",
                 data:JSON.stringify(json),
                 success: function (res) {
@@ -395,7 +397,7 @@ $(function(){
                 pid:arr
             }
             $.ajax({
-                url:"/ms/insertRollingPic",
+                url:"/jin321/ms/insertRollingPic",
                 type:"post",
                 data:json,
                 success: function (res) {

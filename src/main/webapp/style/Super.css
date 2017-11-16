@@ -9,6 +9,7 @@ ul li{
 
 .header{
     width: 80%;
+    height:20px;
     margin: 0 auto;
 }
 
@@ -36,4 +37,13 @@ table{
 td{
     border: 1px solid #000;
     text-align: center;
+}
+
+.item{
+    display: none;
+}
+
+.header li{
+    float: left;
+    margin: 0 20px;
 }

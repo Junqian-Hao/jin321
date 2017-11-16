@@ -26,7 +26,7 @@ $(function(){
         $(".s-info-tr").remove();
         //获取商家商品的信息
         $.ajax({
-            url:"/ms/getDetail1ByDid.do",
+            url:"/jin321/ms/getDetail1ByDid.do",
             type:"post",
             contentType:"application/json",
             success: function (res) {
@@ -90,7 +90,7 @@ $(function(){
                         snumber:snumber
                     }
                     $.ajax({
-                       url:"/ms/updateProduct.do",
+                        url:"/jin321/ms/updateProduct.do",
                         type:"post",
                         contentType:"application/json",
                         data:JSON.stringify(json),
@@ -117,7 +117,7 @@ $(function(){
 
         //获取一级分类内容
         $.ajax({
-            url:"/ms/selectAllFirstProducttype.do",
+            url:"/jin321/ms/selectAllFirstProducttype.do",
             type:"post",
             contentType:"application/json",
             success:function(res){
@@ -133,7 +133,7 @@ $(function(){
                     tid:Subtype[value]
                 };
                 $.ajax({
-                    url:"/ms/selectSecondProducttype.do",
+                    url:"/jin321/ms/selectSecondProducttype.do",
                     type:"POST",
                     contentType:"application/json",
                     data:JSON.stringify(data),
@@ -157,7 +157,7 @@ $(function(){
                 tid:Subtype[value]
             };
             $.ajax({
-                url:"/ms/selectSecondProducttype.do",
+                url:"/jin321/ms/selectSecondProducttype.do",
                 type:"POST",
                 contentType:"application/json",
                 data:JSON.stringify(data),
@@ -221,7 +221,7 @@ $(function(){
                 productsizes:arr
             };
             $.ajax({
-                url:"/ms/insertProduct.do",
+                url:"/jin321/ms/insertProduct.do",
                 type:"post",
                 contentType:"application/json",
                 data:JSON.stringify(json),
@@ -249,7 +249,7 @@ $(function(){
                 sid:$("#delete-s-id").val()
             }
             $.ajax({
-                url:"/ms/deleteProductSize.do",
+                url:"/jin321/ms/deleteProductSize.do",
                 type:"post",
                 contentType:"application/json",
                 data:JSON.stringify(data),
@@ -277,7 +277,7 @@ $(function(){
             for(var i=0;i<this.files.length;i++){
                 var reader = new FileReader();
                 reader.readAsDataURL(this.files[i]);
-                fd.append("file",this.files[i]);　　　　　　　　　
+                fd.append("file",this.files[i]);
             }
         });
 
@@ -285,7 +285,7 @@ $(function(){
             fd.append("pid",$("#file-s-id").val());
             fd.append("header",0);
             $.ajax({
-                url:"/ms/productPicUpload.do",
+                url:"/jin321/ms/productPicUpload.do",
                 type:"post",
                 contentType: false,
                 data:fd,
@@ -321,7 +321,7 @@ $(function(){
                 multipartFile:fdDeatil
             }
             $.ajax({
-                url:"/ms/ productDetailUpload.do",
+                url:"/jin321/ms/ productDetailUpload.do",
                 type:"post",
                 data:json,
                 success: function (res) {
@@ -341,7 +341,7 @@ $(function(){
         $(".change-type-content").css("display","block");
 
         $.ajax({
-            url:"/ms/getDetail1ByDid.do",
+            url:"/jin321/ms/getDetail1ByDid.do",
             type:"post",
             contentType:"application/json",
             success:function (res) {
@@ -354,7 +354,7 @@ $(function(){
             }
         })
         $.ajax({
-            url:"/ms/selectAllFirstProducttype.do",
+            url:"/jin321/ms/selectAllFirstProducttype.do",
             type:"post",
             contentType:"application/json",
             success:function(res){
@@ -369,7 +369,7 @@ $(function(){
                     tid:Subtype[value]
                 };
                 $.ajax({
-                    url:"/ms/selectSecondProducttype.do",
+                    url:"/jin321/ms/selectSecondProducttype.do",
                     type:"POST",
                     contentType:"application/json",
                     data:JSON.stringify(data),
@@ -395,7 +395,7 @@ $(function(){
                 tid:Subtype[value]
             };
             $.ajax({
-                url:"/ms/selectSecondProducttype.do",
+                url:"/jin321/ms/selectSecondProducttype.do",
                 type:"POST",
                 contentType:"application/json",
                 data:JSON.stringify(data),
@@ -419,7 +419,7 @@ $(function(){
                 ptypeb:Supertype[$("#change-typeb").val()]
             }
             $.ajax({
-                url:"/ms/updateProductOwnType.do",
+                url:"/jin321/ms/updateProductOwnType.do",
                 type:"post",
                 contentType:"application/json",
                 data:JSON.stringify(json),
