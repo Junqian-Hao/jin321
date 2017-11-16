@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  *
  * @Description :插入Product并获取其主键自增值
  */
-@Repository("InsertProductMapper")
+@Repository
 public interface InsertProductMapper {
     int insertProduct(Product product);
 }

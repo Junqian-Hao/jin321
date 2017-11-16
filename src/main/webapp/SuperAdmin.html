@@ -32,7 +32,7 @@
             <div class="parents-manage item">
                 <ul>
                     <li id="watch-common">查看普通商品</li>
-                    <li id="delete-common">删除普通商品</li>
+                    <!--<li id="delete-common">删除普通商品</li>-->
                     <li id="watch-parents">查看合伙人商品</li>
                     <li id="add-parents">添加合伙人商品</li>
                 </ul>
@@ -41,7 +41,7 @@
                 <ul>
                     <li id="watch-merchant">查看商家</li>
                     <li id="add-merchant">添加商家</li>
-                    <li id="delete-merchant">删除商家</li>
+                    <!--<li id="delete-merchant">删除商家</li>-->
                 </ul>
             </div>
             <div class="lun-img item">
@@ -56,12 +56,10 @@
             <!-- 查看分类 -->
             <div class="watch-type item">
                 <select id="first-type">
-                    <option>书</option>
-                    <option>书</option>
+
                 </select>
                 <select id="second-type">
-                    <option>书</option>
-                    <option>书</option>
+
                 </select>
             </div>
             <!-- 添加分类 -->
@@ -89,22 +87,40 @@
             </div>
             <!-- 删除品牌 -->
             <div class="delete-brands item">
-                <label>请输入删除的品牌</label>
-                <input type="text" id="delete-b">
+                <label>请选择删除的品牌</label>
+                <select id="delete-typea">
+
+                </select>
+                <select id="delete-typeb">
+
+                </select>
                 <button id="delete-b-btn">确定</button>
             </div>
-            <!-- 查看普通商品（未完成）-->
-            <div class="watch-common-s item">
+            <!-- 查看普通商品-->
+            <div class="watch-common-content item">
                 <select id="common-s-select">
 
                 </select>
+                <table id="watch-common-table">
+                    <tr>
+                        <td>id</td>
+                        <td>名称</td>
+                        <td>介绍</td>
+                        <td>规格</td>
+                        <td>分类</td>
+                        <td>品牌</td>
+                        <td>原价</td>
+                        <td>售价</td>
+                        <td>剩余数量</td>
+                    </tr>
+                </table>
             </div>
             <!-- 删除普通商品 -->
-            <div class="delete-common-s item">
-                <label>请输入商品id</label>
-                <input type="text" id="delete-common-text">
-                <button id="delete-common-btn">删除</button>
-            </div>
+            <!--<div class="delete-common-s item">-->
+                <!--<label>请输入商品id</label>-->
+                <!--<input type="text" id="delete-common-text">-->
+                <!--<button id="delete-common-btn">删除</button>-->
+            <!--</div>-->
             <!-- 查看合伙人商品 -->
             <div class="watch-content item">
                 <table id="parents-table">
