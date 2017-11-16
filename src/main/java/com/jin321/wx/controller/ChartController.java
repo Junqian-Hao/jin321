@@ -62,7 +62,7 @@ public class ChartController {
     @ResponseBody
     public Map<String, Object> deleteChart(@RequestBody Map<String, String> re) throws Exception {
         HashMap<String, Object> map = new HashMap<String, Object>();
-        log.info("删除购物车");
+        log.info("删除购物车->"+re.get("chartid"));
         boolean b = chartService.deleteChart(Integer.parseInt(re.get("chartid")));
         if (b) {
             map.put("code", 1);
@@ -85,7 +85,7 @@ public class ChartController {
     @ResponseBody
     public Map<String, Object> updateChartPnumber(@RequestBody Map<String, String> re) throws Exception {
         HashMap<String, Object> map = new HashMap<String, Object>();
-        log.info("修改购物车");
+        log.info("修改购物车->"+re.get("chartid"));
         boolean b = chartService.updateChartPnumber(Integer.parseInt(re.get("chartid")),Integer.parseInt(re.get("pnumber")));
         if (b) {
             map.put("code", 1);
@@ -109,7 +109,7 @@ public class ChartController {
     @ResponseBody
     public Map<String, Object> selectChartByUserId(@RequestBody Map<String, String> re, HttpServletRequest request) throws Exception {
         HashMap<String, Object> map = new HashMap<String, Object>();
-        log.info("查询购物车信息购物车");
+        log.info("查询购物车信息购物车->"+re.get("uid"));
         List<DealerDetail> uid = chartService.selectChartByUserId(re.get("uid"));
         map.put("baseUrl", UrlUtil.getBasePathNoPort(request));
         map.put("chartDetail", uid);

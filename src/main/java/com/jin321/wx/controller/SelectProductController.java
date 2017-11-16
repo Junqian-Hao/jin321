@@ -1,5 +1,6 @@
 package com.jin321.wx.controller;
 
+import com.jin321.pl.utils.StringUtil;
 import com.jin321.wx.model.ProductPo;
 import com.jin321.wx.service.SelectProductService;
 import org.apache.commons.logging.Log;
@@ -31,7 +32,10 @@ public class SelectProductController {
         log.info("搜索商品");
         String key = rq.get("key");
         String code = rq.get("code");
-        log.info("key->"+key);
+        log.info("key->"+key+"code->"+code);
+        if (StringUtil.isNullString(code)) {
+            code = "0";
+        }
         List<ProductPo> productPos = selectProductService.selectProductBykey(key,code);
         return productPos;
     }

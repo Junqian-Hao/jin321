@@ -333,7 +333,7 @@ $(function(){
                 contentType:"application/json",
                 success:function (res) {
                     for(var i = 0;i<res.length;i++){
-                        var tr = $("<tr></tr>");
+                        var tr = $("<tr class='watch-common-tr'></tr>");
                         //id
                         const tdId = $("<td class='s-id'></td>").html(res[i].sid);
                         //名称
@@ -355,6 +355,12 @@ $(function(){
                         $(tr).append(tdId,tdName,tdPsummary,tdSize,tdPtypea,tdPtypeb,tdPsoriprice,tdPssellprice,tdSnumber,tdSnumber);
                         $("#watch-common-table").append(tr);
                     }
+                    setTimeout(function () {
+                        var len = $(".watch-common-tr").length;
+                        if(res.length<len){
+                            $("#watch-common").trigger("click");
+                        }
+                    },500)
                 }
             });
         });
@@ -388,7 +394,9 @@ $(function(){
     $("#parents-manage").on("click", function () {
         $(".item").css("display","none");
         $(".parents-manage").css("display","block");
+        $(".parents-tr").remove();
         $("#watch-common").trigger("click");
+
     });
 
     $("#watch-parents").on("click", function () {
@@ -401,6 +409,7 @@ $(function(){
             url:"/jin321/ms/firstRequest.do",
             type:"post",
             success: function (res) {
+                $(".parents-tr").remove();
                 var data = res.productPos;
                 for(var i = 0;i<data.length;i++){
                     var tr = $("<tr class='parents-tr'></tr>");
@@ -415,6 +424,12 @@ $(function(){
                     $(tr).append(tdId,tdName,tdo,tdnew);
                     $("#parents-table").append(tr);
                 }
+                var len = $(".parents-tr").length;
+                setTimeout(function () {
+                    if(res.productPos.length<len){
+                        $("#watch-common").trigger("click");
+                    }
+                },500);
             }
         })
     });
@@ -447,6 +462,7 @@ $(function(){
     $("#merchant-manage").on("click", function () {
         $(".item").css("display","none");
         $(".merchant-mange").css("display","block");
+        $(".watch-merchant-tr").remove();
         $("#watch-merchant").trigger("click");
     });
 
@@ -455,7 +471,7 @@ $(function(){
         $(".item").css("display","none");
         $(".merchant-mange").css("display","block");
         $(".watch-merchant").css("display","block");
-        $(".watch-merchant--tr").remove();
+        $(".watch-merchant-tr").remove();
 
         //获取商家信息
         $.ajax({
@@ -463,7 +479,7 @@ $(function(){
             type:"post",
             success: function (res) {
                 for(var i = 0;i<res.length;i++){
-                    var tr = $("<tr class='watch-merchant--tr'></tr>");
+                    var tr = $("<tr class='watch-merchant-tr'></tr>");
                     //ID
                     var tdId = $("<td></td>").html(res[i].did);
                     //商家名字
@@ -479,6 +495,13 @@ $(function(){
                     $(tr).append(tdId,tdName,tdUsername,tdPwd,tdPhonenum,tdAddress);
                     $("#watch-merchant-table").append(tr);
                 }
+                setTimeout(function () {
+                    var len = $(".watch-merchant-tr").length;
+                    if(res.length<len){
+                        $("#watch-merchant").trigger("click");
+                        console.log("a");
+                    }
+                },500);
             }
         })
     });

@@ -20,15 +20,16 @@ import java.util.List;
  * @Description :查询商品类别的实现类
  */
 @Service("typeService")
-public class TypeServiceImp  implements TypeService {
+public class TypeServiceImp implements TypeService {
     private static final Log log = LogFactory.getLog(TypeServiceImp.class);
     @Autowired
     ProducttypeMapper producttypeMapper;
     @Autowired
     ProductPoMapper productPoMapper;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<Producttype> selectAllFirstProducttype() throws Exception{
+    public List<Producttype> selectAllFirstProducttype() throws Exception {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andTypeclassEqualTo(1);
@@ -48,8 +49,15 @@ public class TypeServiceImp  implements TypeService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<ProductPo> selectProductByptypeb(int ptypeb) throws Exception {
-        List<ProductPo> productPos = productPoMapper.selectNowByPtypeb(ptypeb);
+    public List<ProductPo> selectProductByptypeb(int ptypeb, String code) throws Exception {
+        List<ProductPo> productPos = null;
+        if (code.equals("0")) {
+            log.debug("通过销量排序");
+            productPos = productPoMapper.selectNowByPtypebByPsellnum(ptypeb);
+        } else {
+            log.debug("通过价格排序");
+            productPos = productPoMapper.selectNowByPtypebByPrice(ptypeb);
+        }
         return productPos;
     }
 }

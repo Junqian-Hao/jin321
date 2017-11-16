@@ -34,7 +34,7 @@ public class DistrictController {
     @RequestMapping("/selectNextDistrict")
     @ResponseBody
     public List<District> selectNextDistrict(@RequestBody Map<String, String> re) throws Exception {
-        log.info("行政区划查询");
+        log.info("行政区划查询->"+re.get("cid"));
         String cpaid = re.get("cid");
         List<District> districts = districtService.selectNextDistrict(Integer.parseInt(cpaid));
         return districts;

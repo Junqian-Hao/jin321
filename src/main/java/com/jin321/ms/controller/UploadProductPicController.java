@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import sun.net.util.URLUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
@@ -57,7 +56,7 @@ public class UploadProductPicController {
                     uuids=uuid.toString();
                     uuids=uuids.replaceAll("-","");
                     //使用StreamsAPI方式拷贝文件
-                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productpics=new Productpics();
                     productpics.setPid(Integer.parseInt(pid));
                     productpics.setPpicurl("productpics/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));

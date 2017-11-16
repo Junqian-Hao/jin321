@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @Author hao
  * @Date 2017/10/11 18:23
- * @Description :
+ * @Description :订单控制器
  */
 @Controller
 @RequestMapping("/wx")
@@ -30,7 +30,7 @@ public class OrderformController {
     @RequestMapping("/insertOrder")
     @ResponseBody
     public Map<String, Object> insertOrder(@RequestBody OrderformDetail orderformDetail) throws Exception {
-        log.info("下单");
+        log.info("下单->"+orderformDetail);
         HashMap<String, Object> map = new HashMap<String, Object>();
         boolean b = orderformService.insertOrder(orderformDetail);
         if (b) {
@@ -46,7 +46,7 @@ public class OrderformController {
     @RequestMapping("/selectOrderformByuid")
     @ResponseBody
     public List<OrderformProductDetail> selectOrderformByuid(@RequestBody OrderformDetail orderformDetail) throws Exception {
-        log.info("查询订单");
+        log.info("查询订单->"+orderformDetail.getUid());
         List<OrderformProductDetail> orderformProductDetails = orderformService.selectOrderByuid(orderformDetail.getUid());
         return orderformProductDetails;
     }

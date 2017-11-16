@@ -22,10 +22,17 @@ public interface ProductPoMapper {
     List<ProductPo> selectAllNowTogether();
 
     /**
-     *根据二级标签id查询未删除的商品
+     *根据二级标签id查询未删除的商品根据销量排序
      * @return
      */
-    List<ProductPo> selectNowByPtypeb(int ptypeb);
+    List<ProductPo> selectNowByPtypebByPsellnum(int ptypeb);
+
+    /**
+     * 根据二级标签id查询未删除的商品根据价格排序
+     * @param ptypeb
+     * @return
+     */
+    List<ProductPo> selectNowByPtypebByPrice(int ptypeb);
 
     /**
      * 通过关键字模糊搜索商品,价格升序排列

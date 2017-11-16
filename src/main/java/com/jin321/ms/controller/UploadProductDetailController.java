@@ -4,10 +4,6 @@ import com.jin321.ms.Service.ProductDetailService;
 import com.jin321.pl.model.Productdetail;
 import com.jin321.pl.utils.UrlUtil;
 import org.apache.commons.fileupload.util.Streams;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +17,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -52,11 +50,11 @@ public class UploadProductDetailController {
                     uuids=uuid.toString();
                     uuids=uuids.replaceAll("-","");
                     //使用StreamsAPI方式拷贝文件
-                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productdetail\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productdetail/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productdetail=new Productdetail();
                     productdetail.setPid(1);
                     productdetail.setPicurl("productdetail/"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
-                    log.info(UrlUtil.getRealPath(request)+"productdetail\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    log.info(UrlUtil.getRealPath(request)+"productdetail/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productdetail.setIsDeleted(false);
                     productDetailService.productDetailUpdate(productdetail);
                 }

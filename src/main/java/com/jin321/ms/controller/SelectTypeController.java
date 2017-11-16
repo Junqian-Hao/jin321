@@ -47,7 +47,7 @@ public class SelectTypeController {
     public List<ProductPo> selectProductByptypeb(@RequestBody Map<String, String> re) throws Exception {
         String ptypeb = re.get("ptypeb");
         log.info("通过二级标签id查询下属商品");
-        List<ProductPo> producttypes = typeService.selectProductByptypeb(Integer.parseInt(ptypeb));
+        List<ProductPo> producttypes = typeService.selectProductByptypeb(Integer.parseInt(ptypeb),"0");
         return producttypes;
     }
 }

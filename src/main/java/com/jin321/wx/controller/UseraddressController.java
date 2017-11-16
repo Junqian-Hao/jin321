@@ -37,6 +37,7 @@ public class UseraddressController {
     @RequestMapping("/insertUseraddress")
     @ResponseBody
     public Map<String, Object> insertUseraddress(@RequestBody Useraddress useraddress, HttpServletRequest request) throws Exception {
+        log.info("添加用户收货地址->"+useraddress);
         HashMap<String, Object> map = new HashMap<String, Object>();
         boolean b = useraddressService.insertUseraddress(useraddress);
         if (b) {
@@ -59,6 +60,7 @@ public class UseraddressController {
     @RequestMapping("/deleteUseraddressByid")
     @ResponseBody
     public Map<String, Object> deleteUseraddressByid(@RequestBody Map<String, String> re, HttpServletRequest request) throws Exception {
+        log.info("根据uaid删除用户收货地址->"+re.get("uaid"));
         String uaid = re.get("uaid");
         HashMap<String, Object> map = new HashMap<String, Object>();
         boolean b = useraddressService.deleteUseraddressByid(Integer.parseInt(uaid));
@@ -82,6 +84,7 @@ public class UseraddressController {
     @RequestMapping("/updateUseraddressByid")
     @ResponseBody
     public Map<String, Object> updateUseraddressByid(@RequestBody Useraddress useraddress, HttpServletRequest request) throws Exception {
+        log.info("根据uaid更新收货地址->"+useraddress);
         HashMap<String, Object> map = new HashMap<String, Object>();
         boolean b = useraddressService.updateUseraddressByid(useraddress);
         if (b) {
@@ -104,6 +107,7 @@ public class UseraddressController {
     @RequestMapping("/selectUseraddressByuid")
     @ResponseBody
     public Map<String, Object> selectUseraddressByuid(@RequestBody Map<String, String> re, HttpServletRequest request) throws Exception {
+        log.info("根据uid查询收货地址->"+re.get("uid"));
         String uid = re.get("uid");
         HashMap<String, Object> map = new HashMap<String, Object>();
         List<Useraddress> useraddresses = useraddressService.selectUseraddressByuid(uid);
