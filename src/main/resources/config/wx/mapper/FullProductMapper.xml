@@ -11,7 +11,7 @@
         <result column="ptypeb" property="ptypeb" jdbcType="INTEGER" />
         <result column="ptypec" property="ptypec" jdbcType="INTEGER" />
         <result column="is_together" property="isTogether" jdbcType="BIT" />
-        <result column="is_delete" property="isDelete" jdbcType="BIT" />
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
         <collection property="productsizeList" ofType="productsize">
             <id column="sid" property="sid" jdbcType="INTEGER"/>
             <result column="pscost" property="pscost" jdbcType="DECIMAL"/>
