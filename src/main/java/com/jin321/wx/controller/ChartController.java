@@ -25,7 +25,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/wx")
 public class ChartController {
-    private static final Log log = LogFactory.getLog(ChartController.class);
+        private static final Log log = LogFactory.getLog(ChartController.class);
     @Autowired
     ChartService chartService;
 

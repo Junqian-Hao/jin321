@@ -34,7 +34,7 @@ public class SelectTogetherTimeController {
     public Map<String, Object> firstRequest(HttpServletRequest request) throws Exception {
         log.info("请求首页信息");
         Map<String, Object> firstPageMessage = firstPageService.getFirstPageMessage();
-        firstPageMessage.put("basePath", "https://www.haojunqian.cn/jin321/");
+        firstPageMessage.put("basePath", "https://www.jin321.cn/jin321/");
         return firstPageMessage;
     }
 

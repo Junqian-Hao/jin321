@@ -37,7 +37,7 @@ public class FullProductController {
         String pid = re.get("pid");
         log.info("通过id查询商品信息，商品id"+pid);
         FullProduct fullProduct = fullProductService.selectFullProductById(Integer.parseInt(pid));
-        fullProduct.setBasePathNoPort("https://www.haojunqian.cn/jin321/");
+        fullProduct.setBasePathNoPort("https://www.jin321.cn/jin321/");
         return fullProduct;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class DeleteProductPicController {
     @RequestMapping("/deleteProductPics")
     @ResponseBody
     public Map<String,String>  deleteProductPics(@RequestBody String json){
+        returnMap=new HashMap<String, String>();
         piclist= JSON.parseArray(json,Integer.class);
         sign=productPicService.productPicDelete(piclist);
         if(sign==1){

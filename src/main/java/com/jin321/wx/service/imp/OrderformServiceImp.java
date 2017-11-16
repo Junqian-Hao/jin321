@@ -105,7 +105,7 @@ public class OrderformServiceImp implements OrderformService{
             return false;
         }
         //通知后台
-        String url = "https://www.haojunqian.cn/ms/getpaybackevent";
+        String url = "https://www.jin321.cn/ms/getpaybackevent";
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("oid", String.valueOf(oid))

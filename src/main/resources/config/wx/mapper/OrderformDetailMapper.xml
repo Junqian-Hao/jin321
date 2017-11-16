@@ -100,12 +100,9 @@
             LEFT JOIN product ON orderformproduct.pid = product.pid
             LEFT JOIN productsize ON orderformproduct.sid = productsize.sid
             LEFT JOIN productpics ON orderformproduct.pid = productpics.pid
-        WHERE orderform.uid = 1
+        WHERE orderform.uid = #{uid}
               AND orderform.oid = orderformproduct.oid
-              AND productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
-              AND product.`is_delete` = 0
               AND productsize.`is_deleted` = 0
-
     </select>
 </mapper>
