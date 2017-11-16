@@ -70,7 +70,7 @@ public class InsertSecondProductTypeController {
         }
         if(sign==-1){
             returnMap.put("code", "-1");
-            returnMap.put("msg", "分类已存在");
+            returnMap.put("msg", "品牌已存在");
             return returnMap;
         }
         else if(sign==0){
