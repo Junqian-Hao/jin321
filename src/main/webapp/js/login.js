@@ -28,7 +28,7 @@ $(function(){
                 if(res.code == 4){
                     window.location = "admin.html";
                 }else if(res.code == 6){
-                    window.location = "admin.html";
+                    window.location = "SuperAdmin.html";
                 }
             }
         });

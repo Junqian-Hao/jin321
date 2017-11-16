@@ -90,7 +90,7 @@ $(function(){
                         snumber:snumber
                     }
                     $.ajax({
-                       url:"/jin321/ms/updateProduct.do",
+                        url:"/jin321/ms/updateProduct.do",
                         type:"post",
                         contentType:"application/json",
                         data:JSON.stringify(json),
@@ -133,7 +133,7 @@ $(function(){
                     tid:Subtype[value]
                 };
                 $.ajax({
-                    url:"/ms/selectSecondProducttype.do",
+                    url:"/jin321/ms/selectSecondProducttype.do",
                     type:"POST",
                     contentType:"application/json",
                     data:JSON.stringify(data),
@@ -277,7 +277,7 @@ $(function(){
             for(var i=0;i<this.files.length;i++){
                 var reader = new FileReader();
                 reader.readAsDataURL(this.files[i]);
-                fd.append("file",this.files[i]);　　　　　　　　　
+                fd.append("file",this.files[i]);
             }
         });
 
@@ -321,7 +321,7 @@ $(function(){
                 multipartFile:fdDeatil
             }
             $.ajax({
-                url:"/jin321/ms/productDetailUpload.do",
+                url:"/jin321/ms/ productDetailUpload.do",
                 type:"post",
                 data:json,
                 success: function (res) {
@@ -341,7 +341,7 @@ $(function(){
         $(".change-type-content").css("display","block");
 
         $.ajax({
-            url:"/ms/getDetail1ByDid.do",
+            url:"/jin321/ms/getDetail1ByDid.do",
             type:"post",
             contentType:"application/json",
             success:function (res) {
@@ -354,7 +354,7 @@ $(function(){
             }
         })
         $.ajax({
-            url:"/ms/selectAllFirstProducttype.do",
+            url:"/jin321/ms/selectAllFirstProducttype.do",
             type:"post",
             contentType:"application/json",
             success:function(res){
@@ -369,7 +369,7 @@ $(function(){
                     tid:Subtype[value]
                 };
                 $.ajax({
-                    url:"/ms/selectSecondProducttype.do",
+                    url:"/jin321/ms/selectSecondProducttype.do",
                     type:"POST",
                     contentType:"application/json",
                     data:JSON.stringify(data),
@@ -395,7 +395,7 @@ $(function(){
                 tid:Subtype[value]
             };
             $.ajax({
-                url:"/ms/selectSecondProducttype.do",
+                url:"/jin321/ms/selectSecondProducttype.do",
                 type:"POST",
                 contentType:"application/json",
                 data:JSON.stringify(data),
@@ -419,7 +419,7 @@ $(function(){
                 ptypeb:Supertype[$("#change-typeb").val()]
             }
             $.ajax({
-                url:"/ms/updateProductOwnType.do",
+                url:"/jin321/ms/updateProductOwnType.do",
                 type:"post",
                 contentType:"application/json",
                 data:JSON.stringify(json),
