@@ -1,6 +1,7 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductTypeService;
+import com.jin321.ms.model.TrueProductType;
 import com.jin321.pl.dao.ProducttypeMapper;
 
 import com.jin321.pl.model.Producttype;
@@ -8,8 +9,7 @@ import com.jin321.pl.model.ProducttypeExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Tyranitarx on 2017/11/5.
@@ -84,5 +84,30 @@ public class ProductTypeServiceimp implements ProductTypeService {
        }
        else
            return -1;
+    }
+    private List<Producttype> producttypeList;
+    private TrueProductType trueProductType;
+    private List<TrueProductType> trueProductTypeList;
+    @Override
+    public List<TrueProductType> getAllTypes() {
+        trueProductTypeList=new ArrayList<TrueProductType>();
+        ProducttypeExample producttypeExample=new ProducttypeExample();
+        ProducttypeExample.Criteria criteria=producttypeExample.createCriteria();
+        criteria.andTypeclassEqualTo(1);
+        producttypeList=producttypeMapper.selectByExample(producttypeExample);
+        Iterator<Producttype> iterator=producttypeList.iterator();
+        while (iterator.hasNext()) {
+            trueProductType=new TrueProductType();
+            producttype = iterator.next();
+            ProducttypeExample producttypeExample1=new ProducttypeExample();
+            ProducttypeExample.Criteria criteria1=producttypeExample1.createCriteria();
+            criteria1.andTypeclassEqualTo(2);
+            criteria1.andHighertidEqualTo(producttype.getTid());
+            secondbyfirsttidlist=producttypeMapper.selectByExample(producttypeExample1);
+            trueProductType.setProducttype1(producttype);
+            trueProductType.setProducttype2List(secondbyfirsttidlist);
+            trueProductTypeList.add(trueProductType);
+        }
+        return trueProductTypeList;
     }
 }

@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Tyranitarx on 2017/11/6.
  *
- * @Description :样例json{"sid":"xxx"}
+ * @Description :样例json{"123","123","123"}
  */
 @Controller
 @RequestMapping("/ms")
@@ -26,16 +28,15 @@ public class DeleteProductSizeDetailController {
     @Autowired
     private ProductSizeDetailService productSizeDetailService;
     private Map<String,String> returnMap;
-    private int sid;
+    private List<Integer> sidlist;
     private int sign;
     @ResponseBody
     @RequestMapping("/deleteProductSize")
     public Map<String,String> deleteProductSize(@RequestBody String json){
         log.debug("传来的json为："+json);
         returnMap=new HashMap<String, String>();
-        JSONObject object= JSON.parseObject(json);
-        sid=object.getInteger("sid");
-        sign=productSizeDetailService.deleteDetail(sid);
+        sidlist=JSON.parseArray(json,Integer.class);
+        sign=productSizeDetailService.deleteDetail(sidlist);
         if(sign==-1){
             returnMap.put("code","-1");
             returnMap.put("msg","不存在此规格");
@@ -46,13 +47,8 @@ public class DeleteProductSizeDetailController {
             returnMap.put("msg","删除失败");
             return returnMap;
         }
-        else if(sign==4){
-            returnMap.put("code","4");
-            returnMap.put("msg","Product删除成功");
-            return returnMap;
-        }
-        else if(sign==5){
-            returnMap.put("code","5");
+        else if(sign==2){
+            returnMap.put("code","2");
             returnMap.put("msg","不存在规格对应的Product");
             return returnMap;
         }

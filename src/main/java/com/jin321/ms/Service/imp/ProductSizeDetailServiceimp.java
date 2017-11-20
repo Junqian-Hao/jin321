@@ -91,33 +91,38 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
             return -1;
     }
     private int sign;
+    private int sid;
 
     /**
      * 删除商品款式接口
-     * @param sid 款式id
-     * @return 1 成功删除 0 删除失败 -1无此款式 4商品无款式自动删除 5无款式对应商品
+     * @param sidlist 款式id
+     * @return 1 成功删除 0 删除失败 -1无此款式 2无商品
      */
     @Override
-    public int deleteDetail(int sid) {
-        productsize=productsizeMapper.selectByPrimaryKey(sid);
-        if(productsize!=null){
-            productsize.setIsDeleted(true);
-            ProductsizeExample example=new ProductsizeExample();
-            ProductsizeExample.Criteria criteria=example.createCriteria();
-            criteria.andPidEqualTo(productsize.getPid());
-            if(productsizeMapper.selectByExample(example).size()==0){
-                product=productMapper.selectByPrimaryKey(productsize.getPid());
-                if (product!=null){
-                    product.setIsDelete(1);
-                    productMapper.updateByPrimaryKey(product);
-                    productsizeMapper.updateByPrimaryKey(productsize);
-                    return 4;
+    public int deleteDetail(List<Integer> sidlist) {
+        Iterator<Integer> iterator=sidlist.iterator();
+        while (iterator.hasNext()) {
+            sid= iterator.next();
+            productsize=productsizeMapper.selectByPrimaryKey(sid);
+            if(productsize!=null){
+                productsize.setIsDeleted(true);
+                ProductsizeExample example=new ProductsizeExample();
+                ProductsizeExample.Criteria criteria=example.createCriteria();
+                criteria.andPidEqualTo(productsize.getPid());
+                if(productsizeMapper.selectByExample(example).size()==0){
+                    product=productMapper.selectByPrimaryKey(productsize.getPid());
+                    if (product!=null){
+                        product.setIsDelete(1);
+                        productMapper.updateByPrimaryKey(product);
+                        sign=productsizeMapper.updateByPrimaryKey(productsize);
+                    }
+                    else
+                        return 2;
                 }
-                else
-                    return 5;
+                sign=productsizeMapper.updateByPrimaryKey(productsize);
             }
-            return productsizeMapper.updateByPrimaryKey(productsize);
+            return -1;
         }
-        return -1;
+        return sign;
     }
 }

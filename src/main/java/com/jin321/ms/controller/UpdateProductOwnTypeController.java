@@ -17,7 +17,8 @@ import java.util.Map;
  *
  * @Description : 修改商品分类接口
  * {
- *
+ *  "ptypea":"",
+ *  "ptypeb":""
  * }
  */
 @Controller

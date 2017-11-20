@@ -30,9 +30,9 @@ public interface ProductSizeDetailService {
 
     /**
      * 删除商品规格
-     * @param sid
+     * @param sidlist
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int deleteDetail(int sid);
+    int deleteDetail(List<Integer> sidlist);
 }

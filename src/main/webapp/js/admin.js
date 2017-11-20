@@ -271,7 +271,6 @@ $(function(){
         $(".item").css("display","none");
         $(".left-s").css("display","block");
         $(".upload-s-content").css("display","block");
-
         $("#file-input").on("change", function () {
             fd = new FormData();
             for(var i=0;i<this.files.length;i++){
