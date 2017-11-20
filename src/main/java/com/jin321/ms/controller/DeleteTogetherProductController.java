@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,15 +24,14 @@ public class DeleteTogetherProductController {
     @Autowired
     private ProductService productService;
     private Map<String,String> returnMap;
-    private int pid;
+    private List<Integer> pids;
     private int sign;
     @ResponseBody
     @RequestMapping("/deleteTogeter")
     public Map<String, String> deleteTogeter(@RequestBody String json){
         returnMap=new HashMap<String, String>();
-        JSONObject object= JSON.parseObject(json);
-        pid=object.getInteger("pid");
-        sign=productService.deleteTogetherProduct(pid);
+        pids=JSON.parseArray(json,Integer.class);
+        sign=productService.deleteTogetherProduct(pids);
         if(sign==-1){
             returnMap.put("code","-1");
             returnMap.put("mgs","商品不存在");
