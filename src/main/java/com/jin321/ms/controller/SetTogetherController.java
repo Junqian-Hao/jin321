@@ -26,14 +26,15 @@ import java.util.Map;
 public class SetTogetherController {
     @Autowired
     private ProductService productService;
-    private List<Integer> pids;
+    private List<String> pids;
     private Map<String,String> returnMap;
     private int sign;
     @RequestMapping("/setTogether")
     @ResponseBody
     public Map<String,String> setTogether(@RequestBody String json){
         returnMap=new HashMap<String, String>();
-        pids=JSON.parseArray(json,Integer.class);
+        JSONObject object=JSON.parseObject(json);
+        pids=(List<String>)object.get("pid");
         sign=productService.setTogetherProduct(pids);
         if(sign==1){
             returnMap.put("code","1");

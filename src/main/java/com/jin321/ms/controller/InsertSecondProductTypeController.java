@@ -58,11 +58,11 @@ public class InsertSecondProductTypeController {
                 //log.info(UrlUtil.getRealPath(request)+"productdetail\\"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                 producttype.setTypename(typename);
                 producttype.setHighertid(Integer.parseInt(highertid));
-                producttype.setTypeclass(2);
                 producttype.setPicurl( "productsecondtype/" + uuids + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf(".")));
                 sign=productTypeService.insertSecondType(producttype);
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             //log.info("详情图片上传失败");
             e.printStackTrace();
             returnMap.put("code", "0");

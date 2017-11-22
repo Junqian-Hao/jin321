@@ -35,7 +35,7 @@ $(function(){
                     pId[i] = res[i].pid;
                     const tr = $("<tr class='s-info-tr'></tr>");
                     //单选框
-                    const radio = $("<input checked='false' name='info' class='info-choose' type='radio'>");
+                    const radio = $("<input name='info' class='info-choose' type='radio'>");
                     //id
                     const tdId = $("<td class='s-id'></td>").html(res[i].sid);
                     //名称
@@ -64,7 +64,7 @@ $(function(){
         $("#info-s-btn").on("click", function () {
             var len = $(".info-choose").length;
             for(var i = 0;i<len;i++){
-                if($($(".info-choose")[i]).attr("checked")){
+                if($($(".info-choose")[i]).is(":checked")){
                     //id
                     var sid = $($(".s-id")[i]).html();
                     //名字
@@ -89,22 +89,130 @@ $(function(){
                         pssellprice:pssellprice,
                         snumber:snumber
                     }
-                    $.ajax({
-                        url:"/jin321/ms/updateProduct.do",
-                        type:"post",
-                        contentType:"application/json",
-                        data:JSON.stringify(json),
-                        success:function(res){
-
-                            if(res.code == 1){
-                                alert("修改成功")
-                            }
-                        }
-
-                    });
                 }
             }
+            $.ajax({
+                url:"/jin321/ms/updateProduct.do",
+                type:"post",
+                contentType:"application/json",
+                data:JSON.stringify(json),
+                success:function(res){
+                    if(res.code == 1){
+                        alert("修改成功");
+                    }
+                }
+
+            });
         });
+        //删除商品
+        $("#delete-s-btn").on("click", function () {
+            var len = $(".info-choose").length;
+            var data = {};
+            var arr = [];
+            for(var i = 0;i<len;i++){
+                if($($(".info-choose")[i]).is(":checked")){
+                    arr[0] = $($(".s-id")[i]).html();
+                    data = {
+                        sid:arr
+                    }
+                }
+            }
+            $.ajax({
+                url:"/jin321/ms/deleteProductSize.do",
+                type:"post",
+                contentType:"application/json",
+                data:JSON.stringify(data),
+                success: function (res) {
+                    if(res.code == 1){
+                        alert("删除成功");
+                    }else{
+                        alert("删除失败");
+                    }
+                }
+            })
+        });
+
+        //上传图片
+        $("#file-input").on("change", function () {
+            fd = new FormData();
+            for(var i=0;i<this.files.length;i++){
+                var reader = new FileReader();
+                reader.readAsDataURL(this.files[i]);
+                fd.append("file",this.files[i]);
+            }
+        });
+
+        $("#file-btn").on("click", function () {
+            var len = $(".info-choose").length;
+            var data = {};
+            for(var i = 0;i<len;i++){
+                if($($(".info-choose")[i]).is(":checked")){
+                    fd.append("pid",$($(".s-id")[i]).html());
+                }
+            }
+            fd.append("header",0);
+            $.ajax({
+                url:"/jin321/ms/productPicUpload.do",
+                type:"post",
+                contentType: false,
+                data:fd,
+                processData: false,
+                cache: false,
+                success: function (res) {
+                    if(res.code == 1){
+                        alert("上传成功");
+                    }
+                }
+            })
+        });
+        //上传商品缩略图
+        $("#file-suo-btn").on("click", function () {
+            var len = $(".info-choose").length;
+            var data = {};
+            for(var i = 0;i<len;i++){
+                if($($(".info-choose")[i]).is(":checked")){
+                    fd.append("pid",$($(".s-id")[i]).html());
+                }
+            }
+            fd.append("header",1);
+            $.ajax({
+                url:"/jin321/ms/productPicUpload.do",
+                type:"post",
+                contentType: false,
+                data:fd,
+                processData: false,
+                cache: false,
+                success: function (res) {
+                    if(res.code == 1){
+                        alert("上传成功");
+                    }
+                }
+            })
+        });
+        //上传商品详情图片
+        $("#file-detail-btn").on("click", function () {
+            var len = $(".info-choose").length;
+            var data = {};
+            for(var i = 0;i<len;i++){
+                if($($(".info-choose")[i]).is(":checked")){
+                    fd.append("pid",$($(".s-id")[i]).html());
+                }
+            }
+            $.ajax({
+                url:"/jin321/ms/productDetailUpload.do",
+                type:"post",
+                data:fd,
+                contentType: false,
+                processData: false,
+                cache: false,
+                success: function (res) {
+                    if(res.code == 1){
+                        alert("上传成功");
+                    }
+                }
+            })
+        });
+
 
     });
 
@@ -238,100 +346,6 @@ $(function(){
 
     });
 
-    //商品管理删除商品
-    $("#delete-s").on("click",function(){
-        $(".item").css("display","none");
-        $(".left-s").css("display","block");
-        $(".delete-s-content").css("display","block");
-
-        $("#delete-s-btn").on("click", function () {
-            var data = {
-                sid:$("#delete-s-id").val()
-            }
-            $.ajax({
-                url:"/jin321/ms/deleteProductSize.do",
-                type:"post",
-                contentType:"application/json",
-                data:JSON.stringify(data),
-                success: function (res) {
-                    if(res.code == 1){
-                        alert("删除成功");
-                    }else{
-                        alert("删除失败");
-                    }
-                }
-            })
-        });
-    });
-
-    //商品管理
-
-    //商品管理商品图片上传
-    $("#upload-s").on("click",function(){
-        $(".item").css("display","none");
-        $(".left-s").css("display","block");
-        $(".upload-s-content").css("display","block");
-        $("#file-input").on("change", function () {
-            fd = new FormData();
-            for(var i=0;i<this.files.length;i++){
-                var reader = new FileReader();
-                reader.readAsDataURL(this.files[i]);
-                fd.append("file",this.files[i]);
-            }
-        });
-
-        $("#file-btn").on("click", function () {
-            fd.append("pid",$("#file-s-id").val());
-            fd.append("header",0);
-            $.ajax({
-                url:"/jin321/ms/productPicUpload.do",
-                type:"post",
-                contentType: false,
-                data:fd,
-                processData: false,
-                cache: false,
-                success: function (res) {
-                    if(res.code == 1){
-                        alert("上传成功");
-                    }
-                }
-            })
-        });
-
-    });
-
-    //商品管理商品详情图片上传
-    $("#upload-detail").on("click", function () {
-        $(".item").css("display","none");
-        $(".left-s").css("display","block");
-        $(".upload-s-detail-img").css("display","block");
-
-        $("#file-detail-input").on("click", function () {
-            for(var i=0;i<this.files.length;i++){
-                var reader = new FileReader();
-                reader.readAsDataURL(this.files[i]);
-                fdDeatil.append(i,this.files[i]);
-            }
-        });
-
-        $("#file-detail-btn").on("click", function () {
-            var json = {
-                pid:$("#file-s-detail--id").val,
-                multipartFile:fdDeatil
-            }
-            $.ajax({
-                url:"/jin321/ms/ productDetailUpload.do",
-                type:"post",
-                data:json,
-                success: function (res) {
-                    if(res.code == 1){
-                        alert("上传成功");
-                    }
-                }
-            })
-        });
-
-    });
 
     //改变商品分类
     $("#change-type").on("click",function () {

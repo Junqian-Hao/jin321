@@ -30,7 +30,6 @@ public class ProductDetailServiceimp implements ProductDetailService {
         criteria.andPidEqualTo(productdetail.getPid());
         criteria.andIsDeletedEqualTo(false);
         productdetailList=productdetailMapper.selectByExample(productdetailExample);
-        productdetailold=productdetailList.get(0);
         productdetail.setPorder(productdetailList.size()+1);
         return productdetailMapper.insert(productdetail);
     }

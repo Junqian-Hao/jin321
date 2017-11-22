@@ -48,7 +48,7 @@ public interface ProductService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int setTogetherProduct(List<Integer> pids);
+    int setTogetherProduct(List<String> pids);
 
     /**
      * 删除合伙人商品
@@ -56,7 +56,7 @@ public interface ProductService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int deleteTogetherProduct(List<Integer> pids);
+    int deleteTogetherProduct(List<String> pids);
     /**
      * 获取真实商品分类信息
      * @param did

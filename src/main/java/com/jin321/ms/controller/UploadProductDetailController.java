@@ -39,10 +39,10 @@ public class UploadProductDetailController {
     @ResponseBody
     @RequestMapping(value = "/productDetailUpload",method = RequestMethod.POST)
     public Map<String, String> productDetailUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file,
-                                                   @RequestParam("pid")int pid){
+                                                   @RequestParam("pid")String pid){
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
-        productDetailService.productDetailDelete(pid);
+        productDetailService.productDetailDelete(Integer.parseInt(pid));
         try {
             for (int i=0;i<file.length;i++) {
                 if (!file[i].isEmpty()) {

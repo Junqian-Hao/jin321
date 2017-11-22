@@ -34,5 +34,5 @@ public interface ProductSizeDetailService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int deleteDetail(List<Integer> sidlist);
+    int deleteDetail(List<String> sidlist);
 }

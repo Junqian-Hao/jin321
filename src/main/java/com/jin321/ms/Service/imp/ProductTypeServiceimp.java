@@ -1,11 +1,14 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductTypeService;
+import com.jin321.ms.controller.InsertSecondProductTypeController;
 import com.jin321.ms.model.TrueProductType;
 import com.jin321.pl.dao.ProducttypeMapper;
 
 import com.jin321.pl.model.Producttype;
 import com.jin321.pl.model.ProducttypeExample;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,7 @@ import java.util.*;
  */
 @Service
 public class ProductTypeServiceimp implements ProductTypeService {
+    private static final Log log = LogFactory.getLog(ProductTypeServiceimp.class);
     @Autowired
     private ProducttypeMapper producttypeMapper;
     private Producttype producttype;
@@ -49,9 +53,10 @@ public class ProductTypeServiceimp implements ProductTypeService {
         if(producttypeMapper.selectByExample(producttypeExample).size()>0){
             return -1;
         }
-        producttype.setIsDelete(false);
         producttype.setTypeclass(2);
-        return insertFirstType(producttype);
+        producttype.setIsDelete(false);
+        log.debug("获取分类类别"+producttype.getTypeclass());
+        return producttypeMapper.insert(producttype);
     }
     private List<Producttype> secondbyfirsttidlist;
     @Override

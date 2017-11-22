@@ -99,10 +99,11 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
      * @return 1 成功删除 0 删除失败 -1无此款式 2无商品
      */
     @Override
-    public int deleteDetail(List<Integer> sidlist) {
-        Iterator<Integer> iterator=sidlist.iterator();
+    public int deleteDetail(List<String> sidlist) {
+        Iterator<String> iterator=sidlist.iterator();
         while (iterator.hasNext()) {
-            sid= iterator.next();
+            sid= Integer.parseInt(iterator.next());
+            log.debug("获取到的sid为:"+sid);
             productsize=productsizeMapper.selectByPrimaryKey(sid);
             if(productsize!=null){
                 productsize.setIsDeleted(true);
@@ -120,8 +121,9 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
                         return 2;
                 }
                 sign=productsizeMapper.updateByPrimaryKey(productsize);
-            }
-            return -1;
+            }else
+                return -1;
+
         }
         return sign;
     }
