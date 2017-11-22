@@ -28,14 +28,15 @@ public class DeleteProductSizeDetailController {
     @Autowired
     private ProductSizeDetailService productSizeDetailService;
     private Map<String,String> returnMap;
-    private List<Integer> sidlist;
+    private List<String> sidlist;
     private int sign;
     @ResponseBody
     @RequestMapping("/deleteProductSize")
     public Map<String,String> deleteProductSize(@RequestBody String json){
         log.debug("传来的json为："+json);
         returnMap=new HashMap<String, String>();
-        sidlist=JSON.parseArray(json,Integer.class);
+        JSONObject object=JSON.parseObject(json);
+        sidlist=(List<String>)object.get("sid");
         sign=productSizeDetailService.deleteDetail(sidlist);
         if(sign==-1){
             returnMap.put("code","-1");

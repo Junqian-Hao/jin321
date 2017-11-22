@@ -21,9 +21,6 @@
             <ul>
                 <li id="watch-s">查看商品</li>
                 <li id="add-s">添加商品</li>
-                <li id="delete-s">删除商品</li>
-                <li id="upload-s">上传图片</li>
-                <li id="upload-detail">上传商品介绍图片</li>
                 <li id="change-type">更改商品分类</li>
             </ul>
         </div>
@@ -48,6 +45,11 @@
                 </tr>
             </table>
             <button id="info-s-btn">修改商品信息</button>
+            <button id="delete-s-btn">删除商品</button>
+            <input type="file" id="file-input" multiple/>
+            <button id="file-btn">上传商品图片</button>
+            <button id="file-suo-btn">上传商品缩略图</button>
+            <button id="file-detail-btn">上传商品详情图片</button>
         </div>
 
         <!-- 添加商品 -->
@@ -84,29 +86,7 @@
             </div>
         </div>
 
-        <!-- 删除商品 -->
-        <div class="delete-s-content item">
-            <label>请输入商品id</label>
-            <input id="delete-s-id" type="number">
-            <button id="delete-s-btn">删除</button>
-        </div>
 
-        <!-- 上传商品图片 -->
-        <div class="upload-s-content item">
-            <label>请选择图片：</label>
-            <input type="file" id="file-input" multiple/><br>
-            <label>请输入需要上传图片的商品id号</label>
-            <input type="number" id="file-s-id" placeholder="id可以在'查看商品'中找到">
-            <button id="file-btn">上传</button>
-        </div>
-        <!-- 上传商品详情图片 -->
-        <div class="upload-s-detail-img item">
-            <label>请选择图片：</label>
-            <input type="file" id="file-detail-input" multiple/><br>
-            <label>请输入需要上传图片的商品id号</label>
-            <input type="number" id="file-s-detail--id" placeholder="id可以在'查看商品'中找到">
-            <button id="file-detail-btn">上传</button>
-        </div>
         <!-- 改变商品分类 -->
         <div class="change-type-content item">
             <label>请选择商品</label>

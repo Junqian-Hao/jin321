@@ -137,10 +137,10 @@ public class ProductServiceimp implements ProductService {
      * @return -1无此商品 0更新失败 1设置成功
      */
     @Override
-    public int setTogetherProduct(List<Integer> pids) {
-        Iterator<Integer> iterator = pids.iterator();
+    public int setTogetherProduct(List<String> pids) {
+        Iterator<String> iterator = pids.iterator();
         while (iterator.hasNext()) {
-            pid = iterator.next();
+            pid = Integer.parseInt(iterator.next());
             product = productMapper.selectByPrimaryKey(pid);
             if (product == null)
                 return -1;
@@ -159,10 +159,10 @@ public class ProductServiceimp implements ProductService {
      * @return 0失败 1成功 -1无此商品
      */
     @Override
-    public int deleteTogetherProduct(List<Integer> pids) {
-        Iterator<Integer> iterator = pids.iterator();
+    public int deleteTogetherProduct(List<String> pids) {
+        Iterator<String> iterator = pids.iterator();
         while (iterator.hasNext()) {
-            pid = iterator.next();
+            pid = Integer.parseInt(iterator.next());
             product = productMapper.selectByPrimaryKey(pid);
             if (product != null)
                 return -1;

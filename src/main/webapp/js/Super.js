@@ -2,6 +2,7 @@
 var typeId = {};
 //二级分类id
 var typeId2 = {};
+var pId = {};
 //fd
 var fd = new FormData();
 //轮播图fd
@@ -14,70 +15,110 @@ $(function(){
         $(".type-manage").css("display","block");
         $("#watch-type").trigger("click");
     });
+    //删除商品
+    $("#delete-common-btn").on("click", function () {
+        var len = $(".choose-common-checkbox").length;
+        var arr = [];
+        var index = 0;
+        for(var i = 0;i<len;i++){
+            if($($(".choose-common-checkbox")[i]).is(":checked")){
+                arr[index] =  $($(".s-id")[i]).html();
+                index++;
+            }
+        }
+        var json =  {
+            sid:arr
+        }
+        $.ajax({
+            url:"/jin321/ms/deleteProductSize.do",
+            type:"post",
+            data:JSON.stringify(json),
+            contentType:"application/json",
+            success: function (res) {
+                if(res.code == 1){
+                    alert("删除成功");
+                    $("#watch-common").trigger("click");
+                }
+            }
+        })
+    });
 
     //左侧查看分类
     $("#watch-type").on("click", function () {
         $(".item").css("display","none");
         $(".type-manage").css("display","block");
         $(".watch-type").css("display","block");
-        $("#second-type option").remove();
-        $("#first-type option").remove();
+        $(".watch-type-tr").remove();
 
-        //获取一级分类
+        //获取分类
         $.ajax({
-            url:"/jin321/ms/selectAllFirstProducttype.do",
+            url:"/jin321/ms/selectAllProductType.do ",
             type:"post",
             contentType:"application/json",
             success: function (res) {
                 for(var i = 0;i<res.length;i++){
-                    const name = res[i].typename;
-                    typeId[name] = res[i].tid;
-                    const option = $("<option></option>").html(name);
-                    $("#first-type").append(option);
-                }
-                var json = {
-                    tid:typeId[res[0].typename]
-                }
-                //获取对应的二级分类
-                $.ajax({
-                    url:"/jin321/ms/selectSecondProducttype.do",
-                    type:"post",
-                    contentType:"application/json",
-                    data: JSON.stringify(json),
-                    success: function (res) {
-                        $("#second-type option").remove();
-                        for(var i = 0;i<res.length;i++){
-                            const name = res[i].typename;
-                            typeId2[name] = res[i].tid;
-                            const option = $("<option></option>").html(name);
-                            $("#second-type").append(option);
-                        }
+                    typeId[res[i].typename] = res[i].tid;
+                    var data = res[i].producttype2List;
+                    for(var j = 0;j<data.length;j++){
+                        typeId2[data[j].typename] = data[j].tid;
+                        var tr = $("<tr class='watch-type-tr'></tr>");
+                        var radio = $("<input class='choose-type' checked='false' name='info' type='radio'>");
+                        var tdName = $("<td class='typeanme'></td>").html(res[i].producttype1.typename);
+                        var tdName2 = $("<td class='typename2'></td>").html(data[j].typename);
+                        $(tr).append(radio,tdName,tdName2);
+                        $("#watch-type-table").append(tr);
                     }
-                });
+                }
             }
         });
-        //一级分类发生变化
-        $("#first-type").on("change", function () {
-            $("#second-type option").remove();
-            var value = $("#first-type").val();
-            var json = {
-                tid:typeId[value]
+        //删除分类
+        $("#delete-type-btn").on("click", function () {
+            var len = $(".choose-type").length;
+            var json = {};
+            for(var i = 0;i<len;i++){
+                if($($(".choose-type")[i]).attr("checked")){
+                    var value = $($(".typeanme")[i]).html();
+                    json = {
+                        tid:typeId[value]
+                    }
+                }
             }
             $.ajax({
-                url:"/jin321/ms/selectSecondProducttype.do",
+                url:"/jin321/ms/deleteFirstProductType.do",
                 type:"post",
+                data:JSON.stringify(json),
                 contentType:"application/json",
-                data: JSON.stringify(json),
                 success: function (res) {
-                    $("#second-type option").remove();
-                    for(var i = 0;i<res.length;i++){
-                        const name = res[i].typename;
-                        typeId2[name] = res[i].tid;
-                        const option = $("<option></option>").html(name);
-                        $("#second-type").append(option);
+                    if(res.code == 1){
+                        alert("删除成功");
                     }
                 }
             });
+        });
+
+        //删除品牌
+        $("#delete-b-btn").on("click",function () {
+            var len = $(".choose-type").length;
+            var json = {};
+            for(var i = 0;i<len;i++){
+                if($($(".choose-type")[i]).is(":checked")){
+                    var value = $($(".typename2")[i]).html();
+                    json = {
+                        tid:typeId2[value]
+                    }
+                }
+            }
+            $.ajax({
+                url:"/jin321/ms/deleteSecondProductType.do",
+                type:"post",
+                data:JSON.stringify(json),
+                contentType:"application/json",
+                success:function (res) {
+                    if(res.code == 1){
+                        alert("删除成功");
+                    }
+                }
+            })
         });
 
     });
@@ -158,115 +199,6 @@ $(function(){
         });
     });
 
-    //删除分类
-    $("#delete-type").on("click", function () {
-        $(".item").css("display","none");
-        $(".type-manage").css("display","block");
-        $(".delete-type").css("display","block");
-
-        $("#delete-type-btn").on("click", function () {
-            var value = $("#delete-input").val();
-            var json = {
-                tid:typeId[value]
-            }
-            $.ajax({
-                url:"/jin321/ms/deleteFirstProductType.do",
-                type:"post",
-                data:JSON.stringify(json),
-                contentType:"application/json",
-                success: function (res) {
-                    if(res.code == 1){
-                        alert("删除成功");
-                    }
-                }
-            });
-        });
-    });
-
-    //删除品牌
-    $("#delete-brands").on("click", function () {
-        $(".item").css("display","none");
-        $(".type-manage").css("display","block");
-        $(".delete-brands").css("display","block");
-        $("#delete-typea option").remove();
-        $("#delete-typeb option").remove();
-
-        $.ajax({
-            url:"/jin321/ms/selectAllFirstProducttype.do",
-            type:"post",
-            contentType:"application/json",
-            success: function (res) {
-                for(var i = 0;i<res.length;i++){
-                    const name = res[i].typename;
-                    typeId[name] = res[i].tid;
-                    const option = $("<option></option>").html(name);
-                    $("#delete-typea").append(option);
-                }
-                var json = {
-                    tid:typeId[res[0].typename]
-                }
-                //获取对应的二级分类
-                $.ajax({
-                    url:"/jin321/ms/selectSecondProducttype.do",
-                    type:"post",
-                    contentType:"application/json",
-                    data: JSON.stringify(json),
-                    success: function (res) {
-                        $("#delete-typeb option").remove();
-                        for(var i = 0;i<res.length;i++){
-                            const name = res[i].typename;
-                            typeId2[name] = res[i].tid;
-                            const option = $("<option></option>").html(name);
-                            $("#delete-typeb").append(option);
-                        }
-                    }
-                });
-            }
-        });
-        //一级分类发生变化
-        $("#first-type").on("change", function () {
-            $("#delete-typeb option").remove();
-            var value = $("#first-type").val();
-            var json = {
-                tid:typeId[value]
-            }
-            $.ajax({
-                url:"/jin321/ms/selectSecondProducttype.do",
-                type:"post",
-                contentType:"application/json",
-                data: JSON.stringify(json),
-                success: function (res) {
-                    $("#delete-typeb option").remove();
-                    for(var i = 0;i<res.length;i++){
-                        const name = res[i].typename;
-                        typeId2[name] = res[i].tid;
-                        const option = $("<option></option>").html(name);
-                        $("#delete-typeb").append(option);
-                    }
-                }
-            });
-        });
-        $("#delete-b-btn").on("click",function () {
-            var value = $("#delete-typeb").val();
-            var json = {
-                tid:typeId2[value]
-            }
-            $.ajax({
-                url:"/jin321/ms/deleteSecondProductType.do",
-                type:"post",
-                data:JSON.stringify(json),
-                contentType:"application/json",
-                success:function (res) {
-                    if(res.code == 1){
-                        alert("删除成功");
-                    }
-                }
-            })
-        });
-
-
-    });
-
     //查看普通商品
     $("#watch-common").on("click", function () {
         $(".item").css("display","none");
@@ -296,6 +228,8 @@ $(function(){
                     success:function (res) {
                         for(var i = 0;i<res.length;i++){
                             var tr = $("<tr class='watch-common-tr'></tr>");
+                            pId[res[i].pname] = res[i].pid;
+                            var checkbox = $("<input type='checkbox' class='choose-common-checkbox'>");
                             //id
                             const tdId = $("<td class='s-id'></td>").html(res[i].sid);
                             //名称
@@ -314,9 +248,15 @@ $(function(){
                             const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
                             //剩余货物
                             const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
-                            $(tr).append(tdId,tdName,tdPsummary,tdSize,tdPtypea,tdPtypeb,tdPsoriprice,tdPssellprice,tdSnumber,tdSnumber);
+                            $(tr).append(checkbox,tdId,tdName,tdPsummary,tdSize,tdPtypea,tdPtypeb,tdPsoriprice,tdPssellprice,tdSnumber,tdSnumber);
                             $("#watch-common-table").append(tr);
                         }
+                        setTimeout(function () {
+                            var len = $(".watch-common-tr").length;
+                            if(res.length<len){
+                                $("#watch-common").trigger("click");
+                            }
+                        },500);
                     }
                 });
             }
@@ -334,6 +274,7 @@ $(function(){
                 success:function (res) {
                     for(var i = 0;i<res.length;i++){
                         var tr = $("<tr class='watch-common-tr'></tr>");
+                        var checkbox = $("<input type='checkbox' class='choose-common-checkbox'>");
                         //id
                         const tdId = $("<td class='s-id'></td>").html(res[i].sid);
                         //名称
@@ -352,7 +293,7 @@ $(function(){
                         const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
                         //剩余货物
                         const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
-                        $(tr).append(tdId,tdName,tdPsummary,tdSize,tdPtypea,tdPtypeb,tdPsoriprice,tdPssellprice,tdSnumber,tdSnumber);
+                        $(tr).append(checkbox,tdId,tdName,tdPsummary,tdSize,tdPtypea,tdPtypeb,tdPsoriprice,tdPssellprice,tdSnumber,tdSnumber);
                         $("#watch-common-table").append(tr);
                     }
                     setTimeout(function () {
@@ -365,30 +306,37 @@ $(function(){
             });
         });
 
+        //添加合伙人商品
+        $("#add-parents-btn").on("click", function () {
+            var len = $(".choose-common-checkbox").length;
+            var arr = [];
+            var index = 0;
+            for(var i = 0;i<len;i++){
+                if($($(".choose-common-checkbox")[i]).is(":checked")){
+                    var value = $($(".s-name")[i]).html();
+                    arr[index] = pId[value];
+                    index++;
+                }
+            }
+            var json =  {
+                pid:arr
+            }
+            $.ajax({
+                url:"/jin321/ms/setTogether.do",
+                type:"post",
+                data:JSON.stringify(json),
+                contentType:"application/json",
+                success: function (res) {
+                    if(res.code == 1){
+                        alert("添加成功");
+                    }
+                }
+            })
+        });
+
     });
 
-    //删除普通商品
-    // $("#delete-common").on("click", function () {
-    //     $(".item").css("display","none");
-    //     $(".parents-manage").css("display","block");
-    //     $(".delete-common-s").css("display","block");
-    //
-    //     $("#delete-common-btn").on("click", function () {
-    //         var json =  {
-    //             sid:$("#delete-common-btn").val()
-    //         }
-    //         $.ajax({
-    //             url:"/jin321/ms/deleteProductSize.do",
-    //             type:"post",
-    //             data:JSON.stringify(json),
-    //             success: function (res) {
-    //                 if(res.code == 1){
-    //                     alert("删除成功");
-    //                 }
-    //             }
-    //         })
-    //     });
-    // });
+
 
     //查看合伙人商品
     $("#parents-manage").on("click", function () {
@@ -412,16 +360,17 @@ $(function(){
                 $(".parents-tr").remove();
                 var data = res.productPos;
                 for(var i = 0;i<data.length;i++){
+                    var checkbox = $("<input type='checkbox' checked='false' class='parents-choose'>");
                     var tr = $("<tr class='parents-tr'></tr>");
                     //ID
-                    var tdId = $("<td></td>").html(data[i].pid);
+                    var tdId = $("<td class='parents-id'></td>").html(data[i].pid);
                     //合伙人商品名称
                     var tdName = $("<td></td>").html(data[i].pname);
                     //原价
                     var tdo = $("<td></td>").html(data[i].psoriprice);
                     //现价
                     var tdnew = $("<td></td>").html(data[i].pssellprice);
-                    $(tr).append(tdId,tdName,tdo,tdnew);
+                    $(tr).append(checkbox,tdId,tdName,tdo,tdnew);
                     $("#parents-table").append(tr);
                 }
                 var len = $(".parents-tr").length;
@@ -432,29 +381,31 @@ $(function(){
                 },500);
             }
         })
-    });
-
-    //添加合伙人商品
-    $("#add-parents").on("click", function () {
-        $(".item").css("display","none");
-        $(".parents-manage").css("display","block");
-        $(".add-parents-content").css("display","block");
-
-        $("#add-parents-btn").on("click", function () {
+        //删除合伙人商品
+        $("#delete-parents-btn").on("click", function () {
+            var len = $(".parents-choose").length;
+            var arr = [];
+            var index = 0;
+            for(var i = 0;i<len;i++){
+                if($($(".parents-choose")[i]).is(":checked")){
+                    arr[index] = $($(".parents-id")[i]).html();
+                    index++;
+                }
+            }
             var json = {
-                pid:$("#add-parents-text").val()
+                pid:arr
             }
             $.ajax({
-                url:"/jin321/ms/setTogether.do",
+                url:"/jin321/ms/deleteTogether.do",
                 type:"post",
-                data:JSON.stringify(json),
                 contentType:"application/json",
+                data:JSON.stringify(json),
                 success: function (res) {
                     if(res.code == 1){
-                        alert("添加成功");
+                        alert("删除成功");
                     }
                 }
-            })
+            });
         });
     });
 
@@ -499,7 +450,6 @@ $(function(){
                     var len = $(".watch-merchant-tr").length;
                     if(res.length<len){
                         $("#watch-merchant").trigger("click");
-                        console.log("a");
                     }
                 },500);
             }
