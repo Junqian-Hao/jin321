@@ -10,6 +10,7 @@
         <result column="snumber" property="snumber" jdbcType="INTEGER"/>
         <result column="ptypea" property="ptypea" javaType="INTEGER"/>
         <result column="ptypeb" property="ptypeb" javaType="INTEGER"/>
+        <result column="ptypbec" property="ptypec" javaType="INTEGER"/>
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
     </resultMap>
@@ -22,6 +23,7 @@
               productsize.snumber,
               product.ptypea,
               product.ptypeb,
+              product.ptypec,
               productsize.psoriprice,
               productsize.pssellprice
               FROM

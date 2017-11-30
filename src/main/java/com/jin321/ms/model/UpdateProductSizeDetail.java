@@ -24,6 +24,8 @@ public class UpdateProductSizeDetail {
 
     private int ptypeb;
 
+    private int ptypec;
+
     private String sizename;
 
     private Integer snumber;
@@ -107,5 +109,13 @@ public class UpdateProductSizeDetail {
 
     public void setPtypeb(int ptypeb) {
         this.ptypeb = ptypeb;
+    }
+
+    public int getPtypec() {
+        return ptypec;
+    }
+
+    public void setPtypec(int ptypec) {
+        this.ptypec = ptypec;
     }
 }
