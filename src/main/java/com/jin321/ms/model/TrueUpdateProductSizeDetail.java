@@ -19,6 +19,8 @@ public class TrueUpdateProductSizeDetail {
 
     private String ptypeb;
 
+    private String ptypec;
+
     private String sizename;
 
     private Integer snumber;
@@ -102,5 +104,13 @@ public class TrueUpdateProductSizeDetail {
 
     public void setPtypeb(String ptypeb) {
         this.ptypeb = ptypeb;
+    }
+
+    public String getPtypec() {
+        return ptypec;
+    }
+
+    public void setPtypec(String ptypec) {
+        this.ptypec = ptypec;
     }
 }

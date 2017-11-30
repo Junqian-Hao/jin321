@@ -7,7 +7,6 @@ import com.jin321.pl.model.Producttype;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,13 +15,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author TyranitarX
- * @Date 2017/11/16 21:35
+ * /**
+ * Created by Tyranitarx on 2017/11/27.
+ *
  * @Description :
  */
-@Controller
+
 @RequestMapping("/ms")
-public class InsertFirstProductTypeController {
+public class InsertThridProductTypeController {
     private static final Log log = LogFactory.getLog(InsertFirstProductTypeController.class);
     @Autowired
     private ProductTypeService productTypeService;
@@ -31,15 +31,14 @@ public class InsertFirstProductTypeController {
     private Producttype producttype;
     private int sign;
     @ResponseBody
-    @RequestMapping("/insertFirstProductType")
-    public Map<String,String> insertFirstProdcutType(@RequestBody String json){
-        log.debug("传来的添加FTjson为"+json);
+    @RequestMapping("/insertThirdProductType")
+    public Map<String,String> insertThirdProdcutType(@RequestBody String json){
         producttype=new Producttype();
         returnMap=new HashMap<String, String>();
         JSONObject object= JSON.parseObject(json);
         typename=object.getString("typename");
         producttype.setTypename(typename);
-        sign=productTypeService.insertFirstType(producttype);
+        sign=productTypeService.insertThirtType(producttype);
         if(sign==-1){
             returnMap.put("code", "-1");
             returnMap.put("msg", "分类已存在");

@@ -33,6 +33,13 @@ public interface ProductTypeService {
     public int insertSecondType(Producttype producttype);
 
     /**
+     * 添加三级分类
+     * @param producttype
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public int insertThirtType(Producttype producttype);
+    /**
      * 删除一级分类
      * @param tid
      * @return
@@ -48,6 +55,13 @@ public interface ProductTypeService {
     @Transactional(rollbackFor = Exception.class)
     public int deleteSecondType(int tid);
 
+    /**
+     * 删除三级分类
+     * @param tid
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public int deleteThridType(int tid);
     /**
      * 获取一级一级二级分类
      * @return

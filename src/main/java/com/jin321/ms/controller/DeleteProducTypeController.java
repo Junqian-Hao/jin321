@@ -28,24 +28,24 @@ public class DeleteProducTypeController {
     private int sign;
     @ResponseBody
     @RequestMapping("/deleteFirstProductType")
-    public Map<String,String> deleteFirstProductTyep(@RequestBody String json){
+    public Map<String,String> deleteFirstProductType(@RequestBody String json){
         returnMap=new HashMap<String, String>();
         JSONObject object=JSON.parseObject(json);
         tid=object.getInteger("tid");
         sign=productTypeService.deleteFirstType(tid);
         if(sign==-1){
             returnMap.put("code","-1");
-            returnMap.put("msg","不存在此分类");
+            returnMap.put("msg","不存在此分类1");
             return returnMap;
         }
         else if(sign==0){
             returnMap.put("code","0");
-            returnMap.put("msg","分类删除失败");
+            returnMap.put("msg","分类删除失败1");
             return returnMap;
         }
         else {
             returnMap.put("code","1");
-            returnMap.put("msg","删除成功");
+            returnMap.put("msg","删除成功1");
             return returnMap;
         }
     }
@@ -58,17 +58,40 @@ public class DeleteProducTypeController {
         sign=productTypeService.deleteSecondType(tid);
         if(sign==-1){
             returnMap.put("code","-1");
-            returnMap.put("msg","不存在此分类");
+            returnMap.put("msg","不存在此分类2");
             return returnMap;
         }
         else if(sign==0){
             returnMap.put("code","0");
-            returnMap.put("msg","删除失败");
+            returnMap.put("msg","品牌删除失败2");
             return returnMap;
         }
         else {
             returnMap.put("code","1");
-            returnMap.put("msg","删除成功");
+            returnMap.put("msg","删除成功2");
+            return returnMap;
+        }
+    }
+    @ResponseBody
+    @RequestMapping("/deleteThridProductType")
+    public Map<String,String> deleteThirdProdcutType(@RequestBody String json){
+        returnMap=new HashMap<String, String>();
+        JSONObject object= JSON.parseObject(json);
+        tid=object.getInteger("tid");
+        sign=productTypeService.deleteThridType(tid);
+        if(sign==-1){
+            returnMap.put("code","-1");
+            returnMap.put("msg","不存在分类3");
+            return returnMap;
+        }
+        else if(sign==0){
+            returnMap.put("code","0");
+            returnMap.put("msg","删除失败3");
+            return returnMap;
+        }
+        else {
+            returnMap.put("code","1");
+            returnMap.put("msg","删除成功3");
             return returnMap;
         }
     }
