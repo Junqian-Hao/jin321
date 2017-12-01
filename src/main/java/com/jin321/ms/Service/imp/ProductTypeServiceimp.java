@@ -171,6 +171,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
                 ProducttypeExample.Criteria criteria2=producttypeExample2.createCriteria();
                 criteria2.andTypeclassEqualTo(3);
                 criteria2.andIsDeleteEqualTo(false);
+                criteria2.andHighertidEqualTo(producttype2.getTid());
                 trueProductType1.setProducttype2(producttype2);
                 trueProductType1.setProducttype3List(producttypeMapper.selectByExample(producttypeExample2));
                 trueProductType1List.add(trueProductType1);
