@@ -4,7 +4,6 @@ import com.jin321.ms.Service.ProductTypeService;
 import com.jin321.ms.model.TrueProductType;
 import com.jin321.ms.model.TrueProductType1;
 import com.jin321.pl.dao.ProducttypeMapper;
-
 import com.jin321.pl.model.Producttype;
 import com.jin321.pl.model.ProducttypeExample;
 import org.apache.commons.logging.Log;
@@ -12,7 +11,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Tyranitarx on 2017/11/5.
@@ -60,7 +61,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
     }
 
     @Override
-    public int insertThirtType(Producttype producttype,int higherid) {
+    public int insertThirtType(Producttype producttype, int higherid) {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andTypenameEqualTo(producttype.getTypename());
@@ -132,8 +133,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
         if (producttype != null) {
             producttype.setIsDelete(true);
             return producttypeMapper.updateByPrimaryKey(producttype);
-        }
-        else
+        } else
             return -1;
     }
 
@@ -162,13 +162,13 @@ public class ProductTypeServiceimp implements ProductTypeService {
             criteria1.andIsDeleteEqualTo(false);
             criteria1.andHighertidEqualTo(producttype.getTid());
             secondbyfirsttidlist = producttypeMapper.selectByExample(producttypeExample1);
-            Iterator<Producttype> it1=secondbyfirsttidlist.iterator();
-            trueProductType1List=new ArrayList<TrueProductType1>();
-            while(it1.hasNext()){
-                producttype2=it1.next();
-                trueProductType1=new TrueProductType1();
-                ProducttypeExample producttypeExample2=new ProducttypeExample();
-                ProducttypeExample.Criteria criteria2=producttypeExample2.createCriteria();
+            Iterator<Producttype> it1 = secondbyfirsttidlist.iterator();
+            trueProductType1List = new ArrayList<TrueProductType1>();
+            while (it1.hasNext()) {
+                producttype2 = it1.next();
+                trueProductType1 = new TrueProductType1();
+                ProducttypeExample producttypeExample2 = new ProducttypeExample();
+                ProducttypeExample.Criteria criteria2 = producttypeExample2.createCriteria();
                 criteria2.andTypeclassEqualTo(3);
                 criteria2.andIsDeleteEqualTo(false);
                 criteria2.andHighertidEqualTo(producttype2.getTid());
@@ -185,8 +185,8 @@ public class ProductTypeServiceimp implements ProductTypeService {
 
     @Override
     public List<Producttype> getAllTypes1(int tid) {
-        ProducttypeExample example=new ProducttypeExample();
-        ProducttypeExample.Criteria criteria=example.createCriteria();
+        ProducttypeExample example = new ProducttypeExample();
+        ProducttypeExample.Criteria criteria = example.createCriteria();
         criteria.andIsDeleteEqualTo(false);
         criteria.andTypeclassEqualTo(3);
         criteria.andHighertidEqualTo(tid);

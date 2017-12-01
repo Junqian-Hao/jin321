@@ -163,8 +163,9 @@ public class ProductServiceimp implements ProductService {
         Iterator<String> iterator = pids.iterator();
         while (iterator.hasNext()) {
             pid = Integer.parseInt(iterator.next());
+            log.debug("删除的商品id"+pid);
             product = productMapper.selectByPrimaryKey(pid);
-            if (product != null)
+            if (product == null)
                 return -1;
             else {
                 product.setIsTogether(false);

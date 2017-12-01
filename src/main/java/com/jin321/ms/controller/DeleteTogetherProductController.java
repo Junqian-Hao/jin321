@@ -35,17 +35,17 @@ public class DeleteTogetherProductController {
         sign=productService.deleteTogetherProduct(pids);
         if(sign==-1){
             returnMap.put("code","-1");
-            returnMap.put("mgs","商品不存在");
+            returnMap.put("msg","商品不存在");
             return returnMap;
         }
         else if(sign==0){
             returnMap.put("code","0");
-            returnMap.put("mgs","取消失败");
+            returnMap.put("msg","取消失败");
             return returnMap;
         }
         else {
             returnMap.put("code","1");
-            returnMap.put("mgs","取消成功");
+            returnMap.put("msg","取消成功");
             return returnMap;
         }
     }

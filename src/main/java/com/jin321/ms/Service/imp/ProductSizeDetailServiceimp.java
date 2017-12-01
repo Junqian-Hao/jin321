@@ -64,7 +64,6 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
             trueUpdateProductSizeDetail.setPtypea(producttypeMapper.selectByPrimaryKey(updateProductSizeDetail.getPtypea()).getTypename());
             trueUpdateProductSizeDetail.setPtypeb(producttypeMapper.selectByPrimaryKey(updateProductSizeDetail.getPtypeb()).getTypename());
             trueUpdateProductSizeDetail.setPtypec(producttypeMapper.selectByPrimaryKey(updateProductSizeDetail.getPtypec()).getTypename());
-            log.debug("商品AAA"+trueUpdateProductSizeDetail);
             trueUpdateProductSizeDetails.add(trueUpdateProductSizeDetail);
         }
         return trueUpdateProductSizeDetails;
