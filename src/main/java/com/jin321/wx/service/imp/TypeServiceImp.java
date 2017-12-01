@@ -47,16 +47,17 @@ public class TypeServiceImp implements TypeService {
         return producttypes;
     }
 
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<ProductPo> selectProductByptypeb(int ptypeb, String code) throws Exception {
+    public List<ProductPo> selectProductByptypeb(int ptypec, String code) throws Exception {
         List<ProductPo> productPos = null;
         if (code.equals("0")) {
             log.debug("通过销量排序");
-            productPos = productPoMapper.selectNowByPtypebByPsellnum(ptypeb);
+            productPos = productPoMapper.selectNowByPtypebByPsellnum(ptypec);
         } else {
             log.debug("通过价格排序");
-            productPos = productPoMapper.selectNowByPtypebByPrice(ptypeb);
+            productPos = productPoMapper.selectNowByPtypebByPrice(ptypec);
         }
         return productPos;
     }
