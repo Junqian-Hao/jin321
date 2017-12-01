@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TrueProductType {
     private Producttype producttype1;
-    private List<Producttype> producttype2List;
+    private List<TrueProductType1> producttype2List;
 
     public Producttype getProducttype1() {
         return producttype1;
@@ -16,11 +16,11 @@ public class TrueProductType {
         this.producttype1 = producttype1;
     }
 
-    public List<Producttype> getProducttype2List() {
+    public List<TrueProductType1> getProducttype2List() {
         return producttype2List;
     }
 
-    public void setProducttype2List(List<Producttype> producttype2List) {
+    public void setProducttype2List(List<TrueProductType1> producttype2List) {
         this.producttype2List = producttype2List;
     }
 }

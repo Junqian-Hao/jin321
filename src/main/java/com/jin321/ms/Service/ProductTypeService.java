@@ -61,7 +61,7 @@ public interface ProductTypeService {
     @Transactional(rollbackFor = Exception.class)
     public int deleteThridType(int tid);
     /**
-     * 获取一级一级二级分类
+     * 获取一级一级二级三级分类
      * @return
      */
     @Transactional(rollbackFor = Exception.class)

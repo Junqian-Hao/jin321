@@ -2,6 +2,7 @@ package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductTypeService;
 import com.jin321.ms.model.TrueProductType;
+import com.jin321.ms.model.TrueProductType1;
 import com.jin321.pl.dao.ProducttypeMapper;
 
 import com.jin321.pl.model.Producttype;
@@ -137,7 +138,10 @@ public class ProductTypeServiceimp implements ProductTypeService {
 
     private List<Producttype> producttypeList;
     private TrueProductType trueProductType;
+    private Producttype producttype2;
+    private TrueProductType1 trueProductType1;
     private List<TrueProductType> trueProductTypeList;
+    private List<TrueProductType1> trueProductType1List;
 
     @Override
     public List<TrueProductType> getAllTypes() {
@@ -157,8 +161,21 @@ public class ProductTypeServiceimp implements ProductTypeService {
             criteria1.andIsDeleteEqualTo(false);
             criteria1.andHighertidEqualTo(producttype.getTid());
             secondbyfirsttidlist = producttypeMapper.selectByExample(producttypeExample1);
+            Iterator<Producttype> it1=secondbyfirsttidlist.iterator();
+            trueProductType1List=new ArrayList<TrueProductType1>();
+            while(it1.hasNext()){
+                producttype2=it1.next();
+                trueProductType1=new TrueProductType1();
+                ProducttypeExample producttypeExample2=new ProducttypeExample();
+                ProducttypeExample.Criteria criteria2=producttypeExample2.createCriteria();
+                criteria2.andTypeclassEqualTo(3);
+                criteria2.andIsDeleteEqualTo(false);
+                trueProductType1.setProducttype2(producttype2);
+                trueProductType1.setProducttype3List(producttypeMapper.selectByExample(producttypeExample2));
+                trueProductType1List.add(trueProductType1);
+            }
             trueProductType.setProducttype1(producttype);
-            trueProductType.setProducttype2List(secondbyfirsttidlist);
+            trueProductType.setProducttype2List(trueProductType1List);
             trueProductTypeList.add(trueProductType);
         }
         return trueProductTypeList;
