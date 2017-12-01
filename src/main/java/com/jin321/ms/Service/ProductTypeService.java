@@ -36,7 +36,7 @@ public interface ProductTypeService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public int insertThirtType(Producttype producttype);
+    public int insertThirtType(Producttype producttype,int higherid);
     /**
      * 删除一级分类
      * @param tid

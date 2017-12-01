@@ -28,6 +28,7 @@ public class InsertThridProductTypeController {
     private ProductTypeService productTypeService;
     private Map<String,String> returnMap;
     private String typename;
+    private int higherid;
     private Producttype producttype;
     private int sign;
     @ResponseBody
@@ -37,8 +38,9 @@ public class InsertThridProductTypeController {
         returnMap=new HashMap<String, String>();
         JSONObject object= JSON.parseObject(json);
         typename=object.getString("typename");
+        higherid=object.getInteger("higherid");
         producttype.setTypename(typename);
-        sign=productTypeService.insertThirtType(producttype);
+        sign=productTypeService.insertThirtType(producttype,higherid);
         if(sign==-1){
             returnMap.put("code", "-1");
             returnMap.put("msg", "分类已存在");

@@ -60,7 +60,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
     }
 
     @Override
-    public int insertThirtType(Producttype producttype) {
+    public int insertThirtType(Producttype producttype,int higherid) {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andTypenameEqualTo(producttype.getTypename());
@@ -68,6 +68,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
         if (producttypeMapper.selectByExample(producttypeExample).size() > 0) {
             return -1;
         }
+        producttype.setHighertid(higherid);
         producttype.setTypeclass(3);
         producttype.setIsDelete(false);
         return producttypeMapper.insert(producttype);
