@@ -48,7 +48,7 @@ public class TypeController {
     public List<ProductPo> selectProductByptypeb(@RequestBody Map<String, String> re) throws Exception {
         String ptypeb = re.get("ptypeb");
         String code = re.get("code");
-        log.info("通过二级标签id查询下属商品ptypeb->"+ptypeb+"code->"+code);
+        log.info("通过三级标签id查询下属商品ptypeb->"+ptypeb+"code->"+code);
         if (StringUtil.isNullString(code)) {
             code = "0";
         }

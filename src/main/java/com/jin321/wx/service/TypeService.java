@@ -25,6 +25,7 @@ public interface TypeService {
      */
     List<Producttype> selectSecondProducttype(int tid) throws Exception;
 
+
     /**
      * 通过二级标签id查询下属商品
      * @param ptypeb
