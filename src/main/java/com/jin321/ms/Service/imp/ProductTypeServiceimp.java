@@ -1,7 +1,6 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductTypeService;
-import com.jin321.ms.controller.InsertSecondProductTypeController;
 import com.jin321.ms.model.TrueProductType;
 import com.jin321.pl.dao.ProducttypeMapper;
 
@@ -163,5 +162,15 @@ public class ProductTypeServiceimp implements ProductTypeService {
             trueProductTypeList.add(trueProductType);
         }
         return trueProductTypeList;
+    }
+
+    @Override
+    public List<Producttype> getAllTypes1(int tid) {
+        ProducttypeExample example=new ProducttypeExample();
+        ProducttypeExample.Criteria criteria=example.createCriteria();
+        criteria.andIsDeleteEqualTo(false);
+        criteria.andTypeclassEqualTo(3);
+        criteria.andHighertidEqualTo(tid);
+        return producttypeMapper.selectByExample(example);
     }
 }

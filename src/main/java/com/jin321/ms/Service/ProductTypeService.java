@@ -2,11 +2,9 @@ package com.jin321.ms.Service;
 
 import com.jin321.ms.model.TrueProductType;
 import com.jin321.pl.model.Producttype;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -68,4 +66,7 @@ public interface ProductTypeService {
      */
     @Transactional(rollbackFor = Exception.class)
     public List<TrueProductType> getAllTypes();
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<Producttype> getAllTypes1(int tid);
 }
