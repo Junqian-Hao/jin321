@@ -33,6 +33,7 @@ public class TypeServiceImp implements TypeService {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andTypeclassEqualTo(1);
+        criteria.andIsDeleteEqualTo(false);
         List<Producttype> producttypes = producttypeMapper.selectByExample(producttypeExample);
         return producttypes;
     }
@@ -43,6 +44,7 @@ public class TypeServiceImp implements TypeService {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andHighertidEqualTo(tid);
+        criteria.andIsDeleteEqualTo(false);
         List<Producttype> producttypes = producttypeMapper.selectByExample(producttypeExample);
         return producttypes;
     }
