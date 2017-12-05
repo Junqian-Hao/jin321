@@ -52,7 +52,7 @@ public class UploadProductDetailController {
                     //使用StreamsAPI方式拷贝文件
                     Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productdetail/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productdetail=new Productdetail();
-                    productdetail.setPid(1);
+                    productdetail.setPid(Integer.parseInt(pid));
                     productdetail.setPicurl("productdetail/"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     log.info(UrlUtil.getRealPath(request)+"productdetail/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productdetail.setIsDeleted(false);
