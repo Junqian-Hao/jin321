@@ -7,6 +7,7 @@ import com.jin321.pl.model.Producttype;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +21,7 @@ import java.util.Map;
  *
  * @Description :
  */
-
+@Controller
 @RequestMapping("/ms")
 public class InsertThridProductTypeController {
     private static final Log log = LogFactory.getLog(InsertFirstProductTypeController.class);
