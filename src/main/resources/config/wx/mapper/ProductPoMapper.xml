@@ -3,7 +3,7 @@
 <mapper namespace="com.jin321.wx.dao.ProductPoMapper">
     <resultMap id="BaseResultMap" type="productPo">
         <id column="pid" property="pid" jdbcType="INTEGER"/>
-        <result column="psellnum" property="psellnum" jdbcType="INTEGER" />
+        <result column="psellnum" property="psellnum" jdbcType="INTEGER"/>
         <result column="did" property="did" jdbcType="INTEGER"/>
         <result column="pname" property="pname" jdbcType="VARCHAR"/>
         <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
@@ -25,10 +25,12 @@
         FROM product
             LEFT JOIN productpics ON product.`pid` = productpics.`pid`
             LEFT JOIN productsize ON product.`pid` = productsize.`pid`
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
         WHERE productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
               AND product.`is_together` = 1
+              AND productdetail.is_deleted = 0
               AND productsize.`is_deleted` = 0
               AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
                                              FROM productsize
@@ -43,33 +45,37 @@
         FROM product
             LEFT JOIN productpics ON product.`pid` = productpics.`pid`
             LEFT JOIN productsize ON product.`pid` = productsize.`pid`
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
         WHERE productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
-              AND product.ptypec=#{ptypec}
+              AND product.ptypec = #{ptypec}
+              AND productdetail.is_deleted = 0
               AND productsize.`is_deleted` = 0
               AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
                                              FROM productsize
                                              WHERE product.`pid` = productsize.`pid`)
-        ORDER BY product.`psellnum` desc
+        ORDER BY product.`psellnum` DESC
     </select>
     <select id="selectNowByPtypebByPrice" resultMap="BaseResultMap" parameterType="int">
         SELECT DISTINCT
-        product.*,
-        productpics.`ppicurl`,
-        productsize.pssellprice,
-        productsize.`psoriprice`
+            product.*,
+            productpics.`ppicurl`,
+            productsize.pssellprice,
+            productsize.`psoriprice`
         FROM product
-        LEFT JOIN productpics ON product.`pid` = productpics.`pid`
-        LEFT JOIN productsize ON product.`pid` = productsize.`pid`
+            LEFT JOIN productpics ON product.`pid` = productpics.`pid`
+            LEFT JOIN productsize ON product.`pid` = productsize.`pid`
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
         WHERE productpics.`is_deleted` = 0
-        AND productpics.`is_headpic` = 1
-        AND product.`is_delete` = 0
-        AND product.ptypec=#{ptypec}
-        AND productsize.`is_deleted` = 0
-        AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
-        FROM productsize
-        WHERE product.`pid` = productsize.`pid`)
+              AND productpics.`is_headpic` = 1
+              AND product.`is_delete` = 0
+              AND productdetail.is_deleted = 0
+              AND product.ptypec = #{ptypec}
+              AND productsize.`is_deleted` = 0
+              AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
+                                             FROM productsize
+                                             WHERE product.`pid` = productsize.`pid`)
         ORDER BY productsize.`pssellprice`
     </select>
     <select id="selectNowBykeyOrderByPrice" resultMap="BaseResultMap" parameterType="string">
@@ -81,12 +87,15 @@
         FROM product
             LEFT JOIN productpics ON product.`pid` = productpics.`pid`
             LEFT JOIN productsize ON product.`pid` = productsize.`pid`
-            LEFT JOIN producttype ON product.`ptypea`=producttype.`tid` OR product.`ptypeb`=producttype.`tid`
+            LEFT JOIN producttype ON product.`ptypea` = producttype.`tid` OR product.`ptypeb` = producttype.`tid`
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
         WHERE productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
               AND productsize.`is_deleted` = 0
-              AND (product.`pname` LIKE '%${key}%' OR product.`psummary` LIKE '%${key}%' OR producttype.`typename` LIKE '%${key}%')
+              AND productdetail.is_deleted = 0
+              AND (product.`pname` LIKE '%${key}%' OR product.`psummary` LIKE '%${key}%' OR
+                   producttype.`typename` LIKE '%${key}%')
               AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
                                              FROM productsize
                                              WHERE product.`pid` = productsize.`pid`)
@@ -94,23 +103,26 @@
     </select>
     <select id="selectNowBykeyOrderByPsellnum" resultMap="BaseResultMap" parameterType="string">
         SELECT DISTINCT
-        product.*,
-        productpics.`ppicurl`,
-        productsize.pssellprice,
-        productsize.`psoriprice`
+            product.*,
+            productpics.`ppicurl`,
+            productsize.pssellprice,
+            productsize.`psoriprice`
         FROM product
-        LEFT JOIN productpics ON product.`pid` = productpics.`pid`
-        LEFT JOIN productsize ON product.`pid` = productsize.`pid`
-        LEFT JOIN producttype ON product.`ptypea`=producttype.`tid` OR product.`ptypeb`=producttype.`tid`
+            LEFT JOIN productpics ON product.`pid` = productpics.`pid`
+            LEFT JOIN productsize ON product.`pid` = productsize.`pid`
+            LEFT JOIN producttype ON product.`ptypea` = producttype.`tid` OR product.`ptypeb` = producttype.`tid`
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
         WHERE productpics.`is_deleted` = 0
-        AND productpics.`is_headpic` = 1
-        AND product.`is_delete` = 0
-        AND productsize.`is_deleted` = 0
-        AND (product.`pname` LIKE '%${key}%' OR product.`psummary` LIKE '%${key}%' OR producttype.`typename` LIKE '%${key}%')
-        AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
-        FROM productsize
-        WHERE product.`pid` = productsize.`pid`)
-        ORDER BY product.`psellnum` desc
+              AND productpics.`is_headpic` = 1
+              AND product.`is_delete` = 0
+              AND productsize.`is_deleted` = 0
+              AND productdetail.is_deleted = 0
+              AND (product.`pname` LIKE '%${key}%' OR product.`psummary` LIKE '%${key}%' OR
+                   producttype.`typename` LIKE '%${key}%')
+              AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
+                                             FROM productsize
+                                             WHERE product.`pid` = productsize.`pid`)
+        ORDER BY product.`psellnum` DESC
     </select>
 
 </mapper>

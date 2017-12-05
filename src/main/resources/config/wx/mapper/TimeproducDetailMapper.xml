@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.TimeproducDetailMapper">
     <resultMap id="BaseResultMap" type="timeproducDetail">
-        <id column="tpid" property="tpid" jdbcType="INTEGER" />
-        <result column="pid" property="pid" jdbcType="INTEGER" />
-        <result column="timestart" property="timestart" jdbcType="TIMESTAMP" />
-        <result column="timeend" property="timeend" jdbcType="TIMESTAMP" />
-        <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
-        <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR" />
+        <id column="tpid" property="tpid" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="timestart" property="timestart" jdbcType="TIMESTAMP"/>
+        <result column="timeend" property="timeend" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="BIT"/>
+        <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
         <association property="products" javaType="product">
@@ -33,14 +33,16 @@
             LEFT JOIN product ON timeproduct.`pid` = product.`pid`
             LEFT JOIN productpics ON timeproduct.`pid` = productpics.`pid`
             LEFT JOIN productsize ON timeproduct.`pid` = productsize.`pid`
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
         WHERE timeproduct.`is_deleted` = 0
               AND productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
+              AND productdetail.is_deleted = 0
               AND product.`is_delete` = 0
               AND productsize.`is_deleted` = 0
               AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
                                              FROM productsize
                                              WHERE timeproduct.`pid` = productsize.`pid`)
-              AND timeproduct.timeend>NOW()
+              AND timeproduct.timeend > NOW()
     </select>
 </mapper>

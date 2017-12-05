@@ -31,10 +31,12 @@
             LEFT JOIN product ON rollingpick.`pid` = product.`pid`
             LEFT JOIN productpics ON rollingpick.`pid` = productpics.`pid`
             LEFT JOIN productsize ON rollingpick.`pid` = productsize.`pid`
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
         WHERE rollingpick.`is_deleted` = 0
               AND productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
               AND product.`is_delete` = 0
+              AND productdetail.is_deleted = 0
               AND productsize.`is_deleted` = 0
               AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
                                              FROM productsize
@@ -52,9 +54,11 @@
             LEFT JOIN product ON rollingpick.`pid` = product.`pid`
             LEFT JOIN productpics ON rollingpick.`pid` = productpics.`pid`
             LEFT JOIN productsize ON rollingpick.`pid` = productsize.`pid`
+            LEFT JOIN productdetail ON product.pid = productdetail.pid
         WHERE rollingpick.`is_deleted` = 0
               AND productpics.`is_deleted` = 0
               AND productpics.`is_headpic` = 1
+              AND productdetail.is_deleted = 0
               AND product.`is_delete` = 0
               AND productsize.`is_deleted` = 0
               AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)

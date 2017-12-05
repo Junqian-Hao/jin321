@@ -26,7 +26,8 @@ public class FullProductController {
     FullProductService fullProductService;
 
     /**
-     *通过id查询商品详细信息
+     * 通过id查询商品详细信息
+     *
      * @param re
      * @return
      * @throws Exception
@@ -35,7 +36,7 @@ public class FullProductController {
     @ResponseBody
     public FullProduct selectFullProductById(@RequestBody Map<String, String> re, HttpServletRequest request) throws Exception {
         String pid = re.get("pid");
-        log.info("通过id查询商品信息，商品id"+pid);
+        log.info("通过id查询商品信息，商品id" + pid);
         FullProduct fullProduct = fullProductService.selectFullProductById(Integer.parseInt(pid));
         fullProduct.setBasePathNoPort("https://www.jin321.cn/jin321/");
         return fullProduct;
