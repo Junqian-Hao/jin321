@@ -644,10 +644,11 @@ $(function(){
         for(var i = 0;i<len;i++){
             arr[i] = $($(".pid-input")[i]).val();
         }
-        console.log(arr);
         for(var i = 0;i<len;i++){
             fdl.append("pid",arr[i]);
         }
+        var lay = $("<div class='black-overlay'></div>");
+        $(".content").append(lay);
         $.ajax({
             url:"/jin321/ms/insertRollingPic.do",
             type:"post",
@@ -656,6 +657,7 @@ $(function(){
             processData: false,
             cache: false,
             success: function (res) {
+                $(".black-overlay").remove();
                 if(res.code == 1){
                     alert("轮播图设置成功");
                 }
