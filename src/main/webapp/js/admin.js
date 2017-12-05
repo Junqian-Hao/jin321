@@ -1,4 +1,3 @@
-
 //存放一级分类id
 var Subtype = {};
 //存放二级分类id
@@ -104,10 +103,11 @@ $(function(){
 
     $("#file-btn").on("click", function () {
         var len = $(".info-choose").length;
-        var data = {};
+        fd.delete("header");
+        fd.delete("pid");
         for(var i = 0;i<len;i++){
             if($($(".info-choose")[i]).is(":checked")){
-                fd.append("pid",$($(".s-id")[i]).html());
+                fd.append("pid",pId[i]);
             }
         }
         fd.append("header",0);
@@ -129,10 +129,12 @@ $(function(){
     //上传商品缩略图
     $("#file-suo-btn").on("click", function () {
         var len = $(".info-choose").length;
-        var data = {};
+        fd.delete("header");
+        fd.delete("pid");
+        console.log(fd.get("header"));
         for(var i = 0;i<len;i++){
             if($($(".info-choose")[i]).is(":checked")){
-                fd.append("pid",$($(".s-id")[i]).html());
+                fd.append("pid",pId[i]);
             }
         }
         fd.append("header",1);
@@ -155,9 +157,12 @@ $(function(){
     $("#file-detail-btn").on("click", function () {
         var len = $(".info-choose").length;
         var data = {};
+        fd.delete("header");
+        fd.delete("pid");
+        console.log(fd.get("header"));
         for(var i = 0;i<len;i++){
             if($($(".info-choose")[i]).is(":checked")){
-                fd.append("pid",$($(".s-id")[i]).html());
+                fd.append("pid",pId[i]);
             }
         }
         $.ajax({

@@ -219,7 +219,6 @@ $(function(){
         var value = $("#first-type2").val();
         fd.append("typename",$("#brands").val());
         fd.append("highertid",typeId[value]);
-        console.log(fd);
         $.ajax({
             url:"/jin321/ms/insertSecondProductType.do",
             type:"post",
@@ -397,6 +396,8 @@ $(function(){
                             var checkbox = $("<input type='checkbox' class='choose-common-checkbox'>");
                             //id
                             const tdId = $("<td class='s-id'></td>").html(res[i].sid);
+                            //轮播图id
+                            const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
                             //名称
                             const tdName = $("<td class='s-name'></td>").html(res[i].pname);
                             //介绍
@@ -416,7 +417,7 @@ $(function(){
                             //剩余货物
                             const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
                             tdR.append(checkbox);
-                            $(tr).append(tdR,tdId,tdName,tdPsummary,tdSize,tdPtypea,tdPtypeb,tdPtypec,tdPsoriprice,tdPssellprice,tdSnumber,tdSnumber);
+                            $(tr).append(tdR,tdId,tdPid,tdName,tdPsummary,tdSize,tdPtypea,tdPtypeb,tdPtypec,tdPsoriprice,tdPssellprice,tdSnumber,tdSnumber);
                             $("#watch-common-table").append(tr);
                         }
                         setTimeout(function () {
@@ -627,7 +628,7 @@ $(function(){
         $(".pid-input").remove();
         fdl = new FormData();
         for(var i=0;i<this.files.length;i++){
-            var input = $("<input type='text' placeholder='请输入图片相对应的商品id' class='pid-input'>");
+            var input = $("<input type='text' placeholder='请输入图片相对应的商品pid' class='pid-input'>");
             var br = $("<br>");
             $(".pid-content").append(input,br);
             var reader = new FileReader();
@@ -638,6 +639,7 @@ $(function(){
 
     $("#lun-btn").on("click", function () {
         var len = $(".pid-input").length;
+        fdl.delete("pid");
         var arr = [];
         for(var i = 0;i<len;i++){
             arr[i] = $($(".pid-input")[i]).val();
