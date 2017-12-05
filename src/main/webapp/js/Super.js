@@ -644,6 +644,7 @@ $(function(){
         for(var i = 0;i<len;i++){
             arr[i] = $($(".pid-input")[i]).val();
         }
+        console.log(arr);
         for(var i = 0;i<len;i++){
             fdl.append("pid",arr[i]);
         }
