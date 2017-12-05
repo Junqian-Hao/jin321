@@ -25,13 +25,13 @@
                     <li id="watch-type">查看分类</li>
                     <li id="add-type">添加分类</li>
                     <li id="add-brands">添加品牌</li>
+                    <li id="add-kinds">添加种类</li>
                 </ul>
             </div>
             <div class="parents-manage item">
                 <ul>
                     <li id="watch-common">查看普通商品</li>
                     <li id="watch-parents">查看合伙人商品</li>
-                    <li id="add-parents">添加合伙人商品</li>
                 </ul>
             </div>
             <div class="merchant-mange item">
@@ -57,10 +57,12 @@
                         <td>选择</td>
                         <td>分类</td>
                         <td>品牌</td>
+                        <td>种类</td>
                     </tr>
                 </table>
                 <button id="delete-type-btn">删除分类</button>
                 <button id="delete-b-btn">删除品牌</button>
+                <button id="delete-kind">删除种类</button>
             </div>
             <!-- 添加分类 -->
             <div class="add-type item">
@@ -79,6 +81,18 @@
                 <input type="file" id="img-file">
                 <button id="sub-brands">提交</button>
             </div>
+            <!-- 添加种类 -->
+            <div class="add-kind item">
+                <select id="typea">
+
+                </select>
+                <select id="typeb">
+
+                </select><br>
+                <label>请输入需要添加的种类</label>
+                <input type="text" id="typec-input">
+                <button id="add-kind-btn">添加</button>
+            </div>
             <!-- 查看普通商品-->
             <div class="watch-common-content item">
                 <select id="common-s-select">
@@ -93,6 +107,7 @@
                         <td>规格</td>
                         <td>分类</td>
                         <td>品牌</td>
+                        <td>种类</td>
                         <td>原价</td>
                         <td>售价</td>
                         <td>剩余数量</td>

@@ -17,7 +17,7 @@
         <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="selectAllNowTogether" resultMap="BaseResultMap">
-        SELECT
+        SELECT DISTINCT
             product.*,
             productpics.`ppicurl`,
             productsize.pssellprice,
