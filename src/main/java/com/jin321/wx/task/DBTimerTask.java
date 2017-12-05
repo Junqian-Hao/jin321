@@ -22,7 +22,7 @@ public class DBTimerTask {
     @Autowired
     RollingpickMapper rollingpickMapper;
 
-    @Scheduled(cron = "0 0 0/7 * * ?")
+    @Scheduled(cron = "0 0 0/1 * * ?")
     public void run() {
         log.info("定时心跳数据库保持连接");
         List<Rollingpick> rollingpicks = rollingpickMapper.selectByExample(new RollingpickExample());
