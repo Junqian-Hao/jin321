@@ -665,4 +665,99 @@ $(function(){
         })
     });
 
+    //秒杀管理
+    $("#time-kill-manage").on("click", function () {
+        $(".item").css("display","none");
+        $(".time-kill").css("display","block");
+        $(".time-kill-content").css("display","block");
+        $("#time-kill").trigger("click");
+    });
+
+    //查看秒杀
+    $("#time-kill").on("click", function () {
+        $(".item").css("display","none");
+        $(".time-kill").css("display","block");
+        $(".time-kill-content").css("display","block");
+        $(".kill-tr").remove();
+
+        $.ajax({
+            url:"/jin321/ms/firstRequest.do",
+            method:"post",
+            success: function (res) {
+                for(var i = 0;i < res.timeproducs.length;i++){
+                    var tr = $("<tr class='kill-tr'></tr>");
+                    //选择
+                    var tdR = $("<td></td>");
+                    var check = $("<input class='kill-check' type='checkbox'>")
+                    ///id
+                    var tdId = $("<td class='kill-id'></td>").html(res.timeproducs[i].tpid);
+                    //名称
+                    var tdName = $("<td></td>").html(res.timeproducs[i].products.pname);
+                    //原价
+                    var tdPsoriprice = $("<td></td>").html(res.timeproducs[i].psoriprice);
+                    //售价
+                    var tdPssellprice = $("<td></td>").html(res.timeproducs[i].pssellprice);
+                    $(tdR).append(check);
+                    $(tr).append(tdR,tdId,tdName,tdPsoriprice,tdPssellprice);
+                    $("#time-kill-table").append(tr);
+                }
+            }
+        })
+    });
+
+    //删除秒杀
+    $("#time-kill-btn").on("click", function () {
+        var len = $(".kill-tr").length;
+        var arr = [];
+        var index = 0;
+        for(var i = 0;i<len;i++){
+            if($($(".kill-check")[i]).is(":checked")){
+                arr[index] = $($(".kill-id")[i]).html()-0;
+                index++;
+            }
+        }
+        var json = {
+            tpid:arr
+        }
+        $.ajax({
+            url:"/jin321/ms/deleteTimeProduct.do",
+            method:"post",
+            contentType:"application/json",
+            data:JSON.stringify(json),
+            success: function (res) {
+                if(res.code == 1){
+                    alert("删除成功");
+                    $("#time-kill").trigger("click");
+                }
+            }
+        })
+    });
+
+    //添加秒杀
+    $("#time-add").on("click", function () {
+        $(".item").css("display","none");
+        $(".time-kill").css("display","block");
+        $(".add-time-kill").css("display","block");
+    });
+    $("#add-time-kill").on("click",function(){
+        var start = new Date($("#time-start").val()).getTime();
+        var end = new Date($("#time-end").val()).getTime();
+        var json = {
+            pid:$("#time-text").val(),
+            timestart:start,
+            timeend:end
+        }
+        $.ajax({
+            url:"/jin321/ms/createTimeproduct.do",
+            method:"post",
+            contentType:"application/json",
+            data:JSON.stringify(json),
+            success: function (res) {
+                if(res.code == 1){
+                    alert("添加成功");
+                }
+            }
+        });
+    });
 });
+

@@ -16,7 +16,7 @@
                 <li id="parents-manage">商品管理</li>
                 <li id="merchant-manage">商家管理</li>
                 <li id="lun-manage">轮播图管理</li>
-                <!--<li id="time-kill-manage">秒杀管理</li>-->
+                <li id="time-kill-manage">秒杀管理</li>
             </ul>
         </div>
         <!-- 左侧栏 -->
@@ -47,11 +47,12 @@
                     <li id="lun-li">轮播图管理</li>
                 </ul>
             </div>
-            <!--<div class="time-kill item">-->
-                <!--<ul>-->
-                    <!--<li id="time-kill">设置秒杀</li>-->
-                <!--</ul>-->
-            <!--</div>-->
+            <div class="time-kill item">
+                <ul>
+                    <li id="time-kill">查看秒杀</li>
+                    <li id="time-add">添加秒杀</li>
+                </ul>
+            </div>
         </div>
 
         <!-- 内容 -->
@@ -172,11 +173,28 @@
                 </div>
                 <button id="lun-btn">提交</button>
             </div>
-            <!--&lt;!&ndash; 限时秒杀 &ndash;&gt;-->
-            <!--<div class="time-kill-content item">-->
-                <!--<input id="time-start" type="date" placeholder="选择商品开始秒杀时间">-->
-                <!--<input id="time-end" type="date" placeholder="选择商品结束秒杀时间">-->
-            <!--</div>-->
+            <!-- 查看秒杀 -->
+            <div class="time-kill-content item">
+                <table id="time-kill-table">
+                    <tr>
+                        <td>选择</td>
+                        <td>id</td>
+                        <td>商品名称</td>
+                        <td>商品原价</td>
+                        <td>商品售价</td>
+                    </tr>
+                </table>
+                <button id="time-kill-btn">删除</button>
+            </div>
+            <!-- 添加秒杀 -->
+            <div class="add-time-kill item">
+                请选择秒杀开始时间
+                <input id="time-start" type="datetime-local">
+                请选择秒杀结束时间
+                <input id="time-end" type="datetime-local">
+                <input id="time-text" type="text" placeholder="请输入添加商品的pid">
+                <button id="add-time-kill">添加</button>
+            </div>
         </div>
     </div>
     <script src="js/Super.js"></script>
