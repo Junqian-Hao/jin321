@@ -105,11 +105,13 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
             sid= Integer.parseInt(iterator.next());
             log.debug("获取到的sid为:"+sid);
             productsize=productsizeMapper.selectByPrimaryKey(sid);
+            sign=productsizeMapper.updateByPrimaryKey(productsize);
             if(productsize!=null){
                 productsize.setIsDeleted(true);
                 ProductsizeExample example=new ProductsizeExample();
                 ProductsizeExample.Criteria criteria=example.createCriteria();
                 criteria.andPidEqualTo(productsize.getPid());
+                criteria.andIsDeletedEqualTo(false);
                 if(productsizeMapper.selectByExample(example).size()==0){
                     product=productMapper.selectByPrimaryKey(productsize.getPid());
                     if (product!=null){
@@ -120,7 +122,6 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
                     else
                         return 2;
                 }
-                sign=productsizeMapper.updateByPrimaryKey(productsize);
             }else
                 return -1;
 

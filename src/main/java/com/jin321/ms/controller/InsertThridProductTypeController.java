@@ -24,7 +24,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/ms")
 public class InsertThridProductTypeController {
-    private static final Log log = LogFactory.getLog(InsertFirstProductTypeController.class);
+    private static final Log log = LogFactory.getLog(InsertThridProductTypeController.class);
     @Autowired
     private ProductTypeService productTypeService;
     private Map<String,String> returnMap;
@@ -35,6 +35,7 @@ public class InsertThridProductTypeController {
     @ResponseBody
     @RequestMapping("/insertThirdProductType")
     public Map<String,String> insertThirdProdcutType(@RequestBody String json){
+        log.info("添加三级分类");
         producttype=new Producttype();
         returnMap=new HashMap<String, String>();
         JSONObject object= JSON.parseObject(json);

@@ -3,6 +3,8 @@ package com.jin321.ms.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.ProductService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/ms")
 public class DeleteTogetherProductController {
+    private static final Log log = LogFactory.getLog(DeleteTogetherProductController.class);
     @Autowired
     private ProductService productService;
     private Map<String,String> returnMap;
@@ -29,6 +32,7 @@ public class DeleteTogetherProductController {
     @ResponseBody
     @RequestMapping("/deleteTogeter")
     public Map<String, String> deleteTogeter(@RequestBody String json){
+        log.info("取消合伙人商品");
         returnMap=new HashMap<String, String>();
         JSONObject object=JSON.parseObject(json);
         pids=(List<String>) object.get("pid");

@@ -4,6 +4,8 @@ import com.jin321.ms.Service.RollingPicService;
 import com.jin321.pl.model.Rollingpick;
 import com.jin321.pl.utils.UrlUtil;
 import org.apache.commons.fileupload.util.Streams;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,7 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/ms")
 public class UploadRollingPicController {
+    private static final Log log = LogFactory.getLog(UploadRollingPicController.class);
     @Autowired
     private RollingPicService rollingPicService;
     private Rollingpick rollingpick;
@@ -39,6 +42,7 @@ public class UploadRollingPicController {
     public Map<String, String> insertRollingPic(@RequestParam("file") CommonsMultipartFile[] file,
                                                 @RequestParam("pid") int pid[],
                                                 HttpServletRequest request){
+        log.info("上传轮播图");
 
         returnMap = new HashMap<String, String>();
         rollingPicService.deleteAllRollingPic();

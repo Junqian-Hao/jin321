@@ -28,7 +28,7 @@ public class SelectProductSizeDetailBydidController {
     @ResponseBody
     @RequestMapping("/getDetail1ByDid")
     public List<TrueUpdateProductSizeDetail> getPrductSizeDetail(HttpServletRequest request) {
-        did = (Integer) request.getSession().getAttribute("did");
+            did = (Integer) request.getSession().getAttribute("did");
         trueUpdateProductSizeDetails = productSizeDetailService.getDetailBydid(did);
         return trueUpdateProductSizeDetails;
     }

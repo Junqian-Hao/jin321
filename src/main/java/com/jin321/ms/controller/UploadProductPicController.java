@@ -44,8 +44,7 @@ public class UploadProductPicController {
                                                 @RequestParam("file") CommonsMultipartFile[] file
                                                 ,@RequestParam("header")String header,
                                                 @RequestParam("pid")String pid){
-        log.debug("header输出:"+header);
-        log.debug("pid输出"+pid);
+        log.info("上传图片或缩略图");
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
         productPicService.productNoHeadPicDelete(Integer.parseInt(pid),UrlUtil.getRealPath(request));

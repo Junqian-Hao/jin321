@@ -43,9 +43,7 @@ public class InsertSecondProductTypeController {
             @RequestParam("typename") String typename,
             @RequestParam("highertid")String highertid,
             HttpServletRequest request) {
-        log.debug("typename"+typename);
-        log.debug("文件为:"+file);
-        log.debug("上一级id"+highertid);
+        log.info("添加二级分类typename"+typename);
         returnMap=new HashMap<String, String>();
         producttype=new Producttype();
         try {

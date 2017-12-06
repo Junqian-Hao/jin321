@@ -16,6 +16,7 @@
     <context:component-scan base-package="com.jin321.ms.controller"/>
     <context:component-scan base-package="com.jin321.wx.controller"/>
     <context:component-scan base-package="com.jin321.wx.task"/>
+    <context:component-scan base-package="com.jin321.ms.event"/>
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"

@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.ProductService;
 import com.jin321.ms.model.TrueProduct;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/ms")
 public class SelectProuctByDidController {
+    private static final Log log = LogFactory.getLog(SelectProuctByDidController.class);
     @Autowired
     private ProductService productService;
     private int did;
@@ -28,6 +31,7 @@ public class SelectProuctByDidController {
     @ResponseBody
     @RequestMapping("/selectProdutByDid")
     public List<TrueProduct> selectProductByDid(@RequestBody String json){
+        log.info("商家查询自己商品");
         JSONObject object= JSON.parseObject(json);
         did=object.getInteger("did");
         trueProductList=productService.selectProductByDealer(did);

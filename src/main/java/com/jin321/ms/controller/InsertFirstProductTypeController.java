@@ -33,7 +33,7 @@ public class InsertFirstProductTypeController {
     @ResponseBody
     @RequestMapping("/insertFirstProductType")
     public Map<String,String> insertFirstProdcutType(@RequestBody String json){
-        log.debug("传来的添加FTjson为"+json);
+        log.info("添加一级分类传来的添加FTjson为"+json);
         producttype=new Producttype();
         returnMap=new HashMap<String, String>();
         JSONObject object= JSON.parseObject(json);

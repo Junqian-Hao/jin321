@@ -33,7 +33,7 @@ public class DeleteProductSizeDetailController {
     @ResponseBody
     @RequestMapping("/deleteProductSize")
     public Map<String,String> deleteProductSize(@RequestBody String json){
-        log.debug("传来的json为："+json);
+        log.info("用户删除规格传来的json为："+json);
         returnMap=new HashMap<String, String>();
         JSONObject object=JSON.parseObject(json);
         sidlist=(List<String>)object.get("sid");

@@ -22,6 +22,7 @@ public class SelectAllProductTypeController {
     @ResponseBody
     @RequestMapping("/selectAllProductType")
     public List<TrueProductType> getAllTypes(){
-            return productTypeService.getAllTypes();
+        log.info("查询所有商品分类");
+        return productTypeService.getAllTypes();
     }
 }

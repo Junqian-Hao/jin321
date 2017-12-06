@@ -2,6 +2,8 @@ package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.jin321.ms.Service.ProductService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/ms")
 public class DeleteProductController {
+    private static final Log log = LogFactory.getLog(DeleteProductController.class);
     @Autowired
     private ProductService productService;
     private List<Integer> pids;
@@ -29,6 +32,7 @@ public class DeleteProductController {
     @RequestMapping("/deleteProduct")
     @ResponseBody
     public Map<String,String> deleteProduct(@RequestBody String json){
+        log.info("用户删除商品");
         returnMap=new HashMap<String, String>();
         pids=JSON.parseArray(json,Integer.class);
         if(productService.deleteProduct(pids)==1){

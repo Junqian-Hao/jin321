@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.ProductService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/ms")
 public class SetTogetherController {
+    private static final Log log = LogFactory.getLog(SetTogetherController.class);
     @Autowired
     private ProductService productService;
     private List<String> pids;
@@ -32,6 +35,7 @@ public class SetTogetherController {
     @RequestMapping("/setTogether")
     @ResponseBody
     public Map<String,String> setTogether(@RequestBody String json){
+        log.info("设置合伙人商品");
         returnMap=new HashMap<String, String>();
         JSONObject object=JSON.parseObject(json);
         pids=(List<String>)object.get("pid");

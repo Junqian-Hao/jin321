@@ -40,6 +40,7 @@ public class UploadProductDetailController {
     @RequestMapping(value = "/productDetailUpload",method = RequestMethod.POST)
     public Map<String, String> productDetailUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file,
                                                    @RequestParam("pid")String pid){
+        log.info("上传详情图片");
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
         productDetailService.productDetailDelete(Integer.parseInt(pid));
@@ -53,7 +54,7 @@ public class UploadProductDetailController {
                     Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productdetail/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
                     productdetail=new Productdetail();
                     productdetail.setPid(Integer.parseInt(pid));
-                    productdetail.setPicurl("productdetail/"+uuids+"."+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    productdetail.setPicurl("productdetail/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     log.info(UrlUtil.getRealPath(request)+"productdetail/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productdetail.setIsDeleted(false);
                     productDetailService.productDetailUpdate(productdetail);

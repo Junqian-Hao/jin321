@@ -31,7 +31,7 @@ public class InsertDealerController {
     @ResponseBody
     @RequestMapping("/insertDealer")
     public Map<String, String> insertDealer(@RequestBody String json) {
-        log.debug("传来的json为："+json);
+        log.info("添加商户传来的json为："+json);
         returnMap = new HashMap<String, String>();
         dealer = JSON.parseObject(json, Dealer.class);
         sign=dealerService.insertDealer(dealer);

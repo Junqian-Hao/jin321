@@ -46,7 +46,7 @@ public class DealerLoginController{
     @RequestMapping("/dealerLogin")
     @ResponseBody
     public Map<String,String> dealerLogin(@RequestBody String json, HttpServletRequest request){
-        log.debug("传来的json为："+json);
+        log.info("用户登录传来的json为："+json);
         returnMap=new HashMap<String, String>();
         JSONObject obj= JSON.parseObject(json);
         dusername=obj.getString("dusername");

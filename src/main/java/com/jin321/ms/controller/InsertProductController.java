@@ -52,6 +52,7 @@ public class InsertProductController {
         returnMap=new HashMap<String, String>();
         JSONObject obj= JSON.parseObject(json);
         //product
+        log.info("添加商品传来的json为:"+json);
         product=JSON.parseObject(obj.get("product").toString(),Product.class);
         product.setDid((Integer) request.getSession().getAttribute("did"));
         //productsize

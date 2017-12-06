@@ -40,6 +40,7 @@ public class UpdateProductController {
     @RequestMapping("/updateProduct")
     @ResponseBody
     public Map<String,String> updateProduct(@RequestBody String json) {
+        log.info("更新商品信息");
         returnMap=new HashMap<String, String>();
         updateProductSizeDetail=JSON.parseObject(json,UpdateProductSizeDetail.class);
         sign=productSizeDetailService.updateDetail(updateProductSizeDetail);
