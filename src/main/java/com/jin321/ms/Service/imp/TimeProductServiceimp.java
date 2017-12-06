@@ -26,6 +26,7 @@ public class TimeProductServiceimp implements TimeProductService {
         TimeproductExample timeproductExample=new TimeproductExample();
         TimeproductExample.Criteria criteria=timeproductExample.createCriteria();
         criteria.andPidEqualTo(timeproduct.getPid());
+        criteria.andIsDeletedEqualTo(false);
         timeproducts=timeproductMapper.selectByExample(timeproductExample);
         if(timeproducts.size()>0)
                 return -1;
