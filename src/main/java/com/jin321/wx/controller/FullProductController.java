@@ -2,6 +2,7 @@ package com.jin321.wx.controller;
 
 import com.jin321.wx.model.FullProduct;
 import com.jin321.wx.service.FullProductService;
+import com.jin321.wx.utils.WXUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class FullProductController {
         String pid = re.get("pid");
         log.info("通过id查询商品信息，商品id" + pid);
         FullProduct fullProduct = fullProductService.selectFullProductById(Integer.parseInt(pid));
-        fullProduct.setBasePathNoPort("https://www.jin321.cn/jin321/");
+        fullProduct.setBasePathNoPort(WXUtil.BASEPATH);
         return fullProduct;
     }
 }

@@ -7,6 +7,7 @@ import com.jin321.pl.utils.StringUtil;
 import com.jin321.wx.model.LoginEntity;
 import com.jin321.wx.service.FirstPageService;
 import com.jin321.wx.utils.AES;
+import com.jin321.wx.utils.WXUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,7 +46,8 @@ public class FirstPageController {
     public Map<String, Object> firstRequest(HttpServletRequest request) throws Exception {
         log.info("请求首页信息");
         Map<String, Object> firstPageMessage = firstPageService.getFirstPageMessage();
-        firstPageMessage.put("basePath", "https://www.jin321.cn/jin321/");
+//        firstPageMessage.put("basePath", "https://www.jin321.cn/jin321/");
+        firstPageMessage.put("basePath", WXUtil.BASEPATH);
         return firstPageMessage;
     }
 
