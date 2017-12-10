@@ -47,7 +47,10 @@ public class UploadProductPicController {
         log.info("上传图片或缩略图");
         returnmap=new HashMap<String,String>();
         //分别获取的是变量名file---文件类型---文件名
-        productPicService.productNoHeadPicDelete(Integer.parseInt(pid),UrlUtil.getRealPath(request));
+        if (header.equals("0"))
+            productPicService.productNoHeadPicDelete(Integer.parseInt(pid),false);
+        else
+            productPicService.productNoHeadPicDelete(Integer.parseInt(pid),true);
         try {
             for (int i=0;i<file.length;i++) {
                 if (!file[i].isEmpty()) {

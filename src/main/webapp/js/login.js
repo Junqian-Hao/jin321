@@ -5,7 +5,8 @@ $(function(){
             type:"post",
             contentType:"application/json",
             success: function () {
-                $("#verificationÏmg").attr("src","/jin321/ms/getCaptcha.do");
+                var time = new Date();
+                $("#verificationÏmg").attr("src","/jin321/ms/getCaptcha.do?time="+time.getTime());
             }
         })
     });

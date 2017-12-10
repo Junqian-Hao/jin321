@@ -4,6 +4,7 @@ import com.jin321.ms.Service.ProductPicService;
 import com.jin321.pl.dao.ProductpicsMapper;
 import com.jin321.pl.model.Productpics;
 import com.jin321.pl.model.ProductpicsExample;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,11 +50,12 @@ public class ProductPicServiceimp implements ProductPicService {
 
     private Productpics productpics;
     @Override
-    public void productNoHeadPicDelete(int pid,String RealPath) {
+    public void productNoHeadPicDelete(int pid,Boolean header) {
         ProductpicsExample productpicsExample = new ProductpicsExample();
         ProductpicsExample.Criteria criteria = productpicsExample.createCriteria();
         criteria.andIsDeletedEqualTo(false);
         criteria.andPidEqualTo(pid);
+        criteria.andIsHeadpicEqualTo(header);
         productpicsold = productpicsMapper.selectByExample(productpicsExample);
         Iterator<Productpics> iterator = productpicsold.iterator();
         while (iterator.hasNext()) {

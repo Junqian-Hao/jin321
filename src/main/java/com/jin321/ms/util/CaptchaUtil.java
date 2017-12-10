@@ -1,5 +1,9 @@
 package com.jin321.ms.util;
 
+import com.jin321.ms.controller.CaptchaController;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
@@ -19,6 +23,7 @@ import java.util.Random;
  */
 
 public class CaptchaUtil{
+    private static final Log log = LogFactory.getLog(CaptchaUtil.class);
     private static char[] chs = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789".toCharArray();
         private static final int NUMBER_OF_CHS = 4;
         private static final int IMG_WIDTH = 65;
@@ -38,6 +43,7 @@ public class CaptchaUtil{
                 g.drawString(chs[index] + "", 15 * i + 3, 18);                              // 画出字符
                 sb.append(chs[index]);                                                      // 验证码字符串
             }
+            log.info("生成的验证码为:"+sb.toString());
             request.getSession().setAttribute("verifycode",sb.toString());
             return image;
     }

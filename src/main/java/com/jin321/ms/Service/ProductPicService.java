@@ -2,6 +2,7 @@ package com.jin321.ms.Service;
 
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Productpics;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public interface ProductPicService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    void productNoHeadPicDelete(int pid,String Realpath);
+    void productNoHeadPicDelete(int pid, Boolean header);
 
     /**
      * 删除图片

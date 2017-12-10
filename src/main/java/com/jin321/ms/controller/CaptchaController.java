@@ -27,7 +27,6 @@ public class CaptchaController {
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
         response.setContentType("image/jpeg");
-        log.info("验证码为:"+request.getSession().getAttribute("verifycode"));
         ImageIO.write(CaptchaUtil.generateCaptcha(request), "jpg", response.getOutputStream());
     }
 }
