@@ -31,6 +31,7 @@ public class TimeProductServiceimp implements TimeProductService {
         if(timeproducts.size()>0)
                 return -1;
         else{
+            timeproduct.setIsDeleted(false);
             return timeproductMapper.insert(timeproduct);
         }
     }

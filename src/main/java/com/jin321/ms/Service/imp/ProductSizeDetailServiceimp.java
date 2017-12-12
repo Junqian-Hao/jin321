@@ -107,17 +107,17 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
             productsize=productsizeMapper.selectByPrimaryKey(sid);
             sign=productsizeMapper.updateByPrimaryKey(productsize);
             if(productsize!=null){
-                productsize.setIsDeleted(true);
                 ProductsizeExample example=new ProductsizeExample();
                 ProductsizeExample.Criteria criteria=example.createCriteria();
                 criteria.andPidEqualTo(productsize.getPid());
                 criteria.andIsDeletedEqualTo(false);
+                productsize.setIsDeleted(true);
+                sign=productsizeMapper.updateByPrimaryKey(productsize);
                 if(productsizeMapper.selectByExample(example).size()==0){
                     product=productMapper.selectByPrimaryKey(productsize.getPid());
                     if (product!=null){
                         product.setIsDelete(1);
                         productMapper.updateByPrimaryKey(product);
-                        sign=productsizeMapper.updateByPrimaryKey(productsize);
                     }
                     else
                         return 2;
@@ -126,6 +126,6 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
                 return -1;
 
         }
-        return sign;
+      return sign;
     }
 }
