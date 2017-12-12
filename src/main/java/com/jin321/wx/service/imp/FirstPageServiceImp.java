@@ -58,7 +58,7 @@ public class FirstPageServiceImp implements FirstPageService {
         //轮播图
         List<RollingpickDetail> rollingpickDetails = rollingpickDetailMapper.selectNow();
         map.put("rollingpicks", rollingpickDetails);
-        //秒杀
+        //秒杀（热卖商品）
         List<TimeproducDetail> timeproducDetails = timeproducDetailMapper.selectNowAll();
         map.put("timeproducs", timeproducDetails);
         //合伙人商品
