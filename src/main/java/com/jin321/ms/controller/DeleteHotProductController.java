@@ -22,8 +22,8 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/ms")
-public class DeleteTimeProductController {
-    private static final Log log = LogFactory.getLog(DeleteTimeProductController.class);
+public class DeleteHotProductController {
+    private static final Log log = LogFactory.getLog(DeleteHotProductController.class);
     @Autowired
     private TimeProductService timeProductService;
     private List<Integer> tpidlist;
@@ -32,7 +32,7 @@ public class DeleteTimeProductController {
     @ResponseBody
     @RequestMapping("/deleteTimeProduct")
     public Map<String,String> deleteTimeProduct(@RequestBody String json){
-        log.info("删除秒杀活动");
+        log.info("删除秒杀活动"+json);
         returnMap=new HashMap<String, String>();
         JSONObject object= JSON.parseObject(json);
         tpidlist=(List<Integer>)object.get("tpid");

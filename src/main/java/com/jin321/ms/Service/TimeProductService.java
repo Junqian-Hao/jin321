@@ -1,7 +1,5 @@
 package com.jin321.ms.Service;
 
-import com.jin321.pl.model.Timeproduct;
-
 import java.util.List;
 
 /**
@@ -12,10 +10,10 @@ import java.util.List;
 public interface TimeProductService {
     /**
      * 添加秒杀活动
-     * @param timeproduct
+     * @param hotproducts
      * @return
      */
-    int createTimeProduct(Timeproduct timeproduct);
+    int createTimeProduct(List<Integer> hotproducts);
 
     /**
      * 删除秒杀活动

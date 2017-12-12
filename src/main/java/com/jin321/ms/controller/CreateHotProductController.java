@@ -1,8 +1,8 @@
 package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.TimeProductService;
-import com.jin321.pl.model.Timeproduct;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Tyranitarx on 2017/10/30.
  *
  * @Description :添加限时秒杀商品
- * 样例json:
- * {"pid":"xx",
- * "timestart":"xx",
- * "timeend":"xx"}
+ * 样例json:("pid":{[1,2,3,4,2,3]})
  */
 @Controller
 @RequestMapping("/ms")
-public class CreateTimeProductController {
-    private static final Log log = LogFactory.getLog(CreateTimeProductController.class);
+public class CreateHotProductController {
+    private static final Log log = LogFactory.getLog(CreateHotProductController.class);
     @Autowired
     private TimeProductService timeProductService;
-    private Timeproduct timeproduct;
+    private List<Integer> hotproductlist;
     private Map<String, String> returnMap;
     private int sign;
 
@@ -38,8 +36,9 @@ public class CreateTimeProductController {
     public Map<String, String> createTimeProdut(@RequestBody String json) {
         log.debug("进入添加活动控制器");
         returnMap = new HashMap<String, String>();
-        timeproduct = JSON.parseObject(json, Timeproduct.class);
-        sign = timeProductService.createTimeProduct(timeproduct);
+        JSONObject object=JSON.parseObject(json);
+        hotproductlist = (List<Integer>) object.get("pid");
+        sign = timeProductService.createTimeProduct(hotproductlist);
         if (sign == 0) {
             returnMap.put("code", "0");
             returnMap.put("msg", "插入失败");
