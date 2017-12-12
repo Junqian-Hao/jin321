@@ -43,6 +43,6 @@
               AND productsize.pssellprice = (SELECT MIN(productsize.pssellprice)
                                              FROM productsize
                                              WHERE timeproduct.`pid` = productsize.`pid`)
-              AND timeproduct.timeend > NOW()
+#               AND timeproduct.timeend > NOW()
     </select>
 </mapper>

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface TimeproducDetailMapper {
     /**
-     * 查询所有秒杀活动信息
+     * 查询所有秒杀活动(热卖商品)信息
      * @return
      */
     List<TimeproducDetail> selectNowAll();
