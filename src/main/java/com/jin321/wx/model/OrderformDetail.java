@@ -13,6 +13,8 @@ import java.util.List;
 public class OrderformDetail extends Orderform {
     //订单商品信息
     List<Orderformproduct> orderformproducts;
+    //用户session
+    String session;
 
     public List<Orderformproduct> getOrderformproducts() {
         return orderformproducts;
@@ -27,5 +29,13 @@ public class OrderformDetail extends Orderform {
         return "com.jin321.wx.model.OrderformDetail{" +
                 "orderformproducts=" + orderformproducts +
                 "} " + super.toString();
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
     }
 }

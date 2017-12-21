@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -29,17 +29,9 @@ public class OrderformController {
 
     @RequestMapping("/insertOrder")
     @ResponseBody
-    public Map<String, Object> insertOrder(@RequestBody OrderformDetail orderformDetail) throws Exception {
+    public Map insertOrder(@RequestBody OrderformDetail orderformDetail, HttpServletRequest request) throws Exception {
         log.info("下单->"+orderformDetail);
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        boolean b = orderformService.insertOrder(orderformDetail);
-        if (b) {
-            map.put("code", 1);
-            map.put("message", "下单成功");
-        } else {
-            map.put("code", 0);
-            map.put("message", "下单失败");
-        }
+        Map map = orderformService.insertOrder(orderformDetail, request);
         return map;
     }
 

@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +31,8 @@ public class Md5Util {
             //1,指定加密算法类型
             MessageDigest digest = MessageDigest.getInstance("MD5");
             //2,将需要加密的字符串中转换成byte类型的数组,然后进行随机哈希过程
-            byte[] bs = digest.digest(psd.getBytes());
+            byte[] bs = new byte[0];
+            bs = digest.digest(psd.getBytes("utf-8"));
 //			System.out.println(bs.length);
             //3,循环遍历bs,然后让其生成32位字符串,固定写法
             //4,拼接字符串过程
@@ -48,9 +48,9 @@ public class Md5Util {
                 stringBuffer.append(hexString);
             }
             //5,打印测试
-            log.info("md5加密结果："+stringBuffer.toString());
+            log.info("md5加密结果：" + stringBuffer.toString());
             return stringBuffer.toString();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
@@ -69,8 +69,8 @@ public class Md5Util {
             string += list.get(i) + map.get(list.get(i));
         }
         String secret = string;
-        log.info("字典升序加密拼成字符串："+secret+YAN);
-        String encoder = Md5Util.Md5Encoder(secret+YAN);
+        log.info("字典升序加密拼成字符串：" + secret + YAN);
+        String encoder = Md5Util.Md5Encoder(secret + YAN);
         return encoder;
     }
 

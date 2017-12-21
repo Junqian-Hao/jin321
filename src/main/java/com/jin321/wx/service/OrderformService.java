@@ -3,7 +3,9 @@ package com.jin321.wx.service;
 import com.jin321.wx.model.OrderformDetail;
 import com.jin321.wx.model.OrderformProductDetail;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author hao
@@ -16,7 +18,7 @@ public interface OrderformService {
      * @param orderformDetail
      * @return
      */
-    boolean insertOrder(OrderformDetail orderformDetail) throws Exception;
+    Map insertOrder(OrderformDetail orderformDetail, HttpServletRequest request) throws Exception;
 
     /**
      * 退单

@@ -8,12 +8,16 @@ import com.jin321.pl.dao.ProductsizeMapper;
 import com.jin321.pl.model.Orderform;
 import com.jin321.pl.model.Orderformproduct;
 import com.jin321.pl.model.Productsize;
+import com.jin321.pl.utils.JWTUtil;
 import com.jin321.pl.utils.OrderState;
+import com.jin321.pl.utils.PayCommonUtil;
 import com.jin321.wx.dao.OrderformDetailMapper;
+import com.jin321.wx.model.LoginEntity;
 import com.jin321.wx.model.OrderformDetail;
 import com.jin321.wx.model.OrderformProductDetail;
 import com.jin321.wx.service.OrderformService;
 import com.jin321.wx.utils.OidUtil;
+import com.jin321.wx.utils.WXUtil;
 import okhttp3.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,10 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author hao
@@ -45,31 +48,40 @@ public class OrderformServiceImp implements OrderformService{
 
     /**
      * 添加订单
+     *
      * @param orderformDetail
      * @return
      * @throws Exception
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean insertOrder(OrderformDetail orderformDetail) throws Exception {
+    public Map insertOrder(OrderformDetail orderformDetail, HttpServletRequest request) throws Exception {
+        //当前订单订单号
         long oid = OidUtil.newOid();
         orderformDetail.setOid(oid);
         orderformDetail.setOdate(new Date());
         orderformDetail.setOstate(OrderState.PLACE_ORDER_NOTPAY);
+        //插入订单信息
         int insert = orderformDetailMapper.insert(orderformDetail);
         if (!(insert > 0)) {
             log.warn("订单插入失败");
             throw new Exception("订单插入失败");
         }
+        //订单总价
+        BigDecimal peice = new BigDecimal(0);
+        //插入订单商品信息
         List<Orderformproduct> orderformproducts = orderformDetail.getOrderformproducts();
         for (Orderformproduct orderformproduct : orderformproducts) {
             orderformproduct.setOid(oid);
             Productsize productsize = productsizeMapper.selectByPrimaryKey(orderformproduct.getSid());
             if (productsize == null) {
-                log.warn("未知商品型号"+orderformproduct.getSid());
+                log.warn("未知商品型号" + orderformproduct.getSid());
                 throw new Exception("未知商品型号");
             }
+            //获得下单时商品价格
             BigDecimal pssellprice = productsize.getPssellprice();
+            //累加订单信息
+            peice = peice.add(pssellprice);
             orderformproduct.setPbuyprice(pssellprice);
             int insert1 = orderformproductMapper.insert(orderformproduct);
             if (!(insert1 > 0)) {
@@ -77,7 +89,38 @@ public class OrderformServiceImp implements OrderformService{
                 throw new Exception("订单插入失败");
             }
         }
-        return true;
+
+        // TODO: 2017/12/20 啥时候对库存进行减一操作，订单过期时间是多少
+
+        //从session中获得openid
+        LoginEntity loginEntity = JWTUtil.parseJWTToBean(orderformDetail.getSession(), new LoginEntity());
+        String openid = loginEntity.getOpenid();
+//        String openid = "";
+
+        //调用微信支付统一下单api
+        log.info("调用微信统一下单API，下单信息：订单号："+oid+"价格："+peice+"openid:"+openid+"地址:"+request.getRemoteAddr());
+        Map<String, String> map = WXUtil.weixinPrePay(String.valueOf(oid), peice, "晋321——商品支付", openid, request);
+
+        if ("SUCCESS".equals(map.get("return_code"))) {
+            if ("SUCCESS".equals(map.get("result_code"))) {
+                SortedMap<String, Object> parameterMap = new TreeMap<String, Object>();
+                parameterMap.put("appid", PayCommonUtil.APPID);
+                parameterMap.put("partnerid", PayCommonUtil.MCH_ID);
+                parameterMap.put("prepayid", map.get("prepay_id"));
+                parameterMap.put("noncestr", PayCommonUtil.getRandomString(32));
+                parameterMap.put("timestamp", System.currentTimeMillis());
+                String sign = PayCommonUtil.createSign(parameterMap);
+                parameterMap.put("sign", sign);
+                return parameterMap;
+            } else {
+                log.warn("统一下单API业务结果失败，错误代码-》"+map.get("err_code")+"错误代码描述-》"+map.get("err_code_des"));
+            }
+        } else {
+            log.warn("统一下单API调用失败,返回信息-》"+map.get("return_msg"));
+        }
+
+
+        return map;
     }
 
     /**
