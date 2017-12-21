@@ -2,6 +2,8 @@ package com.jin321.ms.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * Created by Tyranitarx on 2017/11/6.
  *
@@ -15,5 +17,5 @@ public interface OrderFormService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public int changeOrderFormStatue(int ostate,Long oid);
+    public int changeOrderFormStatue(int ostate,Long oid,Date odate);
 }

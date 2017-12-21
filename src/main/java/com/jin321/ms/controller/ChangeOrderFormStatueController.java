@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.json.Json;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class ChangeOrderFormStatueController {
         JSONObject object= JSON.parseObject(json);
         oid=(Long) object.get("oid");
         ostate=(Integer)object.get("ostate");
-        sign=orderFormService.changeOrderFormStatue(ostate,oid);
+        sign=orderFormService.changeOrderFormStatue(ostate,oid,new Date());
         if(sign==-1){
             returnMap.put("code","-1");
             returnMap.put("msg","此订单不存在");
