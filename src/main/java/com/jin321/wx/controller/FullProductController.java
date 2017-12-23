@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -41,5 +42,18 @@ public class FullProductController {
         FullProduct fullProduct = fullProductService.selectFullProductById(Integer.parseInt(pid));
         fullProduct.setBasePathNoPort(WXUtil.BASEPATH);
         return fullProduct;
+    }
+
+    @RequestMapping("/selectHeadpicsByPid")
+    @ResponseBody
+    public Map<String, String> selectHeadpicsByPid(@RequestBody Map<String, String> re, HttpServletRequest request) throws Exception {
+        String pid = re.get("pid");
+        log.info("通过id查询缩略图，商品id" + pid);
+        String s = fullProductService.selectHeadpicsByPid(Integer.parseInt(pid));
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("ppicurl", s);
+        map.put("basePath", WXUtil.BASEPATH);
+        map.put("path", WXUtil.BASEPATH + s);
+        return map;
     }
 }

@@ -12,6 +12,7 @@
         <result column="ptypec" property="ptypec" jdbcType="INTEGER" />
         <result column="is_together" property="isTogether" jdbcType="BIT" />
         <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+        <result column="dname" property="dname" jdbcType="VARCHAR"/>
         <collection property="productsizeList" ofType="productsize">
             <id column="sid" property="sid" jdbcType="INTEGER"/>
             <result column="pscost" property="pscost" jdbcType="DECIMAL"/>
@@ -36,16 +37,19 @@
             product.*,
             productsize.*,
             productpics.*,
-            productdetail.*
+            productdetail.*,
+            dealer.dname
         FROM product
             LEFT JOIN productpics ON product.pid = productpics.pid
             LEFT JOIN productsize ON product.pid = productsize.pid
             LEFT JOIN productdetail ON product.pid = productdetail.pid
+            LEFT JOIN dealer ON product.did = dealer.did
         WHERE product.is_delete = 0
               AND productsize.is_deleted = 0
               AND productpics.is_deleted = 0
               AND productdetail.is_deleted = 0
               AND product.pid = #{pid}
+              AND dealer.is_deleted = 0
         ORDER BY productsize.pssellprice,productdetail.porder
     </select>
 </mapper>

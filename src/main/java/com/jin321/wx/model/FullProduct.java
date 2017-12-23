@@ -21,6 +21,8 @@ public class FullProduct extends Product {
     List<Productdetail> productdetailList;
     //商品图片的绝对路径不带端口
     String basePathNoPort;
+    //商家名字
+    String dname;
 
     public String getBasePathNoPort() {
         return basePathNoPort;
@@ -54,6 +56,14 @@ public class FullProduct extends Product {
         this.productdetailList = productdetailList;
     }
 
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
+    }
+
     @Override
     public String toString() {
         return "com.jin321.wx.model.FullProduct{" +
@@ -61,6 +71,7 @@ public class FullProduct extends Product {
                 ", productpicsList=" + productpicsList +
                 ", productdetailList=" + productdetailList +
                 ", basePathNoPort='" + basePathNoPort + '\'' +
+                ", dname='" + dname + '\'' +
                 "} " + super.toString();
     }
 }

@@ -15,4 +15,11 @@ public interface FullProductService {
      */
     FullProduct selectFullProductById(int pid);
 
+    /**
+     *通过商品id查询商品的缩略图路径
+     * @param pid
+     * @return
+     */
+    String selectHeadpicsByPid(int pid);
+
 }

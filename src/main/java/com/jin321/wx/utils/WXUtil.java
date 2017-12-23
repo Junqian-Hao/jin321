@@ -48,7 +48,7 @@ public class WXUtil {
         java.text.DecimalFormat df = new java.text.DecimalFormat("0");
         parameterMap.put("total_fee", df.format(total));
         parameterMap.put("spbill_create_ip", request.getRemoteAddr());
-        parameterMap.put("notify_url", "http://xxx.com");
+        parameterMap.put("notify_url", "http://www.jin321.cn/jin321/ms/recievePayMessage.do");
         parameterMap.put("trade_type", "JSAPI");
         parameterMap.put("openid", openid);
         String sign = PayCommonUtil.createSign(parameterMap);
