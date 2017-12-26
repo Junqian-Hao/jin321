@@ -80,8 +80,8 @@
                                omessage, osendmethod, osendnumber
         )
         VALUES (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER},
-                                         #{odate,jdbcType=DATE}, #{opaydate,jdbcType=DATE}, #{osenddate,jdbcType=DATE},
-                                         #{oconfirmdate,jdbcType=DATE}, #{opayed,jdbcType=INTEGER},
+                                         #{odate,jdbcType=TIMESTAMP}, #{opaydate,jdbcType=TIMESTAMP}, #{osenddate,jdbcType=TIMESTAMP},
+                                         #{oconfirmdate,jdbcType=TIMESTAMP}, #{opayed,jdbcType=INTEGER},
                                          #{ostate,jdbcType=INTEGER},
                                          #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR},
                 #{osendnumber,jdbcType=VARCHAR}
