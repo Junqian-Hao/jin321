@@ -31,7 +31,7 @@ public class RecievePayMessageController {
     @ResponseBody
     public PayReturnMessage getReturnMessage(@RequestBody RecieveMessage recieveMessage)throws Exception{
         payReturnMessage=new PayReturnMessage();
-        log.info("从微信获取到的信息为:"+recieveMessage);
+        log.info("微信调起接口，从微信获取到的信息为:"+recieveMessage);
         if(recieveMessage.getResult_code().equals("SUCCESS")){
             sign=orderFormService.changeOrderFormStatue(1,Long.parseLong(recieveMessage.getOut_trade_no()),new Date());
             if(sign==1){

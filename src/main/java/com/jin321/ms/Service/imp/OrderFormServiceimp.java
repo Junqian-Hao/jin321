@@ -24,7 +24,7 @@ public class OrderFormServiceimp implements OrderFormService {
         orderform=orderformMapper.selectByPrimaryKey(oid);
         if(orderform!=null){
             orderform.setOstate(ostate);
-            orderform.setOrepaytime(odate);
+            orderform.setOpaydate(odate);
             return orderformMapper.updateByPrimaryKey(orderform);
         }else
             return -1;
