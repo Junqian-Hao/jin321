@@ -104,13 +104,13 @@ public class OrderformServiceImp implements OrderformService{
         if ("SUCCESS".equals(map.get("return_code"))) {
             if ("SUCCESS".equals(map.get("result_code"))) {
                 SortedMap<String, Object> parameterMap = new TreeMap<String, Object>();
-                parameterMap.put("appid", PayCommonUtil.APPID);
-                parameterMap.put("partnerid", PayCommonUtil.MCH_ID);
-                parameterMap.put("prepayid", map.get("prepay_id"));
-                parameterMap.put("noncestr", PayCommonUtil.getRandomString(32));
-                parameterMap.put("timestamp", System.currentTimeMillis());
+                parameterMap.put("package", "prepay_id="+map.get("prepay_id"));
+                parameterMap.put("appId", WXUtil.APPID);
+                parameterMap.put("nonceStr", PayCommonUtil.getRandomString(32));
+                parameterMap.put("timeStamp", System.currentTimeMillis());
+                parameterMap.put("signType", "MD5");
                 String sign = PayCommonUtil.createSign(parameterMap);
-                parameterMap.put("sign", sign);
+                parameterMap.put("paySign", sign);
                 return parameterMap;
             } else {
                 log.warn("统一下单API业务结果失败，错误代码-》"+map.get("err_code")+"错误代码描述-》"+map.get("err_code_des"));
