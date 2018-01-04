@@ -38,4 +38,12 @@ public interface UseraddressService {
      * @return
      */
     List<Useraddress> selectUseraddressByuid(String uid)throws Exception;
+
+    /**
+     * 设置默认地址
+     * @param uaid 用户地址id
+     * @return 修改结果
+     * @throws Exception
+     */
+    boolean setDefaultAddress(int uaid)throws Exception;
 }

@@ -34,6 +34,7 @@ public class FullProductServiceImp implements FullProductService{
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String selectHeadpicsByPid(int pid) {
         ProductpicsExample productpicsExample = new ProductpicsExample();
         ProductpicsExample.Criteria criteria = productpicsExample.createCriteria();

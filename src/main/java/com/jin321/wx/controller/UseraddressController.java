@@ -120,4 +120,27 @@ public class UseraddressController {
         }
         return map;
     }
+
+    /**
+     * 设置默认收货地址
+     * @param re
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/setDefaultAddress")
+    @ResponseBody
+    public Map<String, Object> setDefaultAddress(@RequestBody Map<String, String> re) throws Exception {
+        String uaid = re.get("uaid");
+        log.info("设置默认地址,uaid->"+uaid);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        boolean b = useraddressService.setDefaultAddress(Integer.parseInt(uaid));
+        if (b) {
+            map.put("code", 1);
+            map.put("message", "设置成功");
+        } else {
+            map.put("code", 0);
+            map.put("message", "设置失败");
+        }
+        return map;
+    }
 }
