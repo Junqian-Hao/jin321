@@ -131,6 +131,7 @@ public class OrderformServiceImp implements OrderformService{
      * @throws Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean chargebackOrder(long oid,String message) throws Exception {
 
         //查询订单
@@ -174,6 +175,7 @@ public class OrderformServiceImp implements OrderformService{
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<OrderformProductDetail> selectOrderByuid(String uid) throws Exception {
         List<OrderformProductDetail> orderformProductDetails = orderformDetailMapper.selectOrderformByuid(uid);
         return orderformProductDetails;
