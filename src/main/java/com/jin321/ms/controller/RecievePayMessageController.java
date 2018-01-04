@@ -27,23 +27,29 @@ public class RecievePayMessageController {
     private OrderFormService orderFormService;
     private PayReturnMessage payReturnMessage;
     private int sign;
+    private int sign2;
+
     @RequestMapping("/recievePayMessage")
     @ResponseBody
-    public PayReturnMessage getReturnMessage(@RequestBody RecieveMessage recieveMessage)throws Exception{
-        payReturnMessage=new PayReturnMessage();
-        log.info("微信调起接口，从微信获取到的信息为:"+recieveMessage);
-        if(recieveMessage.getResult_code().equals("SUCCESS")){
-            sign=orderFormService.changeOrderFormStatue(1,Long.parseLong(recieveMessage.getOut_trade_no()),new Date());
-            if(sign==1){
-                payReturnMessage.setReturn_code("SUCCESS");
-                payReturnMessage.setReturn_msg("支付成功");
-            }
-            else {
+    public PayReturnMessage getReturnMessage(@RequestBody RecieveMessage recieveMessage) throws Exception {
+        payReturnMessage = new PayReturnMessage();
+        log.info("微信调起接口，从微信获取到的信息为:" + recieveMessage);
+        if (recieveMessage.getResult_code().equals("SUCCESS")) {
+            sign = orderFormService.changeOrderFormStatue(1, Long.parseLong(recieveMessage.getOut_trade_no()), new Date());
+            sign2 = orderFormService.decreaseOrderProductNum(Long.parseLong(recieveMessage.getOut_trade_no()));
+            if (sign == 1) {
+                if (sign2 == 0) {
+                    payReturnMessage.setReturn_code("FAIL");
+                    payReturnMessage.setReturn_msg("商品数量更改失败");
+                } else {
+                    payReturnMessage.setReturn_code("SUCCESS");
+                    payReturnMessage.setReturn_msg("支付成功");
+                }
+            } else if (sign == 0) {
                 payReturnMessage.setReturn_msg("FAIL");
                 payReturnMessage.setReturn_msg("支付状态修改失败");
             }
-        }
-        else{
+        } else {
             payReturnMessage.setReturn_code("FAIL");
             payReturnMessage.setReturn_msg("支付失败");
         }
