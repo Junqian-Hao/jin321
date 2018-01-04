@@ -29,14 +29,19 @@ public class UseraddressServiceImp implements UseraddressService {
     @Transactional(rollbackFor = Exception.class)
     public boolean insertUseraddress(Useraddress useraddress) throws Exception {
         useraddress.setAddtime(new Date());
+
         String uaddress = useraddress.getUaddress();
         if (StringUtil.isNullString(uaddress)) {
             useraddress.setUcountry("中国");
         }
+
         Boolean adddefault = useraddress.getAdddefault();
         if (adddefault == null) {
             useraddress.setAdddefault(false);
         }
+
+        useraddress.setIsDeleted(false);
+
         int insert = useraddressMapper.insert(useraddress);
         if (insert > 0) {
             return true;
@@ -96,6 +101,7 @@ public class UseraddressServiceImp implements UseraddressService {
         UseraddressExample.Criteria criteria = useraddressExample.createCriteria();
         criteria.andUidEqualTo(useraddress.getUid());
         criteria.andAdddefaultEqualTo(true);
+        criteria.andIsDeletedEqualTo(false);
         List<Useraddress> useraddresses = useraddressMapper.selectByExample(useraddressExample);
         log.debug("原默认收货地址"+useraddress);
         if (useraddresses != null && useraddresses.size() > 0) {
