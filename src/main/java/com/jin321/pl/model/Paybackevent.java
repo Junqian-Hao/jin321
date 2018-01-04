@@ -1,11 +1,15 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
+
 public class Paybackevent {
     private Integer eid;
 
     private Long oid;
 
     private Integer did;
+
+    private BigDecimal backprice;
 
     private Integer eventstatus;
 
@@ -35,6 +39,14 @@ public class Paybackevent {
 
     public void setDid(Integer did) {
         this.did = did;
+    }
+
+    public BigDecimal getBackprice() {
+        return backprice;
+    }
+
+    public void setBackprice(BigDecimal backprice) {
+        this.backprice = backprice;
     }
 
     public Integer getEventstatus() {

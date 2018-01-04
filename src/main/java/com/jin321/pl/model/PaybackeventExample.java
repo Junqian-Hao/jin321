@@ -1,5 +1,6 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -281,6 +282,66 @@ public class PaybackeventExample {
 
         public Criteria andDidNotBetween(Integer value1, Integer value2) {
             addCriterion("did not between", value1, value2, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceIsNull() {
+            addCriterion("backprice is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceIsNotNull() {
+            addCriterion("backprice is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceEqualTo(BigDecimal value) {
+            addCriterion("backprice =", value, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceNotEqualTo(BigDecimal value) {
+            addCriterion("backprice <>", value, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceGreaterThan(BigDecimal value) {
+            addCriterion("backprice >", value, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("backprice >=", value, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceLessThan(BigDecimal value) {
+            addCriterion("backprice <", value, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("backprice <=", value, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceIn(List<BigDecimal> values) {
+            addCriterion("backprice in", values, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceNotIn(List<BigDecimal> values) {
+            addCriterion("backprice not in", values, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("backprice between", value1, value2, "backprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("backprice not between", value1, value2, "backprice");
             return (Criteria) this;
         }
 
