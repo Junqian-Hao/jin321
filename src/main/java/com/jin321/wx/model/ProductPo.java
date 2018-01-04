@@ -2,6 +2,8 @@ package com.jin321.wx.model;
 
 import com.jin321.pl.model.Product;
 
+import java.math.BigDecimal;
+
 /**
  * @Author hao
  * @Date 2017/9/28 14:55
@@ -11,9 +13,9 @@ public class ProductPo extends Product {
     //商品缩略图
     private String ppicurl;
     //原价
-    private Long psoriprice;
+    private BigDecimal psoriprice;
     //售价
-    private Long pssellprice;
+    private BigDecimal pssellprice;
 
     public String getPpicurl() {
         return ppicurl;
@@ -23,19 +25,19 @@ public class ProductPo extends Product {
         this.ppicurl = ppicurl;
     }
 
-    public Long getPsoriprice() {
+    public BigDecimal getPsoriprice() {
         return psoriprice;
     }
 
-    public void setPsoriprice(Long psoriprice) {
+    public void setPsoriprice(BigDecimal psoriprice) {
         this.psoriprice = psoriprice;
     }
 
-    public Long getPssellprice() {
+    public BigDecimal getPssellprice() {
         return pssellprice;
     }
 
-    public void setPssellprice(Long pssellprice) {
+    public void setPssellprice(BigDecimal pssellprice) {
         this.pssellprice = pssellprice;
     }
 

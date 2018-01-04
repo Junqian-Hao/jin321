@@ -3,6 +3,8 @@ package com.jin321.wx.model;
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Timeproduct;
 
+import java.math.BigDecimal;
+
 /**
  * @Author hao
  * @Date 2017/9/26 17:34
@@ -12,9 +14,9 @@ public class TimeproducDetail extends Timeproduct {
     Product products;
     String ppicurl;
     //原价
-    private Long psoriprice;
+    private BigDecimal psoriprice;
     //售价
-    private Long pssellprice;
+    private BigDecimal pssellprice;
 
     public Product getProducts() {
         return products;
@@ -24,27 +26,37 @@ public class TimeproducDetail extends Timeproduct {
         this.products = products;
     }
 
-    public Long getPsoriprice() {
-        return psoriprice;
-    }
-
-    public void setPsoriprice(Long psoriprice) {
-        this.psoriprice = psoriprice;
-    }
-
-    public Long getPssellprice() {
-        return pssellprice;
-    }
-
-    public void setPssellprice(Long pssellprice) {
-        this.pssellprice = pssellprice;
-    }
-
     public String getPpicurl() {
         return ppicurl;
     }
 
     public void setPpicurl(String ppicurl) {
         this.ppicurl = ppicurl;
+    }
+
+    public BigDecimal getPsoriprice() {
+        return psoriprice;
+    }
+
+    public void setPsoriprice(BigDecimal psoriprice) {
+        this.psoriprice = psoriprice;
+    }
+
+    public BigDecimal getPssellprice() {
+        return pssellprice;
+    }
+
+    public void setPssellprice(BigDecimal pssellprice) {
+        this.pssellprice = pssellprice;
+    }
+
+    @Override
+    public String toString() {
+        return "com.jin321.wx.model.TimeproducDetail{" +
+                "products=" + products +
+                ", ppicurl='" + ppicurl + '\'' +
+                ", psoriprice=" + psoriprice +
+                ", pssellprice=" + pssellprice +
+                "} " + super.toString();
     }
 }
