@@ -82,7 +82,7 @@ public class OrderformServiceImp implements OrderformService{
             //获得下单时商品价格
             BigDecimal pssellprice = productsize.getPssellprice();
             //累加订单信息
-            peice = peice.add(pssellprice);
+            peice = peice.add(pssellprice.multiply(BigDecimal.valueOf(orderformproduct.getPamount())));
             orderformproduct.setPbuyprice(pssellprice);
             int insert1 = orderformproductMapper.insert(orderformproduct);
             if (!(insert1 > 0)) {
