@@ -35,5 +35,19 @@ public interface OrderformService {
      * @return
      * @throws Exception
      */
-    List<OrderformProductDetail> selectOrderByuid(String uid) throws Exception;
+    List<OrderformProductDetail> selectOrderByuid(String uid,int code) throws Exception;
+
+    /**
+     * 支付未支付订单
+     * @return
+     */
+    Map<String, String> payOrder(Long oid,String session, HttpServletRequest request) throws Exception;
+
+    /**
+     * 删除订单
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    Map<String, String> deleteOrder(Long oid) throws Exception;
 }

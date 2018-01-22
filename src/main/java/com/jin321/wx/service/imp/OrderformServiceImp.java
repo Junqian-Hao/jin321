@@ -15,6 +15,7 @@ import com.jin321.wx.dao.OrderformDetailMapper;
 import com.jin321.wx.model.LoginEntity;
 import com.jin321.wx.model.OrderformDetail;
 import com.jin321.wx.model.OrderformProductDetail;
+import com.jin321.wx.model.OrderformProductPo;
 import com.jin321.wx.service.OrderformService;
 import com.jin321.wx.utils.OidUtil;
 import com.jin321.wx.utils.WXUtil;
@@ -36,7 +37,7 @@ import java.util.*;
  * @Description :订单
  */
 @Service("orderformService")
-public class OrderformServiceImp implements OrderformService{
+public class OrderformServiceImp implements OrderformService {
     private static final Log log = LogFactory.getLog(OrderformServiceImp.class);
     @Autowired
     OrderformMapper orderformMapper;
@@ -99,13 +100,13 @@ public class OrderformServiceImp implements OrderformService{
 //        String openid = "";
 
         //调用微信支付统一下单api
-        log.info("调用微信统一下单API，下单信息：订单号："+oid+"价格："+peice+"openid:"+openid+"地址:"+request.getRemoteAddr());
+        log.info("调用微信统一下单API，下单信息：订单号：" + oid + "价格：" + peice + "openid:" + openid + "地址:" + request.getRemoteAddr());
         Map<String, String> map = WXUtil.weixinPrePay(String.valueOf(oid), peice, "晋321——商品支付", openid, request);
 
         if ("SUCCESS".equals(map.get("return_code"))) {
             if ("SUCCESS".equals(map.get("result_code"))) {
                 SortedMap<String, Object> parameterMap = new TreeMap<String, Object>();
-                parameterMap.put("package", "prepay_id="+map.get("prepay_id"));
+                parameterMap.put("package", "prepay_id=" + map.get("prepay_id"));
                 parameterMap.put("appId", WXUtil.APPID);
                 parameterMap.put("nonceStr", PayCommonUtil.getRandomString(32));
                 parameterMap.put("timeStamp", System.currentTimeMillis());
@@ -114,10 +115,10 @@ public class OrderformServiceImp implements OrderformService{
                 parameterMap.put("paySign", sign);
                 return parameterMap;
             } else {
-                log.warn("统一下单API业务结果失败，错误代码-》"+map.get("err_code")+"错误代码描述-》"+map.get("err_code_des"));
+                log.warn("统一下单API业务结果失败，错误代码-》" + map.get("err_code") + "错误代码描述-》" + map.get("err_code_des"));
             }
         } else {
-            log.warn("统一下单API调用失败,返回信息-》"+map.get("return_msg"));
+            log.warn("统一下单API调用失败,返回信息-》" + map.get("return_msg"));
         }
 
 
@@ -126,19 +127,20 @@ public class OrderformServiceImp implements OrderformService{
 
     /**
      * 退单
+     *
      * @param oid
      * @return
      * @throws Exception
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean chargebackOrder(long oid,String message) throws Exception {
+    public boolean chargebackOrder(long oid, String message) throws Exception {
 
         //查询订单
         Orderform orderform = orderformMapper.selectByPrimaryKey(oid);
         if (orderform == null) {
 //            throw new Exception("订单号错误");
-            log.warn("退单，订单号错误"+oid);
+            log.warn("退单，订单号错误" + oid);
             return false;
         }
         //更新订单信息
@@ -146,7 +148,7 @@ public class OrderformServiceImp implements OrderformService{
         orderform.setOrepaytime(new Date());
         int i = orderformMapper.updateByPrimaryKeySelective(orderform);
         if (i < 1) {
-            log.warn("退单，数据库错误"+oid);
+            log.warn("退单，数据库错误" + oid);
             return false;
         }
         //通知后台
@@ -163,8 +165,9 @@ public class OrderformServiceImp implements OrderformService{
         Call call = okHttpClient.newCall(request);
         Response response = call.execute();
         String string = response.body().string();
-        log.info("管理系统服务器返回："+string);
-        Map<String, String> params = JSONObject.parseObject(string, new TypeReference<Map<String, String>>(){});
+        log.info("管理系统服务器返回：" + string);
+        Map<String, String> params = JSONObject.parseObject(string, new TypeReference<Map<String, String>>() {
+        });
         String code = params.get("code");
         if ("0".equals(code)) {
             log.warn("管理系统错误");
@@ -174,11 +177,116 @@ public class OrderformServiceImp implements OrderformService{
     }
 
 
+    /**
+     * 查询订单
+     *
+     * @param uid  用户id
+     * @param code 条件码
+     * @return
+     * @throws Exception
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<OrderformProductDetail> selectOrderByuid(String uid) throws Exception {
-        List<OrderformProductDetail> orderformProductDetails = orderformDetailMapper.selectOrderformByuid(uid);
+    public List<OrderformProductDetail> selectOrderByuid(String uid, int code) throws Exception {
+        List<OrderformProductDetail> orderformProductDetails = null;
+        if (code == 0) {
+            orderformProductDetails = orderformDetailMapper.selectOrderformByuid(uid);
+        }
+        if (code == 1) {
+            orderformProductDetails = orderformDetailMapper.selectNOTPAYOrderformByuid(uid);
+        }
+        if (code == 2) {
+            orderformProductDetails = orderformDetailMapper.selectNOTShipmentsOrderformByuid(uid);
+        }
+        if (code == 3) {
+            orderformProductDetails = orderformDetailMapper.selectNOTRECEIVEOrderformByuid(uid);
+        }
         return orderformProductDetails;
+    }
+
+    /**
+     * 支付未支付订单
+     *
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String, String> payOrder(Long oid,String session, HttpServletRequest request) throws Exception{
+        Map<String, String> map = new HashMap<String, String>();
+        OrderformProductDetail orderformProductDetail = orderformDetailMapper.selectOrderformByoid(oid);
+        if (orderformProductDetail == null) {
+            map.put("code", "0");
+            map.put("message", "订单号不存在");
+            log.info("支付未支付订单，订单号不存在："+oid);
+            return map;
+        }
+        if (orderformProductDetail.getOstate() != OrderState.PLACE_ORDER_NOTPAY) {
+            map.put("code", "0");
+            map.put("message", "订单已支付或已删除");
+            log.info("支付未支付订单，订单订单已支付或已删除："+oid);
+            return map;
+        }
+        //订单总价
+        BigDecimal peice = new BigDecimal(0);
+        //获取订单内商品详情
+        List<OrderformProductPo> orderformProductPos = orderformProductDetail.getOrderformProductPos();
+        for (OrderformProductPo orderformProductPo : orderformProductPos) {
+            BigDecimal pbuyprice = orderformProductPo.getPbuyprice();
+            peice = peice.add(pbuyprice.multiply(BigDecimal.valueOf(orderformProductPo.getPamount())));
+        }
+
+        //从session中获得openid
+        LoginEntity loginEntity = JWTUtil.parseJWTToBean(session, new LoginEntity());
+        String openid = loginEntity.getOpenid();
+//        String openid = "";
+
+        //调用微信支付统一下单api
+        log.info("调用微信统一下单API，下单信息：订单号：" + oid + "价格：" + peice + "openid:" + openid + "地址:" + request.getRemoteAddr());
+        map = WXUtil.weixinPrePay(String.valueOf(oid), peice, "晋321——商品支付", openid, request);
+
+        if ("SUCCESS".equals(map.get("return_code"))) {
+            if ("SUCCESS".equals(map.get("result_code"))) {
+                SortedMap<String, Object> parameterMap = new TreeMap<String, Object>();
+                parameterMap.put("package", "prepay_id=" + map.get("prepay_id"));
+                parameterMap.put("appId", WXUtil.APPID);
+                parameterMap.put("nonceStr", PayCommonUtil.getRandomString(32));
+                parameterMap.put("timeStamp", System.currentTimeMillis());
+                parameterMap.put("signType", "MD5");
+                String sign = PayCommonUtil.createSign(parameterMap);
+                parameterMap.put("paySign", sign);
+                return map;
+            } else {
+                log.warn("统一下单API业务结果失败，错误代码-》" + map.get("err_code") + "错误代码描述-》" + map.get("err_code_des"));
+            }
+        } else {
+            log.warn("统一下单API调用失败,返回信息-》" + map.get("return_msg"));
+        }
+
+
+        return map;
+    }
+
+    /**
+     * 删除订单
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Map<String, String> deleteOrder(Long oid) throws Exception {
+        Map<String, String> map = new HashMap<String, String>();
+        Orderform orderform = orderformMapper.selectByPrimaryKey(oid);
+        if (orderform == null) {
+            map.put("code", "0");
+            map.put("message", "订单号不存在");
+            log.info("删除订单，订单号不存在："+oid);
+            return map;
+        }
+        orderform.setOstate(OrderState.USER_DELETION_ORDER);
+        orderformMapper.updateByPrimaryKey(orderform);
+        map.put("code", "1");
+        map.put("message", "删除成功");
+        return map;
     }
 
 

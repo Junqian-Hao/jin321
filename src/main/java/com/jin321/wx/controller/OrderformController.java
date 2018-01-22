@@ -27,6 +27,13 @@ public class OrderformController {
     @Autowired
     OrderformService orderformService;
 
+    /**
+     * 下单
+     * @param orderformDetail
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/insertOrder")
     @ResponseBody
     public Map insertOrder(@RequestBody OrderformDetail orderformDetail, HttpServletRequest request) throws Exception {
@@ -35,12 +42,51 @@ public class OrderformController {
         return map;
     }
 
+    /**
+     * 查询订单信息
+     * @param rq
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/selectOrderformByuid")
     @ResponseBody
-    public List<OrderformProductDetail> selectOrderformByuid(@RequestBody OrderformDetail orderformDetail) throws Exception {
-        log.info("查询订单->"+orderformDetail.getUid());
-        List<OrderformProductDetail> orderformProductDetails = orderformService.selectOrderByuid(orderformDetail.getUid());
+    public List<OrderformProductDetail> selectOrderformByuid(@RequestBody Map<String , String> rq) throws Exception {
+        String uid = rq.get("uid");
+        String code = rq.get("code");
+        log.info("查询订单->uid:"+uid+"code:"+code);
+        List<OrderformProductDetail> orderformProductDetails = orderformService.selectOrderByuid(uid, Integer.parseInt(code));
         return orderformProductDetails;
     }
 
+    /**
+     * 支付未支付订单
+     * @param rq
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("payOrder")
+    @ResponseBody
+    public Map<String, String> payOrder(@RequestBody Map<String, String> rq,HttpServletRequest request) throws Exception {
+        String oid = rq.get("oid");
+        String session = rq.get("session");
+        log.info("支付未支付订单-》订单号：" + oid + "session:" + session);
+        Map<String, String> map = orderformService.payOrder(Long.valueOf(oid), session, request);
+        return map;
+    }
+
+    /**
+     * 删除订单
+     * @param rq
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("deleteOrder")
+    @ResponseBody
+    public Map<String, String> deleteOrder(@RequestBody Map<String, String> rq) throws Exception {
+        String oid = rq.get("oid");
+        log.info("删除订单-》订单号：" + oid );
+        Map<String, String> map = orderformService.deleteOrder(Long.valueOf(oid));
+        return map;
+    }
 }

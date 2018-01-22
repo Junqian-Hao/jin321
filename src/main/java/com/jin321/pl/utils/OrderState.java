@@ -37,4 +37,9 @@ public class OrderState {
      * 商家确认取消订单
      */
     public static int CONFIRM_CANCELLATION_OF_ORDER = 6;
+
+    /**
+     * 用户删除订单
+     */
+    public static int USER_DELETION_ORDER = 7;
 }

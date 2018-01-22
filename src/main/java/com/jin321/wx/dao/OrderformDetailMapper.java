@@ -20,6 +20,39 @@ public interface OrderformDetailMapper {
      */
     int insert(Orderform record);
 
+    /**
+     * 通过uid查询全部订单
+     * @param uid
+     * @return
+     */
     List<OrderformProductDetail> selectOrderformByuid(@Param("uid")String uid);
+
+    /**
+     * 通过uid查询未支付订单
+     * @param uid
+     * @return
+     */
+    List<OrderformProductDetail> selectNOTPAYOrderformByuid(@Param("uid")String uid);
+
+    /**
+     * 通过uid查询未收货订单
+     * @param uid
+     * @return
+     */
+    List<OrderformProductDetail> selectNOTRECEIVEOrderformByuid(@Param("uid")String uid);
+
+    /**
+     * 通过uid查询付款未发货订单
+     * @param uid
+     * @return
+     */
+    List<OrderformProductDetail> selectNOTShipmentsOrderformByuid(@Param("uid")String uid);
+
+    /**
+     * 通过oid查询订单
+     * @param oid
+     * @return
+     */
+    OrderformProductDetail selectOrderformByoid(@Param("oid")Long oid);
 
 }
