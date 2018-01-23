@@ -29,6 +29,8 @@ public class OrderformProductPo extends Orderformproduct {
     private Boolean isDelete;
     //商品缩略图
     private String ppicurl;
+    //商家名字
+    private String dname;
 
     @Override
     public Integer getPid() {
@@ -118,5 +120,13 @@ public class OrderformProductPo extends Orderformproduct {
 
     public void setPpicurl(String ppicurl) {
         this.ppicurl = ppicurl;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
     }
 }
