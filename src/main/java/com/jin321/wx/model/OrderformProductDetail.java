@@ -4,6 +4,7 @@ import com.jin321.pl.model.Orderform;
 import com.jin321.pl.model.Useraddress;
 import com.jin321.wx.utils.WXUtil;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -19,6 +20,9 @@ public class OrderformProductDetail extends Orderform {
 
     //baseUrl
     String baseURL = WXUtil.BASEPATH;
+
+    //订单总价
+    private BigDecimal totalprice;
 
     public Useraddress getUseraddress() {
         return useraddress;
@@ -42,5 +46,13 @@ public class OrderformProductDetail extends Orderform {
 
     public void setBaseURL(String baseURL) {
         this.baseURL = baseURL;
+    }
+
+    public BigDecimal getTotalprice() {
+        return totalprice;
+    }
+
+    public void setTotalprice(BigDecimal totalprice) {
+        this.totalprice = totalprice;
     }
 }

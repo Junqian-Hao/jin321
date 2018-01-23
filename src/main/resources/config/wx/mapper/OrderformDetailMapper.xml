@@ -111,6 +111,7 @@
               AND productsize.`is_deleted` = 0
               AND orderform.ostate != 7
               AND orderform.ostate > 0
+
         ]]>
     </select>
     <select id="selectNOTPAYOrderformByuid" resultMap="OrderformProductDetailMap" parameterType="string">
@@ -133,6 +134,7 @@
               AND productpics.`is_headpic` = 1
               AND productsize.`is_deleted` = 0
               AND orderform.ostate = 0
+        
     </select>
     <select id="selectNOTRECEIVEOrderformByuid" resultMap="OrderformProductDetailMap" parameterType="string">
         <![CDATA[

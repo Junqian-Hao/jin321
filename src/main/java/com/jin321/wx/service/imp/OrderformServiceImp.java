@@ -201,6 +201,9 @@ public class OrderformServiceImp implements OrderformService {
         if (code == 3) {
             orderformProductDetails = orderformDetailMapper.selectNOTRECEIVEOrderformByuid(uid);
         }
+        if (orderformProductDetails != null) {
+            orderformProductDetails = totalPrice(orderformProductDetails);
+        }
         return orderformProductDetails;
     }
 
@@ -211,19 +214,19 @@ public class OrderformServiceImp implements OrderformService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Map<String, String> payOrder(Long oid,String session, HttpServletRequest request) throws Exception{
+    public Map<String, String> payOrder(Long oid, String session, HttpServletRequest request) throws Exception {
         Map<String, String> map = new HashMap<String, String>();
         OrderformProductDetail orderformProductDetail = orderformDetailMapper.selectOrderformByoid(oid);
         if (orderformProductDetail == null) {
             map.put("code", "0");
             map.put("message", "订单号不存在");
-            log.info("支付未支付订单，订单号不存在："+oid);
+            log.info("支付未支付订单，订单号不存在：" + oid);
             return map;
         }
         if (orderformProductDetail.getOstate() != OrderState.PLACE_ORDER_NOTPAY) {
             map.put("code", "0");
             map.put("message", "订单已支付或已删除");
-            log.info("支付未支付订单，订单订单已支付或已删除："+oid);
+            log.info("支付未支付订单，订单订单已支付或已删除：" + oid);
             return map;
         }
         //订单总价
@@ -268,6 +271,7 @@ public class OrderformServiceImp implements OrderformService {
 
     /**
      * 删除订单
+     *
      * @param oid
      * @return
      * @throws Exception
@@ -279,7 +283,7 @@ public class OrderformServiceImp implements OrderformService {
         if (orderform == null) {
             map.put("code", "0");
             map.put("message", "订单号不存在");
-            log.info("删除订单，订单号不存在："+oid);
+            log.info("删除订单，订单号不存在：" + oid);
             return map;
         }
         orderform.setOstate(OrderState.USER_DELETION_ORDER);
@@ -289,5 +293,23 @@ public class OrderformServiceImp implements OrderformService {
         return map;
     }
 
+    /**
+     * 计算每张订单的总价，设置到OrderformProductDetail对象中
+     * @param list
+     * @return
+     */
+    private List<OrderformProductDetail> totalPrice(List<OrderformProductDetail> list) {
+        for (OrderformProductDetail orderformProductDetail : list) {
+            BigDecimal peice = new BigDecimal(0);
+            //获取订单内商品详情
+            List<OrderformProductPo> orderformProductPos = orderformProductDetail.getOrderformProductPos();
+            for (OrderformProductPo orderformProductPo : orderformProductPos) {
+                BigDecimal pbuyprice = orderformProductPo.getPbuyprice();
+                peice = peice.add(pbuyprice.multiply(BigDecimal.valueOf(orderformProductPo.getPamount())));
+            }
+            orderformProductDetail.setTotalprice(peice);
+        }
+        return list;
+    }
 
 }
