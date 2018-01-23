@@ -2,6 +2,7 @@ package com.jin321.wx.model;
 
 import com.jin321.pl.model.Orderform;
 import com.jin321.pl.model.Useraddress;
+import com.jin321.wx.utils.WXUtil;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ public class OrderformProductDetail extends Orderform {
     Useraddress useraddress;
     //订单商品详细信息
     List<OrderformProductPo> orderformProductPos;
+
+    //baseUrl
+    String baseURL = WXUtil.BASEPATH;
 
     public Useraddress getUseraddress() {
         return useraddress;
@@ -32,6 +36,11 @@ public class OrderformProductDetail extends Orderform {
         this.orderformProductPos = orderformProductPos;
     }
 
+    public String getBaseURL() {
+        return baseURL;
+    }
 
-
+    public void setBaseURL(String baseURL) {
+        this.baseURL = baseURL;
+    }
 }
