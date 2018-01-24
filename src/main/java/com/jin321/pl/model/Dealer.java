@@ -1,9 +1,13 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
+
 public class Dealer {
     private Integer did;
 
     private String dname;
+
+    private BigDecimal dearned;
 
     private String daddress;
 
@@ -31,6 +35,14 @@ public class Dealer {
 
     public void setDname(String dname) {
         this.dname = dname == null ? null : dname.trim();
+    }
+
+    public BigDecimal getDearned() {
+        return dearned;
+    }
+
+    public void setDearned(BigDecimal dearned) {
+        this.dearned = dearned;
     }
 
     public String getDaddress() {

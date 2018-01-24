@@ -1,5 +1,6 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -231,6 +232,66 @@ public class DealerExample {
 
         public Criteria andDnameNotBetween(String value1, String value2) {
             addCriterion("dname not between", value1, value2, "dname");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedIsNull() {
+            addCriterion("dearned is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedIsNotNull() {
+            addCriterion("dearned is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedEqualTo(BigDecimal value) {
+            addCriterion("dearned =", value, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedNotEqualTo(BigDecimal value) {
+            addCriterion("dearned <>", value, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedGreaterThan(BigDecimal value) {
+            addCriterion("dearned >", value, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("dearned >=", value, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedLessThan(BigDecimal value) {
+            addCriterion("dearned <", value, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("dearned <=", value, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedIn(List<BigDecimal> values) {
+            addCriterion("dearned in", values, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedNotIn(List<BigDecimal> values) {
+            addCriterion("dearned not in", values, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("dearned between", value1, value2, "dearned");
+            return (Criteria) this;
+        }
+
+        public Criteria andDearnedNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("dearned not between", value1, value2, "dearned");
             return (Criteria) this;
         }
 

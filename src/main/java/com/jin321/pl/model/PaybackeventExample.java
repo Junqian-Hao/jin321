@@ -115,52 +115,52 @@ public class PaybackeventExample {
             return (Criteria) this;
         }
 
-        public Criteria andEidEqualTo(Integer value) {
+        public Criteria andEidEqualTo(Long value) {
             addCriterion("eid =", value, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidNotEqualTo(Integer value) {
+        public Criteria andEidNotEqualTo(Long value) {
             addCriterion("eid <>", value, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidGreaterThan(Integer value) {
+        public Criteria andEidGreaterThan(Long value) {
             addCriterion("eid >", value, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andEidGreaterThanOrEqualTo(Long value) {
             addCriterion("eid >=", value, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidLessThan(Integer value) {
+        public Criteria andEidLessThan(Long value) {
             addCriterion("eid <", value, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidLessThanOrEqualTo(Integer value) {
+        public Criteria andEidLessThanOrEqualTo(Long value) {
             addCriterion("eid <=", value, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidIn(List<Integer> values) {
+        public Criteria andEidIn(List<Long> values) {
             addCriterion("eid in", values, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidNotIn(List<Integer> values) {
+        public Criteria andEidNotIn(List<Long> values) {
             addCriterion("eid not in", values, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidBetween(Integer value1, Integer value2) {
+        public Criteria andEidBetween(Long value1, Long value2) {
             addCriterion("eid between", value1, value2, "eid");
             return (Criteria) this;
         }
 
-        public Criteria andEidNotBetween(Integer value1, Integer value2) {
+        public Criteria andEidNotBetween(Long value1, Long value2) {
             addCriterion("eid not between", value1, value2, "eid");
             return (Criteria) this;
         }

@@ -65,4 +65,5 @@ public class WXUtil {
 
         return map;
     }
+
 }

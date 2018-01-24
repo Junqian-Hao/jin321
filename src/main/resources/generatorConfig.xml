@@ -67,11 +67,11 @@
         </javaClientGenerator>
         <!--<table tableName="billtable"/>-->
         <!--<table tableName="chart"/>-->
-        <!--<table tableName="dealer"/>-->
+       <!-- <table tableName="dealer"/>-->
         <!--<table tableName="district"/>-->
         <!--<table tableName="firstrelate"/>-->
         <!--<table tableName="orderform"/>-->
-        <!--<table tableName="orderformproduct"/>-->
+        <table tableName="orderformproduct"/>
         <!--<table tableName="product"/>-->
         <!--<table tableName="productdetail"/>-->
         <!--<table tableName="productpics"/>-->
@@ -82,7 +82,7 @@
         <!--<table tableName="timeproduct"/>-->
         <!--<table tableName="user"/>-->
         <!--<table tableName="useraddress"/>-->
-        <table tableName="paybackevent"/>
+        <!--<table tableName="paybackevent"/>-->
         <!--<table tableName="movies" domainObjectName="User"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->

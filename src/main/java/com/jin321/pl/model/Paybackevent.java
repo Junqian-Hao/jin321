@@ -3,7 +3,7 @@ package com.jin321.pl.model;
 import java.math.BigDecimal;
 
 public class Paybackevent {
-    private Integer eid;
+    private Long eid;
 
     private Long oid;
 
@@ -17,11 +17,11 @@ public class Paybackevent {
 
     private Boolean isDeleted;
 
-    public Integer getEid() {
+    public Long getEid() {
         return eid;
     }
 
-    public void setEid(Integer eid) {
+    public void setEid(Long eid) {
         this.eid = eid;
     }
 

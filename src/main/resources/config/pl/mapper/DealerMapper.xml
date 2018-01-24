@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.jin321.pl.model.Dealer" >
     <id column="did" property="did" jdbcType="INTEGER" />
     <result column="dname" property="dname" jdbcType="VARCHAR" />
+    <result column="dearned" property="dearned" jdbcType="DECIMAL" />
     <result column="daddress" property="daddress" jdbcType="VARCHAR" />
     <result column="dphonenum" property="dphonenum" jdbcType="VARCHAR" />
     <result column="dusername" property="dusername" jdbcType="VARCHAR" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    did, dname, daddress, dphonenum, dusername, dpassword, dpower, is_deleted
+    did, dname, dearned, daddress, dphonenum, dusername, dpassword, dpower, is_deleted
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.DealerExample" >
     select
@@ -103,12 +104,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Dealer" >
-    insert into dealer (did, dname, daddress, 
-      dphonenum, dusername, dpassword, 
-      dpower, is_deleted)
-    values (#{did,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{daddress,jdbcType=VARCHAR}, 
-      #{dphonenum,jdbcType=VARCHAR}, #{dusername,jdbcType=VARCHAR}, #{dpassword,jdbcType=VARCHAR}, 
-      #{dpower,jdbcType=VARCHAR}, #{isDeleted,jdbcType=BIT})
+    insert into dealer (did, dname, dearned, 
+      daddress, dphonenum, dusername, 
+      dpassword, dpower, is_deleted
+      )
+    values (#{did,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{dearned,jdbcType=DECIMAL}, 
+      #{daddress,jdbcType=VARCHAR}, #{dphonenum,jdbcType=VARCHAR}, #{dusername,jdbcType=VARCHAR}, 
+      #{dpassword,jdbcType=VARCHAR}, #{dpower,jdbcType=VARCHAR}, #{isDeleted,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Dealer" >
     insert into dealer
@@ -118,6 +121,9 @@
       </if>
       <if test="dname != null" >
         dname,
+      </if>
+      <if test="dearned != null" >
+        dearned,
       </if>
       <if test="daddress != null" >
         daddress,
@@ -144,6 +150,9 @@
       </if>
       <if test="dname != null" >
         #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="dearned != null" >
+        #{dearned,jdbcType=DECIMAL},
       </if>
       <if test="daddress != null" >
         #{daddress,jdbcType=VARCHAR},
@@ -180,6 +189,9 @@
       <if test="record.dname != null" >
         dname = #{record.dname,jdbcType=VARCHAR},
       </if>
+      <if test="record.dearned != null" >
+        dearned = #{record.dearned,jdbcType=DECIMAL},
+      </if>
       <if test="record.daddress != null" >
         daddress = #{record.daddress,jdbcType=VARCHAR},
       </if>
@@ -207,6 +219,7 @@
     update dealer
     set did = #{record.did,jdbcType=INTEGER},
       dname = #{record.dname,jdbcType=VARCHAR},
+      dearned = #{record.dearned,jdbcType=DECIMAL},
       daddress = #{record.daddress,jdbcType=VARCHAR},
       dphonenum = #{record.dphonenum,jdbcType=VARCHAR},
       dusername = #{record.dusername,jdbcType=VARCHAR},
@@ -222,6 +235,9 @@
     <set >
       <if test="dname != null" >
         dname = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="dearned != null" >
+        dearned = #{dearned,jdbcType=DECIMAL},
       </if>
       <if test="daddress != null" >
         daddress = #{daddress,jdbcType=VARCHAR},
@@ -247,6 +263,7 @@
   <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Dealer" >
     update dealer
     set dname = #{dname,jdbcType=VARCHAR},
+      dearned = #{dearned,jdbcType=DECIMAL},
       daddress = #{daddress,jdbcType=VARCHAR},
       dphonenum = #{dphonenum,jdbcType=VARCHAR},
       dusername = #{dusername,jdbcType=VARCHAR},

@@ -7,15 +7,27 @@ package com.jin321.pl.utils;
  */
 public class PayBackEventState {
     /**
-     *  请求发出未处理
+     *  部分退单请求发出未处理
      */
-    public static int REQUEST_PAYBACK = 0;
+    public static int REQUEST_PARTPAYBACK = 0;
     /**
-     *  接受退单
+     *  全部退单请求处理
      */
-    public static int PAYBACK_SUCCESS = 1;
+    public static int REQUEST_ALLPAYBACK = 1;
     /**
-     *  拒绝退单
+     *  部分退单请求发出处理
      */
-    public static int PAYBACK_REFUSE = 2;
+    public static int PARTPAYBACK_SUCCESS = 2;
+    /**
+     *
+     */
+    public static int PARTPAYBACK_REFUSE = 2;
+    /**
+     *
+     */
+    public static int ALLPAYBACK_SUCCESS = 2;
+    /**
+     *
+     */
+    public static int ALLPAYBACK_REFUSE = 2;
 }

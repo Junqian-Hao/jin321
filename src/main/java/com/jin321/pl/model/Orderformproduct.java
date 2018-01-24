@@ -15,6 +15,8 @@ public class Orderformproduct {
 
     private BigDecimal pbuyprice;
 
+    private Integer status;
+
     public Integer getOfpid() {
         return ofpid;
     }
@@ -63,15 +65,11 @@ public class Orderformproduct {
         this.pbuyprice = pbuyprice;
     }
 
-    @Override
-    public String toString() {
-        return "com.jin321.pl.model.Orderformproduct{" +
-                "ofpid=" + ofpid +
-                ", oid=" + oid +
-                ", pid=" + pid +
-                ", sid=" + sid +
-                ", pamount=" + pamount +
-                ", pbuyprice=" + pbuyprice +
-                '}';
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

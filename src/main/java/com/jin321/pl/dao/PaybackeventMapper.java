@@ -12,7 +12,7 @@ public interface PaybackeventMapper {
 
     int deleteByExample(PaybackeventExample example);
 
-    int deleteByPrimaryKey(Integer eid);
+    int deleteByPrimaryKey(Long eid);
 
     int insert(Paybackevent record);
 
@@ -20,7 +20,7 @@ public interface PaybackeventMapper {
 
     List<Paybackevent> selectByExample(PaybackeventExample example);
 
-    Paybackevent selectByPrimaryKey(Integer eid);
+    Paybackevent selectByPrimaryKey(Long eid);
 
     int updateByExampleSelective(@Param("record") Paybackevent record, @Param("example") PaybackeventExample example);
 

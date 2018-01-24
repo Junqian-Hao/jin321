@@ -1,10 +1,14 @@
 package com.jin321.ms.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.OrderFormService;
+import com.jin321.ms.Service.PayBackEventService;
 import com.jin321.ms.model.PayReturnMessage;
 import com.jin321.ms.model.RecieveMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdom2.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Tyranitarx on 2017/12/21.
@@ -55,4 +67,29 @@ public class RecievePayMessageController {
         }
         return payReturnMessage;
     }
+    private Map<String,String> returnMap;
+    private int status;
+    private Long eid;
+
+    /**
+     *
+     * @param json
+     * {
+     *      "eid":"xxxx",
+     *      "status":"1"//1表示退单 2表示拒绝退单
+     * }
+     */
+    @Autowired
+    private PayBackEventService payBackEventService;
+    @ResponseBody
+    @RequestMapping("/refundOrder")
+    public Map<String, String> refundOrder(@RequestBody String json) throws Exception {
+        JSONObject object= JSON.parseObject(json);
+        status=object.getInteger("status");
+        eid=object.getLong("eid");
+        sign=payBackEventService.payback(eid,status);
+        returnMap=new HashMap<String, String>();
+        return returnMap;
+    }
+
 }

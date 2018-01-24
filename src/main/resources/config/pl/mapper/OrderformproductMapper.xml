@@ -8,6 +8,7 @@
     <result column="sid" property="sid" jdbcType="INTEGER" />
     <result column="pamount" property="pamount" jdbcType="INTEGER" />
     <result column="pbuyprice" property="pbuyprice" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ofpid, oid, pid, sid, pamount, pbuyprice
+    ofpid, oid, pid, sid, pamount, pbuyprice, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.OrderformproductExample" >
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Orderformproduct" >
     insert into orderformproduct (ofpid, oid, pid, 
-      sid, pamount, pbuyprice
-      )
+      sid, pamount, pbuyprice, 
+      status)
     values (#{ofpid,jdbcType=INTEGER}, #{oid,jdbcType=BIGINT}, #{pid,jdbcType=INTEGER}, 
-      #{sid,jdbcType=INTEGER}, #{pamount,jdbcType=INTEGER}, #{pbuyprice,jdbcType=DECIMAL}
-      )
+      #{sid,jdbcType=INTEGER}, #{pamount,jdbcType=INTEGER}, #{pbuyprice,jdbcType=DECIMAL}, 
+      #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Orderformproduct" >
     insert into orderformproduct
@@ -129,6 +130,9 @@
       <if test="pbuyprice != null" >
         pbuyprice,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ofpid != null" >
@@ -148,6 +152,9 @@
       </if>
       <if test="pbuyprice != null" >
         #{pbuyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.pbuyprice != null" >
         pbuyprice = #{record.pbuyprice,jdbcType=DECIMAL},
       </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       pid = #{record.pid,jdbcType=INTEGER},
       sid = #{record.sid,jdbcType=INTEGER},
       pamount = #{record.pamount,jdbcType=INTEGER},
-      pbuyprice = #{record.pbuyprice,jdbcType=DECIMAL}
+      pbuyprice = #{record.pbuyprice,jdbcType=DECIMAL},
+      status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="pbuyprice != null" >
         pbuyprice = #{pbuyprice,jdbcType=DECIMAL},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
     </set>
     where ofpid = #{ofpid,jdbcType=INTEGER}
   </update>
@@ -222,7 +236,8 @@
       pid = #{pid,jdbcType=INTEGER},
       sid = #{sid,jdbcType=INTEGER},
       pamount = #{pamount,jdbcType=INTEGER},
-      pbuyprice = #{pbuyprice,jdbcType=DECIMAL}
+      pbuyprice = #{pbuyprice,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER}
     where ofpid = #{ofpid,jdbcType=INTEGER}
   </update>
 </mapper>

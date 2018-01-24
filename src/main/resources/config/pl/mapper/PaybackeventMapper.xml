@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.pl.dao.PaybackeventMapper" >
+  <resultMap id="BaseResultMap" type="com.jin321.pl.model.Paybackevent" >
+    <id column="eid" property="eid" jdbcType="BIGINT" />
+    <result column="oid" property="oid" jdbcType="BIGINT" />
+    <result column="did" property="did" jdbcType="INTEGER" />
+    <result column="backprice" property="backprice" jdbcType="DECIMAL" />
+    <result column="eventstatus" property="eventstatus" jdbcType="INTEGER" />
+    <result column="messagedetail" property="messagedetail" jdbcType="VARCHAR" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    eid, oid, did, backprice, eventstatus, messagedetail, is_deleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.PaybackeventExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from paybackevent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from paybackevent
+    where eid = #{eid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from paybackevent
+    where eid = #{eid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jin321.pl.model.PaybackeventExample" >
+    delete from paybackevent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jin321.pl.model.Paybackevent" >
+    insert into paybackevent (eid, oid, did, 
+      backprice, eventstatus, messagedetail, 
+      is_deleted)
+    values (#{eid,jdbcType=BIGINT}, #{oid,jdbcType=BIGINT}, #{did,jdbcType=INTEGER}, 
+      #{backprice,jdbcType=DECIMAL}, #{eventstatus,jdbcType=INTEGER}, #{messagedetail,jdbcType=VARCHAR}, 
+      #{isDeleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jin321.pl.model.Paybackevent" >
+    insert into paybackevent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="did != null" >
+        did,
+      </if>
+      <if test="backprice != null" >
+        backprice,
+      </if>
+      <if test="eventstatus != null" >
+        eventstatus,
+      </if>
+      <if test="messagedetail != null" >
+        messagedetail,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        #{eid,jdbcType=BIGINT},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=BIGINT},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=INTEGER},
+      </if>
+      <if test="backprice != null" >
+        #{backprice,jdbcType=DECIMAL},
+      </if>
+      <if test="eventstatus != null" >
+        #{eventstatus,jdbcType=INTEGER},
+      </if>
+      <if test="messagedetail != null" >
+        #{messagedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jin321.pl.model.PaybackeventExample" resultType="java.lang.Integer" >
+    select count(*) from paybackevent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update paybackevent
+    <set >
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=BIGINT},
+      </if>
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=BIGINT},
+      </if>
+      <if test="record.did != null" >
+        did = #{record.did,jdbcType=INTEGER},
+      </if>
+      <if test="record.backprice != null" >
+        backprice = #{record.backprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eventstatus != null" >
+        eventstatus = #{record.eventstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.messagedetail != null" >
+        messagedetail = #{record.messagedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update paybackevent
+    set eid = #{record.eid,jdbcType=BIGINT},
+      oid = #{record.oid,jdbcType=BIGINT},
+      did = #{record.did,jdbcType=INTEGER},
+      backprice = #{record.backprice,jdbcType=DECIMAL},
+      eventstatus = #{record.eventstatus,jdbcType=INTEGER},
+      messagedetail = #{record.messagedetail,jdbcType=VARCHAR},
+      is_deleted = #{record.isDeleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Paybackevent" >
+    update paybackevent
+    <set >
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=BIGINT},
+      </if>
+      <if test="did != null" >
+        did = #{did,jdbcType=INTEGER},
+      </if>
+      <if test="backprice != null" >
+        backprice = #{backprice,jdbcType=DECIMAL},
+      </if>
+      <if test="eventstatus != null" >
+        eventstatus = #{eventstatus,jdbcType=INTEGER},
+      </if>
+      <if test="messagedetail != null" >
+        messagedetail = #{messagedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Paybackevent" >
+    update paybackevent
+    set oid = #{oid,jdbcType=BIGINT},
+      did = #{did,jdbcType=INTEGER},
+      backprice = #{backprice,jdbcType=DECIMAL},
+      eventstatus = #{eventstatus,jdbcType=INTEGER},
+      messagedetail = #{messagedetail,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where eid = #{eid,jdbcType=BIGINT}
+  </update>
+</mapper>
