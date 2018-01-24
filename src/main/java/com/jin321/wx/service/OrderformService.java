@@ -41,7 +41,7 @@ public interface OrderformService {
      * 支付未支付订单
      * @return
      */
-    Map<String, String> payOrder(Long oid,String session, HttpServletRequest request) throws Exception;
+    Map<String, Object> payOrder(Long oid, String session, HttpServletRequest request) throws Exception;
 
     /**
      * 删除订单

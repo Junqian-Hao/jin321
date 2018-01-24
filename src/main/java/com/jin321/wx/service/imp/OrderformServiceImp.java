@@ -235,8 +235,8 @@ public class OrderformServiceImp implements OrderformService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Map<String, String> payOrder(Long oid, String session, HttpServletRequest request) throws Exception {
-        Map<String, String> map = new HashMap<String, String>();
+    public Map<String, Object> payOrder(Long oid, String session, HttpServletRequest request) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
         OrderformProductDetail orderformProductDetail = orderformDetailMapper.selectOrderformByoid(oid);
         if (orderformProductDetail == null) {
             map.put("code", "0");
@@ -266,10 +266,10 @@ public class OrderformServiceImp implements OrderformService {
 
         //调用微信支付统一下单api
         log.info("调用微信统一下单API，下单信息：订单号：" + oid + "价格：" + peice + "openid:" + openid + "地址:" + request.getRemoteAddr());
-        map = WXUtil.weixinPrePay(String.valueOf(oid), peice, "晋321——商品支付", openid, request);
+        Map<String, String> map1 = WXUtil.weixinPrePay(String.valueOf(oid), peice, "晋321——商品支付", openid, request);
 
-        if ("SUCCESS".equals(map.get("return_code"))) {
-            if ("SUCCESS".equals(map.get("result_code"))) {
+        if ("SUCCESS".equals(map1.get("return_code"))) {
+            if ("SUCCESS".equals(map1.get("result_code"))) {
                 SortedMap<String, Object> parameterMap = new TreeMap<String, Object>();
                 parameterMap.put("package", "prepay_id=" + map.get("prepay_id"));
                 parameterMap.put("appId", WXUtil.APPID);
@@ -278,7 +278,7 @@ public class OrderformServiceImp implements OrderformService {
                 parameterMap.put("signType", "MD5");
                 String sign = PayCommonUtil.createSign(parameterMap);
                 parameterMap.put("paySign", sign);
-                return map;
+                return parameterMap;
             } else {
                 log.warn("统一下单API业务结果失败，错误代码-》" + map.get("err_code") + "错误代码描述-》" + map.get("err_code_des"));
             }
@@ -286,7 +286,8 @@ public class OrderformServiceImp implements OrderformService {
             log.warn("统一下单API调用失败,返回信息-》" + map.get("return_msg"));
         }
 
-
+        map.put("code", "0");
+        map.put("message", "统一下单API调用失败");
         return map;
     }
 
