@@ -50,4 +50,13 @@ public interface OrderformService {
      * @throws Exception
      */
     Map<String, String> deleteOrder(Long oid) throws Exception;
+
+    /**
+     * 通过订单id查询订单
+     *
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    OrderformProductDetail selectOrderByoid(String oid) throws Exception;
 }

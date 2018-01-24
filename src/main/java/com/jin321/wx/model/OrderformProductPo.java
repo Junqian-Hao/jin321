@@ -2,6 +2,8 @@ package com.jin321.wx.model;
 
 import com.jin321.pl.model.Orderformproduct;
 
+import java.math.BigDecimal;
+
 /**
  * @Author hao
  * @Date 2017/10/16 16:19
@@ -31,6 +33,17 @@ public class OrderformProductPo extends Orderformproduct {
     private String ppicurl;
     //商家名字
     private String dname;
+
+    //商品型号信息
+    private BigDecimal pscost;
+
+    private BigDecimal psoriprice;
+
+    private BigDecimal pssellprice;
+
+    private String sizename;
+
+    private Integer snumber;
 
     @Override
     public Integer getPid() {
@@ -128,5 +141,45 @@ public class OrderformProductPo extends Orderformproduct {
 
     public void setDname(String dname) {
         this.dname = dname;
+    }
+
+    public BigDecimal getPscost() {
+        return pscost;
+    }
+
+    public void setPscost(BigDecimal pscost) {
+        this.pscost = pscost;
+    }
+
+    public BigDecimal getPsoriprice() {
+        return psoriprice;
+    }
+
+    public void setPsoriprice(BigDecimal psoriprice) {
+        this.psoriprice = psoriprice;
+    }
+
+    public BigDecimal getPssellprice() {
+        return pssellprice;
+    }
+
+    public void setPssellprice(BigDecimal pssellprice) {
+        this.pssellprice = pssellprice;
+    }
+
+    public String getSizename() {
+        return sizename;
+    }
+
+    public void setSizename(String sizename) {
+        this.sizename = sizename;
+    }
+
+    public Integer getSnumber() {
+        return snumber;
+    }
+
+    public void setSnumber(Integer snumber) {
+        this.snumber = snumber;
     }
 }

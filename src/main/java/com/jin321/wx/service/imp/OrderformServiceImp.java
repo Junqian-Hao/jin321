@@ -208,6 +208,27 @@ public class OrderformServiceImp implements OrderformService {
     }
 
     /**
+     * 通过oid查询订单信息
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    public OrderformProductDetail selectOrderByoid(String oid) throws Exception {
+        OrderformProductDetail orderformProductDetail = orderformDetailMapper.selectOrderformByoid(Long.valueOf(oid));
+        BigDecimal peice = new BigDecimal(0);
+        //获取订单内商品详情
+        List<OrderformProductPo> orderformProductPos = orderformProductDetail.getOrderformProductPos();
+        for (OrderformProductPo orderformProductPo : orderformProductPos) {
+            BigDecimal pbuyprice = orderformProductPo.getPbuyprice();
+            peice = peice.add(pbuyprice.multiply(BigDecimal.valueOf(orderformProductPo.getPamount())));
+        }
+        orderformProductDetail.setTotalprice(peice);
+
+        return orderformProductDetail;
+
+    }
+
+    /**
      * 支付未支付订单
      *
      * @return

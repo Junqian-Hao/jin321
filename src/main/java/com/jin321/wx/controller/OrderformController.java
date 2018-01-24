@@ -89,4 +89,18 @@ public class OrderformController {
         Map<String, String> map = orderformService.deleteOrder(Long.valueOf(oid));
         return map;
     }
+
+    /**
+     * 通过订单号查询订单
+     * @param rq
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("selectOrderByoid")
+    @ResponseBody
+    public OrderformProductDetail selectOrderByoid(@RequestBody Map<String, String> rq) throws Exception {
+        String oid = rq.get("oid");
+        log.info("通过oid查询订单->" + oid);
+        return orderformService.selectOrderByoid(oid);
+    }
 }

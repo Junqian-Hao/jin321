@@ -71,6 +71,11 @@
             <result column="is_delete" property="isDelete" jdbcType="BIT"/>
             <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
             <result column="dname" property="dname" jdbcType="VARCHAR"/>
+            <result column="pscost" property="pscost" jdbcType="DECIMAL" />
+            <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL" />
+            <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL" />
+            <result column="sizename" property="sizename" jdbcType="VARCHAR" />
+            <result column="snumber" property="snumber" jdbcType="INTEGER" />
         </collection>
     </resultMap>
 
