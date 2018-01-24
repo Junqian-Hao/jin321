@@ -2,12 +2,11 @@ package com.jin321.wx.service.imp;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.jin321.pl.dao.ExpressageMapper;
 import com.jin321.pl.dao.OrderformMapper;
 import com.jin321.pl.dao.OrderformproductMapper;
 import com.jin321.pl.dao.ProductsizeMapper;
-import com.jin321.pl.model.Orderform;
-import com.jin321.pl.model.Orderformproduct;
-import com.jin321.pl.model.Productsize;
+import com.jin321.pl.model.*;
 import com.jin321.pl.utils.JWTUtil;
 import com.jin321.pl.utils.OrderState;
 import com.jin321.pl.utils.PayCommonUtil;
@@ -47,6 +46,8 @@ public class OrderformServiceImp implements OrderformService {
     OrderformDetailMapper orderformDetailMapper;
     @Autowired
     ProductsizeMapper productsizeMapper;
+    @Autowired
+    ExpressageMapper expressageMapper;
 
     /**
      * 添加订单
@@ -226,6 +227,60 @@ public class OrderformServiceImp implements OrderformService {
 
         return orderformProductDetail;
 
+    }
+
+    @Override
+    public String selectExpressageByOid(String oid) throws Exception {
+        Orderform orderform = orderformMapper.selectByPrimaryKey(Long.valueOf(oid));
+        if (orderform == null) {
+            log.info("查询订单物流信息 ， 订单不存在"+oid);
+            return "{\"code\":\"0\",\"message\":\"订单不存在\"}";
+        }
+        int ostate = orderform.getOstate();
+        if (ostate == OrderState.PLACE_ORDER_NOTPAY) {
+            log.info("查询订单物流信息 ， 用户未付款"+oid);
+            return "{\"code\":\"0\",\"message\":\"用户未付款\"}";
+        }
+        if (ostate == OrderState.PLACE_ORDER_PAY) {
+            log.info("查询订单物流信息 ， 商家未发货"+oid);
+            return "{\"code\":\"0\",\"message\":\"商家未发货\"}";
+        }
+        if (ostate == OrderState.USER_DELETION_ORDER) {
+            log.info("查询订单物流信息 ， 用户已删除订单"+oid);
+            return "{\"code\":\"0\",\"message\":\"用户已删除订单\"}";
+        }
+        String osendmethod = orderform.getOsendmethod();
+        String osendnumber = orderform.getOsendnumber();
+        ExpressageExample expressageExample = new ExpressageExample();
+        ExpressageExample.Criteria criteria = expressageExample.createCriteria();
+        criteria.andComEqualTo(osendmethod);
+        List<Expressage> expressages = expressageMapper.selectByExample(expressageExample);
+        if (expressages == null || expressages.size() < 1) {
+            log.info("查询订单物流信息 ， 不支持的商家"+oid);
+            return "{\"code\":\"0\",\"message\":\"不支持的商家\"}";
+        }
+
+        Expressage expressage = expressages.get(0);
+        String no = expressage.getNo();
+
+
+        //请求聚合数据
+        String url = "http://v.juhe.cn/exp/index";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("com", no)
+                .add("key", WXUtil.JUHE_key)
+                .add("no", osendnumber)
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        Response response = call.execute();
+        String string = response.body().string();
+        log.info("聚合服务器返回："+string);
+        return string;
     }
 
     /**

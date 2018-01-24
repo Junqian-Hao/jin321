@@ -59,4 +59,12 @@ public interface OrderformService {
      * @throws Exception
      */
     OrderformProductDetail selectOrderByoid(String oid) throws Exception;
+
+    /**
+     * 通过订单号查询物流信息
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    String selectExpressageByOid(String oid) throws Exception;
 }

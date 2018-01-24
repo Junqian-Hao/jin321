@@ -1,5 +1,7 @@
 package com.jin321.wx.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.jin321.wx.model.OrderformDetail;
 import com.jin321.wx.model.OrderformProductDetail;
 import com.jin321.wx.service.OrderformService;
@@ -102,5 +104,21 @@ public class OrderformController {
         String oid = rq.get("oid");
         log.info("通过oid查询订单->" + oid);
         return orderformService.selectOrderByoid(oid);
+    }
+
+    /**
+     * 通过订单号查询物流信息
+     * @param rq
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("selectExpressageByOid")
+    @ResponseBody
+    public Map<String, String> selectExpressageByOid(@RequestBody Map<String, String> rq) throws Exception {
+        String oid = rq.get("oid");
+        log.info("通过订单号查询物流信息" + oid);
+        String s = orderformService.selectExpressageByOid(oid);
+        Map<String, String> params = JSONObject.parseObject(s, new TypeReference<Map<String, String>>(){});
+        return params;
     }
 }

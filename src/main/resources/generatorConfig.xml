@@ -71,7 +71,8 @@
         <!--<table tableName="district"/>-->
         <!--<table tableName="firstrelate"/>-->
         <!--<table tableName="orderform"/>-->
-        <table tableName="orderformproduct"/>
+        <!--<table tableName="orderformproduct"/>-->
+        <table tableName="expressage"/>
         <!--<table tableName="product"/>-->
         <!--<table tableName="productdetail"/>-->
         <!--<table tableName="productpics"/>-->

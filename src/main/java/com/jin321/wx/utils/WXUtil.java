@@ -26,6 +26,10 @@ public class WXUtil {
     public static String MCH_ID = "1490493672";
     public static String API_KEY = "wcHennuqkIR6Gg0WsYV5kPPpAy0Y8pZr";
     public static String BASEPATH = "https://test-1252104972.file.myqcloud.com/jin321/";
+    /**
+     * 聚合数据apikey
+     */
+    public static String JUHE_key = "22f4a04bc393677946d6da2549356487";
 
     /**
      * 微信统一下单API
