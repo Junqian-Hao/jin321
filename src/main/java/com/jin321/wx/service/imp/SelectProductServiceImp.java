@@ -17,6 +17,7 @@ import java.util.List;
  * @Description :关键字搜索商品
  */
 @Service("selectProductService")
+@Transactional(rollbackFor = Exception.class)
 public class SelectProductServiceImp implements SelectProductService {
     private static final Log log = LogFactory.getLog(SelectProductServiceImp.class);
     @Autowired

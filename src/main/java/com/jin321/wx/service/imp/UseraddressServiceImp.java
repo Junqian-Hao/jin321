@@ -20,6 +20,7 @@ import java.util.List;
  * @Description :用户收货地址业务逻辑
  */
 @Service("useraddressService")
+@Transactional(rollbackFor = Exception.class)
 public class UseraddressServiceImp implements UseraddressService {
     private static final Log log = LogFactory.getLog(UseraddressServiceImp.class);
     @Autowired

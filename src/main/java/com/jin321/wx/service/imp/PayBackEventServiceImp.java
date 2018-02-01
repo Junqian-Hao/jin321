@@ -11,6 +11,7 @@ import com.jin321.wx.service.PayBackEventService;
 import com.jin321.wx.utils.OidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
  * @Description :
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PayBackEventServiceImp implements PayBackEventService{
     @Autowired
     private PaybackeventMapper paybackeventMapper;

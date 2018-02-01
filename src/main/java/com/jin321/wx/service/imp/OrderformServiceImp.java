@@ -36,6 +36,7 @@ import java.util.*;
  * @Description :订单
  */
 @Service("orderformService")
+@Transactional(rollbackFor = Exception.class)
 public class OrderformServiceImp implements OrderformService {
     private static final Log log = LogFactory.getLog(OrderformServiceImp.class);
     @Autowired

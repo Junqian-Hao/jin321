@@ -20,6 +20,7 @@ import java.util.List;
  * @Description :查询商品类别的实现类
  */
 @Service("typeService")
+@Transactional(rollbackFor = Exception.class)
 public class TypeServiceImp implements TypeService {
     private static final Log log = LogFactory.getLog(TypeServiceImp.class);
     @Autowired

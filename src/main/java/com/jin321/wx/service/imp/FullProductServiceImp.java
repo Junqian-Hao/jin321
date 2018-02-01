@@ -20,6 +20,7 @@ import java.util.List;
  * @Description :查询商品详细信息的实现
  */
 @Service("fullProductService")
+@Transactional(rollbackFor = Exception.class)
 public class FullProductServiceImp implements FullProductService{
     private static final Log log = LogFactory.getLog(FullProductServiceImp.class);
     @Autowired

@@ -136,12 +136,19 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-driver.version}</version>
         </dependency>
-        <!-- 添加数据库连接池依赖 -->
+        <!-- 添加c3p0数据库连接池依赖 -->
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.1.2</version>
         </dependency>
+        <!-- 添加Druid数据库连接池依赖 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+
         <!--添加validator支持-->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -233,6 +240,11 @@
             <groupId>org.jdom</groupId>
             <artifactId>jdom</artifactId>
             <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.8</version>
         </dependency>
     </dependencies>
     <build>
