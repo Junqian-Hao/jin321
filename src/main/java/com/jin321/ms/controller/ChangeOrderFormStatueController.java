@@ -2,6 +2,7 @@ package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.jin321.ms.Service.DealerBuyFormService;
 import com.jin321.ms.Service.OrderFormService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,6 +58,28 @@ public class ChangeOrderFormStatueController {
         else{
             returnMap.put("code","1");
             returnMap.put("msg","修改成功");
+            return returnMap;
+        }
+    }
+    @Autowired
+    private DealerBuyFormService dealerBuyFormService;
+    @ResponseBody
+    @RequestMapping("/changeBuyFromState")
+    public Map<String,String> changeBuyFromState(@RequestBody String json){
+        returnMap=new HashMap<String, String>();
+        JSONObject object=JSONObject.parseObject(json);
+        sign=dealerBuyFormService.changeFormState(object.getInteger("dbfid"),object.getInteger("state"));
+        if(sign==1){
+            returnMap.put("code","1");
+            returnMap.put("msg","订单状态修改成功");
+            return returnMap;
+        }else if (sign==0){
+            returnMap.put("code","0");
+            returnMap.put("msg","未做修改");
+            return returnMap;
+        }else {
+            returnMap.put("code","-1");
+            returnMap.put("msg","查无此订单");
             return returnMap;
         }
 
