@@ -1,5 +1,6 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -532,6 +533,66 @@ public class OrderformExample {
 
         public Criteria andOconfirmdateNotBetween(Date value1, Date value2) {
             addCriterion("oconfirmdate not between", value1, value2, "oconfirmdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyIsNull() {
+            addCriterion("ototalmoney is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyIsNotNull() {
+            addCriterion("ototalmoney is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyEqualTo(BigDecimal value) {
+            addCriterion("ototalmoney =", value, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyNotEqualTo(BigDecimal value) {
+            addCriterion("ototalmoney <>", value, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyGreaterThan(BigDecimal value) {
+            addCriterion("ototalmoney >", value, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("ototalmoney >=", value, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyLessThan(BigDecimal value) {
+            addCriterion("ototalmoney <", value, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("ototalmoney <=", value, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyIn(List<BigDecimal> values) {
+            addCriterion("ototalmoney in", values, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyNotIn(List<BigDecimal> values) {
+            addCriterion("ototalmoney not in", values, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("ototalmoney between", value1, value2, "ototalmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtotalmoneyNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("ototalmoney not between", value1, value2, "ototalmoney");
             return (Criteria) this;
         }
 

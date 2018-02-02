@@ -7,6 +7,8 @@ public class Orderformproduct {
 
     private Long oid;
 
+    private Integer dbfid;
+
     private Integer pid;
 
     private Integer sid;
@@ -31,6 +33,14 @@ public class Orderformproduct {
 
     public void setOid(Long oid) {
         this.oid = oid;
+    }
+
+    public Integer getDbfid() {
+        return dbfid;
+    }
+
+    public void setDbfid(Integer dbfid) {
+        this.dbfid = dbfid;
     }
 
     public Integer getPid() {

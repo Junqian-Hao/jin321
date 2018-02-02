@@ -225,6 +225,66 @@ public class OrderformproductExample {
             return (Criteria) this;
         }
 
+        public Criteria andDbfidIsNull() {
+            addCriterion("dbfid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidIsNotNull() {
+            addCriterion("dbfid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidEqualTo(Integer value) {
+            addCriterion("dbfid =", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidNotEqualTo(Integer value) {
+            addCriterion("dbfid <>", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidGreaterThan(Integer value) {
+            addCriterion("dbfid >", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("dbfid >=", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidLessThan(Integer value) {
+            addCriterion("dbfid <", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidLessThanOrEqualTo(Integer value) {
+            addCriterion("dbfid <=", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidIn(List<Integer> values) {
+            addCriterion("dbfid in", values, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidNotIn(List<Integer> values) {
+            addCriterion("dbfid not in", values, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidBetween(Integer value1, Integer value2) {
+            addCriterion("dbfid between", value1, value2, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidNotBetween(Integer value1, Integer value2) {
+            addCriterion("dbfid not between", value1, value2, "dbfid");
+            return (Criteria) this;
+        }
+
         public Criteria andPidIsNull() {
             addCriterion("pid is null");
             return (Criteria) this;

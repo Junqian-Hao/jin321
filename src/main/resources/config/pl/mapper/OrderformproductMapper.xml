@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.jin321.pl.model.Orderformproduct" >
     <id column="ofpid" property="ofpid" jdbcType="INTEGER" />
     <result column="oid" property="oid" jdbcType="BIGINT" />
+    <result column="dbfid" property="dbfid" jdbcType="INTEGER" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
     <result column="sid" property="sid" jdbcType="INTEGER" />
     <result column="pamount" property="pamount" jdbcType="INTEGER" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ofpid, oid, pid, sid, pamount, pbuyprice, status
+    ofpid, oid, dbfid, pid, sid, pamount, pbuyprice, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.OrderformproductExample" >
     select
@@ -102,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Orderformproduct" >
-    insert into orderformproduct (ofpid, oid, pid, 
-      sid, pamount, pbuyprice, 
-      status)
-    values (#{ofpid,jdbcType=INTEGER}, #{oid,jdbcType=BIGINT}, #{pid,jdbcType=INTEGER}, 
-      #{sid,jdbcType=INTEGER}, #{pamount,jdbcType=INTEGER}, #{pbuyprice,jdbcType=DECIMAL}, 
-      #{status,jdbcType=INTEGER})
+    insert into orderformproduct (ofpid, oid, dbfid, 
+      pid, sid, pamount, 
+      pbuyprice, status)
+    values (#{ofpid,jdbcType=INTEGER}, #{oid,jdbcType=BIGINT}, #{dbfid,jdbcType=INTEGER}, 
+      #{pid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{pamount,jdbcType=INTEGER}, 
+      #{pbuyprice,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Orderformproduct" >
     insert into orderformproduct
@@ -117,6 +118,9 @@
       </if>
       <if test="oid != null" >
         oid,
+      </if>
+      <if test="dbfid != null" >
+        dbfid,
       </if>
       <if test="pid != null" >
         pid,
@@ -140,6 +144,9 @@
       </if>
       <if test="oid != null" >
         #{oid,jdbcType=BIGINT},
+      </if>
+      <if test="dbfid != null" >
+        #{dbfid,jdbcType=INTEGER},
       </if>
       <if test="pid != null" >
         #{pid,jdbcType=INTEGER},
@@ -173,6 +180,9 @@
       <if test="record.oid != null" >
         oid = #{record.oid,jdbcType=BIGINT},
       </if>
+      <if test="record.dbfid != null" >
+        dbfid = #{record.dbfid,jdbcType=INTEGER},
+      </if>
       <if test="record.pid != null" >
         pid = #{record.pid,jdbcType=INTEGER},
       </if>
@@ -197,6 +207,7 @@
     update orderformproduct
     set ofpid = #{record.ofpid,jdbcType=INTEGER},
       oid = #{record.oid,jdbcType=BIGINT},
+      dbfid = #{record.dbfid,jdbcType=INTEGER},
       pid = #{record.pid,jdbcType=INTEGER},
       sid = #{record.sid,jdbcType=INTEGER},
       pamount = #{record.pamount,jdbcType=INTEGER},
@@ -211,6 +222,9 @@
     <set >
       <if test="oid != null" >
         oid = #{oid,jdbcType=BIGINT},
+      </if>
+      <if test="dbfid != null" >
+        dbfid = #{dbfid,jdbcType=INTEGER},
       </if>
       <if test="pid != null" >
         pid = #{pid,jdbcType=INTEGER},
@@ -233,6 +247,7 @@
   <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Orderformproduct" >
     update orderformproduct
     set oid = #{oid,jdbcType=BIGINT},
+      dbfid = #{dbfid,jdbcType=INTEGER},
       pid = #{pid,jdbcType=INTEGER},
       sid = #{sid,jdbcType=INTEGER},
       pamount = #{pamount,jdbcType=INTEGER},

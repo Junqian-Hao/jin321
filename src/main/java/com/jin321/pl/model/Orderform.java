@@ -1,5 +1,6 @@
 package com.jin321.pl.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Orderform {
@@ -16,6 +17,8 @@ public class Orderform {
     private Date osenddate;
 
     private Date oconfirmdate;
+
+    private BigDecimal ototalmoney;
 
     private Date orepaytime;
 
@@ -83,6 +86,14 @@ public class Orderform {
 
     public void setOconfirmdate(Date oconfirmdate) {
         this.oconfirmdate = oconfirmdate;
+    }
+
+    public BigDecimal getOtotalmoney() {
+        return ototalmoney;
+    }
+
+    public void setOtotalmoney(BigDecimal ototalmoney) {
+        this.ototalmoney = ototalmoney;
     }
 
     public Date getOrepaytime() {

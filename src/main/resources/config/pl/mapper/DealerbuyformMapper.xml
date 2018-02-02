@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.pl.dao.DealerbuyformMapper" >
+  <resultMap id="BaseResultMap" type="com.jin321.pl.model.Dealerbuyform" >
+    <id column="dbfid" property="dbfid" jdbcType="INTEGER" />
+    <result column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="did" property="did" jdbcType="INTEGER" />
+    <result column="buyformstate" property="buyformstate" jdbcType="INTEGER" />
+    <result column="formsenddate" property="formsenddate" jdbcType="TIMESTAMP" />
+    <result column="formcomfirmdate" property="formcomfirmdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dbfid, oid, did, buyformstate, formsenddate, formcomfirmdate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.DealerbuyformExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dealerbuyform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dealerbuyform
+    where dbfid = #{dbfid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dealerbuyform
+    where dbfid = #{dbfid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jin321.pl.model.DealerbuyformExample" >
+    delete from dealerbuyform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jin321.pl.model.Dealerbuyform" >
+    insert into dealerbuyform (dbfid, oid, did, 
+      buyformstate, formsenddate, formcomfirmdate
+      )
+    values (#{dbfid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{did,jdbcType=INTEGER}, 
+      #{buyformstate,jdbcType=INTEGER}, #{formsenddate,jdbcType=TIMESTAMP}, #{formcomfirmdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jin321.pl.model.Dealerbuyform" >
+    insert into dealerbuyform
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dbfid != null" >
+        dbfid,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="did != null" >
+        did,
+      </if>
+      <if test="buyformstate != null" >
+        buyformstate,
+      </if>
+      <if test="formsenddate != null" >
+        formsenddate,
+      </if>
+      <if test="formcomfirmdate != null" >
+        formcomfirmdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dbfid != null" >
+        #{dbfid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=INTEGER},
+      </if>
+      <if test="buyformstate != null" >
+        #{buyformstate,jdbcType=INTEGER},
+      </if>
+      <if test="formsenddate != null" >
+        #{formsenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formcomfirmdate != null" >
+        #{formcomfirmdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jin321.pl.model.DealerbuyformExample" resultType="java.lang.Integer" >
+    select count(*) from dealerbuyform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dealerbuyform
+    <set >
+      <if test="record.dbfid != null" >
+        dbfid = #{record.dbfid,jdbcType=INTEGER},
+      </if>
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=INTEGER},
+      </if>
+      <if test="record.did != null" >
+        did = #{record.did,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyformstate != null" >
+        buyformstate = #{record.buyformstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.formsenddate != null" >
+        formsenddate = #{record.formsenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.formcomfirmdate != null" >
+        formcomfirmdate = #{record.formcomfirmdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dealerbuyform
+    set dbfid = #{record.dbfid,jdbcType=INTEGER},
+      oid = #{record.oid,jdbcType=INTEGER},
+      did = #{record.did,jdbcType=INTEGER},
+      buyformstate = #{record.buyformstate,jdbcType=INTEGER},
+      formsenddate = #{record.formsenddate,jdbcType=TIMESTAMP},
+      formcomfirmdate = #{record.formcomfirmdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Dealerbuyform" >
+    update dealerbuyform
+    <set >
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="did != null" >
+        did = #{did,jdbcType=INTEGER},
+      </if>
+      <if test="buyformstate != null" >
+        buyformstate = #{buyformstate,jdbcType=INTEGER},
+      </if>
+      <if test="formsenddate != null" >
+        formsenddate = #{formsenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formcomfirmdate != null" >
+        formcomfirmdate = #{formcomfirmdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dbfid = #{dbfid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Dealerbuyform" >
+    update dealerbuyform
+    set oid = #{oid,jdbcType=INTEGER},
+      did = #{did,jdbcType=INTEGER},
+      buyformstate = #{buyformstate,jdbcType=INTEGER},
+      formsenddate = #{formsenddate,jdbcType=TIMESTAMP},
+      formcomfirmdate = #{formcomfirmdate,jdbcType=TIMESTAMP}
+    where dbfid = #{dbfid,jdbcType=INTEGER}
+  </update>
+</mapper>
