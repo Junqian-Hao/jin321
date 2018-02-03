@@ -10,7 +10,7 @@ public interface DealerbuyformMapper {
 
     int deleteByExample(DealerbuyformExample example);
 
-    int deleteByPrimaryKey(Integer dbfid);
+    int deleteByPrimaryKey(Long dbfid);
 
     int insert(Dealerbuyform record);
 
@@ -18,7 +18,7 @@ public interface DealerbuyformMapper {
 
     List<Dealerbuyform> selectByExample(DealerbuyformExample example);
 
-    Dealerbuyform selectByPrimaryKey(Integer dbfid);
+    Dealerbuyform selectByPrimaryKey(Long dbfid);
 
     int updateByExampleSelective(@Param("record") Dealerbuyform record, @Param("example") DealerbuyformExample example);
 

@@ -296,6 +296,66 @@ public class OrderformExample {
             return (Criteria) this;
         }
 
+        public Criteria andDbfidIsNull() {
+            addCriterion("dbfid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidIsNotNull() {
+            addCriterion("dbfid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidEqualTo(Long value) {
+            addCriterion("dbfid =", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidNotEqualTo(Long value) {
+            addCriterion("dbfid <>", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidGreaterThan(Long value) {
+            addCriterion("dbfid >", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidGreaterThanOrEqualTo(Long value) {
+            addCriterion("dbfid >=", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidLessThan(Long value) {
+            addCriterion("dbfid <", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidLessThanOrEqualTo(Long value) {
+            addCriterion("dbfid <=", value, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidIn(List<Long> values) {
+            addCriterion("dbfid in", values, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidNotIn(List<Long> values) {
+            addCriterion("dbfid not in", values, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidBetween(Long value1, Long value2) {
+            addCriterion("dbfid between", value1, value2, "dbfid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbfidNotBetween(Long value1, Long value2) {
+            addCriterion("dbfid not between", value1, value2, "dbfid");
+            return (Criteria) this;
+        }
+
         public Criteria andOdateIsNull() {
             addCriterion("odate is null");
             return (Criteria) this;

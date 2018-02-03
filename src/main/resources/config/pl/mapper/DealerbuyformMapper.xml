@@ -2,12 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.pl.dao.DealerbuyformMapper" >
   <resultMap id="BaseResultMap" type="com.jin321.pl.model.Dealerbuyform" >
-    <id column="dbfid" property="dbfid" jdbcType="INTEGER" />
-    <result column="oid" property="oid" jdbcType="INTEGER" />
-    <result column="did" property="did" jdbcType="INTEGER" />
+    <id column="dbfid" property="dbfid" jdbcType="BIGINT" />
     <result column="buyformstate" property="buyformstate" jdbcType="INTEGER" />
-    <result column="formsenddate" property="formsenddate" jdbcType="TIMESTAMP" />
-    <result column="formcomfirmdate" property="formcomfirmdate" jdbcType="TIMESTAMP" />
+    <result column="totalmoney" property="totalmoney" jdbcType="DECIMAL" />
+    <result column="dbfdate" property="dbfdate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    dbfid, oid, did, buyformstate, formsenddate, formcomfirmdate
+    dbfid, buyformstate, totalmoney, dbfdate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.DealerbuyformExample" >
     select
@@ -84,15 +82,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from dealerbuyform
-    where dbfid = #{dbfid,jdbcType=INTEGER}
+    where dbfid = #{dbfid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from dealerbuyform
-    where dbfid = #{dbfid,jdbcType=INTEGER}
+    where dbfid = #{dbfid,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.jin321.pl.model.DealerbuyformExample" >
     delete from dealerbuyform
@@ -101,12 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Dealerbuyform" >
-    insert into dealerbuyform (dbfid, oid, did, 
-      buyformstate, formsenddate, formcomfirmdate
-      )
-    values (#{dbfid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{did,jdbcType=INTEGER}, 
-      #{buyformstate,jdbcType=INTEGER}, #{formsenddate,jdbcType=TIMESTAMP}, #{formcomfirmdate,jdbcType=TIMESTAMP}
-      )
+    insert into dealerbuyform (dbfid, buyformstate, totalmoney, 
+      dbfdate)
+    values (#{dbfid,jdbcType=BIGINT}, #{buyformstate,jdbcType=INTEGER}, #{totalmoney,jdbcType=DECIMAL}, 
+      #{dbfdate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Dealerbuyform" >
     insert into dealerbuyform
@@ -114,40 +110,28 @@
       <if test="dbfid != null" >
         dbfid,
       </if>
-      <if test="oid != null" >
-        oid,
-      </if>
-      <if test="did != null" >
-        did,
-      </if>
       <if test="buyformstate != null" >
         buyformstate,
       </if>
-      <if test="formsenddate != null" >
-        formsenddate,
+      <if test="totalmoney != null" >
+        totalmoney,
       </if>
-      <if test="formcomfirmdate != null" >
-        formcomfirmdate,
+      <if test="dbfdate != null" >
+        dbfdate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="dbfid != null" >
-        #{dbfid,jdbcType=INTEGER},
-      </if>
-      <if test="oid != null" >
-        #{oid,jdbcType=INTEGER},
-      </if>
-      <if test="did != null" >
-        #{did,jdbcType=INTEGER},
+        #{dbfid,jdbcType=BIGINT},
       </if>
       <if test="buyformstate != null" >
         #{buyformstate,jdbcType=INTEGER},
       </if>
-      <if test="formsenddate != null" >
-        #{formsenddate,jdbcType=TIMESTAMP},
+      <if test="totalmoney != null" >
+        #{totalmoney,jdbcType=DECIMAL},
       </if>
-      <if test="formcomfirmdate != null" >
-        #{formcomfirmdate,jdbcType=TIMESTAMP},
+      <if test="dbfdate != null" >
+        #{dbfdate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -161,22 +145,16 @@
     update dealerbuyform
     <set >
       <if test="record.dbfid != null" >
-        dbfid = #{record.dbfid,jdbcType=INTEGER},
-      </if>
-      <if test="record.oid != null" >
-        oid = #{record.oid,jdbcType=INTEGER},
-      </if>
-      <if test="record.did != null" >
-        did = #{record.did,jdbcType=INTEGER},
+        dbfid = #{record.dbfid,jdbcType=BIGINT},
       </if>
       <if test="record.buyformstate != null" >
         buyformstate = #{record.buyformstate,jdbcType=INTEGER},
       </if>
-      <if test="record.formsenddate != null" >
-        formsenddate = #{record.formsenddate,jdbcType=TIMESTAMP},
+      <if test="record.totalmoney != null" >
+        totalmoney = #{record.totalmoney,jdbcType=DECIMAL},
       </if>
-      <if test="record.formcomfirmdate != null" >
-        formcomfirmdate = #{record.formcomfirmdate,jdbcType=TIMESTAMP},
+      <if test="record.dbfdate != null" >
+        dbfdate = #{record.dbfdate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -185,12 +163,10 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update dealerbuyform
-    set dbfid = #{record.dbfid,jdbcType=INTEGER},
-      oid = #{record.oid,jdbcType=INTEGER},
-      did = #{record.did,jdbcType=INTEGER},
+    set dbfid = #{record.dbfid,jdbcType=BIGINT},
       buyformstate = #{record.buyformstate,jdbcType=INTEGER},
-      formsenddate = #{record.formsenddate,jdbcType=TIMESTAMP},
-      formcomfirmdate = #{record.formcomfirmdate,jdbcType=TIMESTAMP}
+      totalmoney = #{record.totalmoney,jdbcType=DECIMAL},
+      dbfdate = #{record.dbfdate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,31 +174,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jin321.pl.model.Dealerbuyform" >
     update dealerbuyform
     <set >
-      <if test="oid != null" >
-        oid = #{oid,jdbcType=INTEGER},
-      </if>
-      <if test="did != null" >
-        did = #{did,jdbcType=INTEGER},
-      </if>
       <if test="buyformstate != null" >
         buyformstate = #{buyformstate,jdbcType=INTEGER},
       </if>
-      <if test="formsenddate != null" >
-        formsenddate = #{formsenddate,jdbcType=TIMESTAMP},
+      <if test="totalmoney != null" >
+        totalmoney = #{totalmoney,jdbcType=DECIMAL},
       </if>
-      <if test="formcomfirmdate != null" >
-        formcomfirmdate = #{formcomfirmdate,jdbcType=TIMESTAMP},
+      <if test="dbfdate != null" >
+        dbfdate = #{dbfdate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where dbfid = #{dbfid,jdbcType=INTEGER}
+    where dbfid = #{dbfid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Dealerbuyform" >
     update dealerbuyform
-    set oid = #{oid,jdbcType=INTEGER},
-      did = #{did,jdbcType=INTEGER},
-      buyformstate = #{buyformstate,jdbcType=INTEGER},
-      formsenddate = #{formsenddate,jdbcType=TIMESTAMP},
-      formcomfirmdate = #{formcomfirmdate,jdbcType=TIMESTAMP}
-    where dbfid = #{dbfid,jdbcType=INTEGER}
+    set buyformstate = #{buyformstate,jdbcType=INTEGER},
+      totalmoney = #{totalmoney,jdbcType=DECIMAL},
+      dbfdate = #{dbfdate,jdbcType=TIMESTAMP}
+    where dbfid = #{dbfid,jdbcType=BIGINT}
   </update>
 </mapper>

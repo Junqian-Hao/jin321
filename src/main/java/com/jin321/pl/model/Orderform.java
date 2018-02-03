@@ -10,6 +10,8 @@ public class Orderform {
 
     private Integer uaid;
 
+    private Long dbfid;
+
     private Date odate;
 
     private Date opaydate;
@@ -54,6 +56,14 @@ public class Orderform {
 
     public void setUaid(Integer uaid) {
         this.uaid = uaid;
+    }
+
+    public Long getDbfid() {
+        return dbfid;
+    }
+
+    public void setDbfid(Long dbfid) {
+        this.dbfid = dbfid;
     }
 
     public Date getOdate() {
