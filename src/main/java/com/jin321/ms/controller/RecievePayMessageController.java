@@ -47,7 +47,8 @@ public class RecievePayMessageController {
         payReturnMessage = new PayReturnMessage();
         log.info("微信调起接口，从微信获取到的信息为:" + recieveMessage);
         if (recieveMessage.getResult_code().equals("SUCCESS")) {
-            sign = orderFormService.changeOrderFormStatue(1, Long.parseLong(recieveMessage.getOut_trade_no()), new Date());
+            ///待修改
+          /* sign = orderFormService.changeOrderFormStatue(1, Long.parseLong(recieveMessage.getOut_trade_no()), new Date());*/
             sign2 = orderFormService.decreaseOrderProductNum(Long.parseLong(recieveMessage.getOut_trade_no()));
             if (sign == 1) {
                 if (sign2 == 0) {
