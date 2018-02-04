@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.OrderformDetailMapper">
-    <resultMap id="BaseResultMap" type="orderformDetail">
-        <id column="oid" property="oid" jdbcType="BIGINT"/>
-        <result column="uid" property="uid" jdbcType="VARCHAR"/>
-        <result column="uaid" property="uaid" jdbcType="INTEGER"/>
-        <result column="odate" property="odate" jdbcType="TIMESTAMP"/>
-        <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP"/>
-        <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP"/>
-        <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP"/>
-        <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP"/>
-        <result column="opayed" property="opayed" jdbcType="INTEGER"/>
-        <result column="ostate" property="ostate" jdbcType="INTEGER"/>
-        <result column="omessage" property="omessage" jdbcType="VARCHAR"/>
-        <result column="osendmethod" property="osendmethod" jdbcType="VARCHAR"/>
-        <result column="osendnumber" property="osendnumber" jdbcType="VARCHAR"/>
-        <collection property="orderformproducts" ofType="orderformproduct">
+    <resultMap id="BaseResultMap" type="com.jin321.wx.model.OrderformDetail">
+        <id column="oid" property="oid" jdbcType="BIGINT" />
+        <result column="uid" property="uid" jdbcType="VARCHAR" />
+        <result column="uaid" property="uaid" jdbcType="INTEGER" />
+        <result column="did" property="did" jdbcType="INTEGER" />
+        <result column="dbfid" property="dbfid" jdbcType="BIGINT" />
+        <result column="odate" property="odate" jdbcType="TIMESTAMP" />
+        <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP" />
+        <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP" />
+        <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP" />
+        <result column="ototalmoney" property="ototalmoney" jdbcType="DECIMAL" />
+        <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP" />
+        <result column="opayed" property="opayed" jdbcType="INTEGER" />
+        <result column="ostate" property="ostate" jdbcType="INTEGER" />
+        <result column="omessage" property="omessage" jdbcType="VARCHAR" />
+        <result column="osendmethod" property="osendmethod" jdbcType="VARCHAR" />
+        <result column="osendnumber" property="osendnumber" jdbcType="VARCHAR" />
+        <collection property="orderformproducts" ofType="com.jin321.pl.model.Orderformproduct">
             <id column="ofpid" property="ofpid" jdbcType="INTEGER"/>
             <result column="oid" property="oid" jdbcType="BIGINT"/>
             <result column="pid" property="pid" jdbcType="INTEGER"/>
@@ -24,21 +27,25 @@
             <result column="pbuyprice" property="pbuyprice" jdbcType="DECIMAL"/>
         </collection>
     </resultMap>
-    <resultMap id="OrderformProductDetailMap" type="orderformProductDetail">
-        <id column="oid" property="oid" jdbcType="BIGINT"/>
-        <result column="uid" property="uid" jdbcType="VARCHAR"/>
-        <result column="uaid" property="uaid" jdbcType="INTEGER"/>
-        <result column="odate" property="odate" jdbcType="TIMESTAMP"/>
-        <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP"/>
-        <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP"/>
-        <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP"/>
-        <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP"/>
-        <result column="opayed" property="opayed" jdbcType="INTEGER"/>
-        <result column="ostate" property="ostate" jdbcType="INTEGER"/>
-        <result column="omessage" property="omessage" jdbcType="VARCHAR"/>
-        <result column="osendmethod" property="osendmethod" jdbcType="VARCHAR"/>
-        <result column="osendnumber" property="osendnumber" jdbcType="VARCHAR"/>
-        <association property="useraddress" javaType="useraddress">
+    <resultMap id="OrderformProductDetailMap" type="com.jin321.wx.model.OrderformProductDetail">
+        <id column="oid" property="oid" jdbcType="BIGINT" />
+        <result column="uid" property="uid" jdbcType="VARCHAR" />
+        <result column="uaid" property="uaid" jdbcType="INTEGER" />
+        <result column="did" property="did" jdbcType="INTEGER" />
+        <result column="dbfid" property="dbfid" jdbcType="BIGINT" />
+        <result column="odate" property="odate" jdbcType="TIMESTAMP" />
+        <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP" />
+        <result column="osenddate" property="osenddate" jdbcType="TIMESTAMP" />
+        <result column="oconfirmdate" property="oconfirmdate" jdbcType="TIMESTAMP" />
+        <result column="ototalmoney" property="ototalmoney" jdbcType="DECIMAL" />
+        <result column="orepaytime" property="orepaytime" jdbcType="TIMESTAMP" />
+        <result column="opayed" property="opayed" jdbcType="INTEGER" />
+        <result column="ostate" property="ostate" jdbcType="INTEGER" />
+        <result column="omessage" property="omessage" jdbcType="VARCHAR" />
+        <result column="osendmethod" property="osendmethod" jdbcType="VARCHAR" />
+        <result column="osendnumber" property="osendnumber" jdbcType="VARCHAR" />
+        <result column="dname" property="dname" jdbcType="VARCHAR"/>
+        <association property="useraddress" javaType="com.jin321.pl.model.Useraddress">
             <id column="uaid" property="uaid" jdbcType="INTEGER"/>
             <result column="uid" property="uid" jdbcType="VARCHAR"/>
             <result column="ucountry" property="ucountry" jdbcType="VARCHAR"/>
@@ -67,32 +74,31 @@
             <result column="ptypea" property="ptypea" jdbcType="INTEGER"/>
             <result column="ptypeb" property="ptypeb" jdbcType="INTEGER"/>
             <result column="ptypec" property="ptypec" jdbcType="INTEGER"/>
-            <result column="is_together" property="isTogether" jdbcType="BIT"/>
-            <result column="is_delete" property="isDelete" jdbcType="BIT"/>
             <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
             <result column="dname" property="dname" jdbcType="VARCHAR"/>
-            <result column="pscost" property="pscost" jdbcType="DECIMAL" />
-            <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL" />
-            <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL" />
-            <result column="sizename" property="sizename" jdbcType="VARCHAR" />
-            <result column="snumber" property="snumber" jdbcType="INTEGER" />
+            <result column="pscost" property="pscost" jdbcType="DECIMAL"/>
+            <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
+            <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
+            <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
+            <result column="snumber" property="snumber" jdbcType="INTEGER"/>
         </collection>
     </resultMap>
 
-    <insert id="insert" parameterType="orderformDetail">
+    <insert id="insert" parameterType="com.jin321.wx.model.OrderformDetail">
         INSERT INTO orderform (oid, uid, uaid,
-                               odate, opaydate, osenddate,
-                               oconfirmdate, opayed, ostate,
-                               omessage, osendmethod, osendnumber
-        )
-        VALUES (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER},
-                                         #{odate,jdbcType=TIMESTAMP}, #{opaydate,jdbcType=TIMESTAMP},
-                                         #{osenddate,jdbcType=TIMESTAMP},
-                                         #{oconfirmdate,jdbcType=TIMESTAMP}, #{opayed,jdbcType=INTEGER},
-                                         #{ostate,jdbcType=INTEGER},
-                                         #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR},
-                #{osendnumber,jdbcType=VARCHAR}
-        )
+                               did, dbfid, odate,
+                               opaydate, osenddate, oconfirmdate,
+                               ototalmoney, orepaytime, opayed,
+                               ostate, omessage, osendmethod,
+                               osendnumber)
+        VALUES (#{oid,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER},
+                                        #{did,jdbcType=INTEGER}, #{dbfid,jdbcType=BIGINT}, #{odate,jdbcType=TIMESTAMP},
+                                        #{opaydate,jdbcType=TIMESTAMP}, #{osenddate,jdbcType=TIMESTAMP},
+                                        #{oconfirmdate,jdbcType=TIMESTAMP},
+                                        #{ototalmoney,jdbcType=DECIMAL}, #{orepaytime,jdbcType=TIMESTAMP},
+                #{opayed,jdbcType=INTEGER},
+                #{ostate,jdbcType=INTEGER}, #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR},
+                #{osendnumber,jdbcType=VARCHAR})
     </insert>
     <select id="selectOrderformByuid" resultMap="OrderformProductDetailMap" parameterType="string">
         <![CDATA[
@@ -116,7 +122,6 @@
               AND productsize.`is_deleted` = 0
               AND orderform.ostate != 7
               AND orderform.ostate > 0
-
         ]]>
     </select>
     <select id="selectNOTPAYOrderformByuid" resultMap="OrderformProductDetailMap" parameterType="string">
@@ -139,7 +144,7 @@
               AND productpics.`is_headpic` = 1
               AND productsize.`is_deleted` = 0
               AND orderform.ostate = 0
-        
+
     </select>
     <select id="selectNOTRECEIVEOrderformByuid" resultMap="OrderformProductDetailMap" parameterType="string">
         <![CDATA[
@@ -208,5 +213,11 @@
         WHERE orderform.oid = #{oid}
               AND orderform.oid = orderformproduct.oid
               AND orderform.ostate != 7
+    </select>
+
+    <select id="updateDbfid" parameterType="long">
+        UPDATE orderform
+        SET dbfid = #{dbfid}
+        where oid = #{oid};
     </select>
 </mapper>

@@ -38,7 +38,7 @@ public class OrderformController {
      */
     @RequestMapping("/insertOrder")
     @ResponseBody
-    public Map insertOrder(@RequestBody OrderformDetail orderformDetail, HttpServletRequest request) throws Exception {
+    public Map insertOrder(@RequestBody OrderformDetail[] orderformDetail, HttpServletRequest request) throws Exception {
         log.info("下单->"+orderformDetail);
         Map map = orderformService.insertOrder(orderformDetail, request);
         return map;

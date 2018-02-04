@@ -15,10 +15,10 @@ import java.util.Map;
 public interface OrderformService {
     /**
      * 添加订单
-     * @param orderformDetail
+     * @param orderformDetails
      * @return
      */
-    Map insertOrder(OrderformDetail orderformDetail, HttpServletRequest request) throws Exception;
+    Map insertOrder(OrderformDetail[] orderformDetails, HttpServletRequest request) throws Exception;
 
     /**
      * 退单

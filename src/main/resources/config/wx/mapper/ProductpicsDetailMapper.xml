@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.ProductpicsDetailMapper">
-    <resultMap id="BaseResultMap" type="productpicsDetail" >
+    <resultMap id="BaseResultMap" type="com.jin321.wx.model.ProductpicsDetail" >
         <id column="ppid" property="ppid" jdbcType="INTEGER" />
         <result column="pid" property="pid" jdbcType="INTEGER" />
         <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR" />

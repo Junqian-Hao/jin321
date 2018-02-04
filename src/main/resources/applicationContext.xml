@@ -36,6 +36,7 @@
         <property name="testWhileIdle" value="${testWhileIdle}" />
         <property name="testOnBorrow" value="${testOnBorrow}" />
         <property name="testOnReturn" value="${testOnReturn}" />
+
         <property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}" />
         <!-- 打开removeAbandoned功能 -->
         <property name="removeAbandoned" value="${removeAbandoned}" />

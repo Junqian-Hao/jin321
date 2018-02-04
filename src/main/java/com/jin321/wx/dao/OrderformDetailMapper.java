@@ -55,4 +55,6 @@ public interface OrderformDetailMapper {
      */
     OrderformProductDetail selectOrderformByoid(@Param("oid")Long oid);
 
+    void updateDbfid(@Param("oid")Long oid,@Param("dbfid")long dbfid);
+
 }

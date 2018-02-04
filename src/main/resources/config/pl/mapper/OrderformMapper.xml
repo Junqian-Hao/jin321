@@ -112,18 +112,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Orderform" >
-    insert into orderform (oid, uid, uaid, 
-      did, dbfid, odate, 
-      opaydate, osenddate, oconfirmdate, 
-      ototalmoney, orepaytime, opayed, 
-      ostate, omessage, osendmethod, 
-      osendnumber)
-    values (#{oid,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER}, 
-      #{did,jdbcType=INTEGER}, #{dbfid,jdbcType=BIGINT}, #{odate,jdbcType=TIMESTAMP}, 
-      #{opaydate,jdbcType=TIMESTAMP}, #{osenddate,jdbcType=TIMESTAMP}, #{oconfirmdate,jdbcType=TIMESTAMP}, 
-      #{ototalmoney,jdbcType=DECIMAL}, #{orepaytime,jdbcType=TIMESTAMP}, #{opayed,jdbcType=INTEGER}, 
-      #{ostate,jdbcType=INTEGER}, #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR}, 
-      #{osendnumber,jdbcType=VARCHAR})
+    insert into orderform (oid, uid, uaid,
+    did, dbfid, odate,
+    opaydate, osenddate, oconfirmdate,
+    ototalmoney, orepaytime, opayed,
+    ostate, omessage, osendmethod,
+    osendnumber)
+    values (#{oid,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER},
+    #{did,jdbcType=INTEGER}, #{dbfid,jdbcType=BIGINT}, #{odate,jdbcType=TIMESTAMP},
+    #{opaydate,jdbcType=TIMESTAMP}, #{osenddate,jdbcType=TIMESTAMP}, #{oconfirmdate,jdbcType=TIMESTAMP},
+    #{ototalmoney,jdbcType=DECIMAL}, #{orepaytime,jdbcType=TIMESTAMP}, #{opayed,jdbcType=INTEGER},
+    #{ostate,jdbcType=INTEGER}, #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR},
+    #{osendnumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Orderform" >
     insert into orderform

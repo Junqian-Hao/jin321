@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.TimeproducDetailMapper">
-    <resultMap id="BaseResultMap" type="timeproducDetail">
+    <resultMap id="BaseResultMap" type="com.jin321.wx.model.TimeproducDetail">
         <id column="tpid" property="tpid" jdbcType="INTEGER"/>
         <result column="pid" property="pid" jdbcType="INTEGER"/>
         <result column="timestart" property="timestart" jdbcType="TIMESTAMP"/>
@@ -10,7 +10,7 @@
         <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
-        <association property="products" javaType="product">
+        <association property="products" javaType="com.jin321.pl.model.Product">
             <result column="did" property="did" jdbcType="INTEGER"/>
             <result column="pname" property="pname" jdbcType="VARCHAR"/>
             <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
