@@ -33,7 +33,8 @@ public class ChangeOrderFormStatueController {
     @Autowired
     private OrderFormService orderFormService;
     private Long oid;
-    private int ostate;
+    private String osendmethod;
+    private String osendnumber;
     private int sign;
     private Map<String,String> returnMap;
     @ResponseBody
@@ -43,8 +44,9 @@ public class ChangeOrderFormStatueController {
         returnMap=new HashMap<String, String>();
         JSONObject object= JSON.parseObject(json);
         oid=(Long) object.get("oid");
-        ostate=(Integer)object.get("ostate");
-        sign=orderFormService.changeOrderFormStatue(ostate,oid,new Date());
+        osendmethod=object.getString("osendmethod");
+        osendnumber=object.getString("osendnumber");
+        sign=orderFormService.sendOrderFormStatue(oid,osendmethod,osendnumber);
         if(sign==-1){
             returnMap.put("code","-1");
             returnMap.put("msg","此订单不存在");
@@ -60,28 +62,5 @@ public class ChangeOrderFormStatueController {
             returnMap.put("msg","修改成功");
             return returnMap;
         }
-    }
-    @Autowired
-    private DealerBuyFormService dealerBuyFormService;
-    @ResponseBody
-    @RequestMapping("/changeBuyFromState")
-    public Map<String,String> changeBuyFromState(@RequestBody String json){
-        returnMap=new HashMap<String, String>();
-        JSONObject object=JSONObject.parseObject(json);
-        sign=dealerBuyFormService.changeFormState(object.getInteger("dbfid"),object.getInteger("state"));
-        if(sign==1){
-            returnMap.put("code","1");
-            returnMap.put("msg","订单状态修改成功");
-            return returnMap;
-        }else if (sign==0){
-            returnMap.put("code","0");
-            returnMap.put("msg","未做修改");
-            return returnMap;
-        }else {
-            returnMap.put("code","-1");
-            returnMap.put("msg","查无此订单");
-            return returnMap;
-        }
-
     }
 }

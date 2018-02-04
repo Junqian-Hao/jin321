@@ -28,16 +28,16 @@ public class OrderFormServiceimp implements OrderFormService {
     @Autowired
     private SelectSidInFormMapper selectSidInFormMapper;
     private Orderform orderform;
+
     @Override
-    public int changeOrderFormStatue(int ostate,Long oid,Date odate){
+    public int sendOrderFormStatue(Long oid, String osendmethod, String osendnumber) {
         orderform=orderformMapper.selectByPrimaryKey(oid);
-        if(orderform!=null){
-            orderform.setOstate(ostate);
-            orderform.setOpaydate(odate);
-            return orderformMapper.updateByPrimaryKey(orderform);
-        }else
-            return -1;
+        orderform.setOsendmethod(osendmethod);
+        orderform.setOsendnumber(osendnumber);
+        orderform.setOsenddate(new Date());
+        return orderformMapper.updateByPrimaryKey(orderform);
     }
+
     private List<Integer> sidlist;
     @Autowired
     private ProductsizeMapper productsizeMapper;

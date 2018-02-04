@@ -13,12 +13,12 @@ import java.util.Date;
 public interface OrderFormService {
     /**
      * 修改订单状态
-     * @param ostate
+     * @param
      * @param oid
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public int changeOrderFormStatue(int ostate,Long oid,Date odate);
+    public int sendOrderFormStatue(Long oid,String osendmethod,String osendnumber);
 
     /**
      *
