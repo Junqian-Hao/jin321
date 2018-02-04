@@ -296,6 +296,66 @@ public class OrderformExample {
             return (Criteria) this;
         }
 
+        public Criteria andDidIsNull() {
+            addCriterion("did is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidIsNotNull() {
+            addCriterion("did is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidEqualTo(Integer value) {
+            addCriterion("did =", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotEqualTo(Integer value) {
+            addCriterion("did <>", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidGreaterThan(Integer value) {
+            addCriterion("did >", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("did >=", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidLessThan(Integer value) {
+            addCriterion("did <", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidLessThanOrEqualTo(Integer value) {
+            addCriterion("did <=", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidIn(List<Integer> values) {
+            addCriterion("did in", values, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotIn(List<Integer> values) {
+            addCriterion("did not in", values, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidBetween(Integer value1, Integer value2) {
+            addCriterion("did between", value1, value2, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotBetween(Integer value1, Integer value2) {
+            addCriterion("did not between", value1, value2, "did");
+            return (Criteria) this;
+        }
+
         public Criteria andDbfidIsNull() {
             addCriterion("dbfid is null");
             return (Criteria) this;

@@ -5,6 +5,7 @@
     <id column="oid" property="oid" jdbcType="BIGINT" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="uaid" property="uaid" jdbcType="INTEGER" />
+    <result column="did" property="did" jdbcType="INTEGER" />
     <result column="dbfid" property="dbfid" jdbcType="BIGINT" />
     <result column="odate" property="odate" jdbcType="TIMESTAMP" />
     <result column="opaydate" property="opaydate" jdbcType="TIMESTAMP" />
@@ -77,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    oid, uid, uaid, dbfid, odate, opaydate, osenddate, oconfirmdate, ototalmoney, orepaytime, 
-    opayed, ostate, omessage, osendmethod, osendnumber
+    oid, uid, uaid, did, dbfid, odate, opaydate, osenddate, oconfirmdate, ototalmoney, 
+    orepaytime, opayed, ostate, omessage, osendmethod, osendnumber
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.OrderformExample" >
     select
@@ -112,17 +113,17 @@
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Orderform" >
     insert into orderform (oid, uid, uaid, 
-      dbfid, odate, opaydate, 
-      osenddate, oconfirmdate, ototalmoney, 
-      orepaytime, opayed, ostate, 
-      omessage, osendmethod, osendnumber
-      )
+      did, dbfid, odate, 
+      opaydate, osenddate, oconfirmdate, 
+      ototalmoney, orepaytime, opayed, 
+      ostate, omessage, osendmethod, 
+      osendnumber)
     values (#{oid,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{uaid,jdbcType=INTEGER}, 
-      #{dbfid,jdbcType=BIGINT}, #{odate,jdbcType=TIMESTAMP}, #{opaydate,jdbcType=TIMESTAMP}, 
-      #{osenddate,jdbcType=TIMESTAMP}, #{oconfirmdate,jdbcType=TIMESTAMP}, #{ototalmoney,jdbcType=DECIMAL}, 
-      #{orepaytime,jdbcType=TIMESTAMP}, #{opayed,jdbcType=INTEGER}, #{ostate,jdbcType=INTEGER}, 
-      #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR}, #{osendnumber,jdbcType=VARCHAR}
-      )
+      #{did,jdbcType=INTEGER}, #{dbfid,jdbcType=BIGINT}, #{odate,jdbcType=TIMESTAMP}, 
+      #{opaydate,jdbcType=TIMESTAMP}, #{osenddate,jdbcType=TIMESTAMP}, #{oconfirmdate,jdbcType=TIMESTAMP}, 
+      #{ototalmoney,jdbcType=DECIMAL}, #{orepaytime,jdbcType=TIMESTAMP}, #{opayed,jdbcType=INTEGER}, 
+      #{ostate,jdbcType=INTEGER}, #{omessage,jdbcType=VARCHAR}, #{osendmethod,jdbcType=VARCHAR}, 
+      #{osendnumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Orderform" >
     insert into orderform
@@ -135,6 +136,9 @@
       </if>
       <if test="uaid != null" >
         uaid,
+      </if>
+      <if test="did != null" >
+        did,
       </if>
       <if test="dbfid != null" >
         dbfid,
@@ -182,6 +186,9 @@
       </if>
       <if test="uaid != null" >
         #{uaid,jdbcType=INTEGER},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=INTEGER},
       </if>
       <if test="dbfid != null" >
         #{dbfid,jdbcType=BIGINT},
@@ -239,6 +246,9 @@
       <if test="record.uaid != null" >
         uaid = #{record.uaid,jdbcType=INTEGER},
       </if>
+      <if test="record.did != null" >
+        did = #{record.did,jdbcType=INTEGER},
+      </if>
       <if test="record.dbfid != null" >
         dbfid = #{record.dbfid,jdbcType=BIGINT},
       </if>
@@ -285,6 +295,7 @@
     set oid = #{record.oid,jdbcType=BIGINT},
       uid = #{record.uid,jdbcType=VARCHAR},
       uaid = #{record.uaid,jdbcType=INTEGER},
+      did = #{record.did,jdbcType=INTEGER},
       dbfid = #{record.dbfid,jdbcType=BIGINT},
       odate = #{record.odate,jdbcType=TIMESTAMP},
       opaydate = #{record.opaydate,jdbcType=TIMESTAMP},
@@ -309,6 +320,9 @@
       </if>
       <if test="uaid != null" >
         uaid = #{uaid,jdbcType=INTEGER},
+      </if>
+      <if test="did != null" >
+        did = #{did,jdbcType=INTEGER},
       </if>
       <if test="dbfid != null" >
         dbfid = #{dbfid,jdbcType=BIGINT},
@@ -353,6 +367,7 @@
     update orderform
     set uid = #{uid,jdbcType=VARCHAR},
       uaid = #{uaid,jdbcType=INTEGER},
+      did = #{did,jdbcType=INTEGER},
       dbfid = #{dbfid,jdbcType=BIGINT},
       odate = #{odate,jdbcType=TIMESTAMP},
       opaydate = #{opaydate,jdbcType=TIMESTAMP},

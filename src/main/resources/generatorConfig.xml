@@ -85,7 +85,7 @@
         <!--<table tableName="useraddress"/>-->
         <!--<table tableName="paybackevent"/>-->
         <!--<table tableName="paycommision"/>-->
-        <table tableName="dealerbuyform"/>
+        <!--<table tableName="dealerbuyform"/>-->
         <!--<table tableName="movies" domainObjectName="User"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
