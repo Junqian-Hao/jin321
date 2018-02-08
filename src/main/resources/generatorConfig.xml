@@ -81,7 +81,7 @@
         <!--<table tableName="rollingpick"/>-->
         <!--<table tableName="secondrelate"/>-->
         <!--<table tableName="timeproduct"/>-->
-        <!--<table tableName="user"/>-->
+        <table tableName="user"/>
         <!--<table tableName="useraddress"/>-->
         <!--<table tableName="paybackevent"/>-->
         <!--<table tableName="paycommision"/>-->

@@ -1,5 +1,7 @@
 package com.jin321.pl.model;
 
+import java.util.Date;
+
 public class User {
     private String uid;
 
@@ -8,6 +10,10 @@ public class User {
     private Float ucommition;
 
     private Boolean isTogether;
+
+    private Date registdate;
+
+    private Date togetherdate;
 
     public String getUid() {
         return uid;
@@ -41,13 +47,19 @@ public class User {
         this.isTogether = isTogether;
     }
 
-    @Override
-    public String toString() {
-        return "com.jin321.pl.model.User{" +
-                "uid='" + uid + '\'' +
-                ", userwxid='" + userwxid + '\'' +
-                ", ucommition=" + ucommition +
-                ", isTogether=" + isTogether +
-                '}';
+    public Date getRegistdate() {
+        return registdate;
+    }
+
+    public void setRegistdate(Date registdate) {
+        this.registdate = registdate;
+    }
+
+    public Date getTogetherdate() {
+        return togetherdate;
+    }
+
+    public void setTogetherdate(Date togetherdate) {
+        this.togetherdate = togetherdate;
     }
 }

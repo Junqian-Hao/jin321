@@ -6,6 +6,8 @@
     <result column="userWXid" property="userwxid" jdbcType="VARCHAR" />
     <result column="ucommition" property="ucommition" jdbcType="REAL" />
     <result column="is_together" property="isTogether" jdbcType="BIT" />
+    <result column="registdate" property="registdate" jdbcType="TIMESTAMP" />
+    <result column="togetherdate" property="togetherdate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    uid, userWXid, ucommition, is_together
+    uid, userWXid, ucommition, is_together, registdate, togetherdate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.UserExample" >
     select
@@ -100,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.User" >
     insert into user (uid, userWXid, ucommition, 
-      is_together)
+      is_together, registdate, togetherdate
+      )
     values (#{uid,jdbcType=VARCHAR}, #{userwxid,jdbcType=VARCHAR}, #{ucommition,jdbcType=REAL}, 
-      #{isTogether,jdbcType=BIT})
+      #{isTogether,jdbcType=BIT}, #{registdate,jdbcType=TIMESTAMP}, #{togetherdate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.User" >
     insert into user
@@ -119,6 +123,12 @@
       <if test="isTogether != null" >
         is_together,
       </if>
+      <if test="registdate != null" >
+        registdate,
+      </if>
+      <if test="togetherdate != null" >
+        togetherdate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
@@ -132,6 +142,12 @@
       </if>
       <if test="isTogether != null" >
         #{isTogether,jdbcType=BIT},
+      </if>
+      <if test="registdate != null" >
+        #{registdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="togetherdate != null" >
+        #{togetherdate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -156,6 +172,12 @@
       <if test="record.isTogether != null" >
         is_together = #{record.isTogether,jdbcType=BIT},
       </if>
+      <if test="record.registdate != null" >
+        registdate = #{record.registdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.togetherdate != null" >
+        togetherdate = #{record.togetherdate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +188,9 @@
     set uid = #{record.uid,jdbcType=VARCHAR},
       userWXid = #{record.userwxid,jdbcType=VARCHAR},
       ucommition = #{record.ucommition,jdbcType=REAL},
-      is_together = #{record.isTogether,jdbcType=BIT}
+      is_together = #{record.isTogether,jdbcType=BIT},
+      registdate = #{record.registdate,jdbcType=TIMESTAMP},
+      togetherdate = #{record.togetherdate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +207,12 @@
       <if test="isTogether != null" >
         is_together = #{isTogether,jdbcType=BIT},
       </if>
+      <if test="registdate != null" >
+        registdate = #{registdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="togetherdate != null" >
+        togetherdate = #{togetherdate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where uid = #{uid,jdbcType=VARCHAR}
   </update>
@@ -190,7 +220,9 @@
     update user
     set userWXid = #{userwxid,jdbcType=VARCHAR},
       ucommition = #{ucommition,jdbcType=REAL},
-      is_together = #{isTogether,jdbcType=BIT}
+      is_together = #{isTogether,jdbcType=BIT},
+      registdate = #{registdate,jdbcType=TIMESTAMP},
+      togetherdate = #{togetherdate,jdbcType=TIMESTAMP}
     where uid = #{uid,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.jin321.pl.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserExample {
@@ -361,6 +362,126 @@ public class UserExample {
 
         public Criteria andIsTogetherNotBetween(Boolean value1, Boolean value2) {
             addCriterion("is_together not between", value1, value2, "isTogether");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateIsNull() {
+            addCriterion("registdate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateIsNotNull() {
+            addCriterion("registdate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateEqualTo(Date value) {
+            addCriterion("registdate =", value, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateNotEqualTo(Date value) {
+            addCriterion("registdate <>", value, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateGreaterThan(Date value) {
+            addCriterion("registdate >", value, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateGreaterThanOrEqualTo(Date value) {
+            addCriterion("registdate >=", value, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateLessThan(Date value) {
+            addCriterion("registdate <", value, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateLessThanOrEqualTo(Date value) {
+            addCriterion("registdate <=", value, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateIn(List<Date> values) {
+            addCriterion("registdate in", values, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateNotIn(List<Date> values) {
+            addCriterion("registdate not in", values, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateBetween(Date value1, Date value2) {
+            addCriterion("registdate between", value1, value2, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistdateNotBetween(Date value1, Date value2) {
+            addCriterion("registdate not between", value1, value2, "registdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateIsNull() {
+            addCriterion("togetherdate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateIsNotNull() {
+            addCriterion("togetherdate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateEqualTo(Date value) {
+            addCriterion("togetherdate =", value, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateNotEqualTo(Date value) {
+            addCriterion("togetherdate <>", value, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateGreaterThan(Date value) {
+            addCriterion("togetherdate >", value, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateGreaterThanOrEqualTo(Date value) {
+            addCriterion("togetherdate >=", value, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateLessThan(Date value) {
+            addCriterion("togetherdate <", value, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateLessThanOrEqualTo(Date value) {
+            addCriterion("togetherdate <=", value, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateIn(List<Date> values) {
+            addCriterion("togetherdate in", values, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateNotIn(List<Date> values) {
+            addCriterion("togetherdate not in", values, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateBetween(Date value1, Date value2) {
+            addCriterion("togetherdate between", value1, value2, "togetherdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andTogetherdateNotBetween(Date value1, Date value2) {
+            addCriterion("togetherdate not between", value1, value2, "togetherdate");
             return (Criteria) this;
         }
     }
