@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.wx.dao.FullProductMapper">
-    <resultMap id="BaseResultMap" type="fullProduct">
+    <resultMap id="BaseResultMap" type="com.jin321.wx.model.FullProduct">
         <id column="pid" property="pid" jdbcType="INTEGER" />
         <result column="did" property="did" jdbcType="INTEGER" />
         <result column="pname" property="pname" jdbcType="VARCHAR" />
@@ -13,7 +13,7 @@
         <result column="is_together" property="isTogether" jdbcType="BIT" />
         <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
         <result column="dname" property="dname" jdbcType="VARCHAR"/>
-        <collection property="productsizeList" ofType="productsize">
+        <collection property="productsizeList" ofType="com.jin321.pl.model.Productsize">
             <id column="sid" property="sid" jdbcType="INTEGER"/>
             <result column="pscost" property="pscost" jdbcType="DECIMAL"/>
             <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
@@ -21,12 +21,12 @@
             <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
             <result column="snumber" property="snumber" jdbcType="INTEGER"/>
         </collection>
-        <collection property="productpicsList" ofType="productpics">
+        <collection property="productpicsList" ofType="com.jin321.pl.model.Productpics">
             <id column="ppid" property="ppid" jdbcType="INTEGER"/>
             <result column="ppicurl" property="ppicurl" jdbcType="VARCHAR"/>
             <result column="is_headpic" property="isHeadpic" jdbcType="BIT"/>
         </collection>
-        <collection property="productdetailList" ofType="productdetail">
+        <collection property="productdetailList" ofType="com.jin321.pl.model.Productdetail">
             <id column="pdid" property="pdid" jdbcType="INTEGER"/>
             <result column="picurl" property="picurl" jdbcType="VARCHAR"/>
             <result column="porder" property="porder" jdbcType="INTEGER"/>

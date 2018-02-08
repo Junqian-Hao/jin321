@@ -18,7 +18,10 @@ public class OrderformProductDetail extends Orderform {
     //订单商品详细信息
     List<OrderformProductPo> orderformProductPos;
 
+    private String dname;
+
     //baseUrl
+
     String baseURL = WXUtil.BASEPATH;
 
     //订单总价
@@ -54,5 +57,13 @@ public class OrderformProductDetail extends Orderform {
 
     public void setTotalprice(BigDecimal totalprice) {
         this.totalprice = totalprice;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
     }
 }
