@@ -1,9 +1,9 @@
 package com.jin321.ms.Service;
 
-import com.jin321.pl.model.Orderform;
+import com.jin321.ms.model.OrderFormDetails;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Tyranitarx on 2017/11/6.
@@ -27,4 +27,14 @@ public interface OrderFormService {
      */
     @Transactional(rollbackFor = Exception.class)
     public int decreaseOrderProductNum(Long oid);
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<OrderFormDetails> getReadyOrderform(int did);
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<OrderFormDetails> getUnReadyOrderfrom(int did);
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<OrderFormDetails> getconfirmForm(int did);
+
 }

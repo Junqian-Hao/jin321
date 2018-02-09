@@ -42,12 +42,17 @@ public class TogetherMoneyEvent {
     private String date;
     private String datesplit[];
     private BigDecimal total;
-    @Scheduled(cron = "0 0 1 L * ?")
+    @Scheduled(cron = "0 0 1 1 * ?")
     public void run() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         date = sdf.format(new Date());
         datesplit = date.split("-");
-        dealerbuyformList = getSaleBydateDao.getSaleByMonth(datesplit[1]);
+        String month=datesplit[1];
+        if (datesplit[1].equals("1"))
+            month="12";
+        else
+            month=String.valueOf(Integer.parseInt(datesplit[1])-1);
+        dealerbuyformList = getSaleBydateDao.getSaleByMonth(month);
         Iterator<Dealerbuyform> dealerbuyformIterator = dealerbuyformList.iterator();
         //得到当月所有支付单进行迭代
         while (dealerbuyformIterator.hasNext()) {

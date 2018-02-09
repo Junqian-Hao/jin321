@@ -2,8 +2,8 @@ package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jin321.ms.Service.DealerBuyFormService;
 import com.jin321.ms.Service.OrderFormService;
+import com.jin321.ms.model.OrderFormDetails;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.json.Json;
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -36,7 +36,27 @@ public class ChangeOrderFormStatueController {
     private String osendmethod;
     private String osendnumber;
     private int sign;
+    private List<OrderFormDetails> orderFormDetailsList;
     private Map<String,String> returnMap;
+    @ResponseBody
+    @RequestMapping("/getOrderform")
+    public List<OrderFormDetails> getOrderForm(@RequestBody String json, HttpServletRequest request){
+        //未发货1 未确认2 确认3
+        JSONObject object=JSON.parseObject(json);
+        int select=object.getInteger("select");
+        int did=(Integer)request.getSession().getAttribute("did");
+
+        switch (select){
+            case 1:
+                orderFormDetailsList =orderFormService.getUnReadyOrderfrom(did);break;
+            case 2:
+                orderFormDetailsList =orderFormService.getReadyOrderform(did);break;
+            case 3:
+                orderFormDetailsList =orderFormService.getconfirmForm(did);break;
+        }
+        return orderFormDetailsList;
+    }
+    //发货接口
     @ResponseBody
     @RequestMapping("/changeOrderStatue")
     public Map<String,String> changeStatue(@RequestBody String json){
