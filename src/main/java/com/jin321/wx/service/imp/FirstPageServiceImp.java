@@ -3,10 +3,9 @@ package com.jin321.wx.service.imp;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.jin321.pl.dao.FirstrelateMapper;
+import com.jin321.pl.dao.PaycommisionMapper;
 import com.jin321.pl.dao.UserMapper;
-import com.jin321.pl.model.Firstrelate;
-import com.jin321.pl.model.User;
-import com.jin321.pl.model.UserExample;
+import com.jin321.pl.model.*;
 import com.jin321.pl.utils.StringUtil;
 import com.jin321.wx.dao.ProductPoMapper;
 import com.jin321.wx.dao.RollingpickDetailMapper;
@@ -46,6 +45,8 @@ public class FirstPageServiceImp implements FirstPageService {
     TimeproducDetailMapper timeproducDetailMapper;        //秒杀商品活动信息
     @Autowired
     ProductPoMapper productPoMapper;        //合伙人商品
+    @Autowired
+    PaycommisionMapper paycommisionMapper;
 
     String appid = WXUtil.APPID;
 
@@ -152,5 +153,20 @@ public class FirstPageServiceImp implements FirstPageService {
             map.put("userid", users.get(0).getUid());
         }
         return map;
+    }
+
+    /**
+     * 查询佣金
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Paycommision> Commissions(String uid) throws Exception {
+        PaycommisionExample paycommisionExample = new PaycommisionExample();
+        PaycommisionExample.Criteria criteria = paycommisionExample.createCriteria();
+        criteria.andUidEqualTo(uid);
+        List<Paycommision> paycommisions = paycommisionMapper.selectByExample(paycommisionExample);
+        return paycommisions;
     }
 }

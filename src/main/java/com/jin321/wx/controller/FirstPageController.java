@@ -2,6 +2,7 @@ package com.jin321.wx.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.jin321.pl.model.Paycommision;
 import com.jin321.pl.utils.JWTUtil;
 import com.jin321.pl.utils.StringUtil;
 import com.jin321.wx.model.LoginEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -171,5 +173,15 @@ public class FirstPageController {
         }
         return map;
     }
+
+    @RequestMapping("Commissions")
+    @ResponseBody
+    public List<Paycommision> Commissions(@RequestBody Map<String, String> rq) throws Exception {
+        String uid = rq.get("uid");
+        log.info("查询佣金" + uid);
+        List<Paycommision> commissions = firstPageService.Commissions(uid);
+        return commissions;
+    }
+
 
 }

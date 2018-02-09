@@ -1,7 +1,9 @@
 package com.jin321.wx.service;
 
+import com.jin321.pl.model.Paycommision;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,4 +30,11 @@ public interface FirstPageService {
     @Transactional(rollbackFor = Exception.class)
     Map<String, String> login(String js_code , String lUserid) throws Exception;
 
+    /**
+     * 查询佣金
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    List<Paycommision> Commissions(String uid) throws Exception;
 }
