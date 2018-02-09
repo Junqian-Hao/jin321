@@ -22,10 +22,8 @@ import java.util.List;
 @Component
 public class DeleteRollingpicEvent {
     private static final Log log = LogFactory.getLog(DBTimerTask.class);
-    @Autowired
-    private RollingpickMapper rollingpickMapper;
-    private List<Rollingpick> rollingpicks;
-    @Scheduled(cron = "0 10 0 * * ?")
+
+    @Scheduled(cron = "0 0 1 L * ?")
     public void run(){
         /*RollingpickExample rollingpickExample=new RollingpickExample();
         RollingpickExample.Criteria criteria=rollingpickExample.createCriteria();

@@ -235,52 +235,52 @@ public class OrderformproductExample {
             return (Criteria) this;
         }
 
-        public Criteria andDbfidEqualTo(Integer value) {
+        public Criteria andDbfidEqualTo(Long value) {
             addCriterion("dbfid =", value, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidNotEqualTo(Integer value) {
+        public Criteria andDbfidNotEqualTo(Long value) {
             addCriterion("dbfid <>", value, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidGreaterThan(Integer value) {
+        public Criteria andDbfidGreaterThan(Long value) {
             addCriterion("dbfid >", value, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andDbfidGreaterThanOrEqualTo(Long value) {
             addCriterion("dbfid >=", value, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidLessThan(Integer value) {
+        public Criteria andDbfidLessThan(Long value) {
             addCriterion("dbfid <", value, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidLessThanOrEqualTo(Integer value) {
+        public Criteria andDbfidLessThanOrEqualTo(Long value) {
             addCriterion("dbfid <=", value, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidIn(List<Integer> values) {
+        public Criteria andDbfidIn(List<Long> values) {
             addCriterion("dbfid in", values, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidNotIn(List<Integer> values) {
+        public Criteria andDbfidNotIn(List<Long> values) {
             addCriterion("dbfid not in", values, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidBetween(Integer value1, Integer value2) {
+        public Criteria andDbfidBetween(Long value1, Long value2) {
             addCriterion("dbfid between", value1, value2, "dbfid");
             return (Criteria) this;
         }
 
-        public Criteria andDbfidNotBetween(Integer value1, Integer value2) {
+        public Criteria andDbfidNotBetween(Long value1, Long value2) {
             addCriterion("dbfid not between", value1, value2, "dbfid");
             return (Criteria) this;
         }
