@@ -1,13 +1,14 @@
 package com.jin321.ms.model;
 
 import com.jin321.pl.model.Orderform;
-import com.jin321.pl.model.Orderformproduct;
+import com.jin321.pl.model.Useraddress;
 
 import java.util.List;
 
 public class OrderFormDetails {
     private Orderform orderform;
-    private List<Orderformproduct> orderformproductList;
+    private Useraddress useraddress;
+    private List<OrderFormProductDetails> orderFormProductDetails;
 
     public Orderform getOrderform() {
         return orderform;
@@ -17,11 +18,19 @@ public class OrderFormDetails {
         this.orderform = orderform;
     }
 
-    public List<Orderformproduct> getOrderformproductList() {
-        return orderformproductList;
+    public Useraddress getUseraddress() {
+        return useraddress;
     }
 
-    public void setOrderformproductList(List<Orderformproduct> orderformproductList) {
-        this.orderformproductList = orderformproductList;
+    public void setUseraddress(Useraddress useraddress) {
+        this.useraddress = useraddress;
+    }
+
+    public List<OrderFormProductDetails> getOrderFormProductDetails() {
+        return orderFormProductDetails;
+    }
+
+    public void setOrderFormProductDetails(List<OrderFormProductDetails> orderFormProductDetails) {
+        this.orderFormProductDetails = orderFormProductDetails;
     }
 }

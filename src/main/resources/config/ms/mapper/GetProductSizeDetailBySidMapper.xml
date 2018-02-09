@@ -1,0 +1,34 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.ms.dao.GetProductSizeDetailBySidMapper">
+    <resultMap id="BaseResultMap" type="UpdateProductSizeDetail">
+        <id column="sid" property="sid" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
+        <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
+        <result column="snumber" property="snumber" jdbcType="INTEGER"/>
+        <result column="ptypea" property="ptypea" javaType="INTEGER"/>
+        <result column="ptypeb" property="ptypeb" javaType="INTEGER"/>
+        <result column="ptypbec" property="ptypec" javaType="INTEGER"/>
+        <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
+        <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
+    </resultMap>
+    <select id="getDetial" resultMap="BaseResultMap">
+        SELECT productsize.sid,
+              productsize.pid,
+              product.pname,
+              product.psummary,
+              productsize.sizename,
+              productsize.snumber,
+              product.ptypea,
+              product.ptypeb,
+              product.ptypec,
+              productsize.psoriprice,
+              productsize.pssellprice
+              FROM
+              productsize
+              LEFT JOIN product ON productsize.pid=product.pid
+              WHERE
+               productsize.sid=#{sid}
+    </select>
+</mapper>

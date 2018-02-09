@@ -44,15 +44,15 @@ public class ChangeOrderFormStatueController {
         //未发货1 未确认2 确认3
         JSONObject object=JSON.parseObject(json);
         int select=object.getInteger("select");
-        int did=(Integer)request.getSession().getAttribute("did");
+       // int did=(Integer)request.getSession().getAttribute("did");
 
         switch (select){
             case 1:
-                orderFormDetailsList =orderFormService.getUnReadyOrderfrom(did);break;
+                orderFormDetailsList =orderFormService.getUnReadyOrderfrom(2);break;
             case 2:
-                orderFormDetailsList =orderFormService.getReadyOrderform(did);break;
+                orderFormDetailsList =orderFormService.getReadyOrderform(2);break;
             case 3:
-                orderFormDetailsList =orderFormService.getconfirmForm(did);break;
+                orderFormDetailsList =orderFormService.getconfirmForm(2);break;
         }
         return orderFormDetailsList;
     }

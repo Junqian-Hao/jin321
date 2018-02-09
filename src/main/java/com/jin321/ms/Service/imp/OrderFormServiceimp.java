@@ -2,11 +2,14 @@ package com.jin321.ms.Service.imp;
 
 
 import com.jin321.ms.Service.OrderFormService;
+import com.jin321.ms.dao.GetProductSizeDetailBySidMapper;
 import com.jin321.ms.dao.SelectSidInFormMapper;
 import com.jin321.ms.model.OrderFormDetails;
+import com.jin321.ms.model.OrderFormProductDetails;
 import com.jin321.pl.dao.OrderformMapper;
 import com.jin321.pl.dao.OrderformproductMapper;
 import com.jin321.pl.dao.ProductsizeMapper;
+import com.jin321.pl.dao.UseraddressMapper;
 import com.jin321.pl.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,12 +31,18 @@ public class OrderFormServiceimp implements OrderFormService {
     @Autowired
     private OrderformproductMapper orderformproductMapper;
     @Autowired
+    private UseraddressMapper useraddressMapper;
+    @Autowired
     private SelectSidInFormMapper selectSidInFormMapper;
+    @Autowired
+    private GetProductSizeDetailBySidMapper getProductSizeDetailBySidMapper;
     private Orderform orderform;
     private OrderFormDetails orderformDetails;
     private List<OrderFormDetails> orderFormDetailsList;
     private List<Orderform> orderformList;
     private List<Orderformproduct> orderformproductList;
+    private OrderFormProductDetails orderFormProductDetails;
+    private List<OrderFormProductDetails> orderFormProductDetailsList;
 
     @Override
     public List<OrderFormDetails> getReadyOrderform(int did) {
@@ -46,13 +55,24 @@ public class OrderFormServiceimp implements OrderFormService {
         Iterator<Orderform> orderformIterator=orderformList.iterator();
         while(orderformIterator.hasNext()){
             orderform=orderformIterator.next();
+            orderFormProductDetailsList =new ArrayList<OrderFormProductDetails>();
             OrderformproductExample orderformproductExample=new OrderformproductExample();
             OrderformproductExample.Criteria criteriaop=orderformproductExample.createCriteria();
             criteriaop.andOidEqualTo(orderform.getOid());
             orderformproductList=orderformproductMapper.selectByExample(orderformproductExample);
-            orderformDetails =new OrderFormDetails();
+            orderformDetails=new OrderFormDetails();
+            Iterator<Orderformproduct> orderformproductIterator=orderformproductList.iterator();
+            orderFormProductDetailsList =new ArrayList<OrderFormProductDetails>();
+            while (orderformproductIterator.hasNext()){
+                Orderformproduct orderformproduct= orderformproductIterator.next();
+                orderFormProductDetails =new OrderFormProductDetails();
+                orderFormProductDetails.setOrderformproduct(orderformproduct);
+                orderFormProductDetails.setUpdateProductSizeDetail(getProductSizeDetailBySidMapper.getDetial(orderformproduct.getSid()));
+                orderFormProductDetailsList.add(orderFormProductDetails);
+            }
             orderformDetails.setOrderform(orderform);
-            orderformDetails.setOrderformproductList(orderformproductList);
+            orderformDetails.setUseraddress(useraddressMapper.selectByPrimaryKey(orderform.getUaid()));
+            orderformDetails.setOrderFormProductDetails(orderFormProductDetailsList);
             orderFormDetailsList.add(orderformDetails);
         }
         return orderFormDetailsList;
@@ -69,13 +89,24 @@ public class OrderFormServiceimp implements OrderFormService {
         Iterator<Orderform> orderformIterator=orderformList.iterator();
         while(orderformIterator.hasNext()){
             orderform=orderformIterator.next();
+            orderFormProductDetailsList =new ArrayList<OrderFormProductDetails>();
             OrderformproductExample orderformproductExample=new OrderformproductExample();
             OrderformproductExample.Criteria criteriaop=orderformproductExample.createCriteria();
             criteriaop.andOidEqualTo(orderform.getOid());
             orderformproductList=orderformproductMapper.selectByExample(orderformproductExample);
-            orderformDetails =new OrderFormDetails();
+            orderformDetails=new OrderFormDetails();
+            Iterator<Orderformproduct> orderformproductIterator=orderformproductList.iterator();
+            orderFormProductDetailsList =new ArrayList<OrderFormProductDetails>();
+            while (orderformproductIterator.hasNext()){
+                Orderformproduct orderformproduct= orderformproductIterator.next();
+                orderFormProductDetails =new OrderFormProductDetails();
+                orderFormProductDetails.setOrderformproduct(orderformproduct);
+                orderFormProductDetails.setUpdateProductSizeDetail(getProductSizeDetailBySidMapper.getDetial(orderformproduct.getSid()));
+                orderFormProductDetailsList.add(orderFormProductDetails);
+            }
             orderformDetails.setOrderform(orderform);
-            orderformDetails.setOrderformproductList(orderformproductList);
+            orderformDetails.setUseraddress(useraddressMapper.selectByPrimaryKey(orderform.getUaid()));
+            orderformDetails.setOrderFormProductDetails(orderFormProductDetailsList);
             orderFormDetailsList.add(orderformDetails);
         }
         return orderFormDetailsList;
@@ -92,13 +123,24 @@ public class OrderFormServiceimp implements OrderFormService {
         Iterator<Orderform> orderformIterator=orderformList.iterator();
         while(orderformIterator.hasNext()){
             orderform=orderformIterator.next();
+            orderFormProductDetailsList =new ArrayList<OrderFormProductDetails>();
             OrderformproductExample orderformproductExample=new OrderformproductExample();
             OrderformproductExample.Criteria criteriaop=orderformproductExample.createCriteria();
             criteriaop.andOidEqualTo(orderform.getOid());
             orderformproductList=orderformproductMapper.selectByExample(orderformproductExample);
-            orderformDetails =new OrderFormDetails();
+            orderformDetails=new OrderFormDetails();
+            Iterator<Orderformproduct> orderformproductIterator=orderformproductList.iterator();
+            orderFormProductDetailsList =new ArrayList<OrderFormProductDetails>();
+            while (orderformproductIterator.hasNext()){
+                Orderformproduct orderformproduct= orderformproductIterator.next();
+                orderFormProductDetails =new OrderFormProductDetails();
+                orderFormProductDetails.setOrderformproduct(orderformproduct);
+                orderFormProductDetails.setUpdateProductSizeDetail(getProductSizeDetailBySidMapper.getDetial(orderformproduct.getSid()));
+                orderFormProductDetailsList.add(orderFormProductDetails);
+            }
             orderformDetails.setOrderform(orderform);
-            orderformDetails.setOrderformproductList(orderformproductList);
+            orderformDetails.setUseraddress(useraddressMapper.selectByPrimaryKey(orderform.getUaid()));
+            orderformDetails.setOrderFormProductDetails(orderFormProductDetailsList);
             orderFormDetailsList.add(orderformDetails);
         }
         return orderFormDetailsList;
