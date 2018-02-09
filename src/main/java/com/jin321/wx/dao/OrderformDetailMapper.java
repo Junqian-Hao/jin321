@@ -55,6 +55,18 @@ public interface OrderformDetailMapper {
      */
     OrderformProductDetail selectOrderformByoid(@Param("oid")Long oid);
 
+    /**
+     * 给订单设置支付单号
+     * @param oid
+     * @param dbfid
+     */
     void updateDbfid(@Param("oid")Long oid,@Param("dbfid")long dbfid);
+
+    /**
+     * 修改订单的状态
+     * @param oid
+     * @param osdate
+     */
+    void updateOstade(@Param("oid")Long oid,@Param("osdate")long osdate);
 
 }

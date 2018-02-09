@@ -81,6 +81,7 @@
             <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
             <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
             <result column="snumber" property="snumber" jdbcType="INTEGER"/>
+            <result column="is_together" property="isTogether" />
         </collection>
     </resultMap>
 
@@ -218,6 +219,11 @@
     <select id="updateDbfid" parameterType="long">
         UPDATE orderform
         SET dbfid = #{dbfid}
+        where oid = #{oid};
+    </select>
+    <select id="updateOstade" parameterType="long">
+        UPDATE orderform
+        SET ostate = #{osdate}
         where oid = #{oid};
     </select>
 </mapper>

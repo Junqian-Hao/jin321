@@ -121,4 +121,13 @@ public class OrderformController {
         Map<String, String> params = JSONObject.parseObject(s, new TypeReference<Map<String, String>>(){});
         return params;
     }
+
+    @RequestMapping("confirmReceipt")
+    @ResponseBody
+    public Map<String, Object> confirmReceipt(@RequestBody Map<String, String> rq) throws Exception {
+        String oid = rq.get("oid");
+        log.info("确认收货" + oid);
+        Map<String, Object> map = orderformService.confirmReceipt(oid);
+        return map;
+    }
 }

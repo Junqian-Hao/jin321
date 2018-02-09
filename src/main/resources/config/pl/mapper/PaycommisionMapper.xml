@@ -3,7 +3,7 @@
 <mapper namespace="com.jin321.pl.dao.PaycommisionMapper" >
   <resultMap id="BaseResultMap" type="com.jin321.pl.model.Paycommision" >
     <id column="pcid" property="pcid" jdbcType="INTEGER" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="paynum" property="paynum" jdbcType="DECIMAL" />
     <result column="paydate" property="paydate" jdbcType="TIMESTAMP" />
     <result column="paymsg" property="paymsg" jdbcType="VARCHAR" />
@@ -102,7 +102,7 @@
   <insert id="insert" parameterType="com.jin321.pl.model.Paycommision" >
     insert into paycommision (pcid, uid, paynum, 
       paydate, paymsg)
-    values (#{pcid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{paynum,jdbcType=DECIMAL}, 
+    values (#{pcid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{paynum,jdbcType=DECIMAL}, 
       #{paydate,jdbcType=TIMESTAMP}, #{paymsg,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Paycommision" >
@@ -129,7 +129,7 @@
         #{pcid,jdbcType=INTEGER},
       </if>
       <if test="uid != null" >
-        #{uid,jdbcType=INTEGER},
+        #{uid,jdbcType=VARCHAR},
       </if>
       <if test="paynum != null" >
         #{paynum,jdbcType=DECIMAL},
@@ -155,7 +155,7 @@
         pcid = #{record.pcid,jdbcType=INTEGER},
       </if>
       <if test="record.uid != null" >
-        uid = #{record.uid,jdbcType=INTEGER},
+        uid = #{record.uid,jdbcType=VARCHAR},
       </if>
       <if test="record.paynum != null" >
         paynum = #{record.paynum,jdbcType=DECIMAL},
@@ -174,7 +174,7 @@
   <update id="updateByExample" parameterType="map" >
     update paycommision
     set pcid = #{record.pcid,jdbcType=INTEGER},
-      uid = #{record.uid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=VARCHAR},
       paynum = #{record.paynum,jdbcType=DECIMAL},
       paydate = #{record.paydate,jdbcType=TIMESTAMP},
       paymsg = #{record.paymsg,jdbcType=VARCHAR}
@@ -186,7 +186,7 @@
     update paycommision
     <set >
       <if test="uid != null" >
-        uid = #{uid,jdbcType=INTEGER},
+        uid = #{uid,jdbcType=VARCHAR},
       </if>
       <if test="paynum != null" >
         paynum = #{paynum,jdbcType=DECIMAL},
@@ -202,7 +202,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Paycommision" >
     update paycommision
-    set uid = #{uid,jdbcType=INTEGER},
+    set uid = #{uid,jdbcType=VARCHAR},
       paynum = #{paynum,jdbcType=DECIMAL},
       paydate = #{paydate,jdbcType=TIMESTAMP},
       paymsg = #{paymsg,jdbcType=VARCHAR}

@@ -67,4 +67,13 @@ public interface OrderformService {
      * @throws Exception
      */
     String selectExpressageByOid(String oid) throws Exception;
+
+
+    /**
+     * 确认收货
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    Map<String, Object> confirmReceipt(String oid) throws Exception;
 }

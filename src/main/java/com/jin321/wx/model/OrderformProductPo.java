@@ -182,4 +182,5 @@ public class OrderformProductPo extends Orderformproduct {
     public void setSnumber(Integer snumber) {
         this.snumber = snumber;
     }
+
 }

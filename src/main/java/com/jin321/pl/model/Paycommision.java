@@ -6,7 +6,7 @@ import java.util.Date;
 public class Paycommision {
     private Integer pcid;
 
-    private Integer uid;
+    private String uid;
 
     private BigDecimal paynum;
 
@@ -22,12 +22,12 @@ public class Paycommision {
         this.pcid = pcid;
     }
 
-    public Integer getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUid(String uid) {
+        this.uid = uid == null ? null : uid.trim();
     }
 
     public BigDecimal getPaynum() {

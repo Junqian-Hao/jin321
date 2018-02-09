@@ -48,6 +48,12 @@ public class OrderformServiceImp implements OrderformService {
     ExpressageMapper expressageMapper;
     @Autowired
     DealerbuyformMapper dealerbuyformMapper;
+    @Autowired
+    FirstrelateMapper firstrelateMapper;
+    @Autowired
+    PaycommisionMapper paycommisionMapper;
+    @Autowired
+    UserMapper userMapper;
     /**
      * 添加订单
      *
@@ -296,6 +302,7 @@ public class OrderformServiceImp implements OrderformService {
         return string;
     }
 
+
     /**
      * 支付未支付订单
      *
@@ -380,6 +387,7 @@ public class OrderformServiceImp implements OrderformService {
      * @throws Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Map<String, String> deleteOrder(Long oid) throws Exception {
         Map<String, String> map = new HashMap<String, String>();
         Orderform orderform = orderformMapper.selectByPrimaryKey(oid);
@@ -387,6 +395,13 @@ public class OrderformServiceImp implements OrderformService {
             map.put("code", "0");
             map.put("message", "订单号不存在");
             log.info("删除订单，订单号不存在：" + oid);
+            return map;
+        }
+        Integer ostate = orderform.getOstate();
+        if ((ostate != OrderState.CONFIRM_AN_ORDER)&&(ostate!=OrderState.PLACE_ORDER_NOTPAY)) {
+            map.put("code", "0");
+            map.put("message", "只能删除状态为未支付和确认收货的订单");
+            log.info("删除订单，订单状态为：" + ostate+"不能删除");
             return map;
         }
         orderform.setOstate(OrderState.USER_DELETION_ORDER);
@@ -414,6 +429,138 @@ public class OrderformServiceImp implements OrderformService {
             orderformProductDetail.setTotalprice(peice);
         }
         return list;
+    }
+
+    /**
+     * 确认收货
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String, Object> confirmReceipt(String oid) throws Exception {
+        Map<String , Object> map = new HashMap<String, Object>();
+        OrderformProductDetail orderformProductDetail = orderformDetailMapper.selectOrderformByoid(Long.valueOf(oid));
+
+        if (orderformProductDetail == null) {
+            map.put("code", 0);
+            map.put("message", "订单不存在");
+            log.info("确认收货，订单号不存在：" + oid);
+            return map;
+        }
+        Integer ostate = orderformProductDetail.getOstate();
+        if (ostate == OrderState.CONFIRM_AN_ORDER) {
+            map.put("code", 0);
+            map.put("message", "用户已经确认收货");
+            log.info("确认收货，用户已经确认收货：" + oid);
+            return map;
+        }
+        if (ostate == OrderState.PLACE_ORDER_NOTPAY) {
+            map.put("code", 0);
+            map.put("message", "用户未支付");
+            log.info("确认收货，用户未支付：" + oid);
+            return map;
+        }
+        if (ostate == OrderState.USER_DELETION_ORDER) {
+            map.put("code", 0);
+            map.put("message", "用户已经删除订单");
+            log.info("确认收货，用户已经删除订单：" + oid);
+            return map;
+        }
+
+        //获取订单内商品详情
+        List<OrderformProductPo> orderformProductPos = orderformProductDetail.getOrderformProductPos();
+        for (OrderformProductPo orderformProductPo : orderformProductPos) {
+            Integer sid = orderformProductPo.getSid();
+            Productsize productsize = productsizeMapper.selectByPrimaryKey(sid);
+            if (productsize == null) {
+                map.put("code", 0);
+                map.put("message", "订单下有不存在的商品型号");
+                log.info("确认收货，订单下有不存在的商品型号：" + oid);
+                return map;
+            }
+            //实际付款
+            BigDecimal pbuyprice = orderformProductPo.getPbuyprice();
+            //商品进价
+            BigDecimal pscost = productsize.getPscost();
+            //商品利润
+            BigDecimal subtract = pbuyprice.subtract(pscost);
+            //获取用户id
+            String uid = orderformProductDetail.getUid();
+            //获取直接上级
+            FirstrelateExample firstrelateExample = new FirstrelateExample();
+            FirstrelateExample.Criteria criteria = firstrelateExample.createCriteria();
+            criteria.andR1u1idEqualTo(uid);
+            List<Firstrelate> firstrelates = firstrelateMapper.selectByExample(firstrelateExample);
+            if (firstrelates != null && firstrelates.size() > 0) {
+                //拥有直接上级
+                Firstrelate firstrelate = firstrelates.get(0);
+                //直接上级id（享受40%）
+                String shangji = firstrelate.getR1u2id();
+                BigDecimal fenhong40 = subtract.multiply(new BigDecimal(0.4));
+                Paycommision paycommision = new Paycommision();
+                paycommision.setPaydate(new Date());
+                paycommision.setPaynum(fenhong40);
+                paycommision.setUid(shangji);
+                paycommision.setPaymsg(uid+"购买"+orderformProductPo.getPname()+"的"+orderformProductPo.getSizename()+"的40%分红");
+                //添加直接上级的奖励
+                paycommisionMapper.insert(paycommision);
+
+                //进行上级的上级的分红
+                FirstrelateExample firstrelateExample2 = new FirstrelateExample();
+                FirstrelateExample.Criteria criteria2 = firstrelateExample2.createCriteria();
+                criteria2.andR1u1idEqualTo(shangji);
+                List<Firstrelate> erjis = firstrelateMapper.selectByExample(firstrelateExample2);
+                if (erjis != null && erjis.size() > 0) {
+                    //拥有上级的上级
+                    Firstrelate firstrelate1 = erjis.get(0);
+                    //上级的上级id（享受20%）
+                    String shangji2 = firstrelate1.getR1u2id();
+                    BigDecimal fenhong20 = subtract.multiply(new BigDecimal(0.2));
+                    Paycommision paycommision2 = new Paycommision();
+                    paycommision2.setPaydate(new Date());
+                    paycommision2.setPaynum(fenhong20);
+                    paycommision2.setUid(shangji2);
+                    paycommision2.setPaymsg(shangji+"的下级"+uid+"购买"+orderformProductPo.getPname()+"的"+orderformProductPo.getSizename()+"的20%分红");
+                    //添加直接上级的奖励
+                    paycommisionMapper.insert(paycommision2);
+
+                }
+            }
+
+            //正常分红完成，合伙人逻辑处理
+            Boolean together = orderformProductPo.getTogether();
+            if (together) {
+                //是合伙人商品
+                User user = userMapper.selectByPrimaryKey(uid);
+                Boolean isTogether = user.getIsTogether();
+                if (isTogether) {
+                    //合伙人再次购买合伙人商品，直接10%销售奖励
+                    BigDecimal multiply = pbuyprice.multiply(BigDecimal.valueOf(0.1));
+                    Paycommision paycommision = new Paycommision();
+                    paycommision.setPaydate(new Date());
+                    paycommision.setPaynum(multiply);
+                    paycommision.setUid(uid);
+                    paycommision.setPaymsg(uid + "购买合伙人商品" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的销售奖励");
+                    //添加直接上级的奖励
+                    paycommisionMapper.insert(paycommision);
+                } else {
+                   //普通用户购买合伙人商品,设置为合伙人
+                    user.setIsTogether(true);
+                    user.setTogetherdate(new Date());
+                    userMapper.updateByPrimaryKeySelective(user);
+                }
+            }
+
+        }
+
+        //将订单状态置为确认收货
+        orderformDetailMapper.updateOstade(Long.valueOf(oid),OrderState.CONFIRM_AN_ORDER);
+        map.put("code", 1);
+        map.put("message", "确认收货成功");
+        log.info("确认收货，确认收货成功：" + oid);
+        return map;
     }
 
 }
