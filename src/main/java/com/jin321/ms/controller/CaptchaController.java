@@ -5,10 +5,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -21,7 +23,7 @@ import java.io.IOException;
 public class CaptchaController {
     private static final Log log = LogFactory.getLog(CaptchaController.class);
     private String verifyCode;
-    @RequestMapping("/getCaptcha")
+    @RequestMapping(value = "/getCaptcha")
     public void getCaptcha(HttpServletRequest request, HttpServletResponse response)throws Exception{
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
