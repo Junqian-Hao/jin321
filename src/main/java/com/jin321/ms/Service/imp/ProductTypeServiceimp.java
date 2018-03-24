@@ -26,6 +26,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
     @Autowired
     private ProducttypeMapper producttypeMapper;
     private Producttype producttype;
+    private Producttype producttypenew;
 
     /**
      * @param producttype
@@ -37,7 +38,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andTypenameEqualTo(producttype.getTypename());
         criteria.andTypeclassEqualTo(1);
-        if (producttypeMapper.selectByExample(producttypeExample).size() > 0) {
+        if (producttypeMapper.selectByExample(producttypeExample).size()>0) {
             return -1;
         }
         producttype.setIsDelete(false);
@@ -50,8 +51,14 @@ public class ProductTypeServiceimp implements ProductTypeService {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andTypenameEqualTo(producttype.getTypename());
+        criteria.andHighertidEqualTo(producttype.getHighertid());
         criteria.andTypeclassEqualTo(2);
-        if (producttypeMapper.selectByExample(producttypeExample).size() > 0) {
+        if (producttypeMapper.selectByExample(producttypeExample).size()>0) {
+            producttypenew=producttypeMapper.selectByExample(producttypeExample).get(0);
+            if(producttypenew.getIsDelete().equals(true)){
+                producttypenew.setIsDelete(false);
+                return producttypeMapper.updateByPrimaryKey(producttypenew);
+            }
             return -1;
         }
         producttype.setTypeclass(2);
@@ -65,8 +72,14 @@ public class ProductTypeServiceimp implements ProductTypeService {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andTypenameEqualTo(producttype.getTypename());
+        criteria.andHighertidEqualTo(producttype.getHighertid());
         criteria.andTypeclassEqualTo(3);
-        if (producttypeMapper.selectByExample(producttypeExample).size() > 0) {
+        if (producttypeMapper.selectByExample(producttypeExample).size()>0) {
+            producttypenew=producttypeMapper.selectByExample(producttypeExample).get(0);
+            if(producttypenew.getIsDelete().equals(true)){
+                producttypenew.setIsDelete(false);
+                return producttypeMapper.updateByPrimaryKey(producttypenew);
+            }
             return -1;
         }
         producttype.setHighertid(higherid);

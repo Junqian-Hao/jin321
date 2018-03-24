@@ -42,6 +42,7 @@ public class InsertThridProductTypeController {
         typename=object.getString("typename");
         higherid=object.getInteger("higherid");
         producttype.setTypename(typename);
+        producttype.setHighertid(higherid);
         sign=productTypeService.insertThirtType(producttype,higherid);
         if(sign==-1){
             returnMap.put("code", "-1");
