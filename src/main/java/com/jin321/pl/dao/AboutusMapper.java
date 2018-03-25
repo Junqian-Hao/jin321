@@ -16,19 +16,15 @@ public interface AboutusMapper {
 
     int insertSelective(Aboutus record);
 
-    List<Aboutus> selectByExampleWithBLOBs(AboutusExample example);
-
     List<Aboutus> selectByExample(AboutusExample example);
 
     Aboutus selectByPrimaryKey(Integer auid);
 
     int updateByExampleSelective(@Param("record") Aboutus record, @Param("example") AboutusExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") Aboutus record, @Param("example") AboutusExample example);
-
     int updateByExample(@Param("record") Aboutus record, @Param("example") AboutusExample example);
 
     int updateByPrimaryKeySelective(Aboutus record);
 
-    int updateByPrimaryKeyWithBLOBs(Aboutus record);
+    int updateByPrimaryKey(Aboutus record);
 }

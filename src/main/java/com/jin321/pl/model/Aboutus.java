@@ -3,7 +3,7 @@ package com.jin321.pl.model;
 public class Aboutus {
     private Integer auid;
 
-    private byte[] detail;
+    private String detail;
 
     public Integer getAuid() {
         return auid;
@@ -13,11 +13,11 @@ public class Aboutus {
         this.auid = auid;
     }
 
-    public byte[] getDetail() {
+    public String getDetail() {
         return detail;
     }
 
-    public void setDetail(byte[] detail) {
-        this.detail = detail;
+    public void setDetail(String detail) {
+        this.detail = detail == null ? null : detail.trim();
     }
 }

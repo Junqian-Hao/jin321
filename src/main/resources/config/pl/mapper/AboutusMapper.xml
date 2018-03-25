@@ -3,9 +3,7 @@
 <mapper namespace="com.jin321.pl.dao.AboutusMapper" >
   <resultMap id="BaseResultMap" type="com.jin321.pl.model.Aboutus" >
     <id column="auid" property="auid" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.jin321.pl.model.Aboutus" extends="BaseResultMap" >
-    <result column="detail" property="detail" jdbcType="LONGVARBINARY" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,27 +64,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    auid
+    auid, detail
   </sql>
-  <sql id="Blob_Column_List" >
-    detail
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jin321.pl.model.AboutusExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from aboutus
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jin321.pl.model.AboutusExample" >
     select
     <if test="distinct" >
@@ -101,11 +80,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from aboutus
     where auid = #{auid,jdbcType=INTEGER}
   </select>
@@ -121,7 +98,7 @@
   </delete>
   <insert id="insert" parameterType="com.jin321.pl.model.Aboutus" >
     insert into aboutus (auid, detail)
-    values (#{auid,jdbcType=INTEGER}, #{detail,jdbcType=LONGVARBINARY})
+    values (#{auid,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jin321.pl.model.Aboutus" >
     insert into aboutus
@@ -138,7 +115,7 @@
         #{auid,jdbcType=INTEGER},
       </if>
       <if test="detail != null" >
-        #{detail,jdbcType=LONGVARBINARY},
+        #{detail,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -155,24 +132,17 @@
         auid = #{record.auid,jdbcType=INTEGER},
       </if>
       <if test="record.detail != null" >
-        detail = #{record.detail,jdbcType=LONGVARBINARY},
+        detail = #{record.detail,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update aboutus
-    set auid = #{record.auid,jdbcType=INTEGER},
-      detail = #{record.detail,jdbcType=LONGVARBINARY}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map" >
     update aboutus
-    set auid = #{record.auid,jdbcType=INTEGER}
+    set auid = #{record.auid,jdbcType=INTEGER},
+      detail = #{record.detail,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -181,14 +151,14 @@
     update aboutus
     <set >
       <if test="detail != null" >
-        detail = #{detail,jdbcType=LONGVARBINARY},
+        detail = #{detail,jdbcType=VARCHAR},
       </if>
     </set>
     where auid = #{auid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jin321.pl.model.Aboutus" >
+  <update id="updateByPrimaryKey" parameterType="com.jin321.pl.model.Aboutus" >
     update aboutus
-    set detail = #{detail,jdbcType=LONGVARBINARY}
+    set detail = #{detail,jdbcType=VARCHAR}
     where auid = #{auid,jdbcType=INTEGER}
   </update>
 </mapper>
