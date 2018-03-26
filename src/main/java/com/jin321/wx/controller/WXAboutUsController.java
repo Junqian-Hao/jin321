@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Author: hao
  * @Date: 2018/3/25 20:47
@@ -21,13 +18,13 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/wx")
-public class AboutUsController {
-    private static final Log log = LogFactory.getLog(AboutUsController.class);
+public class WXAboutUsController {
+    private static final Log log = LogFactory.getLog(WXAboutUsController.class);
     @Autowired
     AboutUsService aboutUsService;
     @RequestMapping("/aboutUs")
     @ResponseBody
-    public Aboutus aboutUs(@RequestBody Chart chart) throws Exception {
+    public Aboutus aboutUs() throws Exception {
         log.info("关于我们");
         return aboutUsService.findfirstboutUs();
     }
