@@ -7,7 +7,6 @@ import com.jin321.pl.dao.*;
 import com.jin321.pl.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +53,7 @@ public class ProductServiceimp implements ProductService {
             return -1;
         product.setIsTogether(false);
         //待修改未完成，此处应为2
-        product.setIsDelete(0);
+        product.setIsDelete(2);
         log.debug("商品状态：" + product.getIsDelete());
         signa = insertProductMapper.insertProduct(product);
         Iterator<Productsize> psit = productsizes.iterator();
@@ -249,7 +248,7 @@ public class ProductServiceimp implements ProductService {
     /**
      * @param pid
      * @param check
-     * @return 0为拒绝 1为通过
+     * @return 3为拒绝 1为通过
      */
 
     @Override
