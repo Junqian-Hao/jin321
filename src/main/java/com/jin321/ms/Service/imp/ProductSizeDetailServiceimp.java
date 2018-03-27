@@ -1,26 +1,20 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductSizeDetailService;
-import com.jin321.ms.controller.CaptchaController;
 import com.jin321.ms.dao.GetProductSizeDetailMapper;
-import com.jin321.ms.model.TrueUpdateProductSizeDetail;
 import com.jin321.ms.model.UpdateProductSizeDetail;
 import com.jin321.pl.dao.ProductMapper;
 import com.jin321.pl.dao.ProductsizeMapper;
-import com.jin321.pl.dao.ProducttypeMapper;
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Productsize;
 import com.jin321.pl.model.ProductsizeExample;
-import com.jin321.pl.model.Producttype;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Tyranitarx on 2017/11/6.
@@ -36,42 +30,15 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
     private ProductMapper productMapper;
     @Autowired
     private ProductsizeMapper productsizeMapper;
-    @Autowired
-    private ProducttypeMapper producttypeMapper;
     private Product product;
     private Productsize productsize;
-    private UpdateProductSizeDetail updateProductSizeDetail;
     private List<UpdateProductSizeDetail> productSizeDetailList;
-    private TrueUpdateProductSizeDetail trueUpdateProductSizeDetail;
-    private List<TrueUpdateProductSizeDetail> trueUpdateProductSizeDetails;
 
 
     @Override
-    public List<TrueUpdateProductSizeDetail> getDetailBydid(int did) {
-        trueUpdateProductSizeDetails=new ArrayList<TrueUpdateProductSizeDetail>();
+    public List<UpdateProductSizeDetail> getDetailBydid(int did) {
         productSizeDetailList=getProductSizeDetailMapper.getProductSizeDetail(did);
-        Iterator iterator=productSizeDetailList.iterator();
-        while (iterator.hasNext()){
-            trueUpdateProductSizeDetail=new TrueUpdateProductSizeDetail();
-            updateProductSizeDetail= (UpdateProductSizeDetail)iterator.next();
-            trueUpdateProductSizeDetail.setPid(updateProductSizeDetail.getPid());
-            trueUpdateProductSizeDetail.setPname(updateProductSizeDetail.getPname());
-            trueUpdateProductSizeDetail.setPsoriprice(updateProductSizeDetail.getPsoriprice());
-            trueUpdateProductSizeDetail.setPssellprice(updateProductSizeDetail.getPssellprice());
-            trueUpdateProductSizeDetail.setPsummary(updateProductSizeDetail.getPsummary());
-            trueUpdateProductSizeDetail.setSid(updateProductSizeDetail.getSid());
-            trueUpdateProductSizeDetail.setSizename(updateProductSizeDetail.getSizename());
-            trueUpdateProductSizeDetail.setSnumber(updateProductSizeDetail.getSnumber());
-            trueUpdateProductSizeDetail.setPtypea(updateProductSizeDetail.getPtypea());
-            trueUpdateProductSizeDetail.setPtypeb(updateProductSizeDetail.getPtypeb());
-            String typename=updateProductSizeDetail.getPtypec();
-            if (typename!=null) {
-                trueUpdateProductSizeDetail.setPtypec(typename);
-                trueUpdateProductSizeDetails.add(trueUpdateProductSizeDetail);
-            }
-
-        }
-        return trueUpdateProductSizeDetails;
+        return productSizeDetailList;
     }
 
     /**

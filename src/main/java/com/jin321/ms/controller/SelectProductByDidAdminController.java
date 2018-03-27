@@ -2,10 +2,8 @@ package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jin321.ms.Service.ProductService;
 import com.jin321.ms.Service.ProductSizeDetailService;
-import com.jin321.ms.model.TrueProduct;
-import com.jin321.ms.model.TrueUpdateProductSizeDetail;
+import com.jin321.ms.model.UpdateProductSizeDetail;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ public class SelectProductByDidAdminController {
     private int did;
     @ResponseBody
     @RequestMapping("/selectProductByDidAdmin")
-    public List<TrueUpdateProductSizeDetail> selectProduct(@RequestBody String json){
+    public List<UpdateProductSizeDetail> selectProduct(@RequestBody String json){
         log.info("管理员查询商家商品");
         JSONObject object= JSON.parseObject(json);
         did=object.getInteger("did");
