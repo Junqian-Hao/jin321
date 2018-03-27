@@ -20,11 +20,11 @@ public class UpdateProductSizeDetail {
 
     private BigDecimal pssellprice;
 
-    private int ptypea;
+    private String ptypea;
 
-    private int ptypeb;
+    private String ptypeb;
 
-    private int ptypec;
+    private String ptypec;
 
     private String sizename;
 
@@ -95,27 +95,27 @@ public class UpdateProductSizeDetail {
         this.psummary = psummary;
     }
 
-    public int getPtypea() {
+    public String getPtypea() {
         return ptypea;
     }
 
-    public void setPtypea(int ptypea) {
+    public void setPtypea(String ptypea) {
         this.ptypea = ptypea;
     }
 
-    public int getPtypeb() {
+    public String getPtypeb() {
         return ptypeb;
     }
 
-    public void setPtypeb(int ptypeb) {
+    public void setPtypeb(String ptypeb) {
         this.ptypeb = ptypeb;
     }
 
-    public int getPtypec() {
+    public String getPtypec() {
         return ptypec;
     }
 
-    public void setPtypec(int ptypec) {
+    public void setPtypec(String ptypec) {
         this.ptypec = ptypec;
     }
 }

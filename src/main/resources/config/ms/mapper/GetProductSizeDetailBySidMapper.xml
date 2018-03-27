@@ -7,9 +7,9 @@
         <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
         <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
         <result column="snumber" property="snumber" jdbcType="INTEGER"/>
-        <result column="ptypea" property="ptypea" javaType="INTEGER"/>
-        <result column="ptypeb" property="ptypeb" javaType="INTEGER"/>
-        <result column="ptypbec" property="ptypec" javaType="INTEGER"/>
+        <result column="ptypenamea" property="ptypea" jdbcType="VARCHAR"/>
+        <result column="ptypenameb" property="ptypeb" jdbcType="VARCHAR"/>
+        <result column="ptypenamec" property="ptypec" jdbcType="VARCHAR"/>
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
     </resultMap>
@@ -20,15 +20,21 @@
               product.psummary,
               productsize.sizename,
               productsize.snumber,
-              product.ptypea,
-              product.ptypeb,
-              product.ptypec,
+              producttypea.typename as ptypenamea,
+              producttypeb.typename as ptypenameb,
+              producttypec.typename as ptypenamec,
               productsize.psoriprice,
               productsize.pssellprice
               FROM
-              productsize
-              LEFT JOIN product ON productsize.pid=product.pid
+              (productsize,product)
+              LEFT JOIN producttype as producttypea ON producttypea.tid=product.ptypea
+              LEFT JOIN producttype as producttypeb ON producttypeb.tid=product.ptypeb
+              LEFT JOIN producttype as producttypec ON producttypec.tid=product.ptypec
               WHERE
-               productsize.sid=#{sid}
+                product.is_delete=0
+               AND productsize.sid=${sid}
+               AND productsize.is_deleted=0
+			   AND productsize.pid=product.pid
+
     </select>
 </mapper>

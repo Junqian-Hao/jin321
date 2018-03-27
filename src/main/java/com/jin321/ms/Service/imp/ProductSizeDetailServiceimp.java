@@ -11,6 +11,7 @@ import com.jin321.pl.dao.ProducttypeMapper;
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Productsize;
 import com.jin321.pl.model.ProductsizeExample;
+import com.jin321.pl.model.Producttype;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +62,14 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
             trueUpdateProductSizeDetail.setSid(updateProductSizeDetail.getSid());
             trueUpdateProductSizeDetail.setSizename(updateProductSizeDetail.getSizename());
             trueUpdateProductSizeDetail.setSnumber(updateProductSizeDetail.getSnumber());
-            trueUpdateProductSizeDetail.setPtypea(producttypeMapper.selectByPrimaryKey(updateProductSizeDetail.getPtypea()).getTypename());
-            trueUpdateProductSizeDetail.setPtypeb(producttypeMapper.selectByPrimaryKey(updateProductSizeDetail.getPtypeb()).getTypename());
-            trueUpdateProductSizeDetail.setPtypec(producttypeMapper.selectByPrimaryKey(updateProductSizeDetail.getPtypec()).getTypename());
-            trueUpdateProductSizeDetails.add(trueUpdateProductSizeDetail);
+            trueUpdateProductSizeDetail.setPtypea(updateProductSizeDetail.getPtypea());
+            trueUpdateProductSizeDetail.setPtypeb(updateProductSizeDetail.getPtypeb());
+            String typename=updateProductSizeDetail.getPtypec();
+            if (typename!=null) {
+                trueUpdateProductSizeDetail.setPtypec(typename);
+                trueUpdateProductSizeDetails.add(trueUpdateProductSizeDetail);
+            }
+
         }
         return trueUpdateProductSizeDetails;
     }

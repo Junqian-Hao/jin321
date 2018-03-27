@@ -8,30 +8,33 @@
         <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
         <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
         <result column="snumber" property="snumber" jdbcType="INTEGER"/>
-        <result column="ptypea" property="ptypea" javaType="INTEGER"/>
-        <result column="ptypeb" property="ptypeb" javaType="INTEGER"/>
-        <result column="ptypbec" property="ptypec" javaType="INTEGER"/>
+        <result column="ptypenamea" property="ptypea" jdbcType="VARCHAR"/>
+        <result column="ptypenameb" property="ptypeb" jdbcType="VARCHAR"/>
+        <result column="ptypenamec" property="ptypec" jdbcType="VARCHAR"/>
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
     </resultMap>
     <select id="getProductSizeDetail" resultMap="BaseResultMap">
-        SELECT productsize.sid,
+         SELECT productsize.sid,
               productsize.pid,
               product.pname,
               product.psummary,
               productsize.sizename,
               productsize.snumber,
-              product.ptypea,
-              product.ptypeb,
-              product.ptypec,
+              producttypea.typename as ptypenamea,
+              producttypeb.typename as ptypenameb,
+              producttypec.typename as ptypenamec,
               productsize.psoriprice,
               productsize.pssellprice
               FROM
-              productsize
-              LEFT JOIN product ON productsize.pid=product.pid
+              (productsize,product)
+              LEFT JOIN producttype as producttypea ON producttypea.tid=product.ptypea
+              LEFT JOIN producttype as producttypeb ON producttypeb.tid=product.ptypeb
+              LEFT JOIN producttype as producttypec ON producttypec.tid=product.ptypec
               WHERE
                 product.is_delete=0
                 AND productsize.is_deleted=0
                 AND product.did=#{did}
+                AND productsize.pid=product.pid
     </select>
 </mapper>
