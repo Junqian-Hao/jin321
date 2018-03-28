@@ -2,6 +2,7 @@ package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductSizeDetailService;
 import com.jin321.ms.dao.GetProductSizeDetailMapper;
+import com.jin321.ms.model.Page;
 import com.jin321.ms.model.UpdateProductSizeDetail;
 import com.jin321.pl.dao.ProductMapper;
 import com.jin321.pl.dao.ProductsizeMapper;
@@ -34,11 +35,12 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
     private Productsize productsize;
     private List<UpdateProductSizeDetail> productSizeDetailList;
 
-
+    private Page<UpdateProductSizeDetail> productSizeDetailPage;
     @Override
-    public List<UpdateProductSizeDetail> getDetailBydid(int did) {
+    public Page<UpdateProductSizeDetail> getDetailBydid(int pagenum,int thispage,int did) {
         productSizeDetailList=getProductSizeDetailMapper.getProductSizeDetail(did);
-        return productSizeDetailList;
+        productSizeDetailPage=new Page<UpdateProductSizeDetail>().getPageList(pagenum,thispage,productSizeDetailList);
+        return productSizeDetailPage;
     }
 
     /**

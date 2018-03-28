@@ -1,5 +1,6 @@
 package com.jin321.ms.Service;
 
+import com.jin321.ms.model.Page;
 import com.jin321.ms.model.UpdateProductSizeDetail;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ public interface ProductSizeDetailService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    List<UpdateProductSizeDetail> getDetailBydid(int did);
+    Page<UpdateProductSizeDetail> getDetailBydid(int pagenum,int thispage,int did);
 
     /**
      * 更新商品详细信息

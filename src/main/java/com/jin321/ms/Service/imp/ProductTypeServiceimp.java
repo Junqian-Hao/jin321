@@ -1,6 +1,7 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductTypeService;
+import com.jin321.ms.model.Page;
 import com.jin321.ms.model.TrueProductType;
 import com.jin321.ms.model.TrueProductType1;
 import com.jin321.pl.dao.ProducttypeMapper;
@@ -158,7 +159,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
     private List<TrueProductType1> trueProductType1List;
 
     @Override
-    public List<TrueProductType> getAllTypes() {
+    public Page<TrueProductType> getAllTypes(int pagenum, int thispage) {
         trueProductTypeList = new ArrayList<TrueProductType>();
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
@@ -193,7 +194,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
             trueProductType.setProducttype2List(trueProductType1List);
             trueProductTypeList.add(trueProductType);
         }
-        return trueProductTypeList;
+        return new Page<TrueProductType>().getPageList(pagenum,thispage,trueProductTypeList);
     }
 
     @Override

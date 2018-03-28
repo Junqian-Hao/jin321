@@ -1,6 +1,7 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.DealerService;
+import com.jin321.ms.model.Page;
 import com.jin321.pl.dao.DealerMapper;
 import com.jin321.pl.model.Dealer;
 import com.jin321.pl.model.DealerExample;
@@ -20,12 +21,12 @@ public class DealerServiceimp implements DealerService {
     private DealerMapper dealerMapper;
     private List<Dealer> dealerList;
     @Override
-    public List<Dealer> selectAllDealer() {
+    public Page<Dealer> selectAllDealer(int pagenum, int thispage) {
         DealerExample example=new DealerExample();
         DealerExample.Criteria criteria=example.createCriteria();
         criteria.andDpowerEqualTo("dealer");
         dealerList=dealerMapper.selectByExample(example);
-        return dealerList;
+        return new Page<Dealer>().getPageList(pagenum,thispage,dealerList);
     }
     private List<Dealer> oldDealer;
     @Override

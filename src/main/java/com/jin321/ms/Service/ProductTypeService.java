@@ -1,5 +1,6 @@
 package com.jin321.ms.Service;
 
+import com.jin321.ms.model.Page;
 import com.jin321.ms.model.TrueProductType;
 import com.jin321.pl.model.Producttype;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,7 +66,7 @@ public interface ProductTypeService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public List<TrueProductType> getAllTypes();
+    public Page<TrueProductType> getAllTypes(int pagenum,int thispage);
 
     @Transactional(rollbackFor = Exception.class)
     public List<Producttype> getAllTypes1(int tid);

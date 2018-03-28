@@ -2,6 +2,7 @@ package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductService;
 import com.jin321.ms.dao.InsertProductMapper;
+import com.jin321.ms.model.Page;
 import com.jin321.ms.model.TrueProduct;
 import com.jin321.pl.dao.*;
 import com.jin321.pl.model.*;
@@ -237,12 +238,12 @@ public class ProductServiceimp implements ProductService {
     }
 
     @Override
-    public List<Product> getReadyProduct() {
+    public Page<Product> getReadyProduct(int pagenum, int thispage) {
         ProductExample example = new ProductExample();
         ProductExample.Criteria criteria = example.createCriteria();
         criteria.andIsDeleteEqualTo(2);
         productList = productMapper.selectByExample(example);
-        return productList;
+        return new Page<Product>().getPageList(pagenum,thispage,productList);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.jin321.ms.Service;
 
+import com.jin321.ms.model.Page;
 import com.jin321.ms.model.TrueProduct;
 import com.jin321.ms.model.UpdateProductSizeDetail;
 import com.jin321.pl.model.Product;
@@ -80,7 +81,7 @@ public interface ProductService {
      * @return
      */
     @Transactional(rollbackFor =Exception.class)
-    List<Product> getReadyProduct();
+    Page<Product> getReadyProduct(int pagenum, int thispage);
 
     /**
      * 审核接口

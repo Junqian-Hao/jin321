@@ -1,5 +1,6 @@
 package com.jin321.ms.Service;
 
+import com.jin321.ms.model.Page;
 import com.jin321.pl.model.Dealer;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ public interface DealerService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    List<Dealer> selectAllDealer();
+    Page<Dealer> selectAllDealer(int pagenum,int thispage);
     @Transactional(rollbackFor = Exception.class)
     int insertDealer(Dealer dealer);
 }
