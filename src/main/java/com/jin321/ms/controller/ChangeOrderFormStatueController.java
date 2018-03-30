@@ -70,7 +70,7 @@ public class ChangeOrderFormStatueController {
                 return returnMap;
             }
             else {
-                returnMap.put("error","页信息错误");
+                returnMap.put("error","页信息错误，或不存在订单");
                 return returnMap;
             }
     }
