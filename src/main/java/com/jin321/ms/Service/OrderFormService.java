@@ -1,6 +1,7 @@
 package com.jin321.ms.Service;
 
 import com.jin321.ms.model.OrderFormDetails;
+import com.jin321.ms.model.Page;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -29,12 +30,12 @@ public interface OrderFormService {
     public int decreaseOrderProductNum(Long oid);
 
     @Transactional(rollbackFor = Exception.class)
-    public List<OrderFormDetails> getReadyOrderform(int did);
+    public Page<OrderFormDetails> getReadyOrderform(int did,int pagenum,int thispage);
 
     @Transactional(rollbackFor = Exception.class)
-    public List<OrderFormDetails> getUnReadyOrderfrom(int did);
+    public Page<OrderFormDetails> getUnReadyOrderfrom(int did,int pagenum,int thispage);
 
     @Transactional(rollbackFor = Exception.class)
-    public List<OrderFormDetails> getconfirmForm(int did);
+    public Page<OrderFormDetails> getconfirmForm(int did,int pagenum,int thispage);
 
 }

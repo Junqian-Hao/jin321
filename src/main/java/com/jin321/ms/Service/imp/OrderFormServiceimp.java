@@ -6,6 +6,7 @@ import com.jin321.ms.dao.GetProductSizeDetailBySidMapper;
 import com.jin321.ms.dao.SelectSidInFormMapper;
 import com.jin321.ms.model.OrderFormDetails;
 import com.jin321.ms.model.OrderFormProductDetails;
+import com.jin321.ms.model.Page;
 import com.jin321.pl.dao.OrderformMapper;
 import com.jin321.pl.dao.OrderformproductMapper;
 import com.jin321.pl.dao.ProductsizeMapper;
@@ -45,7 +46,7 @@ public class OrderFormServiceimp implements OrderFormService {
     private List<OrderFormProductDetails> orderFormProductDetailsList;
 
     @Override
-    public List<OrderFormDetails> getReadyOrderform(int did) {
+    public Page<OrderFormDetails> getReadyOrderform(int did,int pagenum,int thispage) {
         orderFormDetailsList =new ArrayList<OrderFormDetails>();
         OrderformExample orderformExample=new OrderformExample();
         OrderformExample.Criteria criteria=orderformExample.createCriteria();
@@ -75,11 +76,11 @@ public class OrderFormServiceimp implements OrderFormService {
             orderformDetails.setOrderFormProductDetails(orderFormProductDetailsList);
             orderFormDetailsList.add(orderformDetails);
         }
-        return orderFormDetailsList;
+        return new Page<OrderFormDetails>().getPageList(pagenum,thispage,orderFormDetailsList);
     }
 
     @Override
-    public List<OrderFormDetails> getUnReadyOrderfrom(int did) {
+    public Page<OrderFormDetails> getUnReadyOrderfrom(int did,int pagenum,int thispage) {
         orderFormDetailsList =new ArrayList<OrderFormDetails>();
         OrderformExample orderformExample=new OrderformExample();
         OrderformExample.Criteria criteria=orderformExample.createCriteria();
@@ -109,11 +110,11 @@ public class OrderFormServiceimp implements OrderFormService {
             orderformDetails.setOrderFormProductDetails(orderFormProductDetailsList);
             orderFormDetailsList.add(orderformDetails);
         }
-        return orderFormDetailsList;
+        return new Page<OrderFormDetails>().getPageList(pagenum,thispage,orderFormDetailsList);
     }
 
     @Override
-    public List<OrderFormDetails> getconfirmForm(int did) {
+    public Page<OrderFormDetails> getconfirmForm(int did,int pagenum,int thispage) {
         orderFormDetailsList =new ArrayList<OrderFormDetails>();
         OrderformExample orderformExample=new OrderformExample();
         OrderformExample.Criteria criteria=orderformExample.createCriteria();
@@ -143,7 +144,7 @@ public class OrderFormServiceimp implements OrderFormService {
             orderformDetails.setOrderFormProductDetails(orderFormProductDetailsList);
             orderFormDetailsList.add(orderformDetails);
         }
-        return orderFormDetailsList;
+        return new Page<OrderFormDetails>().getPageList(pagenum,thispage,orderFormDetailsList);
     }
 
     @Override

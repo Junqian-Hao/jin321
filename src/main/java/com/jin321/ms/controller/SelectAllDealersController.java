@@ -41,6 +41,8 @@ public class SelectAllDealersController {
         pagenum=object.getInteger("pagenum");
         thispage=object.getInteger("thispage");
         Page<Dealer> dealerPage=dealerService.selectAllDealer(pagenum,thispage);
+        dealers=dealerPage.getObjectList();
+        System.out.print(dealerPage.getObjectList());
         if(dealers!=null){
             returnMap.put("datapagenum",dealers.size());
             returnMap.put("thispage",dealerPage.getThispage());

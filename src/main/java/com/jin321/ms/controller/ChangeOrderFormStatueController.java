@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.OrderFormService;
 import com.jin321.ms.model.OrderFormDetails;
+import com.jin321.ms.model.Page;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,31 +39,47 @@ public class ChangeOrderFormStatueController {
     private String osendnumber;
     private int sign;
     private List<OrderFormDetails> orderFormDetailsList;
-    private Map<String,String> returnMap;
+    private Map<String,Object> returnMap;
     @ResponseBody
     @RequestMapping("/getOrderform")
-    public List<OrderFormDetails> getOrderForm(@RequestBody String json, HttpServletRequest request){
+    public Map<String,Object> getOrderForm(@RequestBody String json, HttpServletRequest request){
         //未发货1 未确认2 确认3
+        returnMap=new LinkedHashMap<String,Object>();
         JSONObject object=JSON.parseObject(json);
         int select=object.getInteger("select");
+        int pagenum=object.getInteger("pagenum");
+        int thispage=object.getInteger("thispage");
         int did=(Integer)request.getSession().getAttribute("did");
-
+        Page<OrderFormDetails> orderFormDetailsPage=null;
         switch (select){
             case 1:
-                orderFormDetailsList =orderFormService.getUnReadyOrderfrom(did);break;
+                orderFormDetailsPage=orderFormService.getUnReadyOrderfrom(did,pagenum,thispage);
+                orderFormDetailsList =orderFormDetailsPage.getObjectList();break;
             case 2:
-                orderFormDetailsList =orderFormService.getReadyOrderform(did);break;
+                orderFormDetailsPage=orderFormService.getReadyOrderform(did,pagenum,thispage);
+                orderFormDetailsList =orderFormDetailsPage.getObjectList();break;
             case 3:
-                orderFormDetailsList =orderFormService.getconfirmForm(did);break;
+                orderFormDetailsPage=orderFormService.getconfirmForm(did,pagenum,thispage);
+                orderFormDetailsList =orderFormDetailsPage.getObjectList();break;
         }
-        return orderFormDetailsList;
+            if(orderFormDetailsList!=null){
+                returnMap.put("pagenum",orderFormDetailsList.size());
+                returnMap.put("thispage",orderFormDetailsPage.getThispage());
+                returnMap.put("totalpage",orderFormDetailsPage.getTotalpage());
+                returnMap.put("pagedata",orderFormDetailsList);
+                return returnMap;
+            }
+            else {
+                returnMap.put("error","页信息错误");
+                return returnMap;
+            }
     }
     //发货接口
     @ResponseBody
     @RequestMapping("/changeOrderStatue")
-    public Map<String,String> changeStatue(@RequestBody String json){
+    public Map<String,Object> changeStatue(@RequestBody String json){
         log.info("改变订单状态");
-        returnMap=new HashMap<String, String>();
+        returnMap=new HashMap<String, Object>();
         JSONObject object= JSON.parseObject(json);
         oid=(Long) object.get("oid");
         osendmethod=object.getString("osendmethod");
