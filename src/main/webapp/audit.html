@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="style/audit.css">
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <title>审核页面</title>
+</head>
+<body>
+    <div class="heart clearfix container">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <h3 id="check">商品审核</h3>
+            </thead>
+            <tbody id="readyProduct">
+                <tr>
+                    <td>选择</td>
+                    <td>商品名称</td>
+                    <td>一级标签</td>
+                    <td>二级标签</td>
+                    <td>三级标签</td>
+                    <td>商品进价</td>
+                    <td>商品原价</td>
+                    <td>商品售价</td>
+                    <td>商家名称</td>
+                    <td>联系方式</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="readyProductPaging page"></div>
+        <button id="success" class="btn btn-default">通过审核</button>
+        <button id="fail" class="btn btn-default">拒绝审核</button>
+    </div>
+    <script src="js/audit.js"></script>
+</body>
+</html>

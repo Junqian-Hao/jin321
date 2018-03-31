@@ -1,4 +1,4 @@
-.login-box{
+.login-box {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -7,34 +7,34 @@
     width: 240px;
 }
 
-.login-box input{
+.login-box input {
     width: 160px;
     height: 20px;
     margin-left: 11px;
     border: 1px solid #ccc;
 }
 
-.login-box div{
+.login-box div {
     margin: 20px 0;
 }
 
-.login-box .pwd{
+.login-box .pwd {
     margin-left: 13px;
 }
 
-.login-box .verification{
+.login-box .verification {
     width: 90px;
 }
 
-.login-btn{
+.login-btn {
     margin: 0 auto;
 }
 
-.login-btn button{
+.login-btn button {
 
 }
 
-.login-box img{
+.login-box img {
     height: 24px;
     vertical-align: middle;
     float: right;

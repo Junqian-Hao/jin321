@@ -30,6 +30,8 @@ $(function(){
                     window.location = "admin.html";
                 }else if(res.code == 6){
                     window.location = "SuperAdmin.html";
+                }else if(res.code == 5){
+                    window.location = 'audit.html'
                 }
             }
         });

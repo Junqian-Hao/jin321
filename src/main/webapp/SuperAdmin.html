@@ -4,48 +4,56 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/base.css">
     <link rel="stylesheet" href="style/Super.css">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="jquery/jquery.min.js"></script>
-    <title>Title</title>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <title>管理页面</title>
 </head>
 <body>
-    <div class="heart">
+    <div class="heart clearfix">
         <!-- 头部 -->
-        <div class="header">
-            <ul>
-                <li id="type-manage">分类管理</li>
-                <li id="parents-manage">商品管理</li>
-                <li id="merchant-manage">商家管理</li>
-                <li id="lun-manage">轮播图管理</li>
+        <div class="header clearfix">
+            <ul class="list-group">
+                <li id="type-manage" class="list-group-item">分类管理</li>
+                <li id="parents-manage" class="list-group-item">商品管理</li>
+                <li id="merchant-manage" class="list-group-item">商家管理</li>
+                <li id="lun-manage" class="list-group-item">轮播图管理</li>
+                <li id="money-manage" class="list-group-item">佣金管理</li>
                 <!--<li id="time-kill-manage">秒杀管理</li>-->
             </ul>
         </div>
         <!-- 左侧栏 -->
         <div class="left">
             <div class="type-manage item">
-                <ul>
-                    <li id="watch-type">查看分类</li>
-                    <li id="add-type">添加分类</li>
-                    <li id="add-brands">添加品牌</li>
-                    <li id="add-kinds">添加种类</li>
+                <ul class="list-group">
+                    <li id="watch-type" class="list-group-item">查看分类</li>
+                    <li id="add-type" class="list-group-item">添加分类</li>
+                    <li id="add-brands" class="list-group-item">添加品牌</li>
+                    <li id="add-kinds" class="list-group-item">添加种类</li>
                 </ul>
             </div>
             <div class="parents-manage item">
-                <ul>
-                    <li id="watch-common">查看普通商品</li>
-                    <li id="watch-hot-sale">查看热卖商品</li>
-                    <li id="watch-parents">查看合伙人商品</li>
+                <ul class="list-group">
+                    <li id="watch-common" class="list-group-item">查看普通商品</li>
+                    <li id="watch-hot-sale" class="list-group-item">查看热卖商品</li>
+                    <li id="watch-parents" class="list-group-item">查看合伙人商品</li>
                 </ul>
             </div>
             <div class="merchant-mange item">
-                <ul>
-                    <li id="watch-merchant">查看商家</li>
-                    <li id="add-merchant">添加商家</li>
+                <ul class="list-group">
+                    <li id="watch-merchant" class="list-group-item">查看商家</li>
+                    <li id="add-merchant" class="list-group-item">添加商家</li>
                     <!--<li id="delete-merchant">删除商家</li>-->
                 </ul>
             </div>
             <div class="lun-img item">
-                <ul>
-                    <li id="lun-li">轮播图管理</li>
+                <ul class="list-group">
+                    <li id="lun-li" class="list-group-item">轮播图管理</li>
+                </ul>
+            </div>
+            <div class="money item">
+                <ul class="list-group">
+                    <li id="money-li" class="list-group-item">查看佣金</li>
                 </ul>
             </div>
             <!--<div class="time-kill item">-->
@@ -60,7 +68,7 @@
         <div class="content">
             <!-- 查看分类 -->
             <div class="watch-type item">
-                <table id="watch-type-table">
+                <table id="watch-type-table" class="table table-bordered table-hover">
                     <tr>
                         <td>选择</td>
                         <td>分类</td>
@@ -68,45 +76,46 @@
                         <td>种类</td>
                     </tr>
                 </table>
-                <button id="delete-type-btn">删除分类</button>
-                <button id="delete-b-btn">删除品牌</button>
-                <button id="delete-kind">删除种类</button>
+                <div class="watchTypePaging paging"></div>
+                <button id="delete-type-btn" class="btn btn-default">删除分类</button>
+                <button id="delete-b-btn" class="btn btn-default">删除品牌</button>
+                <button id="delete-kind" class="btn btn-default">删除种类</button>
             </div>
             <!-- 添加分类 -->
             <div class="add-type item">
                 <label>请输入分类名称</label>
                 <input type="text" id="type-value">
-                <button id="add-type-btn">添加</button>
+                <button id="add-type-btn" class="btn btn-default">添加</button>
             </div>
             <!-- 添加品牌 -->
             <div class="add-brands item">
-                <select id="first-type2">
+                <select id="first-type2" class="form-control">
 
                 </select>
                 <label>请输入要添加的品牌</label>
                 <input type="text" id="brands">
                 <label>请选择品牌的图片</label>
                 <input type="file" id="img-file">
-                <button id="sub-brands">提交</button>
+                <button id="sub-brands" class="btn btn-default">提交</button>
             </div>
             <!-- 添加种类 -->
             <div class="add-kind item">
-                <select id="typea">
+                <select id="typea" class="form-control">
 
                 </select>
-                <select id="typeb">
+                <select id="typeb" class="form-control">
 
                 </select><br>
                 <label>请输入需要添加的种类</label>
                 <input type="text" id="typec-input">
-                <button id="add-kind-btn">添加</button>
+                <button id="add-kind-btn" class="btn btn-default">添加</button>
             </div>
             <!-- 查看普通商品-->
             <div class="watch-common-content item">
-                <select id="common-s-select">
+                <select id="common-s-select" class="form-control">
 
                 </select>
-                <table id="watch-common-table">
+                <table id="watch-common-table" class="table table-bordered table-hover">
                     <tr>
                         <td>选择</td>
                         <td>id</td>
@@ -122,13 +131,14 @@
                         <td>剩余数量</td>
                     </tr>
                 </table>
-                <button id="delete-common-btn">删除</button>
-                <button id="add-hot-sale">添加到热卖商品</button>
-                <button id="add-parents-btn">添加到合伙人商品</button>
+                <div class="watchCommonPaging paging"></div>
+                <button id="delete-common-btn" class="btn btn-default">删除</button>
+                <button id="add-hot-sale" class="btn btn-default">添加到热卖商品</button>
+                <button id="add-parents-btn" class="btn btn-default">添加到合伙人商品</button>
             </div>
             <!-- 查看热卖商品 -->
             <div class="watch-hot-content item">
-                <table id="hot-table">
+                <table id="hot-table" class="table table-bordered table-hover">
                     <tr>
                        <td>选择</td>
                        <td>id</td>
@@ -137,11 +147,11 @@
                        <td>商品售价</td>
                     </tr>
                 </table>
-                <button id="delete-hot-btn">删除热卖商品</button>
+                <button id="delete-hot-btn" class="btn btn-default">删除热卖商品</button>
             </div>
             <!-- 查看合伙人商品 -->
             <div class="watch-content item">
-                <table id="parents-table">
+                <table id="parents-table" class="table table-bordered table-hover">
                     <tr>
                         <td>选择</td>
                         <td>id</td>
@@ -150,11 +160,11 @@
                         <td>商品售价</td>
                     </tr>
                 </table>
-                <button id="delete-parents-btn">删除合伙人商品</button>
+                <button id="delete-parents-btn" class="btn btn-default">删除合伙人商品</button>
             </div>
             <!-- 查看商家 -->
             <div class="watch-merchant item">
-                <table id="watch-merchant-table">
+                <table id="watch-merchant-table" class="table table-bordered table-hover">
                     <tr>
                         <td>商家id</td>
                         <td>商家名称</td>
@@ -164,6 +174,7 @@
                         <td>商家地址</td>
                     </tr>
                 </table>
+                <div class="watchMerchantPaging paging"></div>
             </div>
             <!-- 添加商家 -->
             <div class="add-merchant item">
@@ -177,7 +188,7 @@
                 <input type="text" id="merchant-phonenumber"><br>
                 <label>请输入商家地址</label>
                 <input type="text" id="merchant-address"><br>
-                <button id="add-merchant-btn">添加</button>
+                <button id="add-merchant-btn" class="btn btn-default">添加</button>
             </div>
             <!-- 轮播图管理 -->
             <div class="lun-content item">
@@ -186,7 +197,19 @@
                 <div class="pid-content">
 
                 </div>
-                <button id="lun-btn">提交</button>
+                <button id="lun-btn" class="btn btn-default">提交</button>
+            </div>
+            <!-- 查看佣金 -->
+            <div class="watch-money item">
+                <table id="moneyTable" class="table table-bordered table-hover">
+                    <tr>
+                        <td>用户</td>
+                        <td>佣金金额</td>
+                        <td>成为会员时间</td>
+                        <td>佣金记录</td>
+                    </tr>
+                </table>
+                <div class="moneyPaging paging"></div>
             </div>
             <!-- 查看秒杀 -->
             <!--<div class="time-kill-content item">-->
@@ -213,5 +236,6 @@
         </div>
     </div>
     <script src="js/Super.js"></script>
+    <script src="js/page.js"></script>
 </body>
 </html>
