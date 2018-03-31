@@ -1,40 +1,47 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jin321.ms.dao.GetProductSizeDetailMapper">
-    <resultMap id="BaseResultMap" type="UpdateProductSizeDetail">
+<mapper namespace="com.jin321.ms.dao.GetUnCheckedProudctMapper">
+    <resultMap id="BaseResultMap" type="CheckedProductDetail">
         <id column="sid" property="sid" jdbcType="INTEGER"/>
         <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="did" property="did" jdbcType="INTEGER"/>
         <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        <result column="dname" property="dname" jdbcType="VARCHAR"/>
+        <result column="dphonenum" property="dphonenum" jdbcType="VARCHAR"/>
         <result column="psummary" property="psummary" jdbcType="VARCHAR"/>
         <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
         <result column="snumber" property="snumber" jdbcType="INTEGER"/>
         <result column="ptypenamea" property="ptypea" jdbcType="VARCHAR"/>
         <result column="ptypenameb" property="ptypeb" jdbcType="VARCHAR"/>
         <result column="ptypenamec" property="ptypec" jdbcType="VARCHAR"/>
+        <result column="pcost" property="pcost" jdbcType="DECIMAL"/>
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
     </resultMap>
-    <select id="getProductSizeDetail" resultMap="BaseResultMap">
-         SELECT productsize.sid,
+    <select id="getUnCheckedProductSizeDetail" resultMap="BaseResultMap">
+      SELECT productsize.sid,
               productsize.pid,
+              product.did,
               product.pname,
+              dealer.dname,
+              dealer.dphonenum,
               product.psummary,
               productsize.sizename,
               productsize.snumber,
               producttypea.typename as ptypenamea,
               producttypeb.typename as ptypenameb,
               producttypec.typename as ptypenamec,
+              productsize.pscost,
               productsize.psoriprice,
               productsize.pssellprice
               FROM
-              (productsize,product)
+              (productsize,product,dealer)
               LEFT JOIN producttype as producttypea ON producttypea.tid=product.ptypea
               LEFT JOIN producttype as producttypeb ON producttypeb.tid=product.ptypeb
               LEFT JOIN producttype as producttypec ON producttypec.tid=product.ptypec
               WHERE
-                product.is_delete=#{1}
+                product.is_delete=2
                 AND productsize.is_deleted=0
-                AND product.did=#{0}
                 AND productsize.pid=product.pid
+                AND product.did=dealer.did
     </select>
 </mapper>

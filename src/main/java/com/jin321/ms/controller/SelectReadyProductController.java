@@ -3,6 +3,7 @@ package com.jin321.ms.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jin321.ms.Service.ProductService;
+import com.jin321.ms.model.CheckedProductDetail;
 import com.jin321.ms.model.Page;
 import com.jin321.pl.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class SelectReadyProductController {
     @Autowired
     private ProductService productService;
     private Map<String,Object> returnMap;
-    private Page<Product> productPage;
-    private List<Product> productList;
+    private Page<CheckedProductDetail> checkedProductDetailPage;
+    private List<CheckedProductDetail> checkedProductDetails;
     private int pagenum;
     private int thispage;
 
@@ -38,13 +39,13 @@ public class SelectReadyProductController {
         JSONObject object= JSON.parseObject(json);
         pagenum = object.getInteger("pagenum");
         thispage = object.getInteger("thispage");
-        productPage=productService.getReadyProduct(pagenum,thispage);
-        productList=productPage.getObjectList();
-        if(productList!=null){
-            returnMap.put("datapagenum",productList.size());
-            returnMap.put("thispage",productPage.getThispage());
-            returnMap.put("totalpage",productPage.getTotalpage());
-            returnMap.put("pagedata",productList);
+        checkedProductDetailPage=productService.getReadyProduct(pagenum,thispage);
+        checkedProductDetails=checkedProductDetailPage.getObjectList();
+        if(checkedProductDetails!=null){
+            returnMap.put("datapagenum",checkedProductDetails.size());
+            returnMap.put("thispage",checkedProductDetailPage.getThispage());
+            returnMap.put("totalpage",checkedProductDetailPage.getTotalpage());
+            returnMap.put("pagedata",checkedProductDetails);
             return returnMap;
         }else {
             returnMap.put("error","页号错误");

@@ -1,9 +1,12 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductService;
+import com.jin321.ms.dao.GetUnCheckedProudctMapper;
 import com.jin321.ms.dao.InsertProductMapper;
+import com.jin321.ms.model.CheckedProductDetail;
 import com.jin321.ms.model.Page;
 import com.jin321.ms.model.TrueProduct;
+import com.jin321.ms.model.UpdateProductSizeDetail;
 import com.jin321.pl.dao.*;
 import com.jin321.pl.model.*;
 import org.apache.commons.logging.Log;
@@ -236,14 +239,13 @@ public class ProductServiceimp implements ProductService {
         }
         return -1;
     }
-
+    @Autowired
+    private GetUnCheckedProudctMapper unCheckedProudctMapper;
+    private List<CheckedProductDetail> checkedProductDetails;
     @Override
-    public Page<Product> getReadyProduct(int pagenum, int thispage) {
-        ProductExample example = new ProductExample();
-        ProductExample.Criteria criteria = example.createCriteria();
-        criteria.andIsDeleteEqualTo(2);
-        productList = productMapper.selectByExample(example);
-        return new Page<Product>().getPageList(pagenum,thispage,productList);
+    public Page<CheckedProductDetail> getReadyProduct(int pagenum, int thispage) {
+        checkedProductDetails=unCheckedProudctMapper.getUnCheckedProductSizeDetail();
+        return new Page<CheckedProductDetail>().getPageList(pagenum,thispage,checkedProductDetails);
     }
 
     /**

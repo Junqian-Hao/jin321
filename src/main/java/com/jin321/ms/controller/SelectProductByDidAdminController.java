@@ -27,6 +27,7 @@ public class SelectProductByDidAdminController {
     private int did;
     private int pagenum;
     private int thispage;
+    private int isdeleted;
     private Page<UpdateProductSizeDetail> updateProductSizeDetailPage;
     private List<UpdateProductSizeDetail> updateProductSizeDetails;
     private Map<String,Object> returnMap;
@@ -39,7 +40,8 @@ public class SelectProductByDidAdminController {
         did=object.getInteger("did");
         pagenum = object.getInteger("pagenum");
         thispage = object.getInteger("thispage");
-        updateProductSizeDetailPage = productSizeDetailService.getDetailBydid(pagenum,thispage,did);
+        isdeleted = object.getInteger("isdeleted");
+        updateProductSizeDetailPage = productSizeDetailService.getDetailBydid(pagenum,thispage,did,isdeleted);
         updateProductSizeDetails=updateProductSizeDetailPage.getObjectList();
         if(updateProductSizeDetails!=null){
             returnMap.put("datapagenum",updateProductSizeDetails.size());
@@ -48,7 +50,7 @@ public class SelectProductByDidAdminController {
             returnMap.put("pagedata",updateProductSizeDetails);
             return returnMap;
         }else {
-            returnMap.put("error","页号错误");
+            returnMap.put("error","页号错误，或无内容");
             return returnMap;
         }
     }

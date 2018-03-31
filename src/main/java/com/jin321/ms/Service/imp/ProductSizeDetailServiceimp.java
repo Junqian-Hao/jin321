@@ -37,8 +37,8 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
 
     private Page<UpdateProductSizeDetail> productSizeDetailPage;
     @Override
-    public Page<UpdateProductSizeDetail> getDetailBydid(int pagenum,int thispage,int did) {
-        productSizeDetailList=getProductSizeDetailMapper.getProductSizeDetail(did);
+    public Page<UpdateProductSizeDetail> getDetailBydid(int pagenum,int thispage,int did,int isdeleted) {
+        productSizeDetailList=getProductSizeDetailMapper.getProductSizeDetail(did,isdeleted);
         productSizeDetailPage=new Page<UpdateProductSizeDetail>().getPageList(pagenum,thispage,productSizeDetailList);
         return productSizeDetailPage;
     }

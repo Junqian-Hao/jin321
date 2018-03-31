@@ -18,7 +18,7 @@ public interface ProductSizeDetailService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    Page<UpdateProductSizeDetail> getDetailBydid(int pagenum,int thispage,int did);
+    Page<UpdateProductSizeDetail> getDetailBydid(int pagenum,int thispage,int did,int isdeleted);
 
     /**
      * 更新商品详细信息

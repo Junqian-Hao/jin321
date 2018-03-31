@@ -34,6 +34,7 @@ public class SelectProductSizeDetailBydidController {
     private int did;
     private int pagenum;
     private int thispage;
+    private int isdeleted;// 0当前 1已删除 2待审核 3审核未通过
     @ResponseBody
     @RequestMapping("/getDetail1ByDid")
     public Map<String,Object> getPrductSizeDetail(@RequestBody String json,HttpServletRequest request) {
@@ -42,7 +43,8 @@ public class SelectProductSizeDetailBydidController {
         JSONObject object= JSON.parseObject(json);
         pagenum = object.getInteger("pagenum");
         thispage = object.getInteger("thispage");
-        updateProductSizeDetailPage = productSizeDetailService.getDetailBydid(pagenum,thispage,did);
+        isdeleted= object.getInteger("isdeleted");
+        updateProductSizeDetailPage = productSizeDetailService.getDetailBydid(pagenum,thispage,did,isdeleted);
         updateProductSizeDetails=updateProductSizeDetailPage.getObjectList();
         if(updateProductSizeDetails!=null){
             returnMap.put("datapagenum",updateProductSizeDetails.size());
