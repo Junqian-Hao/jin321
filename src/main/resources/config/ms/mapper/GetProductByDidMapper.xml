@@ -1,6 +1,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.ms.dao.GetProductDidMapper">
-    <resultMap id="BaseResultMap" type="TrueProduct">
+    <resultMap id="BaseResultMap" type="com.jin321.ms.model.TrueProduct">
         <id column="pid" property="pid" jdbcType="INTEGER"/>
         <result column="pname" property="pname" jdbcType="VARCHAR"/>
         <result column="ptypenamea" property="ptypea" jdbcType="VARCHAR"/>
