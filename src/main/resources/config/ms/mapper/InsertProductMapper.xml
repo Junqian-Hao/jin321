@@ -5,7 +5,7 @@
    INSERT INTO product
     (did,pname,psummary,ptypea,ptypeb,ptypec,is_together,is_delete)
     VALUES
-    (#{did},#{pname},#{psummary},#{ptypea},#{ptypeb},#{ptypec},#{isTogether},#{isDelete})
+    (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
     <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="pid">
         SELECT  LAST_INSERT_ID()
     </selectKey>

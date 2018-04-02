@@ -4,6 +4,6 @@
     <select id="getSaleByMonth">
         SELECT * FROM dealerbuyform
         WHERE
-        MONTH(dbfdate)=#{month}
+        MONTH(dbfdate)=#{param1}
     </select>
 </mapper>

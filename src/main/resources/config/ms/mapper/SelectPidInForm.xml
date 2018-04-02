@@ -6,6 +6,6 @@
           sid
             FROM orderformproduct
         WHERE
-          oid =#{oid}
+          oid =#{param1}
     </select>
 </mapper>

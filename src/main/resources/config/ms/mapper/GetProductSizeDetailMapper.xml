@@ -34,7 +34,7 @@
               WHERE
                 product.is_delete=0
                 AND productsize.is_deleted=0
-                AND product.did=#{did}
+                AND product.did=#{param1}
                 AND productsize.pid=product.pid
     </select>
 </mapper>

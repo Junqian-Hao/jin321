@@ -21,7 +21,7 @@
         LEFT JOIN producttype as producttypec ON producttypec.tid=product.ptypec
         WHERE
         product.is_delete=0
-        AND product.did=#{did}
+        AND product.did=#{param1}
 
     </select>
 </mapper>
