@@ -11,7 +11,6 @@ public class Jin321ApplicationTests {
 
 	@Test
 	public void contextLoads() {
-
 	}
 
 }
