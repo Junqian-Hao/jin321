@@ -3,14 +3,11 @@ package com.jin321.ms.Service;
 import com.jin321.ms.model.CheckedProductDetail;
 import com.jin321.ms.model.Page;
 import com.jin321.ms.model.TrueProduct;
-import com.jin321.ms.model.UpdateProductSizeDetail;
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Productsize;
-import org.bouncycastle.jce.exception.ExtCertificateEncodingException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Tyranitarx on 2017/10/5.

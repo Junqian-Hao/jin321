@@ -1,0 +1,27 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.ms.dao.GetProductDidMapper">
+    <resultMap id="BaseResultMap" type="TrueProduct">
+        <id column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        <result column="ptypenamea" property="ptypea" jdbcType="VARCHAR"/>
+        <result column="ptypenameb" property="ptypeb" jdbcType="VARCHAR"/>
+        <result column="ptypenamec" property="ptypec" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getTrueProduct" resultMap="BaseResultMap">
+        SELECT
+        product.pid,
+        product.pname,
+        producttypea.typename as ptypenamea,
+        producttypeb.typename as ptypenameb,
+        producttypec.typename as ptypenamec
+        FROM
+        product
+        LEFT JOIN producttype as producttypea ON producttypea.tid=product.ptypea
+        LEFT JOIN producttype as producttypeb ON producttypeb.tid=product.ptypeb
+        LEFT JOIN producttype as producttypec ON producttypec.tid=product.ptypec
+        WHERE
+        product.is_delete=0
+        AND product.did=#{did}
+
+    </select>
+</mapper>

@@ -1,45 +1,18 @@
 package com.jin321.ms.model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-/**
- * Created by Tyranitarx on 2017/11/6.
- *
- * @Description :
- */
 public class TrueProduct {
-    private Integer pid;
-
-    private Integer did;
-
+    private int pid;
     private String pname;
-
-    private String psummary;
-
-    private Integer psellnum;
-
     private String ptypea;
-
     private String ptypeb;
+    private String ptypec;
 
-    private Boolean isTogether;
-
-    private Integer isDelete;
-
-    public Integer getPid() {
+    public int getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(int pid) {
         this.pid = pid;
-    }
-
-    public Integer getDid() {
-        return did;
-    }
-
-    public void setDid(Integer did) {
-        this.did = did;
     }
 
     public String getPname() {
@@ -48,22 +21,6 @@ public class TrueProduct {
 
     public void setPname(String pname) {
         this.pname = pname;
-    }
-
-    public String getPsummary() {
-        return psummary;
-    }
-
-    public void setPsummary(String psummary) {
-        this.psummary = psummary;
-    }
-
-    public Integer getPsellnum() {
-        return psellnum;
-    }
-
-    public void setPsellnum(Integer psellnum) {
-        this.psellnum = psellnum;
     }
 
     public String getPtypea() {
@@ -82,19 +39,11 @@ public class TrueProduct {
         this.ptypeb = ptypeb;
     }
 
-    public Boolean getTogether() {
-        return isTogether;
+    public String getPtypec() {
+        return ptypec;
     }
 
-    public void setTogether(Boolean together) {
-        isTogether = together;
-    }
-
-    public Integer getDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(Integer delete) {
-        isDelete = delete;
+    public void setPtypec(String ptypec) {
+        this.ptypec = ptypec;
     }
 }

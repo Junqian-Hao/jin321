@@ -528,7 +528,7 @@ $(function () {
             $("#change-typec option").remove();
 
             $.ajax({
-                url: "/jin321/ms/getDetail1ByDid.do",
+                url: "/jin321/ms/selectProdutByDid.do",
                 type: "post",
                 contentType: "application/json",
                 success: function (res) {
@@ -703,7 +703,7 @@ $(function () {
             $('.ordertr').remove();
 
             $.ajax({
-                url: '/ms/getOrderform.do',
+                url: '/jin321/ms/getOrderform.do',
                 method: "post",
                 contentType: "application/json",
                 data: JSON.stringify({
@@ -730,7 +730,7 @@ $(function () {
                             //购买产品
                             var product = $('<td></td>').html(res[i].orderFormProductDetails[j].updateProductSizeDetail.pname + res[i].orderFormProductDetails[j].updateProductSizeDetail.sizename);
                             //购买数量
-                            var number = $('<td></td>').html(res[i].orderFormProductDetails[j].updateProductSizeDetail.pname);
+                            var number = $('<td></td>').html(res[i].orderFormProductDetails[j].updateProductSizeDetail.pamount);
                             //购买时间
                             var time = $('<td></td>').html(new Date(res[i].orderform.opaydate).toLocaleString());
                             //买家留言
@@ -785,7 +785,7 @@ $(function () {
                             osendnumber: ""
                         }
                         $.ajax({
-                            url: '/ms/changeOrderStatue.do',
+                            url: '/jin321/ms/changeOrderStatue.do',
                             method: "post",
                             contentType: "application/json",
                             data: JSON.stringify(json),
@@ -812,7 +812,7 @@ $(function () {
             $('.ordertr2').remove();
 
             $.ajax({
-                url: '/ms/getOrderform.do',
+                url: '/jin321/ms/getOrderform.do',
                 method: "post",
                 contentType: "application/json",
                 data: JSON.stringify({
@@ -892,7 +892,7 @@ $(function () {
             $('.ordertr3').remove();
 
             $.ajax({
-                url: '/ms/getOrderform.do',
+                url: '/jin321/ms/getOrderform.do',
                 method: "post",
                 contentType: "application/json",
                 data: JSON.stringify({
