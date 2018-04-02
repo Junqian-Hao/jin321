@@ -19,7 +19,7 @@ import java.util.List;
  * @Date 2017/10/10 18:38
  * @Description :用户收货地址业务逻辑
  */
-@Service("useraddressService")
+@Service
 @Transactional(rollbackFor = Exception.class)
 public class UseraddressServiceImp implements UseraddressService {
     private static final Log log = LogFactory.getLog(UseraddressServiceImp.class);

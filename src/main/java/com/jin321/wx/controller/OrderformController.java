@@ -69,7 +69,7 @@ public class OrderformController {
      */
     @RequestMapping("payOrder")
     @ResponseBody
-    public Map<String, Object> payOrder(@RequestBody Map<String, String> rq,HttpServletRequest request) throws Exception {
+    public Map<String, Object> payOrder(@RequestBody Map<String, String> rq, HttpServletRequest request) throws Exception {
         String oid = rq.get("oid");
         String session = rq.get("session");
         log.info("支付未支付订单-》订单号：" + oid + "session:" + session);

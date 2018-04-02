@@ -39,12 +39,12 @@ public interface ProductPoMapper {
      * @param key
      * @return
      */
-    List<ProductPo> selectNowBykeyOrderByPrice(@Param("key")String key);
+    List<ProductPo> selectNowBykeyOrderByPrice(@Param("key") String key);
 
     /**
      * 通过关键字模糊搜索商品,销量降序排列
      * @param key
      * @return
      */
-    List<ProductPo> selectNowBykeyOrderByPsellnum(@Param("key")String key);
+    List<ProductPo> selectNowBykeyOrderByPsellnum(@Param("key") String key);
 }

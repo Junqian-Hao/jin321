@@ -3,16 +3,16 @@ package com.jin321.ms.controller;
 import com.jin321.ms.Service.ProductDetailService;
 import com.jin321.pl.model.Productdetail;
 import com.jin321.pl.utils.UrlUtil;
-import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
@@ -38,7 +38,7 @@ public class UploadProductDetailController {
     private Productdetail productdetail;
     @ResponseBody
     @RequestMapping(value = "/productDetailUpload",method = RequestMethod.POST)
-    public Map<String, String> productDetailUpload(HttpServletRequest request, @RequestParam("file") CommonsMultipartFile[] file,
+    public Map<String, String> productDetailUpload(HttpServletRequest request, @RequestParam("file") MultipartFile[] file,
                                                    @RequestParam("pid")String pid){
         log.info("上传详情图片");
         returnmap=new HashMap<String,String>();

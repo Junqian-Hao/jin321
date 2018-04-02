@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jin321.ms.dao.GetProductSizeDetailMapper">
-    <resultMap id="BaseResultMap" type="UpdateProductSizeDetail">
+    <resultMap id="BaseResultMap" type="com.jin321.ms.model.UpdateProductSizeDetail">
         <id column="sid" property="sid" jdbcType="INTEGER"/>
         <result column="pid" property="pid" jdbcType="INTEGER"/>
         <result column="pname" property="pname" jdbcType="VARCHAR"/>
@@ -32,9 +32,9 @@
               LEFT JOIN producttype as producttypeb ON producttypeb.tid=product.ptypeb
               LEFT JOIN producttype as producttypec ON producttypec.tid=product.ptypec
               WHERE
-                product.is_delete=#{1}
+                product.is_delete=0
                 AND productsize.is_deleted=0
-                AND product.did=#{0}
+                AND product.did=#{did}
                 AND productsize.pid=product.pid
     </select>
 </mapper>

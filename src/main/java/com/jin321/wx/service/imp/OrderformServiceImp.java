@@ -32,7 +32,7 @@ import java.util.*;
  * @Date 2017/10/11 17:41
  * @Description :订单
  */
-@Service("orderformService")
+@Service
 @Transactional(rollbackFor = Exception.class)
 public class OrderformServiceImp implements OrderformService {
     private static final Log log = LogFactory.getLog(OrderformServiceImp.class);
@@ -398,7 +398,7 @@ public class OrderformServiceImp implements OrderformService {
             return map;
         }
         Integer ostate = orderform.getOstate();
-        if ((ostate != OrderState.CONFIRM_AN_ORDER)&&(ostate!=OrderState.PLACE_ORDER_NOTPAY)) {
+        if ((ostate != OrderState.CONFIRM_AN_ORDER)&&(ostate!= OrderState.PLACE_ORDER_NOTPAY)) {
             map.put("code", "0");
             map.put("message", "只能删除状态为未支付和确认收货的订单");
             log.info("删除订单，订单状态为：" + ostate+"不能删除");
@@ -556,7 +556,7 @@ public class OrderformServiceImp implements OrderformService {
         }
 
         //将订单状态置为确认收货
-        orderformDetailMapper.updateOstade(Long.valueOf(oid),OrderState.CONFIRM_AN_ORDER);
+        orderformDetailMapper.updateOstade(Long.valueOf(oid), OrderState.CONFIRM_AN_ORDER);
         map.put("code", 1);
         map.put("message", "确认收货成功");
         log.info("确认收货，确认收货成功：" + oid);

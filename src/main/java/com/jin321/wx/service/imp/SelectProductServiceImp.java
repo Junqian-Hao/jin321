@@ -16,7 +16,7 @@ import java.util.List;
  * @Date 2017/10/14 16:23
  * @Description :关键字搜索商品
  */
-@Service("selectProductService")
+@Service
 @Transactional(rollbackFor = Exception.class)
 public class SelectProductServiceImp implements SelectProductService {
     private static final Log log = LogFactory.getLog(SelectProductServiceImp.class);
@@ -24,7 +24,7 @@ public class SelectProductServiceImp implements SelectProductService {
     ProductPoMapper productPoMapper;
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<ProductPo> selectProductBykey(String key,String code) throws Exception {
+    public List<ProductPo> selectProductBykey(String key, String code) throws Exception {
         String trim = key.trim();
         List<ProductPo> productPos = null;
         if (code.equals("0")) {

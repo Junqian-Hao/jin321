@@ -17,7 +17,7 @@ import java.util.List;
  * @Date 2017/10/8 20:57
  * @Description :行政区划查询
  */
-@Service("districtService")
+@Service
 @Transactional(rollbackFor = Exception.class)
 public class DistrictServiceImp implements DistrictService {
     private static final Log log = LogFactory.getLog(DistrictServiceImp.class);

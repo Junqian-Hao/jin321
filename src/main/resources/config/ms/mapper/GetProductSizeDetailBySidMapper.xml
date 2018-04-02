@@ -32,7 +32,7 @@
               LEFT JOIN producttype as producttypec ON producttypec.tid=product.ptypec
               WHERE
                 product.is_delete=0
-               AND productsize.sid=#{sid}
+               AND productsize.sid=${sid}
                AND productsize.is_deleted=0
 			   AND productsize.pid=product.pid
 

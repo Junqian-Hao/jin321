@@ -31,7 +31,7 @@ import java.util.Map;
  * @Date 2017/9/26 17:09
  * @Description :
  */
-@Service("firstPageService")
+@Service
 @Transactional(rollbackFor = Exception.class)
 public class FirstPageServiceImp implements FirstPageService {
     private static final Log log = LogFactory.getLog(FirstPageServiceImp.class);

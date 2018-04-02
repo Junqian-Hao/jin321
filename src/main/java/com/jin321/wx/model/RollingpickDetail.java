@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @Date 2017/9/26 17:19
  * @Description : 秒杀活动详细信息
  */
-public class RollingpickDetail extends Rollingpick{
+public class RollingpickDetail extends Rollingpick {
     Product products;
     String ppicurl;
     //原价

@@ -2,9 +2,10 @@ package com.jin321.pl.dao;
 
 import com.jin321.pl.model.Rollingpick;
 import com.jin321.pl.model.RollingpickExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface RollingpickMapper {

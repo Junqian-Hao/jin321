@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class PayBackEventServiceImp implements PayBackEventService{
+public class PayBackEventServiceImp implements PayBackEventService {
     @Autowired
     private PaybackeventMapper paybackeventMapper;
     @Autowired

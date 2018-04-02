@@ -2,9 +2,10 @@ package com.jin321.pl.dao;
 
 import com.jin321.pl.model.Timeproduct;
 import com.jin321.pl.model.TimeproductExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface TimeproductMapper {

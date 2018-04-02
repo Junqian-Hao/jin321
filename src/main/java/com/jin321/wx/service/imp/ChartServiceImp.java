@@ -21,9 +21,9 @@ import java.util.List;
  * @Date 2017/10/5 22:09
  * @Description :购物车实现类
  */
-@Service("chartService")
+@Service
 @Transactional(rollbackFor = Exception.class)
-public class ChartServiceImp implements ChartService{
+public class ChartServiceImp implements ChartService {
     private static final Log log = LogFactory.getLog(ChartServiceImp.class);
     @Autowired
     ChartMapper chartMapper;

@@ -3,16 +3,16 @@ package com.jin321.ms.controller;
 import com.jin321.ms.Service.ProductPicService;
 import com.jin321.pl.model.Productpics;
 import com.jin321.pl.utils.UrlUtil;
-import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
@@ -41,7 +41,7 @@ public class UploadProductPicController {
     @ResponseBody
     @RequestMapping(value = "/productPicUpload",method = RequestMethod.POST)
     public Map<String, String> productPicUpload(HttpServletRequest request,
-                                                @RequestParam("file") CommonsMultipartFile[] file
+                                                @RequestParam("file") MultipartFile[] file
                                                 ,@RequestParam("header")String header,
                                                 @RequestParam("pid")String pid){
         log.info("上传图片或缩略图");

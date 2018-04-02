@@ -28,7 +28,7 @@ public interface FirstPageService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    Map<String, String> login(String js_code , String lUserid) throws Exception;
+    Map<String, String> login(String js_code, String lUserid) throws Exception;
 
     /**
      * 查询佣金

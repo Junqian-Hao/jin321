@@ -11,7 +11,7 @@ import java.util.List;
  * @Description : 轮播图
  */
 public interface RollingpickDetailMapper {
-    RollingpickDetail selectNowByPid(@Param("pid")Integer pid);
+    RollingpickDetail selectNowByPid(@Param("pid") Integer pid);
 
     /**
      * 查询所有现在进行的轮播图活动

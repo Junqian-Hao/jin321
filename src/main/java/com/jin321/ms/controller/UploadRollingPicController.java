@@ -3,19 +3,18 @@ package com.jin321.ms.controller;
 import com.jin321.ms.Service.RollingPicService;
 import com.jin321.pl.model.Rollingpick;
 import com.jin321.pl.utils.UrlUtil;
-import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -39,7 +38,7 @@ public class UploadRollingPicController {
 
     @ResponseBody
     @RequestMapping("/insertRollingPic")
-    public Map<String, String> insertRollingPic(@RequestParam("file") CommonsMultipartFile[] file,
+    public Map<String, String> insertRollingPic(@RequestParam("file") MultipartFile[] file,
                                                 @RequestParam("pid") int pid[],
                                                 HttpServletRequest request){
         log.info("上传轮播图");

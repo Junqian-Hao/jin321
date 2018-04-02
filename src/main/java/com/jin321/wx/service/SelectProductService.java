@@ -17,6 +17,6 @@ public interface SelectProductService {
      * @return
      * @throws Exception
      */
-    List<ProductPo> selectProductBykey(String key,String code) throws Exception;
+    List<ProductPo> selectProductBykey(String key, String code) throws Exception;
 
 }

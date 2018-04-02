@@ -26,7 +26,7 @@ public interface OrderformService {
      * @return
      * @throws Exception
      */
-    boolean chargebackOrder(long oid,String message) throws Exception;
+    boolean chargebackOrder(long oid, String message) throws Exception;
 
 
     /**
@@ -35,7 +35,7 @@ public interface OrderformService {
      * @return
      * @throws Exception
      */
-    List<OrderformProductDetail> selectOrderByuid(String uid,int code) throws Exception;
+    List<OrderformProductDetail> selectOrderByuid(String uid, int code) throws Exception;
 
     /**
      * 支付未支付订单

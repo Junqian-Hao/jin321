@@ -14,5 +14,5 @@ public interface FullProductMapper {
      * @param pid 商品id
      * @return 商品详细信息
      */
-    FullProduct selectFullProductById(@Param("pid")int pid);
+    FullProduct selectFullProductById(@Param("pid") int pid);
 }

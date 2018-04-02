@@ -32,5 +32,5 @@ public interface TypeService {
      * @return
      * @throws Exception
      */
-    List<ProductPo> selectProductByptypeb(int ptypeb,String code) throws Exception;
+    List<ProductPo> selectProductByptypeb(int ptypeb, String code) throws Exception;
 }

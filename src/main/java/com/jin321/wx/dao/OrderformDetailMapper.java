@@ -25,48 +25,48 @@ public interface OrderformDetailMapper {
      * @param uid
      * @return
      */
-    List<OrderformProductDetail> selectOrderformByuid(@Param("uid")String uid);
+    List<OrderformProductDetail> selectOrderformByuid(@Param("uid") String uid);
 
     /**
      * 通过uid查询未支付订单
      * @param uid
      * @return
      */
-    List<OrderformProductDetail> selectNOTPAYOrderformByuid(@Param("uid")String uid);
+    List<OrderformProductDetail> selectNOTPAYOrderformByuid(@Param("uid") String uid);
 
     /**
      * 通过uid查询未收货订单
      * @param uid
      * @return
      */
-    List<OrderformProductDetail> selectNOTRECEIVEOrderformByuid(@Param("uid")String uid);
+    List<OrderformProductDetail> selectNOTRECEIVEOrderformByuid(@Param("uid") String uid);
 
     /**
      * 通过uid查询付款未发货订单
      * @param uid
      * @return
      */
-    List<OrderformProductDetail> selectNOTShipmentsOrderformByuid(@Param("uid")String uid);
+    List<OrderformProductDetail> selectNOTShipmentsOrderformByuid(@Param("uid") String uid);
 
     /**
      * 通过oid查询订单
      * @param oid
      * @return
      */
-    OrderformProductDetail selectOrderformByoid(@Param("oid")Long oid);
+    OrderformProductDetail selectOrderformByoid(@Param("oid") Long oid);
 
     /**
      * 给订单设置支付单号
      * @param oid
      * @param dbfid
      */
-    void updateDbfid(@Param("oid")Long oid,@Param("dbfid")long dbfid);
+    void updateDbfid(@Param("oid") Long oid, @Param("dbfid") long dbfid);
 
     /**
      * 修改订单的状态
      * @param oid
      * @param osdate
      */
-    void updateOstade(@Param("oid")Long oid,@Param("osdate")long osdate);
+    void updateOstade(@Param("oid") Long oid, @Param("osdate") long osdate);
 
 }

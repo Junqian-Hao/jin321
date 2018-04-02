@@ -2,8 +2,9 @@ package com.jin321.pl.dao;
 
 import com.jin321.pl.model.Aboutus;
 import com.jin321.pl.model.AboutusExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AboutusMapper {
     int countByExample(AboutusExample example);
