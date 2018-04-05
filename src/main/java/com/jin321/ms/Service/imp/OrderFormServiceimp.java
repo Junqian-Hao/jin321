@@ -152,6 +152,7 @@ public class OrderFormServiceimp implements OrderFormService {
         orderform=orderformMapper.selectByPrimaryKey(oid);
         orderform.setOsendmethod(osendmethod);
         orderform.setOsendnumber(osendnumber);
+        orderform.setOstate(2);
         orderform.setOsenddate(new Date());
         return orderformMapper.updateByPrimaryKey(orderform);
     }
