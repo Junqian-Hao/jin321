@@ -1,6 +1,5 @@
 package com.jin321;
 
-import com.jin321.ms.controller.CaptchaController;
 import com.jin321.ms.interceptors.LoginInterceptor;
 import com.jin321.pl.intercepts.SuffixIntercetp;
 import com.jin321.pl.utils.UrlUtil;
@@ -52,6 +51,7 @@ public class MyWebAppConfigurer implements WebMvcConfigurer {
             registry.addResourceHandler("/productpics/**").addResourceLocations("file:" + UrlUtil.linux_productpics);
             registry.addResourceHandler("/productsecondtype/**").addResourceLocations("file:" + UrlUtil.linux_productsecondtype);
             registry.addResourceHandler("/rollingpick/**").addResourceLocations("file:" + UrlUtil.linux_rollingpick);
+            registry.addResourceHandler("/banner/**").addResourceLocations("file:"+UrlUtil.linux_banner);
         }
     }
 

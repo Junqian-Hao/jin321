@@ -54,6 +54,7 @@ public class OrderformServiceImp implements OrderformService {
     PaycommisionMapper paycommisionMapper;
     @Autowired
     UserMapper userMapper;
+
     /**
      * 添加订单
      *
@@ -255,6 +256,9 @@ public class OrderformServiceImp implements OrderformService {
             log.info("查询订单物流信息 ， 订单不存在" + oid);
             return "{\"code\":\"0\",\"message\":\"订单不存在\"}";
         }
+        if ("自提".equals(orderform.getOsendmethod())) {
+            return "{\"company\":\"自提\"}";
+        }
         int ostate = orderform.getOstate();
         if (ostate == OrderState.PLACE_ORDER_NOTPAY) {
             log.info("查询订单物流信息 ， 用户未付款" + oid);
@@ -398,10 +402,10 @@ public class OrderformServiceImp implements OrderformService {
             return map;
         }
         Integer ostate = orderform.getOstate();
-        if ((ostate != OrderState.CONFIRM_AN_ORDER)&&(ostate!= OrderState.PLACE_ORDER_NOTPAY)) {
+        if ((ostate != OrderState.CONFIRM_AN_ORDER) && (ostate != OrderState.PLACE_ORDER_NOTPAY)) {
             map.put("code", "0");
             map.put("message", "只能删除状态为未支付和确认收货的订单");
-            log.info("删除订单，订单状态为：" + ostate+"不能删除");
+            log.info("删除订单，订单状态为：" + ostate + "不能删除");
             return map;
         }
         orderform.setOstate(OrderState.USER_DELETION_ORDER);
@@ -433,6 +437,7 @@ public class OrderformServiceImp implements OrderformService {
 
     /**
      * 确认收货
+     *
      * @param oid
      * @return
      * @throws Exception
@@ -440,7 +445,7 @@ public class OrderformServiceImp implements OrderformService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Map<String, Object> confirmReceipt(String oid) throws Exception {
-        Map<String , Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         OrderformProductDetail orderformProductDetail = orderformDetailMapper.selectOrderformByoid(Long.valueOf(oid));
 
         if (orderformProductDetail == null) {
@@ -503,7 +508,7 @@ public class OrderformServiceImp implements OrderformService {
                 paycommision.setPaydate(new Date());
                 paycommision.setPaynum(fenhong40);
                 paycommision.setUid(shangji);
-                paycommision.setPaymsg(uid+"购买"+orderformProductPo.getPname()+"的"+orderformProductPo.getSizename()+"的40%分红");
+                paycommision.setPaymsg(uid + "购买" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的40%分红");
                 //添加直接上级的奖励
                 paycommisionMapper.insert(paycommision);
 
@@ -522,7 +527,7 @@ public class OrderformServiceImp implements OrderformService {
                     paycommision2.setPaydate(new Date());
                     paycommision2.setPaynum(fenhong20);
                     paycommision2.setUid(shangji2);
-                    paycommision2.setPaymsg(shangji+"的下级"+uid+"购买"+orderformProductPo.getPname()+"的"+orderformProductPo.getSizename()+"的20%分红");
+                    paycommision2.setPaymsg(shangji + "的下级" + uid + "购买" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的20%分红");
                     //添加直接上级的奖励
                     paycommisionMapper.insert(paycommision2);
 
@@ -546,7 +551,7 @@ public class OrderformServiceImp implements OrderformService {
                     //添加直接上级的奖励
                     paycommisionMapper.insert(paycommision);
                 } else {
-                   //普通用户购买合伙人商品,设置为合伙人
+                    //普通用户购买合伙人商品,设置为合伙人
                     user.setIsTogether(true);
                     user.setTogetherdate(new Date());
                     userMapper.updateByPrimaryKeySelective(user);

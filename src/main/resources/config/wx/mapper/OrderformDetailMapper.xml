@@ -120,9 +120,9 @@
         WHERE orderform.uid = #{uid}
               AND orderform.oid = orderformproduct.oid
               AND productpics.`is_headpic` = 1
+              AND productpics.`is_deleted` = 0
               AND productsize.`is_deleted` = 0
               AND orderform.ostate != 7
-              AND orderform.ostate > 0
         ]]>
     </select>
     <select id="selectNOTPAYOrderformByuid" resultMap="OrderformProductDetailMap" parameterType="string">
@@ -143,6 +143,7 @@
         WHERE orderform.uid = #{uid}
               AND orderform.oid = orderformproduct.oid
               AND productpics.`is_headpic` = 1
+              AND productpics.`is_deleted` = 0
               AND productsize.`is_deleted` = 0
               AND orderform.ostate = 0
 
@@ -166,6 +167,7 @@
         WHERE orderform.uid = #{uid}
               AND orderform.oid = orderformproduct.oid
               AND productpics.`is_headpic` = 1
+              AND productpics.`is_deleted` = 0
               AND productsize.`is_deleted` = 0
               AND orderform.ostate > 1
               AND orderform.ostate <= 4
@@ -191,6 +193,7 @@
         WHERE orderform.uid = #{uid}
               AND orderform.oid = orderformproduct.oid
               AND productpics.`is_headpic` = 1
+              AND productpics.`is_deleted` = 0
               AND productsize.`is_deleted` = 0
               AND orderform.ostate = 1
         ]]>
@@ -212,6 +215,12 @@
             LEFT JOIN productpics ON orderformproduct.pid = productpics.pid
             LEFT JOIN dealer ON product.did = dealer.did
         WHERE orderform.oid = #{oid}
+              AND useraddress.is_deleted = 0
+              AND product.is_delete = 0
+              AND productsize.is_deleted = 0
+              AND productpics.is_deleted = 0
+              AND productpics.is_headpic = 1
+              AND dealer.is_deleted = 0
               AND orderform.oid = orderformproduct.oid
               AND orderform.ostate != 7
     </select>

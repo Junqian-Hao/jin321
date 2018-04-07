@@ -18,6 +18,7 @@ public class UrlUtil {
     public static final String linux_productpics = "/root/apache-tomcat-8.5.23/webapps/jin321/productpics/";
     public static final String linux_productsecondtype = "/root/apache-tomcat-8.5.23/webapps/jin321/productsecondtype/";
     public static final String linux_rollingpick = "/root/apache-tomcat-8.5.23/webapps/jin321/rollingpick/";
+    public static final String linux_banner = "/root/apache-tomcat-8.5.23/webapps/jin321/banner/";
     /**
      * 返回当前项目的相对路径
      * @param request
