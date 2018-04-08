@@ -19,6 +19,8 @@ import okhttp3.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,7 @@ import java.util.*;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
+@CacheConfig(cacheNames = "orderForm")
 public class OrderformServiceImp implements OrderformService {
     private static final Log log = LogFactory.getLog(OrderformServiceImp.class);
     @Autowired
@@ -250,6 +253,7 @@ public class OrderformServiceImp implements OrderformService {
     }
 
     @Override
+    @Cacheable
     public String selectExpressageByOid(String oid) throws Exception {
         Orderform orderform = orderformMapper.selectByPrimaryKey(Long.valueOf(oid));
         if (orderform == null) {

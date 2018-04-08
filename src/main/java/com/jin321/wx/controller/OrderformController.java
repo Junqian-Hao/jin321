@@ -1,7 +1,5 @@
 package com.jin321.wx.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.jin321.wx.model.OrderformDetail;
 import com.jin321.wx.model.OrderformProductDetail;
 import com.jin321.wx.service.OrderformService;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -114,12 +114,13 @@ public class OrderformController {
      */
     @RequestMapping("selectExpressageByOid")
     @ResponseBody
-    public String selectExpressageByOid(@RequestBody Map<String, String> rq) throws Exception {
+    public void selectExpressageByOid(@RequestBody Map<String, String> rq , HttpServletResponse response) throws Exception {
         String oid = rq.get("oid");
         log.info("通过订单号查询物流信息" + oid);
         String s = orderformService.selectExpressageByOid(oid);
-        Map<String, String> params = JSONObject.parseObject(s, new TypeReference<Map<String, String>>(){});
-        return s;
+        response.setContentType("application/json; charset=utf-8");
+        PrintWriter writer = response.getWriter();
+        writer.print(s);
     }
 
     @RequestMapping("confirmReceipt")
