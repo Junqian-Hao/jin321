@@ -2,6 +2,7 @@ package com.jin321.wx.model;
 
 import com.jin321.pl.model.Chart;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
  * @Date 2017/9/27 16:33
  * @Description : 购物车
  */
-public class ChartDetail extends Chart {
+public class ChartDetail extends Chart implements Serializable{
     //商品缩略图
     private String ppicurl;
     //原价

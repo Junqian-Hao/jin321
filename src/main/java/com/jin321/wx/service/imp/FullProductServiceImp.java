@@ -9,6 +9,8 @@ import com.jin321.wx.service.FullProductService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
+@CacheConfig(cacheNames = "fullProduct")
 public class FullProductServiceImp implements FullProductService{
     private static final Log log = LogFactory.getLog(FullProductServiceImp.class);
     @Autowired
@@ -29,6 +32,7 @@ public class FullProductServiceImp implements FullProductService{
     ProductpicsMapper productpicsMapper;
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable
     public FullProduct selectFullProductById(int pid) {
         FullProduct fullProduct = fullProductMapper.selectFullProductById(pid);
         return fullProduct;
@@ -36,6 +40,7 @@ public class FullProductServiceImp implements FullProductService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable
     public String selectHeadpicsByPid(int pid) {
         ProductpicsExample productpicsExample = new ProductpicsExample();
         ProductpicsExample.Criteria criteria = productpicsExample.createCriteria();

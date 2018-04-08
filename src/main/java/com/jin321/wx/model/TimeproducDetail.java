@@ -3,6 +3,7 @@ package com.jin321.wx.model;
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Timeproduct;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
  * @Date 2017/9/26 17:34
  * @Description :秒杀商品扩展类
  */
-public class TimeproducDetail extends Timeproduct {
+public class TimeproducDetail extends Timeproduct implements Serializable {
     Product products;
     String ppicurl;
     //原价

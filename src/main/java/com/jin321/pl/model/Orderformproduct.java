@@ -1,8 +1,9 @@
 package com.jin321.pl.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Orderformproduct {
+public class Orderformproduct implements Serializable {
     private Integer ofpid;
 
     private Long oid;

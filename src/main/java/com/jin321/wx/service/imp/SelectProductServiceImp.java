@@ -6,6 +6,8 @@ import com.jin321.wx.service.SelectProductService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,12 +20,14 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
+@CacheConfig(cacheNames = "selectProduct")
 public class SelectProductServiceImp implements SelectProductService {
     private static final Log log = LogFactory.getLog(SelectProductServiceImp.class);
     @Autowired
     ProductPoMapper productPoMapper;
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable
     public List<ProductPo> selectProductBykey(String key, String code) throws Exception {
         String trim = key.trim();
         List<ProductPo> productPos = null;

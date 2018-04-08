@@ -1,8 +1,9 @@
 package com.jin321.pl.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private String uid;
 
     private String userwxid;

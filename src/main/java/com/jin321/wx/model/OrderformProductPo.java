@@ -2,6 +2,7 @@ package com.jin321.wx.model;
 
 import com.jin321.pl.model.Orderformproduct;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
  * @Date 2017/10/16 16:19
  * @Description :订单详情下
  */
-public class OrderformProductPo extends Orderformproduct {
+public class OrderformProductPo extends Orderformproduct implements Serializable {
     private Integer pid;
 
     private Integer did;

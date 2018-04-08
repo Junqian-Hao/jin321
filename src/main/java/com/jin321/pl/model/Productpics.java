@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Productpics {
+import java.io.Serializable;
+
+public class Productpics implements Serializable {
     private Integer ppid;
 
     private Integer pid;

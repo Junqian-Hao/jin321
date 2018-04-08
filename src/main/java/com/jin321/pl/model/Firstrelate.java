@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Firstrelate {
+import java.io.Serializable;
+
+public class Firstrelate implements Serializable {
     private Integer r1id;
 
     private String r1u1id;

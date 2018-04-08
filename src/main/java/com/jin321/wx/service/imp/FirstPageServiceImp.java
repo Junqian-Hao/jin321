@@ -19,6 +19,8 @@ import okhttp3.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,7 @@ import java.util.Map;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
+@CacheConfig(cacheNames = "firstPage")
 public class FirstPageServiceImp implements FirstPageService {
     private static final Log log = LogFactory.getLog(FirstPageServiceImp.class);
     @Autowired
@@ -54,6 +57,7 @@ public class FirstPageServiceImp implements FirstPageService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable
     public Map<String, Object> getFirstPageMessage() throws Exception {
         Map<String, Object> map = new HashMap<String,Object>();
         //轮播图

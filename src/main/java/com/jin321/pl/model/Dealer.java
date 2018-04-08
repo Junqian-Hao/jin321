@@ -1,8 +1,9 @@
 package com.jin321.pl.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Dealer {
+public class Dealer implements Serializable {
     private Integer did;
 
     private String dname;

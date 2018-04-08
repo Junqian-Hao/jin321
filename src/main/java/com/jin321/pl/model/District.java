@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class District {
+import java.io.Serializable;
+
+public class District implements Serializable {
     private Integer cId;
 
     private Integer cPaId;

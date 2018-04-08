@@ -4,6 +4,7 @@ import com.jin321.pl.model.Orderform;
 import com.jin321.pl.model.Useraddress;
 import com.jin321.wx.utils.WXUtil;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @Date 2017/10/16 15:28
  * @Description :订单商品模型
  */
-public class OrderformProductDetail extends Orderform {
+public class OrderformProductDetail extends Orderform implements Serializable {
     //用户收货地址信息
     Useraddress useraddress;
     //订单商品详细信息

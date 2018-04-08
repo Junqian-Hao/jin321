@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Aboutus {
+import java.io.Serializable;
+
+public class Aboutus implements Serializable {
     private Integer auid;
 
     private String detail;

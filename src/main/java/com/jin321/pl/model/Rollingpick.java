@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Rollingpick {
+import java.io.Serializable;
+
+public class Rollingpick implements Serializable {
     private Integer rpid;
 
     private Integer pid;

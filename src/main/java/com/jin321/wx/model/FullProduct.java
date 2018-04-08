@@ -5,6 +5,7 @@ import com.jin321.pl.model.Productdetail;
 import com.jin321.pl.model.Productpics;
 import com.jin321.pl.model.Productsize;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @Date 2017/10/1 21:48
  * @Description :完整的商品信息
  */
-public class FullProduct extends Product {
+public class FullProduct extends Product implements Serializable {
     //商品型号
     List<Productsize> productsizeList;
     //商品相关图片

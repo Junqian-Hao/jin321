@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Chart {
+import java.io.Serializable;
+
+public class Chart implements Serializable {
     private Integer cartid;
 
     private String uid;

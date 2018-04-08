@@ -9,6 +9,8 @@ import com.jin321.wx.service.TypeService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
+@CacheConfig(cacheNames = "type")
 public class TypeServiceImp implements TypeService {
     private static final Log log = LogFactory.getLog(TypeServiceImp.class);
     @Autowired
@@ -30,6 +33,7 @@ public class TypeServiceImp implements TypeService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable
     public List<Producttype> selectAllFirstProducttype() throws Exception {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
@@ -41,6 +45,7 @@ public class TypeServiceImp implements TypeService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable
     public List<Producttype> selectSecondProducttype(int tid) throws Exception {
         ProducttypeExample producttypeExample = new ProducttypeExample();
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
@@ -53,6 +58,7 @@ public class TypeServiceImp implements TypeService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable
     public List<ProductPo> selectProductByptypeb(int ptypec, String code) throws Exception {
         List<ProductPo> productPos = null;
         if (code.equals("0")) {

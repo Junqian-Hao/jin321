@@ -1,8 +1,9 @@
 package com.jin321.pl.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Paybackevent {
+public class Paybackevent implements Serializable {
     private Long eid;
 
     private Long oid;

@@ -1,5 +1,6 @@
 package com.jin321.wx.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @Date 2017/10/23 17:34
  * @Description :
  */
-public class DealerDetail {
+public class DealerDetail implements Serializable {
     //经销商名字
     private String dname;
     private Integer did;

@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Expressage {
+import java.io.Serializable;
+
+public class Expressage implements Serializable {
     private Integer eid;
 
     private String com;

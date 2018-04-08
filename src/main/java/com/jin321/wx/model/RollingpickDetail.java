@@ -3,6 +3,7 @@ package com.jin321.wx.model;
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Rollingpick;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
  * @Date 2017/9/26 17:19
  * @Description : 秒杀活动详细信息
  */
-public class RollingpickDetail extends Rollingpick {
+public class RollingpickDetail extends Rollingpick implements Serializable {
     Product products;
     String ppicurl;
     //原价

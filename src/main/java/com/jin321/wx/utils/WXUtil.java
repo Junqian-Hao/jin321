@@ -25,7 +25,7 @@ public class WXUtil {
     public static String SECRET = "93e4f9508f806ea59999f1608b688f6f";
     public static String MCH_ID = "1490493672";
     public static String API_KEY = "wcHennuqkIR6Gg0WsYV5kPPpAy0Y8pZr";
-    public static String BASEPATH = "https://test-1252104972.file.myqcloud.com/jin321/";
+    public static String BASEPATH = "https://jin321-1254609256.file.myqcloud.com/jin321/";
     /**
      * 聚合数据apikey
      */

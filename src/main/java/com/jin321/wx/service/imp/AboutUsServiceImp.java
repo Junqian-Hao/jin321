@@ -5,6 +5,8 @@ import com.jin321.pl.model.Aboutus;
 import com.jin321.pl.model.AboutusExample;
 import com.jin321.wx.service.AboutUsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +17,12 @@ import java.util.List;
  * @Description: 关于我们
  */
 @Service
+@CacheConfig(cacheNames = "aboutUs")
 public class AboutUsServiceImp implements AboutUsService {
     @Autowired
     AboutusMapper aboutusMapper;
     @Override
+    @Cacheable
     public Aboutus findfirstboutUs() {
         List<Aboutus> aboutuses = aboutusMapper.selectByExample(new AboutusExample());
         if (aboutuses == null) {

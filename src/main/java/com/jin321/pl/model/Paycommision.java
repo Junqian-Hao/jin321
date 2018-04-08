@@ -1,9 +1,10 @@
 package com.jin321.pl.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Paycommision {
+public class Paycommision implements Serializable {
     private Integer pcid;
 
     private String uid;

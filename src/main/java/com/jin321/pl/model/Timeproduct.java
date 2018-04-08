@@ -1,8 +1,9 @@
 package com.jin321.pl.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Timeproduct {
+public class Timeproduct implements Serializable {
     private Integer tpid;
 
     private Integer pid;

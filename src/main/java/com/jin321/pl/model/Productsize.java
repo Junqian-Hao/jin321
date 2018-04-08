@@ -1,8 +1,9 @@
 package com.jin321.pl.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Productsize {
+public class Productsize implements Serializable {
     private Integer sid;
 
     private Integer pid;

@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Producttype {
+import java.io.Serializable;
+
+public class Producttype implements Serializable {
     private Integer tid;
 
     private String typename;

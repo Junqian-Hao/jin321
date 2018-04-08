@@ -5,12 +5,14 @@ import com.jin321.pl.model.Productpics;
 import com.jin321.pl.model.Productsize;
 import com.jin321.pl.model.Rollingpick;
 
+import java.io.Serializable;
+
 /**
  * @Author hao
  * @Date 2017/9/27 12:48
  * @Description :简略商品信息
  */
-public class SimpleProduct extends Product {
+public class SimpleProduct extends Product implements Serializable {
     //商品缩略图信息
     Productpics productpics;
     //轮播图信息

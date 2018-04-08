@@ -1,11 +1,13 @@
 package com.jin321.wx.model;
 
+import java.io.Serializable;
+
 /**
  * @Author hao
  * @Date 2017/9/27 22:08
  * @Description : 存储用户登录信息
  */
-public class LoginEntity {
+public class LoginEntity implements Serializable {
     String sessionKey;
     String openid;
     String userid;

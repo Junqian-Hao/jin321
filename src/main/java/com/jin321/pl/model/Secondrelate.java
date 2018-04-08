@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Secondrelate {
+import java.io.Serializable;
+
+public class Secondrelate implements Serializable {
     private Integer r2id;
 
     private String r2u1id;

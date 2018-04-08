@@ -1,6 +1,8 @@
 package com.jin321.pl.model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private Integer pid;
 
     private Integer did;

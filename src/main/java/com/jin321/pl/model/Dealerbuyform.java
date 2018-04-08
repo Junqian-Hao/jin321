@@ -1,9 +1,10 @@
 package com.jin321.pl.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Dealerbuyform {
+public class Dealerbuyform implements Serializable {
     private Long dbfid;
 
     private Integer buyformstate;
