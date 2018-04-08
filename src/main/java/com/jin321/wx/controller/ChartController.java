@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,6 +113,9 @@ public class ChartController {
         log.info("查询购物车信息购物车->"+re.get("uid"));
         List<DealerDetail> uid = chartService.selectChartByUserId(re.get("uid"));
         map.put("baseUrl", UrlUtil.getBasePathNoPort(request));
+        if (uid == null) {
+            uid = new ArrayList<>();
+        }
         map.put("chartDetail", uid);
         return map;
     }

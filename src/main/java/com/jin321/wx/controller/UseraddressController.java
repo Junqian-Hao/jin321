@@ -115,8 +115,8 @@ public class UseraddressController {
             map.put("code", 1);
             map.put("useraddresses", useraddresses);
         } else {
-            map.put("code", 0);
-            map.put("message", "未查询到");
+            map.put("code", 1);
+            map.put("useraddresses", useraddresses);
         }
         return map;
     }

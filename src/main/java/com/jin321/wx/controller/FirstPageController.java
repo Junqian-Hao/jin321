@@ -174,6 +174,10 @@ public class FirstPageController {
         return map;
     }
 
+    /**
+     * 查询佣金
+     *
+     */
     @RequestMapping("Commissions")
     @ResponseBody
     public List<Paycommision> Commissions(@RequestBody Map<String, String> rq) throws Exception {
