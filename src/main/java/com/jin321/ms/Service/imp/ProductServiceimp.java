@@ -9,6 +9,7 @@ import com.jin321.ms.model.Page;
 import com.jin321.ms.model.TrueProduct;
 import com.jin321.pl.dao.*;
 import com.jin321.pl.model.*;
+import com.jin321.pl.utils.CacheUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,6 @@ public class ProductServiceimp implements ProductService {
     private int signb;
     private int signc;
     private int signd;
-    @Autowired
-    private RedisTemplate redisTemplate;
     @Autowired
     private ProductMapper productMapper;
     @Autowired
@@ -86,6 +85,8 @@ public class ProductServiceimp implements ProductService {
         productdetail.setPid(product.getPid());
         productdetail.setPicurl("productdetail/default.jpg");
         signd = productdetailMapper.insert(productdetail);
+
+        CacheUtil.flushDb();
         return signa & signb & signc & signd;
     }
 
@@ -109,6 +110,7 @@ public class ProductServiceimp implements ProductService {
                 return 0;
             }
         }
+        CacheUtil.flushDb();
         return 1;
     }
 
@@ -128,6 +130,7 @@ public class ProductServiceimp implements ProductService {
             while (iterator.hasNext()) {
                 signb = productsizeMapper.updateByPrimaryKey(iterator.next());
             }
+            CacheUtil.flushDb();
             return signa & signb;
         } else
             return 2;
@@ -151,8 +154,10 @@ public class ProductServiceimp implements ProductService {
             if (product == null)
                 return -1;
             product.setIsTogether(true);
-            if (productMapper.updateByPrimaryKey(product) != 0)
+            if (productMapper.updateByPrimaryKey(product) != 0){
                 sign = 1;
+                CacheUtil.flushDb();
+            }
             else
                 return 0;
         }
@@ -175,8 +180,10 @@ public class ProductServiceimp implements ProductService {
                 return -1;
             else {
                 product.setIsTogether(false);
-                if (productMapper.updateByPrimaryKey(product) != 0)
+                if (productMapper.updateByPrimaryKey(product) != 0){
                     sign = 1;
+                    CacheUtil.flushDb();
+                }
                 else
                     return 0;
             }
@@ -210,6 +217,7 @@ public class ProductServiceimp implements ProductService {
         product.setPtypeb(ptypeb);
         if (producttypeMapper.selectByPrimaryKey(ptypea) != null &&
                 producttypeMapper.selectByPrimaryKey(ptypeb) != null) {
+            CacheUtil.flushDb();
             return productMapper.updateByPrimaryKey(product);
         }
         return -1;
@@ -239,6 +247,7 @@ public class ProductServiceimp implements ProductService {
                 product.setIsDelete(0);
             signa = productMapper.updateByPrimaryKey(product);
         }
+        CacheUtil.flushDb();
         return signa;
     }
 }

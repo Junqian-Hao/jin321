@@ -9,6 +9,7 @@ import com.jin321.pl.dao.ProductsizeMapper;
 import com.jin321.pl.model.Product;
 import com.jin321.pl.model.Productsize;
 import com.jin321.pl.model.ProductsizeExample;
+import com.jin321.pl.utils.CacheUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,7 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
             productsize.setPssellprice(updateProductSizeDetail.getPssellprice());
             productsize.setSizename(updateProductSizeDetail.getSizename());
             productsize.setSnumber(updateProductSizeDetail.getSnumber());
+            CacheUtil.flushDb();
             return productsizeMapper.updateByPrimaryKey(productsize)&
                     productMapper.updateByPrimaryKey(product);
         }
@@ -92,6 +94,7 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
                     if (product!=null){
                         product.setIsDelete(1);
                         productMapper.updateByPrimaryKey(product);
+                        CacheUtil.flushDb();
                     }
                     else
                         return 2;
