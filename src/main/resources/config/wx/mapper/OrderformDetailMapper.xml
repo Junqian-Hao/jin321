@@ -170,7 +170,7 @@
               AND productpics.`is_deleted` = 0
               AND productsize.`is_deleted` = 0
               AND orderform.ostate > 1
-              AND orderform.ostate <= 4
+              AND orderform.ostate <= 3
         ]]>
     </select>
 
