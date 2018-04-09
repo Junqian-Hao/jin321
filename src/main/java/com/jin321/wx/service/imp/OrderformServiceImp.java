@@ -84,6 +84,7 @@ public class OrderformServiceImp implements OrderformService {
             orderformDetail.setOdate(new Date());
             orderformDetail.setOstate(OrderState.PLACE_ORDER_NOTPAY);
             orderformDetail.setDbfid(dbfid);
+            log.info("订单发货方式："+orderformDetail.getOsendmethod());
             //插入订单信息
             int insert = orderformDetailMapper.insert(orderformDetail);
             if (!(insert > 0)) {
@@ -512,7 +513,8 @@ public class OrderformServiceImp implements OrderformService {
                 paycommision.setPaydate(new Date());
                 paycommision.setPaynum(fenhong40);
                 paycommision.setUid(shangji);
-                paycommision.setPaymsg(uid + "购买" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的40%分红");
+                paycommision.setPaymsg(uid  + "的40%分红");
+                paycommision.setPaymsgusr(uid + "购买" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的40%分红");
                 //添加直接上级的奖励
                 paycommisionMapper.insert(paycommision);
 
@@ -531,7 +533,8 @@ public class OrderformServiceImp implements OrderformService {
                     paycommision2.setPaydate(new Date());
                     paycommision2.setPaynum(fenhong20);
                     paycommision2.setUid(shangji2);
-                    paycommision2.setPaymsg(shangji + "的下级" + uid + "购买" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的20%分红");
+                    paycommision2.setPaymsg(shangji + "的下级" + uid + "的" + "的20%分红");
+                    paycommision2.setPaymsgusr(shangji + "的下级" + uid + "购买" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的20%分红");
                     //添加直接上级的奖励
                     paycommisionMapper.insert(paycommision2);
 
@@ -540,22 +543,26 @@ public class OrderformServiceImp implements OrderformService {
 
             //正常分红完成，合伙人逻辑处理
             Boolean together = orderformProductPo.getTogether();
+            log.info("购买的商品是否是合伙人商品："+together);
             if (together) {
                 //是合伙人商品
                 User user = userMapper.selectByPrimaryKey(uid);
                 Boolean isTogether = user.getIsTogether();
                 if (isTogether) {
                     //合伙人再次购买合伙人商品，直接10%销售奖励
+                    log.info("合伙人再次购买合伙人商品");
                     BigDecimal multiply = pbuyprice.multiply(BigDecimal.valueOf(0.1));
                     Paycommision paycommision = new Paycommision();
                     paycommision.setPaydate(new Date());
                     paycommision.setPaynum(multiply);
                     paycommision.setUid(uid);
-                    paycommision.setPaymsg(uid + "购买合伙人商品" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的销售奖励");
+                    paycommision.setPaymsg(uid + "购买合伙人商品" +  "的销售奖励");
+                    paycommision.setPaymsgusr(uid + "购买合伙人商品" + orderformProductPo.getPname() + "的" + orderformProductPo.getSizename() + "的销售奖励");
                     //添加直接上级的奖励
                     paycommisionMapper.insert(paycommision);
                 } else {
                     //普通用户购买合伙人商品,设置为合伙人
+                    log.info("普通用户"+user.getUid()+"购买合伙人商品");
                     user.setIsTogether(true);
                     user.setTogetherdate(new Date());
                     userMapper.updateByPrimaryKeySelective(user);
