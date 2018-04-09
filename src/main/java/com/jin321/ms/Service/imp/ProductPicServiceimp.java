@@ -4,6 +4,7 @@ import com.jin321.ms.Service.ProductPicService;
 import com.jin321.pl.dao.ProductpicsMapper;
 import com.jin321.pl.model.Productpics;
 import com.jin321.pl.model.ProductpicsExample;
+import com.jin321.pl.utils.CacheUtil;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,14 @@ public class ProductPicServiceimp implements ProductPicService {
     @Override
     public int productPicUpdate(Productpics productpics) {
         productpics.setIsHeadpic(false);
+        CacheUtil.flushDb();
         return productpicsMapper.insert(productpics);
     }
 
     @Override
     public int productHeadPicService(Productpics productpics) {
         productpics.setIsHeadpic(true);
+        CacheUtil.flushDb();
         return productpicsMapper.insert(productpics);
     }
 
@@ -45,6 +48,7 @@ public class ProductPicServiceimp implements ProductPicService {
             if (productpicsMapper.updateByPrimaryKey(productpics) == 0)
                 return 0;
         }
+        CacheUtil.flushDb();
         return 1;
     }
 
@@ -63,6 +67,7 @@ public class ProductPicServiceimp implements ProductPicService {
             productpics.setIsDeleted(true);
             productpicsMapper.updateByPrimaryKey(productpics);
         }
+        CacheUtil.flushDb();
     }
 
     @Override

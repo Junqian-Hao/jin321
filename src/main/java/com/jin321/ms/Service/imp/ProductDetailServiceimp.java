@@ -5,6 +5,7 @@ import com.jin321.pl.dao.ProductMapper;
 import com.jin321.pl.dao.ProductdetailMapper;
 import com.jin321.pl.model.Productdetail;
 import com.jin321.pl.model.ProductdetailExample;
+import com.jin321.pl.utils.CacheUtil;
 import com.jin321.wx.model.ProductsizeDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class ProductDetailServiceimp implements ProductDetailService {
         criteria.andIsDeletedEqualTo(false);
         productdetailList=productdetailMapper.selectByExample(productdetailExample);
         productdetail.setPorder(productdetailList.size()+1);
+        CacheUtil.flushDb();
         return productdetailMapper.insert(productdetail);
     }
     private List<Productdetail> productdetailsold;
@@ -51,5 +53,6 @@ public class ProductDetailServiceimp implements ProductDetailService {
             productdetailold.setIsDeleted(true);
             productdetailMapper.updateByPrimaryKey(productdetailold);
         }
+        CacheUtil.flushDb();
     }
 }

@@ -4,6 +4,7 @@ import com.jin321.ms.Service.TimeProductService;
 import com.jin321.pl.dao.TimeproductMapper;
 import com.jin321.pl.model.Timeproduct;
 import com.jin321.pl.model.TimeproductExample;
+import com.jin321.pl.utils.CacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,7 @@ public class TimeProductServiceimp implements TimeProductService {
                 timeproductMapper.insert(timeproduct);
             }
         }
+        CacheUtil.flushDb();
         return sign;
     }
 
@@ -53,6 +55,7 @@ public class TimeProductServiceimp implements TimeProductService {
             if(sign==0)
                 return 0;
         }
+        CacheUtil.flushDb();
         return sign;
     }
 }

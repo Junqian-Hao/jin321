@@ -5,6 +5,7 @@ import com.jin321.pl.dao.RollingpickMapper;
 import com.jin321.pl.model.ProductExample;
 import com.jin321.pl.model.Rollingpick;
 import com.jin321.pl.model.RollingpickExample;
+import com.jin321.pl.utils.CacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,7 @@ public class RollingPicServiceimp implements RollingPicService {
             if(sign==0)
                 return 0;
         }
+        CacheUtil.flushDb();
         return 1;
     }
     @Override
@@ -49,6 +51,7 @@ public class RollingPicServiceimp implements RollingPicService {
         rollingpick=rollingpickMapper.selectByPrimaryKey(rpid);
         if(rollingpick!=null){
             rollingpick.setIsDeleted(true);
+            CacheUtil.flushDb();
             return rollingpickMapper.updateByPrimaryKey(rollingpick);
         }
         return -1;

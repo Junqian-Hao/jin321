@@ -12,6 +12,7 @@ import com.jin321.pl.dao.OrderformproductMapper;
 import com.jin321.pl.dao.ProductsizeMapper;
 import com.jin321.pl.dao.UseraddressMapper;
 import com.jin321.pl.model.*;
+import com.jin321.pl.utils.CacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -154,6 +155,7 @@ public class OrderFormServiceimp implements OrderFormService {
         orderform.setOsendnumber(osendnumber);
         orderform.setOstate(2);
         orderform.setOsenddate(new Date());
+        CacheUtil.flushDb();
         return orderformMapper.updateByPrimaryKey(orderform);
     }
 
@@ -173,6 +175,7 @@ public class OrderFormServiceimp implements OrderFormService {
             if (sign==0)
                 return 0;
         }
+        CacheUtil.flushDb();
         return sign;
     }
 }

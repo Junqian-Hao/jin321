@@ -7,6 +7,7 @@ import com.jin321.ms.model.TrueProductType1;
 import com.jin321.pl.dao.ProducttypeMapper;
 import com.jin321.pl.model.Producttype;
 import com.jin321.pl.model.ProducttypeExample;
+import com.jin321.pl.utils.CacheUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
         }
         producttype.setIsDelete(false);
         producttype.setTypeclass(1);
+        CacheUtil.flushDb();
         return producttypeMapper.insert(producttype);
     }
 
@@ -65,6 +67,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
         producttype.setTypeclass(2);
         producttype.setIsDelete(false);
         log.debug("获取分类类别" + producttype.getTypeclass());
+        CacheUtil.flushDb();
         return producttypeMapper.insert(producttype);
     }
 
@@ -86,6 +89,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
         producttype.setHighertid(higherid);
         producttype.setTypeclass(3);
         producttype.setIsDelete(false);
+        CacheUtil.flushDb();
         return producttypeMapper.insert(producttype);
     }
 
@@ -110,6 +114,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
                 }
             }
             producttype.setIsDelete(true);
+            CacheUtil.flushDb();
             return producttypeMapper.updateByPrimaryKey(producttype);
         } else
             return -1;
@@ -136,6 +141,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
                 }
             }
             producttype.setIsDelete(true);
+            CacheUtil.flushDb();
             return producttypeMapper.updateByPrimaryKey(producttype);
         } else
             return -1;
@@ -146,6 +152,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
         producttype = producttypeMapper.selectByPrimaryKey(tid);
         if (producttype != null) {
             producttype.setIsDelete(true);
+            CacheUtil.flushDb();
             return producttypeMapper.updateByPrimaryKey(producttype);
         } else
             return -1;
