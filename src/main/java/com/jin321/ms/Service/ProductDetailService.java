@@ -1,6 +1,7 @@
 package com.jin321.ms.Service;
 
 import com.jin321.pl.model.Productdetail;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,15 +17,12 @@ public interface ProductDetailService {
      * @param productdetail
      * @return
      */
-    @Transactional(rollbackFor = Exception.class)
     int productDetailUpdate(Productdetail productdetail);
-
     /**
      * 删除图片
      * @param pid
      * @return
      */
-    @Transactional(rollbackFor = Exception.class)
     void productDetailDelete(int pid);
 
 

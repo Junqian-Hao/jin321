@@ -425,6 +425,76 @@ public class PaycommisionExample {
             addCriterion("paymsg not between", value1, value2, "paymsg");
             return (Criteria) this;
         }
+
+        public Criteria andPaymsgusrIsNull() {
+            addCriterion("paymsgusr is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrIsNotNull() {
+            addCriterion("paymsgusr is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrEqualTo(String value) {
+            addCriterion("paymsgusr =", value, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrNotEqualTo(String value) {
+            addCriterion("paymsgusr <>", value, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrGreaterThan(String value) {
+            addCriterion("paymsgusr >", value, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrGreaterThanOrEqualTo(String value) {
+            addCriterion("paymsgusr >=", value, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrLessThan(String value) {
+            addCriterion("paymsgusr <", value, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrLessThanOrEqualTo(String value) {
+            addCriterion("paymsgusr <=", value, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrLike(String value) {
+            addCriterion("paymsgusr like", value, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrNotLike(String value) {
+            addCriterion("paymsgusr not like", value, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrIn(List<String> values) {
+            addCriterion("paymsgusr in", values, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrNotIn(List<String> values) {
+            addCriterion("paymsgusr not in", values, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrBetween(String value1, String value2) {
+            addCriterion("paymsgusr between", value1, value2, "paymsgusr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymsgusrNotBetween(String value1, String value2) {
+            addCriterion("paymsgusr not between", value1, value2, "paymsgusr");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

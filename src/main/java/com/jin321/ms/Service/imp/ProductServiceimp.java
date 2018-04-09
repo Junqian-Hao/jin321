@@ -12,6 +12,7 @@ import com.jin321.pl.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,8 @@ public class ProductServiceimp implements ProductService {
     private int signb;
     private int signc;
     private int signd;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Autowired
     private ProductMapper productMapper;
     @Autowired

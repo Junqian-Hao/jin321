@@ -1,10 +1,9 @@
 package com.jin321.pl.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Paycommision implements Serializable {
+public class Paycommision {
     private Integer pcid;
 
     private String uid;
@@ -14,6 +13,8 @@ public class Paycommision implements Serializable {
     private Date paydate;
 
     private String paymsg;
+
+    private String paymsgusr;
 
     public Integer getPcid() {
         return pcid;
@@ -53,5 +54,13 @@ public class Paycommision implements Serializable {
 
     public void setPaymsg(String paymsg) {
         this.paymsg = paymsg == null ? null : paymsg.trim();
+    }
+
+    public String getPaymsgusr() {
+        return paymsgusr;
+    }
+
+    public void setPaymsgusr(String paymsgusr) {
+        this.paymsgusr = paymsgusr == null ? null : paymsgusr.trim();
     }
 }

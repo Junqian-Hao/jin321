@@ -7,6 +7,7 @@ import com.jin321.pl.model.Producttype;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,8 @@ public class InsertFirstProductTypeController {
     private static final Log log = LogFactory.getLog(InsertFirstProductTypeController.class);
     @Autowired
     private ProductTypeService productTypeService;
+    @Autowired
+    private RedisTemplate redisTemplate;
     private Map<String,String> returnMap;
     private String typename;
     private Producttype producttype;
