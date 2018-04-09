@@ -24,6 +24,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,6 +121,9 @@ public class FirstPageServiceImp implements FirstPageService {
             User user = new User();
             user.setUid(StringUtil.makeUserid());
             user.setUserwxid(openid);
+            user.setIsTogether(false);
+            user.setRegistdate(new Date());
+            user.setUcommition(0f);
             userMapper.insert(user);
 
             if (!StringUtil.isNullString(lUserid)) {
