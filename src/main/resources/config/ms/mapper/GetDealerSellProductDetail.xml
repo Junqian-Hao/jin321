@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jin321.ms.dao.GetDealerSellProductDetaiMapper">
+    <resultMap id="BaseResultMap" type="com.jin321.ms.model.DealerSellProductDetail">
+        <id column="ofpid" property="ofpid" jdbcType="INTEGER"/>
+        <result column="oid" property="oid" jdbcType="BIGINT"/>
+        <result column="dbfid" property="dbfid" jdbcType="BIGINT"/>
+        <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        <result column="sizename" property="sizename" jdbcType="VARCHAR"/>
+        <result column="pbuyprice" property="pbuyprice" jdbcType="DECIMAL"/>
+        <result column="pamount" property="pamount" jdbcType="INTEGER"/>
+        <result column="odate" property="odate" jdbcType="DATE"/>
+        <result column="opaydate" property="opaydate" jdbcType="DATE"/>
+        <result column="osenddate" property="osenddate" jdbcType="DATE"/>
+        <result column="oconfirmdate" property="oconfirmdate" jdbcType="DATE"/>
+    </resultMap>
+    <select id="getDealerSellProductDetail" resultMap="BaseResultMap">
+         SELECT
+              orderformproduct.ofpid,
+              orderform.oid,
+              orderform.dbfid,
+              product.pname,
+              productsize.sizename,
+              orderformproduct.pbuyprice,
+              orderformproduct.pamount,
+              orderform.odate,
+              orderform.opaydate,
+              orderform.osenddate,
+              orderform.oconfirmdate
+            FROM
+              orderformproduct
+              LEFT JOIN orderform ON  orderformproduct.oid=orderform.oid
+              LEFT JOIN product ON orderformproduct.pid=product.pid
+              LEFT JOIN productsize ON orderformproduct.sid=productsize.sid
+            WHERE
+              orderform.ostate=4
+              AND
+              orderform.did=#{param0}
+    </select>
+</mapper>

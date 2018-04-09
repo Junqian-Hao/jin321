@@ -2,7 +2,9 @@ package com.jin321.ms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.jin321.ms.Service.DealerService;
 import com.jin321.ms.Service.OrderFormService;
+import com.jin321.ms.model.DealerSellProductDetail;
 import com.jin321.ms.model.OrderFormDetails;
 import com.jin321.ms.model.Page;
 import org.apache.commons.logging.Log;
@@ -43,7 +45,7 @@ public class ChangeOrderFormStatueController {
     @ResponseBody
     @RequestMapping("/getOrderform")
     public Map<String,Object> getOrderForm(@RequestBody String json, HttpServletRequest request){
-        //未发货1 未确认2 确认3
+        //未发货1 未确认2 确认4
         returnMap=new LinkedHashMap<String,Object>();
         JSONObject object=JSON.parseObject(json);
         int select=object.getInteger("select");
@@ -98,6 +100,30 @@ public class ChangeOrderFormStatueController {
         else{
             returnMap.put("code","1");
             returnMap.put("msg","修改成功");
+            return returnMap;
+        }
+    }
+    @Autowired
+    private DealerService dealerService;
+    @ResponseBody
+    @RequestMapping("/getDealerSellDetail")
+    public Map<String,Object> getDealerSellDetail(@RequestBody String json){
+        returnMap=new LinkedHashMap<>();
+        JSONObject object=JSON.parseObject(json);
+        int thispage=object.getInteger("thispage");
+        int pagenum=object.getInteger("pagenum");
+        int did=object.getInteger("did");
+        Page<DealerSellProductDetail> dealerSellProductDetailPage=dealerService.getAllDealerOrderDetail(pagenum,thispage,did);
+        List<DealerSellProductDetail> dealerSellProductDetails=dealerSellProductDetailPage.getObjectList();
+        if(dealerSellProductDetails!=null){
+            returnMap.put("pagenum",dealerSellProductDetails.size());
+            returnMap.put("thispage",dealerSellProductDetailPage.getThispage());
+            returnMap.put("totalpage",dealerSellProductDetailPage.getTotalpage());
+            returnMap.put("pagedata",dealerSellProductDetails);
+            return returnMap;
+        }
+        else {
+            returnMap.put("error","页信息错误，或不存在信息");
             return returnMap;
         }
     }

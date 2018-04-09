@@ -105,12 +105,24 @@ $(function () {
 
                     for (var i = 0; i < res.length; i++) {
                         typeId[res[i].typename] = res[i].tid;
-                        var data = res[i].producttype2List || ['无'];
+                        var data = res[i].producttype2List.length > 0 ? res[i].producttype2List : [{
+                            producttype2:{
+                                typename:'无',
+                                tid:-1
+                            },
+                            producttype3List:[{
+                                typename:'无',
+                                tid:-1
+                            }]
+                        }];
                         for (var j = 0; j < data.length; j++) {
                             if (data[j].tid) {
                                 typeId2[data[j].producttype2.typename] = data[j].tid;
                             }
-                            var da = data[j].producttype3List || ['无'];
+                            var da = data[j].producttype3List.length > 0 ? data[j].producttype3List : [{
+                                typename:'无',
+                                tid:-1
+                            }];
                             for (var k = 0; k < da.length; k++) {
                                 if (da[k].tid) {
                                     typeId3[da[k].typename] = da[k].tid;
@@ -510,10 +522,11 @@ $(function () {
 
             //获取商家名
             $.ajax({
-                url: "/jin321/ms/selectAllDealer.do",
+                url: "/jin321/ms/selectAllDealerName.do",
                 type: "post",
                 success: function (res) {
-                    if ($("#common-s-select")) {
+                    console.log($("#common-s-select").val());
+                    if ($("#common-s-select").val()) {
 
                     } else {
                         for (var i = 0; i < res.length; i++) {
@@ -523,9 +536,10 @@ $(function () {
                         }
                     }
                     var json = {
-                        did: dId[$("#common-s-select")],
+                        did: dId[$("#common-s-select").val()],
                         pagenum: 10,
-                        thispage: commonProduct.thisPage
+                        thispage: commonProduct.thisPage,
+                        isdeleted:0
                     }
                     $.ajax({
                         url: "/jin321/ms/selectProductByDidAdmin.do",
@@ -814,14 +828,17 @@ $(function () {
             $(".watch-merchant").css("display", "block");
             $(".watch-merchant-tr").remove();
 
+            var json = {
+                pagenum: 10,
+                thispage: dealer.thisPage
+            }
+
             //获取商家信息
             $.ajax({
                 url: "/jin321/ms/selectAllDealer.do",
-                data: JSON.stringify({
-                    pagenum: 10,
-                    thispage: dealer.thisPage
-                }),
+                data: JSON.stringify(json),
                 type: "post",
+                contentType:'application/json',
                 success: function (res) {
                     dealer.totalPages = res.totalpage || 1;
                     dealer.thisPage = res.thispage || 1;
@@ -976,9 +993,11 @@ $(function () {
     $('#money-manage').on('click', function () {
         $('.item').css('display', 'none');
         $('.money').css('display', 'block');
+        $('.watch-money').css('display', 'block');
+
 
         $.ajax({
-            url: '/ms/showCommisions.do',
+            url: '/jin321/ms/showCommisions.do',
             data: JSON.stringify({
                 pagenum: 10,
                 thispage: money.thisPage

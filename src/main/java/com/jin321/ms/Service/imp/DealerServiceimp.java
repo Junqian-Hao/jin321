@@ -1,6 +1,8 @@
 package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.DealerService;
+import com.jin321.ms.dao.GetDealerSellProductDetaiMapper;
+import com.jin321.ms.model.DealerSellProductDetail;
 import com.jin321.ms.model.Page;
 import com.jin321.pl.dao.DealerMapper;
 import com.jin321.pl.model.Dealer;
@@ -19,6 +21,8 @@ import java.util.List;
 public class DealerServiceimp implements DealerService {
     @Autowired
     private DealerMapper dealerMapper;
+    @Autowired
+    private GetDealerSellProductDetaiMapper getDealerSellProductDetaiMapper;
     private List<Dealer> dealerList;
     @Override
     public Page<Dealer> selectAllDealer(int pagenum, int thispage) {
@@ -27,6 +31,14 @@ public class DealerServiceimp implements DealerService {
         criteria.andDpowerEqualTo("dealer");
         dealerList=dealerMapper.selectByExample(example);
         return new Page<Dealer>().getPageList(pagenum,thispage,dealerList);
+    }
+    @Override
+    public List<Dealer> selectAllDealerName() {
+        DealerExample example=new DealerExample();
+        DealerExample.Criteria criteria=example.createCriteria();
+        criteria.andDpowerEqualTo("dealer");
+        dealerList=dealerMapper.selectByExample(example);
+        return dealerList;
     }
     private List<Dealer> oldDealer;
     @Override
@@ -39,5 +51,10 @@ public class DealerServiceimp implements DealerService {
         if (oldDealer.size()>0)
             return -1;
         else return dealerMapper.insert(dealer);
+    }
+
+    @Override
+    public Page<DealerSellProductDetail> getAllDealerOrderDetail(int pagenum, int thispage, int did) {
+        return new Page<DealerSellProductDetail>().getPageList(pagenum,thispage,getDealerSellProductDetaiMapper.getDealerSellProductDetail(did));
     }
 }

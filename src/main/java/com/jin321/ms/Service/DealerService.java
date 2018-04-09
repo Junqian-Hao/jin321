@@ -1,7 +1,9 @@
 package com.jin321.ms.Service;
 
+import com.jin321.ms.model.DealerSellProductDetail;
 import com.jin321.ms.model.Page;
 import com.jin321.pl.model.Dealer;
+import com.jin321.pl.model.Orderformproduct;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,8 +18,12 @@ public interface DealerService {
      * 查询所有商家
      * @return
      */
-    @Transactional(rollbackFor = Exception.class)
+
     Page<Dealer> selectAllDealer(int pagenum,int thispage);
-    @Transactional(rollbackFor = Exception.class)
+
     int insertDealer(Dealer dealer);
+
+    public List<Dealer> selectAllDealerName();
+
+    public Page<DealerSellProductDetail> getAllDealerOrderDetail(int pagenum,int thispage,int did);
 }

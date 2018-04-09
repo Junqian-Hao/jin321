@@ -54,4 +54,9 @@ public class SelectAllDealersController {
             return returnMap;
         }
     }
+    @ResponseBody
+    @RequestMapping("/selectAllDealerName")
+    public List<Dealer> selectAllDealerName(){
+        return dealerService.selectAllDealerName();
+    }
 }
