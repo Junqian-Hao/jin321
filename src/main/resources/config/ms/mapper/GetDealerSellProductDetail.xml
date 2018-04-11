@@ -35,6 +35,8 @@
             WHERE
               orderform.ostate=4
               AND
-              orderform.did=#{param0}
+              orderform.did=#{param1}
+              AND
+              DATE_SUB(CURDATE(), INTERVAL #{param2} DAY) &lt;= date(orderform.oconfirmdate)
     </select>
 </mapper>

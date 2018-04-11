@@ -13,14 +13,11 @@ public interface DealerLoginService {
      * @param dpassword 经销商密码
      * @return
      */
-    @Transactional(rollbackFor = Exception.class)
     int Login(String dusername,String dpassword);
-
     /**
      * 获取经销商id
      * @param dusername
      * @return
      */
-    @Transactional(rollbackFor = Exception.class)
     int getDealerId(String dusername);
 }

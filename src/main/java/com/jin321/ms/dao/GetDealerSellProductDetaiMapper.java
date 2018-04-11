@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface GetDealerSellProductDetaiMapper {
-    public List<DealerSellProductDetail> getDealerSellProductDetail(int did);
+    public List<DealerSellProductDetail> getDealerSellProductDetail(int did,int days);
 }
