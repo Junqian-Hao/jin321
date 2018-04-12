@@ -104,7 +104,7 @@ $(function () {
                     res = res.pagedata || [];
 
                     for (var i = 0; i < res.length; i++) {
-                        typeId[res[i].typename] = res[i].tid;
+                        typeId[res[i].producttype1.typename] = res[i].producttype1.tid;
                         var data = res[i].producttype2List.length > 0 ? res[i].producttype2List : [{
                             producttype2:{
                                 typename:'无',
@@ -116,8 +116,8 @@ $(function () {
                             }]
                         }];
                         for (var j = 0; j < data.length; j++) {
-                            if (data[j].tid) {
-                                typeId2[data[j].producttype2.typename] = data[j].tid;
+                            if (data[j].producttype2.tid) {
+                                typeId2[data[j].producttype2.typename] = data[j].producttype2.tid;
                             }
                             var da = data[j].producttype3List.length > 0 ? data[j].producttype3List : [{
                                 typename:'无',
@@ -179,6 +179,7 @@ $(function () {
     //删除分类
     $("#delete-type-btn").on("click", function () {
         if (flag) {
+            console.log(typeId)
             var len = $(".choose-type").length;
             var json = {};
             for (var i = 0; i < len; i++) {
@@ -206,6 +207,7 @@ $(function () {
     //删除品牌
     $("#delete-b-btn").on("click", function () {
         if (flag) {
+            console.log(typeId2)
             var len = $(".choose-type").length;
             var json = {};
             for (var i = 0; i < len; i++) {
@@ -810,123 +812,48 @@ $(function () {
         }
     });
 
-    //商家管理
-    $("#merchant-manage").on("click", function () {
-        if (flag) {
-            $(".item").css("display", "none");
-            $(".merchant-mange").css("display", "block");
-            $(".watch-merchant-tr").remove();
-            $("#watch-merchant").trigger("click");
-        }
-    });
-
-    //查看商家信息
-    $("#watch-merchant").on("click", function () {
-        if (flag) {
-            $(".item").css("display", "none");
-            $(".merchant-mange").css("display", "block");
-            $(".watch-merchant").css("display", "block");
-            $(".watch-merchant-tr").remove();
-
-            var json = {
-                pagenum: 10,
-                thispage: dealer.thisPage
-            }
-
-            //获取商家信息
-            $.ajax({
-                url: "/jin321/ms/selectAllDealer.do",
-                data: JSON.stringify(json),
-                type: "post",
-                contentType:'application/json',
-                success: function (res) {
-                    dealer.totalPages = res.totalpage || 1;
-                    dealer.thisPage = res.thispage || 1;
-                    res = res.pagedata || [];
-
-                    for (var i = 0; i < res.length; i++) {
-                        var tr = $("<tr class='watch-merchant-tr'></tr>");
-                        //ID
-                        var tdId = $("<td></td>").html(res[i].did);
-                        //商家名字
-                        var tdName = $("<td></td>").html(res[i].dname);
-                        //商家账号
-                        var tdUsername = $("<td></td>").html(res[i].dusername);
-                        //商家密码
-                        var tdPwd = $("<td></td>").html(res[i].dpassword);
-                        //商家手机号
-                        var tdPhonenum = $("<td></td>").html(res[i].dphonenum);
-                        //商家地址
-                        var tdAddress = $("<td></td>").html(res[i].daddress);
-                        $(tr).append(tdId, tdName, tdUsername, tdPwd, tdPhonenum, tdAddress);
-                        $("#watch-merchant-table").append(tr);
-                    }
-
-                    paging($('.watchMerchantPaging')[0], {
-                        totalPages: dealer.totalPages,
-                        nowPage: dealer.thisPage
-                    });
-                    $('.watchMerchantPaging .page').on('click', function () {
-                        var text = '';
-                        switch($(this).text()){
-                            case '末页':
-                                text = dealer.totalPages
-                                break;
-                            case '首页':
-                                text = 1
-                                break;
-                            default:
-                                text = this.text
-                        }
-                        dealer.thisPage = text;
-                        $('#watch-merchant').trigger('click');
-                    })
-                    $('.watchMerchantPaging .prev').on('click', function () {
-                        dealer.thisPage = dealer.thisPage - 1;
-                        $('#watch-merchant').trigger('click');
-                    })
-                    $('.watchMerchantPaging .next').on('click', function () {
-                        dealer.thisPage = parseInt(dealer.thisPage) + 1;
-                        $('#watch-merchant').trigger('click');
-                    })
-
-                }
-            })
-        }
-    });
-
-    //添加商家
-    $("#add-merchant").on("click", function () {
-        if (flag) {
-            $(".item").css("display", "none");
-            $(".merchant-mange").css("display", "block");
-            $(".add-merchant").css("display", "block");
-        }
-    });
-
-    $("#add-merchant-btn").on("click", function () {
-        if (flag) {
-            var json = {
-                dname: $("#merchant-name").val(),
-                dusername: $("#merchant-username").val(),
-                dpassword: $("#merchant-pwd").val(),
-                dphonenum: $("#merchant-phonenumber").val(),
-                daddress: $("#merchant-address").val(),
-                dpower: "dealer"
-            }
-            $.ajax({
-                url: "/jin321/ms/insertDealer.do",
-                type: "post",
-                contentType: "application/json",
-                data: JSON.stringify(json),
-                success: function (res) {
-                    if (res.code == 1) {
-                        alert("添加成功");
-                    }
-                }
-            });
-        }
-    });
+    // //商家管理
+    // $("#merchant-manage").on("click", function () {
+    //     if (flag) {
+    //         $(".item").css("display", "none");
+    //         $(".merchant-mange").css("display", "block");
+    //         $(".watch-merchant-tr").remove();
+    //         $("#watch-merchant").trigger("click");
+    //     }
+    // });
+    //
+    // //添加商家
+    // $("#add-merchant").on("click", function () {
+    //     if (flag) {
+    //         $(".item").css("display", "none");
+    //         $(".merchant-mange").css("display", "block");
+    //         $(".add-merchant").css("display", "block");
+    //     }
+    // });
+    //
+    // $("#add-merchant-btn").on("click", function () {
+    //     if (flag) {
+    //         var json = {
+    //             dname: $("#merchant-name").val(),
+    //             dusername: $("#merchant-username").val(),
+    //             dpassword: $("#merchant-pwd").val(),
+    //             dphonenum: $("#merchant-phonenumber").val(),
+    //             daddress: $("#merchant-address").val(),
+    //             dpower: "dealer"
+    //         }
+    //         $.ajax({
+    //             url: "/jin321/ms/insertDealer.do",
+    //             type: "post",
+    //             contentType: "application/json",
+    //             data: JSON.stringify(json),
+    //             success: function (res) {
+    //                 if (res.code == 1) {
+    //                     alert("添加成功");
+    //                 }
+    //             }
+    //         });
+    //     }
+    // });
 
     //轮播图管理
     $("#lun-manage").on("click", function () {

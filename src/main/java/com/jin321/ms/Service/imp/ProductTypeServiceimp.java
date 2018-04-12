@@ -124,7 +124,7 @@ public class ProductTypeServiceimp implements ProductTypeService {
 
     @Override
     public int deleteSecondType(int tid) {
-        deleteProducttype = producttypeMapper.selectByPrimaryKey(tid);
+        producttype = producttypeMapper.selectByPrimaryKey(tid);
         if (producttype != null) {
             //删除二级分类下三级分类
             ProducttypeExample producttypeExample = new ProducttypeExample();
