@@ -51,3 +51,4 @@ server:
     key-store-type: JKS
 logging:
   file: jin321.log
+  level: debug
