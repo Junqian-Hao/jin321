@@ -25,5 +25,5 @@ public interface DealerService {
 
     public List<Dealer> selectAllDealerName();
 
-    public Page<DealerSellProductDetail> getAllDealerOrderDetail(int pagenum,int thispage,int did);
+    public Page<DealerSellProductDetail> getAllDealerOrderDetail(int pagenum,int thispage,int did,int days);
 }

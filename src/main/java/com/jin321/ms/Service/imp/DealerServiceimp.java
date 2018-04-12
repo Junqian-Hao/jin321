@@ -54,7 +54,7 @@ public class DealerServiceimp implements DealerService {
     }
 
     @Override
-    public Page<DealerSellProductDetail> getAllDealerOrderDetail(int pagenum, int thispage, int did) {
-        return new Page<DealerSellProductDetail>().getPageList(pagenum,thispage,getDealerSellProductDetaiMapper.getDealerSellProductDetail(did));
+    public Page<DealerSellProductDetail> getAllDealerOrderDetail(int pagenum, int thispage, int did,int days) {
+        return new Page<DealerSellProductDetail>().getPageList(pagenum,thispage,getDealerSellProductDetaiMapper.getDealerSellProductDetail(did,days));
     }
 }

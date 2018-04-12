@@ -16,8 +16,8 @@ $(function(){
         var pwd = $("#pwd").val();
         var verification = $("#verification").val();
         var data = {
-            dusername:username,
-            dpassword:pwd,
+            dusername:$.md5(username),
+            dpassword:$.md5($.md5(pwd)+username),
             verifycode:verification
         }
         $.ajax({

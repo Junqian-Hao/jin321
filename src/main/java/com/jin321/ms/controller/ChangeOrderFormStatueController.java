@@ -113,7 +113,8 @@ public class ChangeOrderFormStatueController {
         int thispage=object.getInteger("thispage");
         int pagenum=object.getInteger("pagenum");
         int did=object.getInteger("did");
-        Page<DealerSellProductDetail> dealerSellProductDetailPage=dealerService.getAllDealerOrderDetail(pagenum,thispage,did);
+        int days=object.getInteger("days");
+        Page<DealerSellProductDetail> dealerSellProductDetailPage=dealerService.getAllDealerOrderDetail(pagenum,thispage,did,days);
         List<DealerSellProductDetail> dealerSellProductDetails=dealerSellProductDetailPage.getObjectList();
         if(dealerSellProductDetails!=null){
             returnMap.put("pagenum",dealerSellProductDetails.size());
