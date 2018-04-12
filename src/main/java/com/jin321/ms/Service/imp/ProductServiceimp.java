@@ -59,7 +59,7 @@ public class ProductServiceimp implements ProductService {
             return -1;
         product.setIsTogether(false);
         //待修改未完成，此处应为2
-        product.setIsDelete(2);
+        product.setIsDelete(0);
         log.debug("商品状态：" + product.getIsDelete());
         signa = insertProductMapper.insertProduct(product);
         Iterator<Productsize> psit = productsizes.iterator();

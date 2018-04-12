@@ -4,6 +4,6 @@
     <select id="getDid">
         SELECT did
         FROM product
-        WHERE pid=(SELECT pid FROM orderformproduct WHERE oid=#{param1})
+        WHERE pid=(SELECT pid FROM orderformproduct WHERE oid=#{param0})
     </select>
 </mapper>

@@ -360,12 +360,12 @@ $(function () {
                         data: JSON.stringify(data),
                         success: function (res) {
                             console.log(res);
-                            $("#change-typeb option").remove();
+                            $("#suptype option").remove();
                             for (var i = 0; i < res.length; i++) {
                                 const type1 = res[i].typename;
                                 Supertype[type1] = res[i].tid;
                                 const option = $("<option></option>").text(type1);
-                                $("#change-typeb").append(option);
+                                $("#suptype").append(option);
                             }
                             var json = {
                                 tid: res[0].tid

@@ -40,8 +40,11 @@ public class ProductTypeServiceimp implements ProductTypeService {
         ProducttypeExample.Criteria criteria = producttypeExample.createCriteria();
         criteria.andTypenameEqualTo(producttype.getTypename());
         criteria.andTypeclassEqualTo(1);
-        if (producttypeMapper.selectByExample(producttypeExample).size()>0) {
-            return -1;
+        List<Producttype> producttypenewli=producttypeMapper.selectByExample(producttypeExample);
+        if (producttypenewli.size()>0) {
+            producttypenew=producttypenewli.get(0);
+            producttypenew.setIsDelete(false);
+            return producttypeMapper.updateByPrimaryKey(producttypenew);
         }
         producttype.setIsDelete(false);
         producttype.setTypeclass(1);
