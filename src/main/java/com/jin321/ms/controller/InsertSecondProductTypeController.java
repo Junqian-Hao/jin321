@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
@@ -39,7 +39,7 @@ public class InsertSecondProductTypeController {
     @ResponseBody
     @RequestMapping("/insertSecondProductType")
     public Map<String,String> insertFirstProductType(
-            @RequestParam("file")CommonsMultipartFile file,
+            @RequestParam("file")MultipartFile file,
             @RequestParam("typename") String typename,
             @RequestParam("highertid")String highertid,
             HttpServletRequest request) {
