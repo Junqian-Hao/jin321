@@ -16,6 +16,8 @@ public class UpdateProductSizeDetail {
 
     private String psummary;
 
+    private BigDecimal pcost;
+
     private BigDecimal psoriprice;
 
     private BigDecimal pssellprice;
@@ -53,6 +55,14 @@ public class UpdateProductSizeDetail {
 
     public void setPname(String pname) {
         this.pname = pname;
+    }
+
+    public BigDecimal getPcost() {
+        return pcost;
+    }
+
+    public void setPcost(BigDecimal pcost) {
+        this.pcost = pcost;
     }
 
     public BigDecimal getPsoriprice() {

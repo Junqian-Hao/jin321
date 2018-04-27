@@ -23,6 +23,7 @@ import java.util.Map;
  * "pid":"",
  * "pname":"",
  * "psummary":"",
+ * "pcost":"",
  * "psoriprice":"",
  * "pssellprice":"",
  * "sizename":"",
