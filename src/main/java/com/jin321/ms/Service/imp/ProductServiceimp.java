@@ -13,11 +13,11 @@ import com.jin321.pl.utils.CacheUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Tyranitarx on 2017/10/5.
@@ -65,6 +65,10 @@ public class ProductServiceimp implements ProductService {
         Iterator<Productsize> psit = productsizes.iterator();
         while (psit.hasNext()) {
             productsize = psit.next();
+            if(productsize.getPscost().equals("")||productsize.getPscost().equals(null))
+                productsize.setPscost(productsize.getPssellprice());
+            if(productsize.getPsoriprice().equals("")||productsize.getPsoriprice().equals(null))
+                productsize.setPsoriprice(productsize.getPssellprice());
             productsize.setPid(product.getPid());
             productsize.setIsDeleted(false);
             signb = productsizeMapper.insert(productsize);
