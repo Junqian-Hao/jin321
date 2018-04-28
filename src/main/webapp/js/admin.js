@@ -360,12 +360,12 @@ $(function () {
                         data: JSON.stringify(data),
                         success: function (res) {
                             console.log(res);
-                            $("#suptype option").remove();
+                            $("#change-typeb option").remove();
                             for (var i = 0; i < res.length; i++) {
                                 const type1 = res[i].typename;
                                 Supertype[type1] = res[i].tid;
                                 const option = $("<option></option>").text(type1);
-                                $("#suptype").append(option);
+                                $("#change-typeb").append(option);
                             }
                             var json = {
                                 tid: res[0].tid
@@ -403,14 +403,16 @@ $(function () {
                 url: "/jin321/ms/selectSecondProducttype.do",
                 type: "POST",
                 contentType: "application/json",
-                data: JSON.stringify(data),
+                data: data,
                 success: function (res) {
-                    $("#supType option").remove();
+                    console.log(res);
+                    $("#suptype option").remove();
                     for (var i = 0; i < res.length; i++) {
-                        const type1 = res[i].typename;
+                        console.log(res[i].typename);
+                        var type1 = res[i].typename;
                         Supertype[type1] = res[i].tid;
-                        const option = $("<option></option>").text(type1);
-                        $("#supType").append(option);
+                        var option = $("<option></option>").text(type1);
+                        $("#suptype").append(option);
                     }
                     var json = {
                         tid: res[0].tid
@@ -435,10 +437,10 @@ $(function () {
         }
     });
 
-    $("#supType").on("change", function () {
+    $("#suptype").on("change", function () {
         if (flag) {
             var json = {
-                tid: Supertype[$("#supType").val()]
+                tid: Supertype[$("#suptype").val()]
             }
             $.ajax({
                 url: "/jin321/ms/selectThirdProductTypeByhightid.do",
@@ -671,7 +673,8 @@ $(function () {
             var json = {
                 pid: pid,
                 ptypea: Subtype[$("#change-typea").val()],
-                ptypeb: Supertype[$("#change-typeb").val()]
+                ptypeb: Supertype[$("#change-typeb").val()],
+                ptypec: thirdType[$("#change-typec").val()]
             }
             $.ajax({
                 url: "/jin321/ms/updateProductOwnType.do",
