@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
@@ -65,9 +66,11 @@ public class ProductServiceimp implements ProductService {
         Iterator<Productsize> psit = productsizes.iterator();
         while (psit.hasNext()) {
             productsize = psit.next();
-            if(productsize.getPscost().equals("")||productsize.getPscost().equals(null))
+            BigDecimal pscost=productsize.getPscost();
+            BigDecimal psoriprice=productsize.getPsoriprice();
+            if(pscost==null)
                 productsize.setPscost(productsize.getPssellprice());
-            if(productsize.getPsoriprice().equals("")||productsize.getPsoriprice().equals(null))
+            if(psoriprice==null)
                 productsize.setPsoriprice(productsize.getPssellprice());
             productsize.setPid(product.getPid());
             productsize.setIsDeleted(false);
@@ -212,13 +215,15 @@ public class ProductServiceimp implements ProductService {
     /**
      * @param ptypea 第一分类
      * @param ptypeb 第二分类
+     * @param ptypec 第三分类
      * @return 1 成功 0失败 -1 无此分类
      */
     @Override
-    public int updateProductType(int pid, int ptypea, int ptypeb) {
+    public int updateProductType(int pid, int ptypea, int ptypeb,int ptypec) {
         product = productMapper.selectByPrimaryKey(pid);
         product.setPtypea(ptypea);
         product.setPtypeb(ptypeb);
+        product.setPtypec(ptypec);
         if (producttypeMapper.selectByPrimaryKey(ptypea) != null &&
                 producttypeMapper.selectByPrimaryKey(ptypeb) != null) {
             CacheUtil.flushDb();

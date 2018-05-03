@@ -72,7 +72,7 @@ public interface ProductService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    int updateProductType(int pid,int ptypea,int ptypeb);
+    int updateProductType(int pid,int ptypea,int ptypeb,int ptypec);
 
     /***
      * 获取待审核商品

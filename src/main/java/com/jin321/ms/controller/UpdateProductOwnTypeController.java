@@ -32,6 +32,7 @@ public class UpdateProductOwnTypeController {
     private int pid;
     private int ptypea;
     private int ptypeb;
+    private int ptypec;
     private int sign;
     private Map<String,String> returnMap;
     @ResponseBody
@@ -43,7 +44,8 @@ public class UpdateProductOwnTypeController {
         pid=object.getInteger("pid");
         ptypea=object.getInteger("ptypea");
         ptypeb=object.getInteger("ptypeb");
-        sign=productService.updateProductType(pid,ptypea,ptypeb);
+        ptypec=object.getInteger("ptypec");
+        sign=productService.updateProductType(pid,ptypea,ptypeb,ptypec);
         if(sign==-1){
             returnMap.put("code","-1");
             returnMap.put("msg","不存在的分类");
