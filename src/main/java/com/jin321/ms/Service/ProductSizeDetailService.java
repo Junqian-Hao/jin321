@@ -14,11 +14,11 @@ import java.util.List;
 public interface ProductSizeDetailService {
     /**
      * 获取显示商品详情
-     * @param did
+     * @param
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    Page<UpdateProductSizeDetail> getDetailBydid(int pagenum,int thispage,int did,int isdeleted);
+    Page<UpdateProductSizeDetail> getDetailBydid(int did,int pagenum,int thispage,int ptypea,int ptypeb,int ptypec);
 
     /**
      * 更新商品详细信息

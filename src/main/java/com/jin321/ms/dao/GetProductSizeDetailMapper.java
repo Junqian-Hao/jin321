@@ -14,5 +14,5 @@ import java.util.Map;
  */
 @Repository
 public interface GetProductSizeDetailMapper {
-    List<UpdateProductSizeDetail> getProductSizeDetail(int did,int isdeleted);
+    List<UpdateProductSizeDetail> getProductSizeDetail(int did,int ptypea,int ptypeb,int ptypec);
 }
