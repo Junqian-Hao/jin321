@@ -208,8 +208,8 @@ public class ProductServiceimp implements ProductService {
      * @return 真·商品
      */
     @Override
-    public List<TrueProduct> selectProductByDealer(int did) {
-        return getProductDidMapper.getTrueProduct(did);
+    public List<TrueProduct> selectProductByDealer(int did,int ptypea,int ptypeb,int ptypec) {
+        return getProductDidMapper.getTrueProduct(did,ptypea,ptypeb,ptypec);
     }
 
     /**

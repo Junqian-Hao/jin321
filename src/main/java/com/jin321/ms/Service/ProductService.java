@@ -62,7 +62,7 @@ public interface ProductService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    List<TrueProduct> selectProductByDealer(int did);
+    List<TrueProduct> selectProductByDealer(int did,int ptypea,int ptypeb,int ptypec);
 
     /**
      * 修改商品分类
