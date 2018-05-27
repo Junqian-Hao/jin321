@@ -39,13 +39,12 @@ public class SelectProductByDidAdminController {
         log.info("管理员查询商家商品");
         returnMap=new LinkedHashMap<String, Object>();
         JSONObject object= JSON.parseObject(json);
-        did=object.getInteger("did");
         pagenum = object.getInteger("pagenum");
         thispage = object.getInteger("thispage");
         ptypea=object.getInteger("ptypea");
         ptypeb=object.getInteger("ptypeb");
         ptypec=object.getInteger("ptypec");
-        updateProductSizeDetailPage = productSizeDetailService.getDetailBydid(did,pagenum,thispage,ptypea,ptypeb,ptypec);
+        updateProductSizeDetailPage = productSizeDetailService.getDetailBydid(2,pagenum,thispage,ptypea,ptypeb,ptypec);
         updateProductSizeDetails=updateProductSizeDetailPage.getObjectList();
         if(updateProductSizeDetails!=null){
             returnMap.put("datapagenum",updateProductSizeDetails.size());
