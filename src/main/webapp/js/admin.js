@@ -233,7 +233,7 @@ $(function () {
             $(".left-s").css("display", "block");
             $(".watch-s-content").css("display", "block");
 
-            $(".s-info-tr").remove();
+            $(".watch-common-tr").remove();
             $.ajax({
                 url: "/jin321/ms/selectAllFirstProducttype.do",
                 type: "post",
@@ -442,6 +442,313 @@ $(function () {
             //     }
             // })
         }
+    });
+    //一级分类改变时获取二级分类内容
+    $("#common-s-select1").on("change", function () {
+        if (flag) {
+            var value = $("#common-s-select1").val();
+            var data = {
+                tid: Subtype[value]
+            };
+            $.ajax({
+                url: "/jin321/ms/selectSecondProducttype.do",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (res) {
+                    $("#common-s-select2 option").remove();
+                    for (var i = 0; i < res.length; i++) {
+                        const type1 = res[i].typename;
+                        Supertype[type1] = res[i].tid;
+                        const option = $("<option></option>").text(type1);
+                        $("#common-s-select2").append(option);
+                    }
+                    var json = {
+                        tid: res[0].tid
+                    }
+                    $.ajax({
+                        url: "/jin321/ms/selectThirdProductTypeByhightid.do",
+                        method: "post",
+                        contentType: "application/json",
+                        data: JSON.stringify(json),
+                        success: function (res) {
+                            $("#common-s-select3 option").remove();
+                            $(".watch-common-tr").remove();
+                            for (var i = 0; i < res.length; i++) {
+                                const type1 = res[i].typename;
+                                thirdType[type1] = res[i].tid;
+                                const option = $("<option></option>").text(type1);
+                                $("#common-s-select3").append(option);
+                            }
+                            var json = {
+                                ptypea: Subtype[$('#common-s-select1').val()],
+                                ptypeb: Supertype[$('#common-s-select2').val()],
+                                ptypec: thirdType[$('#common-s-select3').val()],
+                                pagenum: 10,
+                                thispage: detailProduct.thisPage,
+                                isdeleted:0
+                            }
+                            $.ajax({
+                                url: "/jin321/ms//selectProductByDidAdmin.do",
+                                type: "post",
+                                data: JSON.stringify(json),
+                                contentType: "application/json",
+                                success: function (res) {
+                                    detailProduct.totalPages = res.totalpage || 1;
+                                    detailProduct.thisPage = res.thispage || 1;
+                                    res = res.pagedata || [];
+
+                                    for (var i = 0; i < res.length; i++) {
+                                        var tr = $("<tr class='watch-common-tr'></tr>");
+                                        pId[res[i].pname] = res[i].pid;
+                                        var tdR = $("<td></td>");
+                                        var checkbox = $("<input class='info-choose' type='radio'>");
+                                        //id
+                                        const tdId = $("<td class='s-id'></td>").html(res[i].sid);
+                                        //id
+                                        const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
+                                        //名称
+                                        const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                                        //介绍
+                                        const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                                        //规格
+                                        const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                                        //一级分类
+                                        const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
+                                        //二级分类
+                                        const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
+                                        //三级分类
+                                        const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                                        //原价
+                                        const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                                        //售价
+                                        const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                                        //剩余货物
+                                        const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                                        tdR.append(checkbox);
+                                        $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                                        $("#watch-common-table").append(tr);
+                                    }
+                                    paging($('.infoPaging')[0], {
+                                        totalPages: detailProduct.totalPages,
+                                        nowPage: detailProduct.thisPage
+                                    });
+                                    $('.infoPaging .page').on('click', function () {
+                                        var text = '';
+                                        switch ($(this).text()) {
+                                            case '末页':
+                                                text = detailProduct.totalPages
+                                                break;
+                                            case '首页':
+                                                text = 1
+                                                break;
+                                            default:
+                                                text = this.text
+                                        }
+                                        detailProduct.thisPage = text;
+                                        $('#watch-s').trigger('click');
+                                    });
+                                    $('.infoPaging .prev').on('click', function () {
+                                        detailProduct.thisPage = detailProduct.thisPage - 1;
+                                        $('#watch-s').trigger('click');
+                                    })
+                                    $('.infoPaging .next').on('click', function () {
+                                        detailProduct.thisPage = parseInt(detailProduct.thisPage) + 1;
+                                        $('#watch-s').trigger('click');
+                                    })
+
+                                }
+                            });
+                        }
+                    });
+                }
+            })
+        }
+    });
+
+    //二级分类改变三级分类
+    $("#common-s-select2").on("change", function () {
+        var json = {
+            tid: Supertype[$("#common-s-select2").val()]
+        }
+        $.ajax({
+            url: "/jin321/ms/selectThirdProductTypeByhightid.do",
+            method: "post",
+            contentType: "application/json",
+            data: JSON.stringify(json),
+            success: function (res) {
+                $("#common-s-select3 option").remove();
+                $(".watch-common-tr").remove();
+                for (var i = 0; i < res.length; i++) {
+                    const type1 = res[i].typename;
+                    thirdType[type1] = res[i].tid;
+                    const option = $("<option></option>").text(type1);
+                    $("#common-s-select3").append(option);
+                }
+                var json = {
+                    ptypea: Subtype[$('#common-s-select1').val()],
+                    ptypeb: Supertype[$('#common-s-select2').val()],
+                    ptypec: thirdType[$('#common-s-select3').val()],
+                    pagenum: 10,
+                    thispage: detailProduct.thisPage,
+                    isdeleted:0
+                }
+                $.ajax({
+                    url: "/jin321/ms//selectProductByDidAdmin.do",
+                    type: "post",
+                    data: JSON.stringify(json),
+                    contentType: "application/json",
+                    success: function (res) {
+                        detailProduct.totalPages = res.totalpage || 1;
+                        detailProduct.thisPage = res.thispage || 1;
+                        res = res.pagedata || [];
+
+                        for (var i = 0; i < res.length; i++) {
+                            var tr = $("<tr class='watch-common-tr'></tr>");
+                            pId[res[i].pname] = res[i].pid;
+                            var tdR = $("<td></td>");
+                            var checkbox = $("<input class='info-choose' type='radio'>");
+                            //id
+                            const tdId = $("<td class='s-id'></td>").html(res[i].sid);
+                            //id
+                            const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
+                            //名称
+                            const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                            //介绍
+                            const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                            //规格
+                            const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                            //一级分类
+                            const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
+                            //二级分类
+                            const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
+                            //三级分类
+                            const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                            //原价
+                            const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                            //售价
+                            const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                            //剩余货物
+                            const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                            tdR.append(checkbox);
+                            $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                            $("#watch-common-table").append(tr);
+                        }
+                        paging($('.infoPaging')[0], {
+                            totalPages: detailProduct.totalPages,
+                            nowPage: detailProduct.thisPage
+                        });
+                        $('.infoPaging .page').on('click', function () {
+                            var text = '';
+                            switch ($(this).text()) {
+                                case '末页':
+                                    text = detailProduct.totalPages
+                                    break;
+                                case '首页':
+                                    text = 1
+                                    break;
+                                default:
+                                    text = this.text
+                            }
+                            detailProduct.thisPage = text;
+                            $('#watch-s').trigger('click');
+                        });
+                        $('.infoPaging .prev').on('click', function () {
+                            detailProduct.thisPage = detailProduct.thisPage - 1;
+                            $('#watch-s').trigger('click');
+                        })
+                        $('.infoPaging .next').on('click', function () {
+                            detailProduct.thisPage = parseInt(detailProduct.thisPage) + 1;
+                            $('#watch-s').trigger('click');
+                        })
+
+                    }
+                });
+            }
+        });
+    });
+
+    //三级分类改变三级分类
+    $("#common-s-select3").on("change", function () {
+        var json = {
+            ptypea: Subtype[$('#common-s-select1').val()],
+            ptypeb: Supertype[$('#common-s-select2').val()],
+            ptypec: thirdType[$('#common-s-select3').val()],
+            pagenum: 10,
+            thispage: detailProduct.thisPage,
+            isdeleted:0
+        }
+        $.ajax({
+            url: "/jin321/ms//selectProductByDidAdmin.do",
+            type: "post",
+            data: JSON.stringify(json),
+            contentType: "application/json",
+            success: function (res) {
+                detailProduct.totalPages = res.totalpage || 1;
+                detailProduct.thisPage = res.thispage || 1;
+                res = res.pagedata || [];
+
+                for (var i = 0; i < res.length; i++) {
+                    var tr = $("<tr class='watch-common-tr'></tr>");
+                    pId[res[i].pname] = res[i].pid;
+                    var tdR = $("<td></td>");
+                    var checkbox = $("<input class='info-choose' type='radio'>");
+                    //id
+                    const tdId = $("<td class='s-id'></td>").html(res[i].sid);
+                    //id
+                    const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
+                    //名称
+                    const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                    //介绍
+                    const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                    //规格
+                    const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                    //一级分类
+                    const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
+                    //二级分类
+                    const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
+                    //三级分类
+                    const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                    //原价
+                    const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                    //售价
+                    const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                    //剩余货物
+                    const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                    tdR.append(checkbox);
+                    $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                    $("#watch-common-table").append(tr);
+                }
+                paging($('.infoPaging')[0], {
+                    totalPages: detailProduct.totalPages,
+                    nowPage: detailProduct.thisPage
+                });
+                $('.infoPaging .page').on('click', function () {
+                    var text = '';
+                    switch ($(this).text()) {
+                        case '末页':
+                            text = detailProduct.totalPages
+                            break;
+                        case '首页':
+                            text = 1
+                            break;
+                        default:
+                            text = this.text
+                    }
+                    detailProduct.thisPage = text;
+                    $('#watch-s').trigger('click');
+                });
+                $('.infoPaging .prev').on('click', function () {
+                    detailProduct.thisPage = detailProduct.thisPage - 1;
+                    $('#watch-s').trigger('click');
+                })
+                $('.infoPaging .next').on('click', function () {
+                    detailProduct.thisPage = parseInt(detailProduct.thisPage) + 1;
+                    $('#watch-s').trigger('click');
+                })
+
+            }
+        });
     });
 
     $('#productSelect').on('change',function () {

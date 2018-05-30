@@ -574,7 +574,6 @@ $(function () {
                                         $("#common-s-select3").append(option);
                                     }
                                     var json = {
-                                        did: dId[$("#common-s-select").val()],
                                         ptypea: Subtype[$('#common-s-select1').val()],
                                         ptypeb: Supertype[$('#common-s-select2').val()],
                                         ptypec: thirdType[$('#common-s-select3').val()],
@@ -714,12 +713,92 @@ $(function () {
                         data: JSON.stringify(json),
                         success: function (res) {
                             $("#common-s-select3 option").remove();
+                            $(".watch-common-tr").remove();
                             for (var i = 0; i < res.length; i++) {
                                 const type1 = res[i].typename;
                                 thirdType[type1] = res[i].tid;
                                 const option = $("<option></option>").text(type1);
                                 $("#common-s-select3").append(option);
                             }
+                            var json = {
+                                ptypea: Subtype[$('#common-s-select1').val()],
+                                ptypeb: Supertype[$('#common-s-select2').val()],
+                                ptypec: thirdType[$('#common-s-select3').val()],
+                                pagenum: 10,
+                                thispage: commonProduct.thisPage,
+                                isdeleted:0
+                            }
+                            $.ajax({
+                                url: "/jin321/ms//selectProductByDidAdmin.do",
+                                type: "post",
+                                data: JSON.stringify(json),
+                                contentType: "application/json",
+                                success: function (res) {
+                                    commonProduct.totalPages = res.totalpage || 1;
+                                    commonProduct.thisPage = res.thispage || 1;
+                                    res = res.pagedata || [];
+
+                                    for (var i = 0; i < res.length; i++) {
+                                        var tr = $("<tr class='watch-common-tr'></tr>");
+                                        pId[res[i].pname] = res[i].pid;
+                                        var tdR = $("<td></td>");
+                                        var checkbox = $("<input type='checkbox' class='choose-common-checkbox'>");
+                                        //id
+                                        const tdId = $("<td class='s-id'></td>").html(res[i].sid);
+                                        //轮播图id
+                                        const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
+                                        //名称
+                                        const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                                        //介绍
+                                        const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                                        //规格
+                                        const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                                        //一级分类
+                                        const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
+                                        //二级分类
+                                        const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
+                                        //三级分类
+                                        const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                                        //原价
+                                        const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                                        //售价
+                                        const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                                        //剩余货物
+                                        const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                                        tdR.append(checkbox);
+                                        $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                                        $("#watch-common-table").append(tr);
+                                    }
+                                    paging($('.watchCommonPaging')[0], {
+                                        totalPages: commonProduct.totalPages,
+                                        nowPage: commonProduct.thisPage
+                                    })
+                                    $('.watchCommonPaging .page').on('click', function () {
+                                        var text = '';
+                                        switch($(this).text()){
+                                            case '末页':
+                                                text = commonProduct.totalPages
+                                                break;
+                                            case '首页':
+                                                text = 1
+                                                break;
+                                            default:
+                                                text = this.text
+                                        }
+                                        commonProduct.thisPage = text;
+                                        $('#watch-common').trigger('click');
+                                    })
+                                    $('.watchCommonPaging .prev').on('click', function () {
+                                        commonProduct.thisPage = commonProduct.thisPage - 1;
+                                        $('#watch-common').trigger('click');
+                                    })
+                                    $('.watchCommonPaging .next').on('click', function () {
+                                        commonProduct.thisPage = parseInt(commonProduct.thisPage) + 1;
+                                        $('#watch-common').trigger('click');
+                                    })
+
+                                }
+                            });
                         }
                     });
                 }
@@ -740,15 +819,178 @@ $(function () {
                 data: JSON.stringify(json),
                 success: function (res) {
                     $("#common-s-select3 option").remove();
+                    $(".watch-common-tr").remove();
                     for (var i = 0; i < res.length; i++) {
                         const type1 = res[i].typename;
                         thirdType[type1] = res[i].tid;
                         const option = $("<option></option>").text(type1);
                         $("#common-s-select3").append(option);
                     }
+                    var json = {
+                        ptypea: Subtype[$('#common-s-select1').val()],
+                        ptypeb: Supertype[$('#common-s-select2').val()],
+                        ptypec: thirdType[$('#common-s-select3').val()],
+                        pagenum: 10,
+                        thispage: commonProduct.thisPage,
+                        isdeleted:0
+                    }
+                    $.ajax({
+                        url: "/jin321/ms//selectProductByDidAdmin.do",
+                        type: "post",
+                        data: JSON.stringify(json),
+                        contentType: "application/json",
+                        success: function (res) {
+                            commonProduct.totalPages = res.totalpage || 1;
+                            commonProduct.thisPage = res.thispage || 1;
+                            res = res.pagedata || [];
+
+                            for (var i = 0; i < res.length; i++) {
+                                var tr = $("<tr class='watch-common-tr'></tr>");
+                                pId[res[i].pname] = res[i].pid;
+                                var tdR = $("<td></td>");
+                                var checkbox = $("<input type='checkbox' class='choose-common-checkbox'>");
+                                //id
+                                const tdId = $("<td class='s-id'></td>").html(res[i].sid);
+                                //轮播图id
+                                const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
+                                //名称
+                                const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                                //介绍
+                                const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                                //规格
+                                const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                                //一级分类
+                                const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
+                                //二级分类
+                                const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
+                                //三级分类
+                                const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                                //原价
+                                const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                                //售价
+                                const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                                //剩余货物
+                                const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                                tdR.append(checkbox);
+                                $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                                $("#watch-common-table").append(tr);
+                            }
+                            paging($('.watchCommonPaging')[0], {
+                                totalPages: commonProduct.totalPages,
+                                nowPage: commonProduct.thisPage
+                            })
+                            $('.watchCommonPaging .page').on('click', function () {
+                                var text = '';
+                                switch($(this).text()){
+                                    case '末页':
+                                        text = commonProduct.totalPages
+                                        break;
+                                    case '首页':
+                                        text = 1
+                                        break;
+                                    default:
+                                        text = this.text
+                                }
+                                commonProduct.thisPage = text;
+                                $('#watch-common').trigger('click');
+                            })
+                            $('.watchCommonPaging .prev').on('click', function () {
+                                commonProduct.thisPage = commonProduct.thisPage - 1;
+                                $('#watch-common').trigger('click');
+                            })
+                            $('.watchCommonPaging .next').on('click', function () {
+                                commonProduct.thisPage = parseInt(commonProduct.thisPage) + 1;
+                                $('#watch-common').trigger('click');
+                            })
+
+                        }
+                    });
                 }
             });
         }
+    });
+
+    //三级分类改变三级分类
+    $("#common-s-select3").on("change", function () {
+        var json = {
+            ptypea: Subtype[$('#common-s-select1').val()],
+            ptypeb: Supertype[$('#common-s-select2').val()],
+            ptypec: thirdType[$('#common-s-select3').val()],
+            pagenum: 10,
+            thispage: commonProduct.thisPage,
+            isdeleted:0
+        }
+        $.ajax({
+            url: "/jin321/ms//selectProductByDidAdmin.do",
+            type: "post",
+            data: JSON.stringify(json),
+            contentType: "application/json",
+            success: function (res) {
+                commonProduct.totalPages = res.totalpage || 1;
+                commonProduct.thisPage = res.thispage || 1;
+                res = res.pagedata || [];
+
+                for (var i = 0; i < res.length; i++) {
+                    var tr = $("<tr class='watch-common-tr'></tr>");
+                    pId[res[i].pname] = res[i].pid;
+                    var tdR = $("<td></td>");
+                    var checkbox = $("<input type='checkbox' class='choose-common-checkbox'>");
+                    //id
+                    const tdId = $("<td class='s-id'></td>").html(res[i].sid);
+                    //轮播图id
+                    const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
+                    //名称
+                    const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                    //介绍
+                    const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                    //规格
+                    const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                    //一级分类
+                    const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
+                    //二级分类
+                    const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
+                    //三级分类
+                    const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                    //原价
+                    const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                    //售价
+                    const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                    //剩余货物
+                    const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                    tdR.append(checkbox);
+                    $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                    $("#watch-common-table").append(tr);
+                }
+                paging($('.watchCommonPaging')[0], {
+                    totalPages: commonProduct.totalPages,
+                    nowPage: commonProduct.thisPage
+                })
+                $('.watchCommonPaging .page').on('click', function () {
+                    var text = '';
+                    switch($(this).text()){
+                        case '末页':
+                            text = commonProduct.totalPages
+                            break;
+                        case '首页':
+                            text = 1
+                            break;
+                        default:
+                            text = this.text
+                    }
+                    commonProduct.thisPage = text;
+                    $('#watch-common').trigger('click');
+                })
+                $('.watchCommonPaging .prev').on('click', function () {
+                    commonProduct.thisPage = commonProduct.thisPage - 1;
+                    $('#watch-common').trigger('click');
+                })
+                $('.watchCommonPaging .next').on('click', function () {
+                    commonProduct.thisPage = parseInt(commonProduct.thisPage) + 1;
+                    $('#watch-common').trigger('click');
+                })
+
+            }
+        });
     });
 
     //查看热卖商品

@@ -11,6 +11,7 @@
         <result column="ptypenamea" property="ptypea" jdbcType="VARCHAR"/>
         <result column="ptypenameb" property="ptypeb" jdbcType="VARCHAR"/>
         <result column="ptypenamec" property="ptypec" jdbcType="VARCHAR"/>
+        <result column="pcost" property="pcost" jdbcType="DECIMAL"/>
         <result column="psoriprice" property="psoriprice" jdbcType="DECIMAL"/>
         <result column="pssellprice" property="pssellprice" jdbcType="DECIMAL"/>
     </resultMap>
@@ -24,6 +25,7 @@
               producttypea.typename as ptypenamea,
               producttypeb.typename as ptypenameb,
               producttypec.typename as ptypenamec,
+              productsize.pcost,
               productsize.psoriprice,
               productsize.pssellprice
               FROM

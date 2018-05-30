@@ -27,20 +27,13 @@ public class SelectProuctByDidController {
     @Autowired
     private ProductService productService;
     private int did;
-    private int ptypea;
-    private int ptypeb;
-    private int ptypec;
     private List<TrueProduct> trueProductList;
     @ResponseBody
     @RequestMapping("/selectProdutByDid")
-    public List<TrueProduct> selectProductByDid(HttpServletRequest request, @RequestBody String json){
+    public List<TrueProduct> selectProductByDid(HttpServletRequest request){
         log.info("商家查询自己商品");
         did=(Integer) request.getSession().getAttribute("did");
-        JSONObject object= JSON.parseObject(json);
-        ptypea=object.getInteger("ptypea");
-        ptypeb=object.getInteger("ptypeb");
-        ptypec=object.getInteger("ptypec");
-        trueProductList=productService.selectProductByDealer(did,ptypea,ptypeb,ptypec);
+        trueProductList=productService.selectProductByDealer(did);
         return trueProductList;
     }
 }

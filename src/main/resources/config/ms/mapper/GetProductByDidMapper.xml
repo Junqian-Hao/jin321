@@ -22,8 +22,5 @@
         WHERE
         product.is_delete=0
         AND product.did=#{param1}
-        AND product.ptypea=#{param2}
-        AND product.ptypeb=#{param3}
-        AND product.ptypec=#{param4}
   </select>
 </mapper>
