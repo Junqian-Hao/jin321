@@ -24,6 +24,7 @@ public class CacheUtil {
             @Override
             public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
                 redisConnection.flushDb();
+                
                 return null;
             }
         });
