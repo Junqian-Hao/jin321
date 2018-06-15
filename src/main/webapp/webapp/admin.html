@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="style/admin.css">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <title>商户页面</title>
+</head>
+<body>
+<div class="heart clearfix">
+    <!-- 头部 -->
+    <div class="header">
+        <ul class="list-group">
+            <li id="s-manage" class="list-group-item">商品管理</li>
+            <li id="order-manage" class="list-group-item">订单管理</li>
+        </ul>
+    </div>
+    <!-- 左侧栏 -->
+    <div class="left">
+        <div class="left-s item">
+            <ul class="list-group">
+                <li id="watch-s" class="list-group-item">查看商品</li>
+                <li id="add-s" class="list-group-item">添加商品</li>
+                <li id="change-type" class="list-group-item">更改商品分类</li>
+            </ul>
+        </div>
+        <div class="left-order item">
+            <ul class="list-group">
+                <li id="noSend" class="list-group-item">未发货订单</li>
+                <li id="noRec" class="list-group-item">未收货订单</li>
+                <li id="already" class="list-group-item">已收货订单</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <!-- 查看商品 -->
+        <div class="watch-s-content item">
+            <select id="common-s-select1" class="form-control">
+
+            </select>
+            <select id="common-s-select2" class="form-control">
+
+            </select>
+            <select id="common-s-select3" class="form-control">
+
+            </select>
+            <table id="watch-common-table" class="table table-bordered table-hover">
+                <tr>
+                    <td>选择</td>
+                    <td>id</td>
+                    <td>pid</td>
+                    <td>名称</td>
+                    <td>介绍</td>
+                    <td>规格</td>
+                    <td>分类</td>
+                    <td>品牌</td>
+                    <td>种类</td>
+                    <td>原价</td>
+                    <td>售价</td>
+                    <td>剩余数量</td>
+                </tr>
+            </table>
+            <div class="infoPaging paging"></div>
+            <div class="btnBox clearfix">
+                <button id="info-s-btn" class="btn btn-default">修改商品信息</button>
+                <button id="delete-s-btn" class="btn btn-default">删除商品</button>
+                <input type="file" id="file-input" multiple/>
+                <button id="file-btn" class="btn btn-default">上传商品图片</button>
+                <button id="file-suo-btn" class="btn btn-default">上传商品缩略图</button>
+                <button id="file-detail-btn" class="btn btn-default">上传商品详情图片</button>
+            </div>
+        </div>
+
+        <!-- 添加商品 -->
+        <div class="add-s-content item">
+            商品分类
+            <select id="subType" class="form-control">
+
+            </select>
+            商品品牌
+            <select id="suptype" class="form-control">
+
+            </select>
+            商品种类
+            <select id="thirdType" class="form-control">
+
+            </select>
+            <div>
+                <label>商品名称</label>
+                <input id="s-name" type="text">
+            </div>
+            <div>
+                <label>商品描述</label>
+                <input id="s-say" type="text">
+            </div>
+            <div id="size">
+                <div class="size">
+                    <label>商品规格</label>
+                    <input class="s-size" type="text"><label>商品进价</label>
+                    <input type="number" class="s-jin"><label>商品原价</label>
+                    <input class="s-oprice" type="number"><label>商品售价</label>
+                    <input class="s-nprice" type="number"><label>商品数量</label>
+                    <input class="s-number" type="number">
+                    <button id="add-size" class="btn btn-default">+</button>
+                </div>
+            </div>
+            <div>
+                <button id="add-s-btn" class="btn btn-default">添加</button>
+            </div>
+        </div>
+
+        <!-- 改变商品分类 -->
+        <div class="change-type-content item">
+            <label>请选择商品</label>
+            <select id="change-type-id" class="form-control">
+
+            </select>
+            <select id="change-typea" class="form-control">
+
+            </select>
+            <select id="change-typeb" class="form-control">
+
+            </select>
+            <select id="change-typec" class="form-control">
+
+            </select>
+            <button id="change-type-btn" class="btn btn-default">提交</button>
+        </div>
+
+        <!-- 未发货订单 -->
+        <div class="noSend item">
+            <table id="noSend-table" class="table table-bordered table-hover">
+                <tr>
+                    <td>选择</td>
+                    <td>姓名</td>
+                    <td>电话</td>
+                    <td>地址</td>
+                    <td>购买产品</td>
+                    <td>购买数量</td>
+                    <td>购买时间</td>
+                    <td>买家留言</td>
+                </tr>
+            </table><br>
+            <div class="noSendPaging paging"></div>
+            <select id="express" class="form-control">
+                <option>顺丰</option>
+                <option>申通</option>
+                <option>圆通</option>
+                <option>韵达</option>
+                <option>天天</option>
+                <option>EMS</option>
+                <option>德邦</option>
+                <option>京东快递</option>
+            </select>
+            <input type="text" placeholder="请输入快递单号">
+            <button id="send" class="btn btn-default">确认发货</button>
+        </div>
+
+        <!-- 未收货订单 -->
+        <div class="noRec item">
+            <table id="noRec-table" class="table table-bordered table-hover">
+                <tr>
+                    <td>姓名</td>
+                    <td>电话</td>
+                    <td>地址</td>
+                    <td>购买产品</td>
+                    <td>购买数量</td>
+                    <td>购买时间</td>
+                    <td>买家留言</td>
+                    <td>快递单号</td>
+                    <td>发货时间</td>
+                </tr>
+            </table>
+            <div class="noRecPaging paging"></div>
+        </div>
+
+        <!-- 已收货订单 -->
+        <div class="already item">
+            <table id="already-table" class="table table-bordered table-hover">
+                <tr>
+                    <td>姓名</td>
+                    <td>电话</td>
+                    <td>地址</td>
+                    <td>购买产品</td>
+                    <td>购买数量</td>
+                    <td>购买时间</td>
+                    <td>买家留言</td>
+                </tr>
+            </table>
+            <div class="alreadyPaging paging"></div>
+        </div>
+    </div>
+</div>
+<script src="js/admin.js"></script>
+<script src="js/page.js"></script>
+</body>
+</html>

@@ -26,7 +26,6 @@ import java.util.UUID;
  *
  * @Description : 商品相关图片上传
  * 样例JSON
- *
  */
 @Controller
 @RequestMapping("/ms")
@@ -34,51 +33,55 @@ public class UploadProductPicController {
     private static final Log log = LogFactory.getLog(UploadProductPicController.class);
     @Autowired
     private ProductPicService productPicService;
-    private Map<String,String> returnmap;
+    private Map<String, String> returnmap;
     private Productpics productpics;
     private UUID uuid;
     private String uuids;
+
     @ResponseBody
-    @RequestMapping(value = "/productPicUpload",method = RequestMethod.POST)
+    @RequestMapping(value = "/productPicUpload", method = RequestMethod.POST)
     public Map<String, String> productPicUpload(HttpServletRequest request,
                                                 @RequestParam("file") MultipartFile[] file
-                                                ,@RequestParam("header")String header,
-                                                @RequestParam("pid")String pid){
+            , @RequestParam("header") String header,
+                                                @RequestParam("pid") String pid) {
         log.info("上传图片或缩略图");
-        returnmap=new HashMap<String,String>();
+        returnmap = new HashMap<String, String>();
         //分别获取的是变量名file---文件类型---文件名
         if (header.equals("0"))
-            productPicService.productNoHeadPicDelete(Integer.parseInt(pid),false);
+            productPicService.productNoHeadPicDelete(Integer.parseInt(pid), false);
         else
-            productPicService.productNoHeadPicDelete(Integer.parseInt(pid),true);
+            productPicService.productNoHeadPicDelete(Integer.parseInt(pid), true);
         try {
-            for (int i=0;i<file.length;i++) {
+            for (int i = 0; i < file.length; i++) {
                 if (!file[i].isEmpty()) {
-                    uuid=UUID.randomUUID();
-                    uuids=uuid.toString();
-                    uuids=uuids.replaceAll("-","");
+                    uuid = UUID.randomUUID();
+                    uuids = uuid.toString();
+                    uuids = uuids.replaceAll("-", "");
                     //使用StreamsAPI方式拷贝文件
-                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request)+"productpics/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
-                    productpics=new Productpics();
+                    Streams.copy(file[i].getInputStream(), new FileOutputStream(UrlUtil.getRealPath(request) + "productpics/" + uuids + file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf("."))), true);
+                    productpics = new Productpics();
                     productpics.setPid(Integer.parseInt(pid));
-                    productpics.setPpicurl("productpics/"+uuids+file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
+                    productpics.setPpicurl("productpics/" + uuids + file[i].getOriginalFilename().substring(file[i].getOriginalFilename().indexOf(".")));
                     productpics.setIsDeleted(false);
-                    if(Integer.parseInt(header)==0)
+                    if (Integer.parseInt(header) == 0) {
+                        productPicService.productNoHeadPicDelete(productpics.getPid(), false);
                         productPicService.productPicUpdate(productpics);
-                    else
+                    } else {
+                        productPicService.productNoHeadPicDelete(productpics.getPid(), true);
                         productPicService.productHeadPicService(productpics);
+                    }
 
                 }
             }
         } catch (IOException e) {
             log.info("相关图片上传失败");
             e.printStackTrace();
-            returnmap.put("code","0");
-            returnmap.put("msg","相关图片上传失败");
+            returnmap.put("code", "0");
+            returnmap.put("msg", "相关图片上传失败");
             return returnmap;
         }
-        returnmap.put("code","1");
-        returnmap.put("msg","相关图片上传成功");
+        returnmap.put("code", "1");
+        returnmap.put("msg", "相关图片上传成功");
         return returnmap;
     }
 }

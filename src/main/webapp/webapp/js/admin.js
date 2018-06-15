@@ -35,16 +35,6 @@ var already = {
     thisPage: 1
 }
 
-function imgData(){
-    fd = new FormData();
-    var file_input = document.getElementById('file-input');
-    for (var i = 0; i < file_input.files.length; i++) {
-        var reader = new FileReader();
-        reader.readAsDataURL(file_input.files[i]);
-        fd.append("file", file_input.files[i]);
-    }
-}
-
 $(function () {
     //bootstrap
     $('.list-group-item').on('click', function () {
@@ -140,16 +130,25 @@ $(function () {
     });
 
     //上传图片
+    $("#file-input").on("change", function () {
+        if (flag) {
+            fd = new FormData();
+            for (var i = 0; i < this.files.length; i++) {
+                var reader = new FileReader();
+                reader.readAsDataURL(this.files[i]);
+                fd.append("file", this.files[i]);
+            }
+        }
+    });
 
     $("#file-btn").on("click", function () {
         if (flag) {
             var len = $(".info-choose").length;
-            imgData();
+            fd.delete("header");
+            fd.delete("pid");
             for (var i = 0; i < len; i++) {
-                console.log($($(".info-choose")[i]).is(":checked"));
                 if ($($(".info-choose")[i]).is(":checked")) {
-                    console.log(pId[i]);
-                    fd.append("pid", $($(".info-choose")[i]).parent().next().next().html());
+                    fd.append("pid", pId[i]);
                 }
             }
             fd.append("header", 0);
@@ -173,10 +172,12 @@ $(function () {
     $("#file-suo-btn").on("click", function () {
         if (flag) {
             var len = $(".info-choose").length;
-            imgData();
+            fd.delete("header");
+            fd.delete("pid");
+            console.log(fd.get("header"));
             for (var i = 0; i < len; i++) {
                 if ($($(".info-choose")[i]).is(":checked")) {
-                    fd.append("pid", $($(".info-choose")[i]).parent().next().next().html());
+                    fd.append("pid", pId[i]);
                 }
             }
             fd.append("header", 1);
@@ -201,10 +202,12 @@ $(function () {
         if (flag) {
             var len = $(".info-choose").length;
             var data = {};
-            imgData();
+            fd.delete("header");
+            fd.delete("pid");
+            console.log(fd.get("header"));
             for (var i = 0; i < len; i++) {
                 if ($($(".info-choose")[i]).is(":checked")) {
-                    fd.append("pid", $($(".info-choose")[i]).parent().next().next().html());
+                    fd.append("pid", pId[i]);
                 }
             }
             $.ajax({
@@ -298,7 +301,7 @@ $(function () {
                                                 var tr = $("<tr class='watch-common-tr'></tr>");
                                                 pId[res[i].pname] = res[i].pid;
                                                 var tdR = $("<td></td>");
-                                                var checkbox = $("<input name='info-choose' class='info-choose' type='radio'>");
+                                                var checkbox = $("<input class='info-choose' type='radio'>");
                                                 //id
                                                 const tdId = $("<td class='s-id'></td>").html(res[i].sid);
                                                 //id
@@ -499,7 +502,7 @@ $(function () {
                                         var tr = $("<tr class='watch-common-tr'></tr>");
                                         pId[res[i].pname] = res[i].pid;
                                         var tdR = $("<td></td>");
-                                        var checkbox = $("<input name='info-choose' class='info-choose' type='radio'>");
+                                        var checkbox = $("<input class='info-choose' type='radio'>");
                                         //id
                                         const tdId = $("<td class='s-id'></td>").html(res[i].sid);
                                         //id
@@ -604,7 +607,7 @@ $(function () {
                             var tr = $("<tr class='watch-common-tr'></tr>");
                             pId[res[i].pname] = res[i].pid;
                             var tdR = $("<td></td>");
-                            var checkbox = $("<input name='info-choose' class='info-choose' type='radio'>");
+                            var checkbox = $("<input class='info-choose' type='radio'>");
                             //id
                             const tdId = $("<td class='s-id'></td>").html(res[i].sid);
                             //id
@@ -689,7 +692,7 @@ $(function () {
                     var tr = $("<tr class='watch-common-tr'></tr>");
                     pId[res[i].pname] = res[i].pid;
                     var tdR = $("<td></td>");
-                    var checkbox = $("<input name='info-choose' class='info-choose' type='radio'>");
+                    var checkbox = $("<input class='info-choose' type='radio'>");
                     //id
                     const tdId = $("<td class='s-id'></td>").html(res[i].sid);
                     //id
@@ -934,7 +937,7 @@ $(function () {
                     pname: $("#s-name").val(),
                     psummary: $("#s-say").val(),
                     ptypea: Subtype[$("#subType").val()],
-                    ptypeb: Supertype[$("#suptype").val()],
+                    ptypeb: Supertype[$("#supType").val()],
                     ptypec: thirdType[$("#thirdType").val()],
                     is_together: 0
                 },

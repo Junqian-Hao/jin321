@@ -56,7 +56,7 @@ public class ProductSizeDetailServiceimp implements ProductSizeDetailService {
         if(product!=null&&productsize!=null){
             product.setPname(updateProductSizeDetail.getPname());
             product.setPsummary(updateProductSizeDetail.getPsummary());
-            productsize.setPscost(updateProductSizeDetail.getPcost());
+            productsize.setPscost(updateProductSizeDetail.getPscost());
             productsize.setPsoriprice(updateProductSizeDetail.getPsoriprice());
             productsize.setPssellprice(updateProductSizeDetail.getPssellprice());
             productsize.setSizename(updateProductSizeDetail.getSizename());

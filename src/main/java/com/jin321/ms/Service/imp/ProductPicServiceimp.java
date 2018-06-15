@@ -2,6 +2,8 @@ package com.jin321.ms.Service.imp;
 
 import com.jin321.ms.Service.ProductPicService;
 import com.jin321.pl.dao.ProductpicsMapper;
+import com.jin321.pl.model.Product;
+import com.jin321.pl.model.ProductExample;
 import com.jin321.pl.model.Productpics;
 import com.jin321.pl.model.ProductpicsExample;
 import com.jin321.pl.utils.CacheUtil;

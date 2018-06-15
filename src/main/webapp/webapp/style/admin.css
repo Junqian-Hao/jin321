@@ -1,0 +1,12 @@
+.size input {
+    width: 100px;
+}
+
+.size .s-size {
+    width: 157px;
+}
+
+.btnBox{
+    display: flex;
+    flex-direction: row;
+}
