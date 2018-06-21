@@ -128,4 +128,22 @@ public class UpdateProductSizeDetail {
     public void setPtypec(String ptypec) {
         this.ptypec = ptypec;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateProductSizeDetail{" +
+                "sid=" + sid +
+                ", pid=" + pid +
+                ", pname='" + pname + '\'' +
+                ", psummary='" + psummary + '\'' +
+                ", pscost=" + pscost +
+                ", psoriprice=" + psoriprice +
+                ", pssellprice=" + pssellprice +
+                ", ptypea='" + ptypea + '\'' +
+                ", ptypeb='" + ptypeb + '\'' +
+                ", ptypec='" + ptypec + '\'' +
+                ", sizename='" + sizename + '\'' +
+                ", snumber=" + snumber +
+                '}';
+    }
 }

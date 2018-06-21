@@ -76,6 +76,7 @@ $(function () {
                     var psummary = $($(".s-summary")[i]).html();
                     //规格
                     var sizename = $($(".size-s")[i]).html();
+                    var pcost = $($(".s-pcost")[i]).html();
                     //原价
                     var psoriprice = $($(".s-psoriprice")[i]).html();
                     //售价
@@ -83,11 +84,12 @@ $(function () {
                     //剩余数量
                     var snumber = $($(".s-snumber")[i]).html();
                     var json = {
-                        pid: pId[i],
+                        pid: $($(".info-choose")[i]).parent().next().next().html(),
                         sid: sid,
                         pname: pname,
                         psummary: psummary,
                         sizename: sizename,
+                        pscost: pcost,
                         psoriprice: psoriprice,
                         pssellprice: pssellprice,
                         snumber: snumber
@@ -304,25 +306,27 @@ $(function () {
                                                 //id
                                                 const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
                                                 //名称
-                                                const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                                                const tdName = $("<td contentEditable='true' class='s-name'></td>").html(res[i].pname);
                                                 //介绍
-                                                const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                                                const tdPsummary = $("<td contentEditable='true' class='s-summary'></td>").html(res[i].psummary);
                                                 //规格
-                                                const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                                                const tdSize = $("<td contentEditable='true' class='size-s'></td>").html(res[i].sizename);
                                                 //一级分类
                                                 const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
                                                 //二级分类
                                                 const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
                                                 //三级分类
                                                 const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                                                //进价
+                                                const tdPcost = $("<td contentEditable='true' class='s-pcost'></td>").html(res[i].pscost);
                                                 //原价
-                                                const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                                                const tdPsoriprice = $("<td contentEditable='true' class='s-psoriprice'></td>").html(res[i].psoriprice);
                                                 //售价
-                                                const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                                                const tdPssellprice = $("<td contentEditable='true' class='s-pssellprice'></td>").html(res[i].pssellprice);
                                                 //剩余货物
-                                                const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                                                const tdSnumber = $("<td contentEditable='true' class='s-snumber'></td>").html(res[i].snumber);
                                                 tdR.append(checkbox);
-                                                $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                                                $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec,tdPcost, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
                                                 $("#watch-common-table").append(tr);
                                             }
                                             paging($('.infoPaging')[0], {
@@ -505,25 +509,27 @@ $(function () {
                                         //id
                                         const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
                                         //名称
-                                        const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                                        const tdName = $("<td contentEditable='true' class='s-name'></td>").html(res[i].pname);
                                         //介绍
-                                        const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                                        const tdPsummary = $("<td contentEditable='true' class='s-summary'></td>").html(res[i].psummary);
                                         //规格
-                                        const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                                        const tdSize = $("<td contentEditable='true' class='size-s'></td>").html(res[i].sizename);
                                         //一级分类
                                         const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
                                         //二级分类
                                         const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
                                         //三级分类
                                         const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                                        //进价
+                                        const tdPcost = $("<td contentEditable='true' class='s-pcost'></td>").html(res[i].pscost);
                                         //原价
-                                        const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                                        const tdPsoriprice = $("<td contentEditable='true' class='s-psoriprice'></td>").html(res[i].psoriprice);
                                         //售价
-                                        const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                                        const tdPssellprice = $("<td contentEditable='true' class='s-pssellprice'></td>").html(res[i].pssellprice);
                                         //剩余货物
-                                        const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                                        const tdSnumber = $("<td contentEditable='true' class='s-snumber'></td>").html(res[i].snumber);
                                         tdR.append(checkbox);
-                                        $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                                        $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec,tdPcost, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
                                         $("#watch-common-table").append(tr);
                                     }
                                     paging($('.infoPaging')[0], {
@@ -610,25 +616,27 @@ $(function () {
                             //id
                             const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
                             //名称
-                            const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                            const tdName = $("<td contentEditable='true' class='s-name'></td>").html(res[i].pname);
                             //介绍
-                            const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                            const tdPsummary = $("<td contentEditable='true' class='s-summary'></td>").html(res[i].psummary);
                             //规格
-                            const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                            const tdSize = $("<td contentEditable='true' class='size-s'></td>").html(res[i].sizename);
                             //一级分类
                             const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
                             //二级分类
                             const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
                             //三级分类
                             const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                            //进价
+                            const tdPcost = $("<td contentEditable='true' class='s-pcost'></td>").html(res[i].pscost);
                             //原价
-                            const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                            const tdPsoriprice = $("<td contentEditable='true' class='s-psoriprice'></td>").html(res[i].psoriprice);
                             //售价
-                            const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                            const tdPssellprice = $("<td contentEditable='true' class='s-pssellprice'></td>").html(res[i].pssellprice);
                             //剩余货物
-                            const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                            const tdSnumber = $("<td contentEditable='true' class='s-snumber'></td>").html(res[i].snumber);
                             tdR.append(checkbox);
-                            $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                            $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec,tdPcost, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
                             $("#watch-common-table").append(tr);
                         }
                         paging($('.infoPaging')[0], {
@@ -695,25 +703,27 @@ $(function () {
                     //id
                     const tdPid = $("<td class='p-id'></td>").html(res[i].pid);
                     //名称
-                    const tdName = $("<td class='s-name'></td>").html(res[i].pname);
+                    const tdName = $("<td contentEditable='true' class='s-name'></td>").html(res[i].pname);
                     //介绍
-                    const tdPsummary = $("<td class='s-summary'></td>").html(res[i].psummary);
+                    const tdPsummary = $("<td contentEditable='true' class='s-summary'></td>").html(res[i].psummary);
                     //规格
-                    const tdSize = $("<td class='size-s'></td>").html(res[i].sizename);
+                    const tdSize = $("<td contentEditable='true' class='size-s'></td>").html(res[i].sizename);
                     //一级分类
                     const tdPtypea = $("<td class='s-typea'></td>").html(res[i].ptypea);
                     //二级分类
                     const tdPtypeb = $("<td class='s-typeb'></td>").html(res[i].ptypeb);
                     //三级分类
                     const tdPtypec = $("<td class='s-typec'></td>").html(res[i].ptypec);
+                    //进价
+                    const tdPcost = $("<td contentEditable='true' class='s-pcost'></td>").html(res[i].pscost);
                     //原价
-                    const tdPsoriprice = $("<td class='s-psoriprice'></td>").html(res[i].psoriprice);
+                    const tdPsoriprice = $("<td contentEditable='true' class='s-psoriprice'></td>").html(res[i].psoriprice);
                     //售价
-                    const tdPssellprice = $("<td class='s-pssellprice'></td>").html(res[i].pssellprice);
+                    const tdPssellprice = $("<td contentEditable='true' class='s-pssellprice'></td>").html(res[i].pssellprice);
                     //剩余货物
-                    const tdSnumber = $("<td class='s-snumber'></td>").html(res[i].snumber);
+                    const tdSnumber = $("<td contentEditable='true' class='s-snumber'></td>").html(res[i].snumber);
                     tdR.append(checkbox);
-                    $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
+                    $(tr).append(tdR, tdId, tdPid, tdName, tdPsummary, tdSize, tdPtypea, tdPtypeb, tdPtypec,tdPcost, tdPsoriprice, tdPssellprice, tdSnumber, tdSnumber);
                     $("#watch-common-table").append(tr);
                 }
                 paging($('.infoPaging')[0], {
